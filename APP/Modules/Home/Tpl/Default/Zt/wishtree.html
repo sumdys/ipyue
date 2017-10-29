@@ -1,0 +1,227 @@
+<include file="Public:header" />
+<style type="text/css">
+#kfivtwin{display:none!important;}/*53客服*/
+body,ul,li,dl,dt,dd,img,p,h1,h2,h3,h4,h5,h6{margin:0px;padding:0px;}
+#body{background:#23ac38 url(__PUBLIC__/images/Zt/wishtree/bg.gif) no-repeat center top;}
+#wishtree{width:1000px;height:950px;margin:0 auto;font-family:"微软雅黑", "黑体", "宋体";}
+#top{width:1000px;height:560px;background:url(__PUBLIC__/images/Zt/wishtree/top_ad.gif) no-repeat;position:relative;}
+#top .heart{color:#FFF;font-weight:bold;text-align:center;background:url(__PUBLIC__/images/Zt/wishtree/heart.png) no-repeat;position:absolute;cursor:pointer;}
+#top .h1{width:73px;height:67px;background-position:0 0;}
+#top .h2{width:66px;height:67px;background-position:-84px 0;}
+#top .h3{width:77px;height:70px;background-position:-162px 0;}
+#top .h4{width:80px;height:80px;background-position:-255px 0;}
+#top .h5{width:69px;height:64px;background-position:-360px 0;}
+#top .h6{width:65px;height:66px;background-position:-444px 0;}
+#top .h7{width:72px;height:64px;background-position:-525px 0;}
+#top .h8{width:74px;height:71px;background-position:-620px 0;}
+#top .h9{width:71px;height:62px;background-position:-717px 0;}
+#top .h10{width:70px;height:68px;background-position:-816px 0;}
+#left_of{display: none}
+
+#content{height:390px;background:url(__PUBLIC__/images/Zt/wishtree/cont_bg.gif) no-repeat;position:relative;}
+#content h2{height:42px;margin:25px 0 10px 0;text-align:center;}
+#content h2 img{cursor:pointer;}
+#refresh{width:85px;height:32px;line-height:32px;text-align:center;color:#e5007f;font-size:14px;font-weight:bold;position:absolute;top:30px;right:210px;z-index:100;cursor:pointer;background:url(__PUBLIC__/images/Zt/wishtree/bt85.png) no-repeat;}
+#explain{font-weight:bold;}
+#explain li{float:left;width:380px;padding:0 60px;}
+#explain li h3{height:60px;line-height:60px;padding-bottom:5px;font-size:24px;color:#FFF;text-align:center;background:url(__PUBLIC__/images/Zt/wishtree/title_bg.gif) no-repeat center center;}
+#explain dl{margin-top:12px;height:60px;}
+#explain dt,#explain dd{float:left;}
+#explain dt{width:30px;height:30px;line-height:30px;text-align:center;margin-right:10px;font-size:16px;color:#e5007f;background:url(__PUBLIC__/images/Zt/wishtree/iocn.gif) no-repeat;}
+#explain dd{width:340px;line-height:20px;color:#FFF;font-size:16px;}
+#remark{margin-top:15px;line-height:40px;text-align:center;color:#FFF;font-size:16px;}
+
+#tier{background-color:#000;top:0px;}
+#tier,#wish_box{position:absolute;display:none;z-index:10000!important;}
+#wish_box{width:300px;border:2px solid #cfcfcf;color:#333;font-size:14px;background:#FFF;}
+#wish_box h2{height:35px;line-height:35px;padding:0 20px;border-bottom:1px solid #cfcfcf;background:#fafafa;}
+#wish_box h2 span{float:right;cursor:pointer;}
+#wish_box dl{width:260px;padding:5px 20px;}
+#wish_box dt{height:32px;margin-top:15px;}
+#wish_box dt input{width:248px;height:30px;line-height:30px;padding:0 5px;border:1px solid #cfcfcf;color:#999;}
+#wish_box dd{height:130px;margin-top:15px;}
+#wish_box dd textarea{width:248px;height:120px;padding:5px;line-height:30px;border:1px solid #cfcfcf;color:#999;}
+#sub{width:159px;height:32px;line-height:32px;margin:0 auto;font-size:18px;font-weight:bold;text-align:center;color:#FFF;background:url(__PUBLIC__/images/Zt/wishtree/bt159.gif) no-repeat;cursor:pointer;}
+
+#wish{width:65px;height:170px;position:absolute;top:200px;left:10px;cursor:pointer;}
+</style>
+<div id="tier"></div>
+<div id="wish_box">
+	<h2><span id="close">关闭</span><strong>留下自己的愿望</strong></h2>
+	<dl>
+    	<dt><input id="wish_name" type="text" value="姓名" /></dt>
+        <dt><input id="wish_phone" type="text" value="手机" /></dt>
+        <dt><input id="wish_mail" type="text" value="邮箱" /></dt>
+        <dd><textarea id="wish_txt" name="" cols="" rows="">愿望</textarea></dd>
+        <dt><div id="sub">马上许愿</div></dt>
+    </dl>
+</div>
+<div id="body">
+	<div id="wishtree">
+		<div id="top">
+            <volist name="list" id="vo">
+                <span style="top:{$vo.top}px;left:{$vo.left}px;" class="heart h{$vo.h}" txt="{$vo.name} - {$vo.content}"></span>
+            </volist>
+        	<!--<span id="heart" style="top:200px;left:320px;" class="heart h2" title="坏人带着猫-早上在广州喝个早茶，下午就躺在马尔代夫的沙滩上晒着太阳？…"></span>-->
+        </div>
+	  <div id="content">
+			<h2><img src="__PUBLIC__/images/Zt/wishtree/bt222.gif"></h2>
+            <div id="refresh">刷新愿望</div>
+            <ul id="explain">
+            	<li>
+                	<h3>参加方法如下</h3>
+                    <dl>
+                    	<dt>1</dt>
+                        <dd>点击“我要许愿”按钮，填写您的姓名、手机、邮箱等相关信息。</dd>
+                    </dl>
+                    <dl>
+                    	<dt>2</dt>
+                        <dd>在许愿框中，留下自己的愿望，<br/>如：在2014年05月28日，从广州飞土耳其。</dd>
+                    </dl>
+                </li>
+                <li>
+                	<h3>抽奖方式</h3>
+                    <dl>
+                    	<dt>1</dt>
+                        <dd>我们每天都将随机抽取10名幸运儿，获奖者将可享受低至1折最高3折的价格购买与所愿望相符的机票一张！</dd>
+                    </dl>
+                    <dl>
+                    	<dt>2</dt>
+                        <dd>许愿后，将有工作人员尽快与你取得联系。</dd>
+                    </dl>
+                </li>
+            </ul>
+            <div id="remark">备注：本活动如有其它任何问题，请以客服人员的答复为准。</div>
+		</div>
+	</div>
+</div>
+<div id="wish"><img src="__PUBLIC__/images/Zt/wishtree/wish.png"></div>
+<script type="text/javascript">
+$(function(){
+	$("#content h2 img").click(function(){
+		$('#tier').show();
+		$('#wish_box').show();
+		});
+	$('#close').click(function(){
+		$('#wish_box').hide();
+		$('#tier').hide();
+		});
+	$(window).scroll(function(){
+		var top = $(this).scrollTop()+50 + 'px';
+		var left = ($(this).width()-302)/2 + 'px';
+		$('#wish_box').css({top:top,left:left});
+		$('#tier').css({width:$('body').width(),height:$('body').height(),opacity:0.60});
+		});
+	
+	$("#wish").click(function(){
+		$('#tier').show();
+		$('#wish_box').show();
+		});
+	$(window).scroll(function(){
+		var top = $(this).scrollTop()+200 + 'px';
+		var scope = $(this).scrollTop()+200;
+		$('#wish').css({top:top});
+		if(scope>550){
+			$('#wish').hide();
+			}else{
+				$('#wish').show();
+				}
+		});
+	
+	//提交愿望
+	$("#sub").click(function(){
+		var name=$("#wish_name").val(),phone=$("#wish_phone").val(),mail=$("#wish_mail").val(),txt=$("#wish_txt").val(),re=/^(1[0-9]{10})$/,email=/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/;
+		if(name=="姓名||name.length<2"){
+			alert("请输入正确的姓名");return false;
+			}else if(!re.test(phone)){
+				alert("请输入正确的手机号");return false;
+				}else if(!email.test(mail)){
+					alert("请输入正确的邮箱");return false;
+					}else if(txt=="愿望"||txt.length<10){
+						alert("请输入正确的愿望或愿望太短了");return false;
+						}else{
+							$.getJSON("{:U('/zt/wishtree')}",{name:name,phone:phone,mail:mail,txt:txt},function(data){
+								if(data.status==1){
+									var html='<span style="top:'+RndNum(3,2)+'px;left:'+RndNum(3,8)+'px;" class="heart h'+RndNum(1,10)+'" txt="'+name+'-'+txt+'"></span>';
+									$("#top").append(html);
+									$('#wish_box').hide();
+									$('#tier').hide();
+									}else{
+										alert(data.info);
+									}
+								});
+                                /*
+								var html='<span style="top:'+RndNum(3,2)+'px;left:'+RndNum(3,8)+'px;" class="heart h'+RndNum(1,10)+'" title="'+name+'-'+txt+'"></span>';
+									$("#top").append(html);
+									$('#wish_box').hide();
+									$('#tier').hide();
+								*/
+							}
+		});
+		
+	
+	//刷新愿望
+	$("#refresh").click(function(){
+		$.getJSON("{:U('/zt/wishtree')}",{ref:"yes"},function(data){
+			if(data.status==1){
+				var dataList=data.list;html='';
+				$.each(dataList,function(i,item){
+					html += '<span style="top:'+item.top+'px;left:'+item.left+'px;" class="heart h'+item.h+'" txt="'+item.name+'-'+item.content+'"></span>';
+					});
+				$("#top").html(html);
+				}else{
+					alert(data.info);
+					}
+			});
+		});
+	
+	
+	//N随机整数
+	function RndNum(n,m){
+		var rnd="",num;
+		for(var i=0;i<n;i++){
+			num=Math.floor(Math.random()*10+1);
+			if(num>=10){
+				num=9;
+				}
+			if(i==0&&num>m){
+				rnd+=m;
+				}else{
+					rnd+=num;
+					}
+		}
+		return rnd;
+	}
+	
+	//愿望说明
+	$(document).on('mousemove',"#top span",function(){
+		var txt=$(this).attr('txt');
+		layer.tips(txt, this, {
+        time:1,
+        style: ['background-color:#12883a; color:#fff', '#12883a'],
+        maxWidth:180
+    	});
+	});
+	
+	//提示
+	hint("#wish_name","姓名");
+	hint("#wish_phone","手机");
+	hint("#wish_mail","邮箱");
+	hint("#wish_txt","愿望");
+	function hint(id,txt){
+		$(id).focus(function(){
+			if($(this).val() == txt){
+				$(this).val("");
+				}
+			});
+		$(id).blur(function(){
+			if($(this).val() == ""){
+				$(this).val(txt)
+				}
+			});
+	}
+
+
+	});
+</script>
+<include file="Public:footer" />

@@ -1,0 +1,102 @@
+<div class="page">
+	<div class="pageContent">
+          
+    <script type="text/javascript">
+    $(function(){
+        var index = parent.layer.getFrameIndex();
+        $('.close').click(function(){
+            parent.layer.close(index);
+        });
+
+        $('.del_img').click(function(){
+            $.get('__URL__/edit','act=del_img&id={$vo.id}',function(data){
+                layer.load(1,0,0);
+                if(data){
+                    $('.img').hide();
+                }
+            })
+        })
+
+        $('.submits').click(function(){
+            $('form').ajaxSubmit({
+                url:$('form').attr('action'),
+                type:"POST",
+                success:function(data) {
+                    if(data && (typeof data)=='string'){
+                        var data = eval("(" + data + ")");
+                    };
+                    $('#msg').val(data.info);
+                    parent.layer.msg(data.info,2,data.status);
+                    parent.layer.close(index);
+                }
+            });
+        })
+
+    });
+</script>
+	<form method="post" action="__URL__/edit/navTabId/__MODULE__-index"   enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+        <input type="hidden" name="id" value="{$vo['id']}" />
+		<div class="pageFormContent" layoutH="58">
+            <div class="unit">
+				<label>活动标题：</label>
+				<input type="text" class="required" size="60" name="title" id="title" value="{$vo.title}">
+			</div>
+           <div class="unit">
+                <label>活动发布状态：</label>
+                <input type="radio" name="status"  value="0" <if condition="$vo.status eq 0"> checked="checked"</if> /> 活动审核状态 &nbsp; <input type="radio" name="status" value="1" <if condition="$vo.status eq 1"> checked="checked"</if> /> 活动已发布状态
+            </div>
+            <div class="unit">
+                <label width="100">活动开始时间：</label>
+                <input type="text"  size="40" class="input"  name="start_time" value="{$vo.start_time}"/>
+            </div>
+               <div class="unit">
+                <label width="100">活动结束时间：</label>
+                <input type="text"  size="40" class="input"  name="end_time" value="{$vo.end_time}"/>
+            </div>               
+
+            <div class="unit">
+                <label>热门活动描述：</label>
+                <textarea class="alt" cols="100" rows="4" name="description" alt="用于SEO 如果不填写则系统自动截取文章前200个字符" >{$vo.description}</textarea>
+                <span class="info"></span>
+            </div>
+          <div class="unit">
+                <label>模板选择：</label>
+               <input type="text"  size="40" value="{$vo['filename']}" class="text"  lookup="org.filename"  readonly="readonly" name="filename" />
+               <a class="btnLook" href="__GROUP__/Hot/hotmodel" lookupGroup="org" width="650" height="300" title="查找带回">查找带回</a>
+	       <input type="hidden"  value="{$vo['filename']}" class="text" lookup="org.filename"  readonly="readonly" name="filename" />
+           </div>  
+           <div class="unit">
+                <label>小图：</label>
+                <input type="file"   class="input" size="60" name="pic1"/>
+               <a class="img">{$vo.pic1}</a>&nbsp;&nbsp;&nbsp;小图发布在往期活动，尺寸为300*148
+               <span class="info"></span>     
+           </div>  
+             <div class="unit">
+		       <label>图片：</label>
+                                <img src="__PUBLIC__/uploads/hot/{$vo['pic1']}" width="100" height="100"/>
+            </div>  
+              <div class="unit">
+                <label>大图：</label>
+                <input type="file"  class="input"  name="pic2" value="" />
+                <a class="img">{$vo.pic2}</a>&nbsp;&nbsp;&nbsp;大图发布在活动首页，尺寸为335*160  
+                <span class="info"></span>
+            </div>
+                <div class="unit">
+				<label>图片：</label>
+                                <img src="__PUBLIC__/uploads/hot/{$vo['pic2']}" width="100" height="100"/>
+            </div>   
+             <div class="unit">
+                <label>活动链接：</label>
+                <input type="text" class="input" size="60" name="url" value="{$vo.url}"/>
+            </div>         
+		</div>		
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	</div>
+</div>
+

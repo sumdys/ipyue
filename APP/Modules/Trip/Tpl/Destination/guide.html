@@ -1,0 +1,73 @@
+<include file="Public:header" />
+    <div id="cont">
+    	<div class="wd980">
+        	<h1 class="h1_tit_nav">你当前所在位置：<a href="{:U('/')}" class="cur">首页</a> > <a href="{:U('/Trip')}" class="cur">攻略社区</a> > <a href="{:U('/Trip/Destination')}" class="cur">目的地</a> > <a href="{:U('/Trip/Destination/destn')}" class="cur">普吉岛</a> > <a class="sy">指南</a></h1>
+
+            <div class="wd980">
+            	<div class="wd720 left">
+                	<div id="guide">
+                   	  <h2><span>更新时间：2014-02-12</span>普吉岛<b>指南</b></h2>
+                        <div id="guide_nav">
+                       	  <a class="active">概况</a>&nbsp;|&nbsp;<a>交通</a>&nbsp;|&nbsp;<a>旅游时间</a>&nbsp;|&nbsp;<a>签证与出入境</a>&nbsp;|&nbsp;<a>货币与花费</a>&nbsp;|&nbsp;<a>实用信息</a>
+                        </div>
+                        <div class="tab_box active">
+                        	<h4><b>•</b>介绍</h4>
+                          	<p>泰国(Thailand)适合作为东南亚旅行的第一站，总是热情地欢迎来自世界各地的旅行者。泰国有美食、海滩和热情的人民，再加上东南亚最成熟优秀的旅游服务，还有什么理由不去泰国呢？从曼谷这座现代化的城市出发，往北是大城、素可泰和清迈等一系列可以安静悠闲享受生活的古城，往南则是芭提雅、普吉岛、苏梅岛、涛岛等等遍布的海滩，可以满足你对热带海洋的一切想象。<br/>当地语言：泰语</p>
+                            <h4><b>•</b>当地人生活</h4>
+                            <p>可能因为泰国90%的居民是佛教徒的原因，泰国人极其推崇慢生活，他们最常挂在嘴边的一句话便是“Jai Yen Yen”，意为“不要急他们会慢条斯理地走路、吃饭、做事，初到泰国时可能会觉得有点不可思议，但是就算你已经急得快要跳起来，泰国人还是会对你说那一句“Jai Yen Yen”。</p>
+                            <h4><b>•</b>文化</h4>
+                          	<p>泰国人很相信因果报应、今生来世，很多泰国人都会给你讲他所经历过的灵异事件，他们不相信这是用科学便能解释得清楚的，据说这也是在泰国随处可见寺庙、神殿的原因，泰国电影业也因为各种类型的鬼片而为众人所知。乐善好施也算是泰国人的国民性格之一每逢搬新家、生日、母亲节、父亲节，泰国人都会前往寺庙布施，他们相信这样能为自己以及父母积福。泰国男性一生中至少要出家一次，短则一个星期、一个月，长则一辈子。</p>
+                            <h4><b>•</b>环境</h4>
+                          	<p>泰国人都会比较礼貌客气，所以在言语举止上都要注意一下，见面打招呼一般不握手，而是行“合十礼(Wai)”，即合掌躬首互向对方致礼。还要注意说话时避免手插在腰上，这样会显得不礼貌。在生活上，泰国人给人很深刻的另外一个印象便是乐观、随性、爱开玩笑，每天开开心心地过就好</p>
+                            <h4><b>•</b>日常对话</h4>
+                          	<p>泰语<br/>泰语(ภาษาไทย，Phasa Thai)与汉语相同的一点是都有不同的声调，同样的拼读，声调不同，词义也不同，以下所列举是旅行中可能用到的语句或标识，可以请泰国当地人多教你几遍，注意模仿他们的音调，才能准确表达意思。曼谷所流行的泰语可以成为“标准泰语”，泰国北部、东北部、南部都有自己的方言。比较正式的泰语表达里，女性在句子后加上kha，男性可加上khrap。</p>
+                            <h4><b>•</b>文字标识</h4>
+                          	<p>ห้องน้ำ/ สุขาhong nam / sukaa - 厕所</p>
+                        </div>
+                        
+                        <div class="tab_box">交通</div>
+                        <div class="tab_box">旅游时间</div>
+                        <div class="tab_box">签证与出入境</div>
+                        <div class="tab_box">货币与花费</div>
+                        <div class="tab_box">实用信息</div>
+                        
+                        <div class="update">更新时间：2013-03-01   <a href="{:U('/Trip/Destination/guide_edit')}">添加</a> / <a href="{:U('/Trip/Destination/guide_edit')}">更新</a></div>
+                    </div>
+                </div><!--wd720 end-->
+                
+                <div class="wd250 right">
+                	<!--目的地栏目的NAV-->
+                	<include file="destn_nav" />
+                    
+                    <!--攻略下载-->
+                    <include file="strategy_r" />
+                    
+                    <!--周边景点-->
+                    <include file="periphery" />
+                    
+                    <!--你可能会喜欢-->
+                    <include file="maylike" />
+                    
+                    <!--游友点评-->
+                    <include file="comment_r" />
+                    
+                    <!--当地特价机票-->
+                    <include file="local_ticket" />
+                    
+                    <div class="mt10"><a href="#"><img src="__PUBLIC__/images/Trip/ad1.jpg" /></a></div>
+                    
+                </div><!--wd250 end-->
+            </div>
+            
+        </div>
+    </div>
+<script type="text/javascript">
+	$(function(){
+		$("#guide_nav a").click(function(){
+				var i=$(this).index();
+				$(this).addClass("active").siblings().removeClass("active");
+				$("#guide .tab_box").eq(i).addClass("active").siblings().removeClass("active");
+			});
+		});
+</script>
+<include file="Public:footer" />

@@ -1,0 +1,11 @@
+<ul class="home_nav<?php if(MODULE_NAME=='Index' && $_REQUEST[_URL_][0]!='Member') echo ''; ?>">
+    <li <?php if(MODULE_NAME=='Index'  && $_REQUEST[_URL_][0]!='Member') echo "class='active'"; ?> ><a href="<?php echo U('/') ?>">首页</a></li>
+	    <li <?php if(MODULE_NAME=='Freetour' && $_REQUEST[_URL_][1]!='diy') echo "class='active'"; ?> ><a href="<?php echo U('/freetour')?>">自由行</a></li>
+    <!-- <li <?php if(MODULE_NAME=='Iflight') echo "class='active'"; ?> ><a href="<?php echo U('/iflight')?>">国际机票</a></li> -->
+    <li <?php if($_REQUEST[_URL_][1]=='diy') echo "class='active'"; ?> ><a href="<?php echo U('/freetour/diy')?>">私人定制</a></li>
+    <li <?php if(MODULE_NAME=='Hotel') echo "class='active'"; ?> ><a href="<?php echo U('/Iflight/orderflight')?>">机票预订</a></li>
+    <!-- <li <?php if(MODULE_NAME=='Special') echo "class='active'"; ?> ><a href="<?php echo U('/special')?>">特卖</a></li> -->
+    <!-- <li><a <?php if(MODULE_NAME=='Ailehui') echo "class='active'"; ?> href="{:U('/Ailehui')?>" class="new">国际酒店<span><img src="__PUBLIC__/images/top_nav_new.gif" alt="new"/></span></a></li> -->
+	<!-- <li><a <?php if(MODULE_NAME=='Adviser') echo "class='active'"; ?> href="<if condition="$userinfo">{:U('/Adviser/review')}_{$userinfo.user.id}<else/>{:U('/adviser')}</if>">专业顾问</a></li>-->
+    <!-- <li><a <?php if(MODULE_NAME=='About') echo "class='active'"; ?> href="{:U('/About')}">关于我们</a></li> -->
+</ul>

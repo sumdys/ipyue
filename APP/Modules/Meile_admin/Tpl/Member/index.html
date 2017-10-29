@@ -1,0 +1,157 @@
+<form id="pagerForm" action="__URL__" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+    <input type="hidden" name="so" value="{$_REQUEST.so}" />
+    <input type="hidden" name="so_type" value="{$_REQUEST.so_type}" />
+    <input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST['_sort']|default='1'}"/>
+    <input type="hidden" name="listRows" value="{$_REQUEST['listRows']}"/>
+    <volist name="map" id="m">
+        <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li>
+                    <label>搜索：</label>
+                    <input type="text" name="so" value="{$_REQUEST.so}" placeholder ="搜索帐号、姓名、手机"/>
+                    搜会员：<input type="radio" name="so_type" value="1" <if condition="$_REQUEST.so_type neq 2">checked</if> />
+                    &nbsp;
+                    搜顾问：<input type="radio" name="so_type" value="2" <eq name="_REQUEST.so_type" value="2">checked</eq>/>
+                </li>
+                <li>
+                    <label> </label>
+                    <select name="reg_type">
+                        <option value="0">--注册类型--</option>
+                        <option value="1" <eq name="_REQUEST.reg_type" value="1">selected=selected</eq>>自主注册</option>
+                        <option value="2" <eq name="_REQUEST.reg_type" value="2">selected=selected</eq>>非自主注册</option>
+                    </select>
+                </li>
+                <li>
+                    <label>注册日期：</label>
+                    <input type="text" size="10"  class="date textInput valid"  name="so_date1" value="{$_REQUEST.so_date1}">                    
+                </li>
+                <li>
+                    <input type="text" size="10"  class="date textInput valid"  name="so_date2" value="{$_REQUEST.so_date2}">                   
+                </li>
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <auth name="add">
+                <li><a class="add" href="__URL__/add" target="dialog" height="350" rel="add" mask="true"><span>新增</span></a></li>
+            </auth>
+            <auth name="add">
+                <li><a class="delete" href="__URL__/foreverdelete/id/{sid_user}/navTabId/__MODULE__-index" target="ajaxTodo" title="你确定要删除吗？" warn="请选择用户"><span>删除</span></a></li>
+            </auth>
+            <auth name="edit"> <li><a class="edit" href="__URL__/edit/id/{sid_user}" target="dialog" width="650" mask="true" rel="edit" warn="请选择"><span>编辑</span></a></li>
+        </auth>
+         <auth name="points">
+                <li><a class="edit" href="__URL__/points/id/{sid_user}" target="dialog" mask="true" warn="请选择"><span>积分管理</span></a></li>
+        </auth>
+            <li class="line">line</li>
+            <auth name="password">
+                <li><a class="icon" href="__URL__/password/id/{sid_user}" target="dialog" mask="true" warn="请选择用户"><span>修改密码</span></a></li>
+        </auth>
+            <auth name="Mobilesms/send">
+            <li><a class="icon" href="{:U('Mobilesms/send')}/id/{sid_user}" target="dialog"  warn="请选择用户" width="650" height="360"><span>发送信息</span></a></li>
+        </auth>
+        </ul>
+    </div>
+<style type="text/css">
+th{
+	text-align:center;
+}
+</style>
+    <table class="table" width="100%" layoutH="115">
+        <thead>
+        <tr>
+            <th width="40">编号</th>
+            <th width="100" orderField="username" <if condition="$_REQUEST._order eq 'username'">class="{$_REQUEST._sort}"</if>>用户名</th>
+            <th width="50" orderField="name" <if condition="$_REQUEST._order eq 'name'">class="{$_REQUEST._sort}"</if>>姓名</th>
+            <th width="75" orderField="mobile" <if condition="$_REQUEST._order eq 'mobile'">class="{$_REQUEST._sort}"</if>>手机</th>
+            <th width="50">会员等级</th>
+            <th width="100" orderField="email" <if condition="$_REQUEST._order eq 'email'">class="{$_REQUEST._sort}"</if>>Email</th>
+            <th width="75" orderField="create_time" <if condition="$_REQUEST._order eq 'create_time'">class="{$_REQUEST._sort}"</if>是>添加时间</th>
+            <th width="110" orderField="last_login_time" <if condition="$_REQUEST._order eq 'last_login_time'">class="{$_REQUEST._sort}"</if>>上次登录</th>
+            <th width="60" orderField="login_count" <if condition="$_REQUEST._order eq 'login_count'">class="{$_REQUEST._sort}"</if>>登录次数</th>
+            <th width="30" orderField="status" <if condition="$_REQUEST._order eq 'status'">class="{$_REQUEST._sort}"</if>>状态</th>
+            <th width="60" orderField="user_id" <if condition="$_REQUEST._order eq 'user_name'">class="{$_REQUEST._sort}"</if>>专属顾问</th>
+            <th width="25">来路</th>
+            <th width="60">自主注册</th>
+            <th width="40">积fun</th>
+            <th width="40">爱钻</th>
+            <th width="70">待支付订单</th>
+            <th width="60">添加订单</th>
+            <if condition="$can_bj eq 1"><th></th><else/><th width="40">操作</th></if>
+        </tr>
+        </thead>
+        <tbody>
+        <volist id="vo" name="info">
+            <tr target="sid_user" rel="{$vo['id']}">
+                <td>{$vo['id']}</td>
+                <td>{$vo['username']}</td>
+                <td>{$vo['name']}</td>
+                <td>{$vo.mobile}</td>
+                <td>{$vo.rank.name}</td>
+                <td>{$vo['email']}</td>
+                <td>{$vo['create_time']|date="Y-m-d",###}</td>
+                <td><empty name="vo.last_login_time">{$vo['create_time']|date="Y-m-d H:i",###}<else/>{$vo['last_login_time']|date="Y-m-d H:i",###}</empty></td>
+                <td>{$vo['login_count']}</td>
+                <td>{$vo['status']}</td>
+                <td <eq name="vo.user.status" value="0">class="bg_red"</eq>>{$vo.user.name}</td>
+                <td><if condition="($vo['source'] eq 1) or($vo['source'] eq 'pc')">pc<else/>{$vo.source}</if></td>
+                <if condition="$vo['source'] eq 1 or $vo['source'] eq 'Asms'"><td>否</td><else/><td>是</td></td></if>
+                <td>{$vo.jifen}</td>
+                <td>{$vo.aizuan}</td>
+                <td>
+                	<if condition="$vo['totel_zf'] eq 0">
+                    	（<span style=" color:#F00;">0</span>）
+                     <else/>
+                     	（<span style=" color:#F00;">{$vo.totel_zf}</span>）
+                        <a href="{:U('/Meile_admin/Order/index')}" target="navTab" rel="Order-index" style="color:#06F;">查看</a>
+                     </if>
+                </td>
+                <td><a href="__URL__/order_add?id={$vo.id}"  style="color:#06F;" width="1200" height="400" target="dialog" rel="edit">添加</a></td>
+
+                    <if condition="$vo['source'] eq 'Asms'">
+                       <td><a href="__URL__/edit/id/{$vo.id}" width="645" height="350" target="dialog" rel="edit">[编辑]</a></td>
+                   <elseif condition="($can_bj eq 1)and($vo['source'] neq 1)" /><!---国际客服部--->
+						<td style="color:#999;">[编辑]</td>		
+				  <elseif condition="($vo['source'] neq 1)and($L_xz eq 1) "/>
+                  		<td style="color:#999;">[编辑]</td>                            
+                  <else/>
+						<td><a href="__URL__/edit/id/{$vo.id}" width="645" height="350" target="dialog" rel="edit">[编辑]</a></td>
+				  </if>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+
+    <div class="panelBar">
+        <div class="pages">
+            <span>显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                <option value="10" <eq name="numPerPage" value="10">selected=selected</eq>>10</option>
+                <option value="20" <eq name="numPerPage" value="20">selected=selected</eq>>20</option>
+                <option value="30" <eq name="numPerPage" value="30">selected=selected</eq>>30</option>
+                <option value="50" <eq name="numPerPage" value="50">selected=selected</eq>>50</option>
+                <option value="100" <eq name="numPerPage" value="100">selected=selected</eq>>100</option>
+            </select>
+            <span>共{$totalCount}条</span>
+        </div>
+        <div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}"  pageNumShown="10" currentPage="{$currentPage}"></div>
+    </div>
+
+</div>

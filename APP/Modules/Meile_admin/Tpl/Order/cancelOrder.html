@@ -1,0 +1,17 @@
+<!--/****
+	取消订单【业务员】
+****/-->
+<style type="text/css">
+p{margin-top:15px;}
+</style>
+<div>
+	<form action="__URL__/handleOrder/navTabId/__MODULE__-newOrder"  method="post" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)"> 
+		<center>
+        	<p>你确定要取消该订单吗？</p>
+        	<p>（订单ID号：{$vo.orderID}）</p>
+        	<p><button type="submit" style="width:30px;">是</button>&nbsp;&nbsp;&nbsp;<button type="button" class="close" size="10" style="width:30px;">否</button></p>
+		</center>
+        <input type="hidden" name="id" value="{$vo.id}" />
+        <input type="hidden" name="type" value="cancel" />
+	</form>
+</div>

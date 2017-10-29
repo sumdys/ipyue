@@ -1,0 +1,120 @@
+﻿<include file="Public:header" />
+
+<link rel="stylesheet" href="__PUBLIC__/css/member.css" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/js/member.js"></script>
+<div class="member">
+	<!--会员中心导航-->
+	<include file="Public:left" />
+
+	<div class="right" id="memberR">
+		<div id="order">
+			<div class="services"><span>您好的专职客服：</span><img src="__PUBLIC__/uploads/{$userInfo['user']['avatar']}" class="icon" /><strong>{$userInfo['user']['name']}</strong>电话：{$userInfo['user']['public_mobile']}
+				<a style="display: inline;" target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin={$userInfo['user']['qq']}&amp;site=qq&amp;menu=yes"><img src="http://wpa.qq.com/pa?p=2:{$userInfo['user']['qq']}:47" alt="点击这里给我发消息" title="点击这里给我发消息"></a>
+			</div>
+			<div class="details">
+				<h2>订单信息</h2>
+				<dl>
+					<dd><strong>订单号：</strong>{$info.order_num}</dd>
+					<dd><strong>预订时间：</strong>{$info.start_date}</dd>
+					<dd><strong>线路名称：</strong>{$info.title}</dd>
+					<dt class="client_info">
+                        	<table cellspacing="0" cellpadding="0" border="1" align="center" width="758">
+                        		<tbody>
+                        			<tr class="tit" style="background-color:#D2D2D2;text-align: center;color: #000;">
+	                        			<td class="first">出发城市</td>
+	                        			<td>出发日期</td>
+	                        			<td>游玩天数</td>
+	                        			<td>出游人数</td>
+                        			</tr>
+                        			<tr style="text-align: center;color: #000;">
+                        				<td class="first">{$info.dcity}</td>
+                        				<td class="blue">{$info.start_date}</td>
+                        				<td class="price">{$info.days}</td>
+                        				<td>{$info.num}</td>
+                        			</tr>
+                        		</tbody>
+                        	</table>
+                        </dt>
+					<dd style="background-color: #ddd;margin-top: 20px;">
+						<ul>
+							<li>
+								<strong>当前订单状态： 已确认，<if condition="$info.pay_state eq 0">待支付<elseif condition="$info.pay_state eq 1"/>已支付<else/>已取消</if></strong>
+						</li>
+							<li>
+								<span style="margin-left: 10px;">您的订单已确认，品悦旅行已为您保留位置，请您在48小时内付款。如有疑问请联系客服。</span>
+							</li>
+						</ul>
+					</dd>
+					<dd class="client_info">
+						<h3 class="info_list"><span>订单确认</span><span>已确认</span><span>待支付</span><span>已支付</span><span>已出游</span></h3>
+					</dd>
+				</dl>
+				<h2>价格</h2>
+				<dl>
+					<dd><strong>订单总价：</strong><b>{$info.total_price}</b></dd>
+					<dd><strong>支付状态：</strong><b><if condition="$info.pay_state eq 0">待支付<elseif condition="$info.pay_state eq 1"/>已支付<else/>已取消</if></b></dd>
+				</dl>
+				<h2>保险信息</h2>
+				<dl>
+					<dd><strong>保险生效/结束时间：2015-7-11 0:00:00 至2015-7-24 23:59:59</dd>
+					<dt class="client_info">
+                        	<table cellspacing="0" cellpadding="0" border="1" align="center" width="758">
+                        		<tbody>
+                        			<tr class="tit" style="background-color:#D2D2D2;text-align: center;color: #000;">
+	                        			<td class="first">投保人姓名</td>
+	                        			<td>保险类型</td>
+	                        			<td>保险费用</td>
+	                        			<td>保险状态</td>
+	                        			<td>保单号</td>
+                        			</tr>
+                        			<tr style="text-align: center;color: #000;">
+                        				<td class="first">{$info.linkman}</td>
+                        				<td class="blue">{$info.start_date}</td>
+                        				<td class="price">{$info.days}</td>
+                        				<td>{$info.num}</td>
+                        				<td>{$info.num}</td>
+                        			</tr>
+                        		</tbody>
+                        	</table>
+                        </dt>
+                </dl>
+                <h2>游客信息</h2>
+                <dl>
+					<dd class="chocebox">
+						<div class="choce-nav">
+							<label class="selectbox"><input type="checkbox" name="name[]"/>张三</label>
+							<label class="selectbox"><input type="checkbox" name="name[]"/>张三</label>
+							<label class="selectbox"><input type="checkbox" name="name[]"/>张三</label>
+						</div>
+					</dd>
+					<dd>
+						<div>
+							
+						</div>
+					</dd>
+					<dd>
+						<div>
+							
+						</div>
+					</dd>					
+				</dl>
+				<h2>联系人信息</h2>
+				<dl>
+					<dd><strong>联系人：</strong><span>{$info.linkman}</span></dd>
+					<dd><strong>手机号码：</strong><span>{$info.mobile}</span></dd>
+				</dl>
+				<dl></dl>
+			</div>
+			<!--国际机票订单详情-->
+			<div id="order_but">
+				<notempty name="is_pending">
+					<a href="{:U('/Member/booking/onlinepay/ddbh/'.$info['ddbh'])}" class="pay">立即付款</a>
+				</notempty>
+				<a href="#" class="print">打印订单</a>
+				<a href="{:U('/Member/booking')}?status=pending" class="back">返回订单列表</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<include file="Public:footer" />

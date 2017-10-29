@@ -1,0 +1,36 @@
+<div class="page">
+	<div class="pageContent">
+
+	<form method="post" action="__URL__/memberPrivilege/act/{$act}/navTabId/__MODULE__-memberPrivilege" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>名称：</label>
+				<input type="text" class="text"  name="name" value="{$vo.name}">
+			</div>
+            <div class="unit">
+                <label>描述：</label>
+                <textarea  name="description" cols="50" rows="2">{$vo.description}</textarea>
+            </div>
+            <div class="unit">
+                <label>排序：</label>
+                <input  class="number"  name="sort" value="{$vo.sort}"/>
+            </div>
+            <div class="unit">
+                <label>CLASS：</label>
+                <input  class="number"  name="class" value="{$vo.class}"/>
+            </div>
+		</div>
+		
+		<div class="formBar">
+			<ul>
+				<li>
+                    <input type="hidden" name="id" value="{$vo.id}">
+                    <div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+	</div>
+</div>
+

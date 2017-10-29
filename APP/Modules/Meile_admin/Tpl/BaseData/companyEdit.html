@@ -1,0 +1,40 @@
+<div class="page">
+	<div class="pageContent">
+
+	<form method="post" action="__URL__/{$Think.ACTION_NAME}/act/{$act}/navTabId/__MODULE__-{$Think.ACTION_NAME}" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>名称：</label>
+				<input type="text" class="text"  name="name" value="{$vo.name}">
+			</div>
+            <div class="unit">
+                <label>电话：</label>
+                <input  class=""  name="telephone" value="{$vo.telephone}"/>
+            </div>
+            <div class="unit">
+                <label>传真：</label>
+                <input  class=""  name="fax" value="{$vo.fax}"/>
+            </div>
+            <div class="unit">
+                <label>银行：</label>
+                <textarea  name="bank" cols="50" rows="2">{$vo.bank}</textarea>
+            </div>
+            <div class="unit">
+                <label>地址：</label>
+                <textarea  name="address" cols="50" rows="2">{$vo.address}</textarea>
+            </div>
+		</div>
+		
+		<div class="formBar">
+			<ul>
+				<li>
+                    <input type="hidden" name="id" value="{$vo.id}">
+                    <div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+	</div>
+</div>
+

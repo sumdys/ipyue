@@ -1,0 +1,61 @@
+<div class="wd270 left">
+    <!--会员登录-->
+    <empty name="userinfo">
+    <div id="act_login">
+            <span class="login"><a href="{:U('/member/login')}">马上登录fun享</a></span>
+            <p>还不是会员？<a href="{:U('/member/register')}">立即注册</a></p>
+        <!-- Baidu Button BEGIN -->
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" data="{'url':'http://www.aishangfei.com/activity/share','text':'分享内容'}">
+            <span class="bds_more">分享到：</span>
+            <a class="bds_qzone"></a>
+            <a class="bds_tsina"></a>
+            <a class="bds_tqq"></a>
+            <a class="bds_renren"></a>
+            <a class="bds_t163"></a>
+        </div>
+    </div>
+    <else/>
+    <!--会员登录 END-->
+    
+    <div id="logining">
+    	<h2>fun享管理</h2>
+        <ul>
+        	<li><a href="{:U('/Member/Appcenter/fun')}">详细</a><strong>我的fun享：</strong><em>{$fx_num|default="0"}</em>次</li>
+            <li><a href="{:U('/Member/Assetaccount/aizuan')}">详细</a><strong>我的爱钻：</strong><b>x{$azpoints|default="0"}</b></li>
+        </ul>
+        <dl>
+        	<dt><a href="{:U('/Member/Appcenter/fun')}">马上fun享</a></dt>
+            <dd><a href="{:I('/jifen/lists/cid/56')}">立即兑换好礼</a></dd>
+		</dl>
+        <!-- Baidu Button BEGIN -->
+        <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" data="{'url':'http://www.aishangfei.com/activity/share','text':'分享内容'}">
+        <span class="bds_more">分享到：</span>
+            <a class="bds_qzone"></a>
+            <a class="bds_tsina"></a>
+            <a class="bds_tqq"></a>
+            <a class="bds_renren"></a>
+            <a class="bds_t163"></a>
+        </div>
+    </div>
+    </empty>
+    <!-- Baidu Button END -->
+    <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6671062" ></script>
+    <script type="text/javascript" id="bdshell_js"></script>
+    <script type="text/javascript">
+        document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+    </script>
+
+    <div class="act_box mt10 act_i_list">
+        <h3 >最新fun享</h3>
+        <ul>
+           <!-- <li><em>1分钟前</em><span>fei</span>进行了fun享</li>-->
+        </ul>
+    </div>
+
+    <div class="act_box mt10 act_i_list">
+        <h3>最近兑换</h3>
+        <ul>
+         <!--   <li><em>1分钟前</em><span>fei</span>成功兑换了<a>IPAD4</a></li>-->
+        </ul>
+    </div>
+</div>

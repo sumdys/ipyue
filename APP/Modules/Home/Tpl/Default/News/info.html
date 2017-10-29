@@ -1,0 +1,43 @@
+<include file="Public:header" />
+    <div id="cont">
+        <div class="wd980 mt10 bgWhite about_asf">
+        	<div class="h1_tit_nav">你当前所在位置：<a href="/" class="sy">首页</a>　>　最新动态<a href="{$href}">　>　{$type}</a>
+            </div>
+            <include file="About:left" />
+            <div class="list_right_gy"><!-- id="news_dt"-->
+            	<h1 class="tit">{$info.title}</h1>
+				
+                <center>
+                     <div style="border-bottom:1px solid #C1C1C1;color:#666; padding:10px;">
+                        <span style="margin-right:25px;">发表于：{$info.published|date='Y-m-d',###}</span>
+                        <span style="margin-right:25px;">来源：{$info.source|default="品悦"}</span>
+                        <span id="info_font_size">
+                            字体：                                                
+                            <select name="font_size" id="font_size">
+                                <option value="12px" >小</option>
+                                <option value="14px" selected="selected" >中</option>
+                                <option value="16px" >大</option>
+                            </select>
+                        </span>
+                     </div>               
+                 </center>   
+                              
+            	<div class="content" id="content">
+                    {$info.content}
+                </div>
+          </div>
+        </div>
+    </div>
+<script type="text/javascript"> 
+//改变字体大小
+ $(document).ready(function() {
+	$("#font_size").change(function(){									
+		$("#content span").css({fontSize:this.value});						 
+		$("#content p").css({fontSize:this.value});
+		$("#content div").css({fontSize:this.value});		
+		$("#content b").css({fontSize:this.value});
+		$("#content li").css({fontSize:this.value});
+	})
+}); 
+ </script>
+<include file="Public:footer" />

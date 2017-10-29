@@ -1,0 +1,54 @@
+
+<!--<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>-->
+<script type="text/javascript" src="__PUBLIC__/js/member.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/modify.js"></script>
+
+<style type="text/css">
+.add{margin-left:10px;}
+.add span{font-weight:bold;}
+.mar_left{margin-left:25px;}
+.add input{float:none;}
+.add ul li{margin-bottom:5px;}
+</style>
+
+<div class="add">
+    <form method="post" action="__URL__/add/navTabId/__MODULE__-index" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <ul>
+            <li><span>手机号码：</span> <input type="text"       value="" class="text"  name="mobile" /><span style="color:#CCC;"><b style="color:#F00;">*</b>(请输入会员手机号码，该号码作为登录名)</span></li>
+            <li><span class="mar_left">密码：</span>    <input  type="text"  value="123456"  class="text"  name="password"/><b style="color:#F00;">*</b></li>
+            <li><span>确认密码：</span>    <input type="text"   value="123456"  class="text"  name="password2"/><b style="color:#F00;">*</b></li>
+            <li><span class="mar_left">姓名：</span>    <input type="text"      value=""  class="text"  name="name" /><b style="color:#F00;">*</b></li>
+            <li><span style="margin-left:12px;">用户名：</span>    <input type="text"       value=""  class="text"  name="username" /><span style="color:#CCC;"><b style="color:#F00;">*</b>（6~20位字符、数字、字母组合，建议用客户姓名的拼音）</span></li>            
+            <li><span class="mar_left">昵称：</span>    <input type="text"       value=""  class="text"  name="nickname" /></li></li>
+            <li><span class="mar_left">性别：</span>    <select name="sex" class="sex"><option value="0">女</option><option value="1">男</option></select></li>
+            <li><span class="mar_left">生日：</span>
+                <select name="year" id="idYear" on=""><option value="0">请选择年份</option></select>
+                <select name="month" id="idMonth"  on=""><option value="0">请选择月份</option></select>
+                <select name="day" id="idDay" on=""><option value="0">请选择日期</option></select>
+            </li>
+            <li><span class="mar_left">职业：</span>
+                <select name="profession">
+                    <option value="0">请选择职业</option><option value="1">白领</option><option value="2">教师</option><option value="3">学生</option>
+                    <option value="4">公务员</option><option value="5">老板</option><option value="6">自由职业者</option><option value="7">其它</option>
+                </select>
+            </li>
+            <li id="addcodePCT" val="{$userInfo.province},{$userInfo.city}"><span>常用出发城市：</span>
+<!--                <select name="province" value=""  class="province" id="province_sel"><option value="">- -</option></select>省
+                <select name="city"  value="" class="city" id="city_sel"><option value="">- -</option></select>市-->
+                <include file="city"/>
+            </li>             
+        </ul>    
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">Submit</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">Cancel</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+	$(function(){
+		optionDate("#idYear","#idMonth","#idDay");
+		});
+</script>
+

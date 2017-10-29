@@ -1,0 +1,93 @@
+<include file="Public:header" />
+
+    <link rel="stylesheet" href="__PUBLIC__/css/member.css" type="text/css" />
+    <script type="text/javascript" src="__PUBLIC__/js/member.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/layer/layer.min.js"></script>
+    <script src="__PUBLIC__/admin/Js/jquery.form.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/modify.js"></script>
+    <div class="member">
+    	<!--会员中心导航-->
+    	<include file="Public:left" />
+        
+		<div class="right" id="memberR">
+        	<h1 class="nav_tit">我的信息</h1>
+            <div id="myinfo">
+            	<form action="myinfo.php" method="post">
+                	<div class="info"> 
+                    	<ul>
+                        	<li><span>用户名：</span>
+								{$userInfo.username}
+							</li>
+                            <li><span>手机：</span>
+								{$userInfo.mobile}<a href="{:U('/Member/Setting/replacephone')}">修改</a>
+							</li>
+                            <li><span>邮箱：</span>
+     
+                                 <if condition="$checkemail['is_check'] eq 1">
+                                        {$userInfo.email}<a href="{:U('/Member/Setting/replacemailbox')}">修改</a> 
+                                 <else/>
+                                      <input type="text"  value="{$userInfo.email}" class="text" name="email" />
+                                 </if>
+							</li>
+                            <li><span>姓名：</span>
+								<input type="text"  value="{$userInfo.name}" class="text" name="name" />
+								<em>请输入真实姓名,不得超过10个汉字或20个英文字母</em>
+							</li>
+							<li><span>昵称：</span>
+								<input type="text"  value="{$userInfo.nickname}" class="text" name="nickname" />
+								<em>4-30个字符,可由中英文字母、数字、“_”、“-”组成</em>
+							</li> 
+                            <li><span>性别：</span>																
+								<input name="sex" type="radio" value="1" <if condition="$userInfo['sex'] eq 1">checked</if> />男								
+								<input name="sex" type="radio" value="0" <if condition="$userInfo['sex'] eq 0">checked</if> />女
+							</li>								
+                            <li><span>生日：</span>
+								<select name="year" id="idYear" on="{$birthday[0]}"><option value="0">请选择年份</option></select>
+								<select name="month" id="idMonth"  on="{$birthday[1]}"><option value="0">请选择月份</option></select>
+								<select name="day" id="idDay" on="{$birthday[2]}"><option value="0">请选择日期</option></select>
+                            </li>
+                            <li><span>职业：</span>
+								<select name="profession">
+                               		<option value="0">请选择职业</option>
+                                	<option value="1" <if condition="$userInfo['profession'] eq 1">selected="selected"</if>>白领</option>
+                                    <option value="2" <if condition="$userInfo['profession'] eq 2">selected="selected"</if>>教师</option>
+                                    <option value="3" <if condition="$userInfo['profession'] eq 3">selected="selected"</if>>学生</option>
+                                    <option value="4" <if condition="$userInfo['profession'] eq 4">selected="selected"</if>>公务员</option>
+                                    <option value="5" <if condition="$userInfo['profession'] eq 5">selected="selected"</if>>老板</option>
+                                    <option value="6" <if condition="$userInfo['profession'] eq 6">selected="selected"</if>>自由职业者</option>
+                                    <option value="7" <if condition="$userInfo['profession'] eq 7">selected="selected"</if>>其它</option>
+                                </select>
+							</li>
+                        	<li id="addcodePCT" val="{$userInfo.province},{$userInfo.city}"><span>常用出发城市：</span>
+							<select name="province" value="{$userInfo['province']}"  class="province" id="province_sel"><option value="">- -</option></select>省
+								<select name="city"  value="{$userInfo['city']}" class="city" id="city_sel"><option value="">- -</option></select>市
+							</li>                        	
+                        </ul>
+                        <div class="right">
+                        	<a href="{:U('/Member/Setting/seticon')}"><div id="icon">
+								<empty name="userInfo['headimg']">
+									<img src="__PUBLIC__/images/member/icon.gif" />
+								<else/>
+									<img src="__PUBLIC__/member/images/{$userinfo['headimg']}" />
+                                    <!--<img src="{：U('/public/member/images/$userinfo.headimg')}" />-->
+								</empty>
+							</div>设置头像</a>
+                        </div>
+                    </div>
+                  	<ul id="hint">
+						<li class="on"><span>温馨提示:</span>
+                        <p>品悦旅行网承诺不公开您的个人信息，建议您完善以上信息，以便于我们为您量身<br>订制个性化服务，为您提供更优质的旅行体验；完善生日信息更可以免费获得生日大礼包哦！</p>
+                        </li>
+					</ul>
+                    <input class="sub" name="" type="submit" value="提交" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    	$(function(){
+			optionDate("#idYear","#idMonth","#idDay");
+			});
+    </script>
+    
+<include file="Public:footer" />

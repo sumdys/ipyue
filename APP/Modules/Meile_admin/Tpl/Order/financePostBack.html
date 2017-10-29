@@ -1,0 +1,19 @@
+<!--/****
+	打回订单【财务组】
+****/-->
+<style type="text/css">
+.ti{margin-top:15px;}
+.pageForm input{float:none;width:300px; height:50px; vertical-align:top;}
+</style>
+<div>
+	<form action="__URL__/ticketPostBack/navTabId/__MODULE__-financeNNOrder"  method="post" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)"> 
+	<center>
+        <div class="ti">打回说明：<input type="text" name="remark" value=""/></div>
+        <div class="ti">
+        	<button type="submit" style="width:60px;">打回</button>&nbsp;&nbsp;&nbsp;
+        	<button type="button" class="close" size="10" style="width:60px;">取消</button>
+        </div>
+	</center>        
+        <input type="hidden" name="id" value="{$id}" />
+	</form>
+</div>

@@ -1,0 +1,112 @@
+<!--/**
+**
+**添加登帐信息，客服部和商旅部可以添加
+**
+**/-->
+
+<style type="text/css">
+.com{margin-left:15px;}
+.com tr{ height:35px; line-height:35px;}
+.com td{ text-align:right; padding-right:50px;}
+.com td a:hover{ text-decoration:none;}
+.com li{padding-bottom:10px; text-align:right; }
+.com input{float:none; width:170px; height:20px; border:1px solid #999;}
+.com textarea{width:170px;height:20px; border:1px solid #999;}
+.del{float:right;margin-top:10px;}
+</style>
+<form  action="__URL__/add/navTabId/__MODULE__-index" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone)" method="post">
+	<table cellpadding="0" cellspacing="0"  class="com">
+    	<tr>
+        	<td><span>出票日期：</span><input type="text" name="cpdate" class="date textInput valid"></td>
+            <td><span>出票地：</span><include file="cpd"/> </td>
+    	</tr>
+         <tr>
+            <td><span>票号：</span><input type="text" name="ticketNo"/></td>
+            <td><span>PNR：</span><input type="text" name="PNR" /></td>
+         </tr>  
+         <tr>
+            <td><span>行程：</span><input type="text" name="route" /></td>
+            <td><span>客人姓名：</span><input type="text" name="krxm" /></td>
+         </tr>           
+         <tr>
+            <td><span>新&旧：</span> <input type="text" name="newORold" /></td>
+            <td><span>航线：</span>
+            	<select name="airline" style="width:170px;height:25px; border:1px solid #999;">
+                	<option value="国内">国内</option><option value="美国">美国</option><option value="欧洲">欧洲</option>
+                    <option value="亚洲">亚洲</option><option value="非洲">非洲</option><option value="南美洲">南美洲</option><option value="加拿大">加拿大</option>
+                </select>
+            </td>
+         </tr>           
+         <tr class="sk">
+            <td><span>收入金额：</span> <input type="text" name="income[]" /></td>
+            <td><span>收款银行：</span><include file="bank"/></td>           
+         </tr>           
+         <tr>
+            <td class="addpapers"><a href="#" style="cursor:hand;"><span style="color:#F00;">+</span>添加收入金额及收款银行</a></td>
+         </tr>           
+         <tr>
+            <td><span>取票金额：</span> <input type="text" name="pay" /></td>
+            <td><span>单数：</span> <input type="text" name="ds" /></td>
+         </tr>           
+         <tr>
+            <td><span>拿位地：</span>
+            	<select name="nwd" style="width:170px;height:25px; border:1px solid #999;">
+                	<option value="大雄鹰">大雄鹰</option><option value="龙华城">龙华城</option><option value="孙健">孙健</option>
+                    <option value="燕山">燕山</option><option value="华特">华特</option><option value="林晓萍">林晓萍</option>
+                    <option value="飘哥">飘哥</option><option value="天马国际">天马国际</option><option value="文昌塔">文昌塔</option>
+                </select>
+            </td>
+            <td><span>拿位费：</span><input type="text" name="nwf" /></td>
+         </tr>           
+          <tr>
+            <td><span>刷卡费：</span><input type="text" name="skf" /></td>
+            <td><span>送票费：</span><input type="text" name="spf" /></td>
+         </tr>          
+         <tr>
+            <td><span>退票款：</span><input type="text" name="tpk" /></td>
+            <td><span>返客费：</span> <input type="text" name="fkf" /></td>
+         </tr>           
+         <tr>
+            <td><span>分利：</span><input type="text" name="fl" /></td>
+            <td><span>收利人：</span><input type="text" name="slr" /></td>
+         </tr>  
+         <tr>
+            <td><span>承担人：</span><input type="text" name="cdr" /></td>
+            <td><span>到账地：</span>
+            <select name="dzd" style="width:170px;height:25px; border:1px solid #999;">
+            	<option value="广州">广州</option><option value="深圳">深圳</option><option value="北京">北京</option>
+            	<option value="上海">上海</option><option value="数据部">数据部</option><option value="去哪部">去哪部</option>
+            </select>         
+            </td>
+         </tr>     
+    </table>  
+<div class="formBar">
+    <ul>
+        <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+        <li><div class="button"><div class="buttonContent"><button type="button" callback="dialogAjax" class="close">取消</button></div></div></li>
+    </ul>
+</div>
+</form>
+
+    <script type="text/javascript">
+    	$(function(){		
+			//添加证件
+			$('.addpapers').click(function(){
+				var html='';
+				html += '<tr>';
+				html += '<td><span>收入金额：</span> <input type="text" name="income[]" /></td>';
+				html += '<td><span>收款银行：</span>';
+                html += '<select name="bank[]" style="width:170px;height:25px; border:1px solid #999;">';
+				html += '<option value="北京对公建行">北京对公建行</option><option value="北京工行">北京工行</option><option value="北京建行">北京建行</option><option value="北京交行">北京交行</option><option value="北京农行">北京农行</option><option value="北京银行">北京银行</option><option value="北京招行">北京招行</option><option value="北京中行">北京中行</option><option value="北京现金">北京现金</option><option value="北京支票">北京支票</option><option value="北京POS机">北京POS机</option><option value="北京--纵横国内平台">北京--纵横国内平台</option><option value="广州对公工行">广州对公工行</option><option value="广州对公中行">广州对公中行</option><option value="广州对公民生">广州对公民生</option><option value="广州工行0693">广州工行0693</option><option value="广州工行6176">广州工行6176</option><option value="广州建设银行">广州建设银行</option><option value="广州交通银行">广州交通银行</option><option value="广州农业银行">广州农业银行</option><option value="广州商业银行">广州商业银行</option><option value="广州招行5188">广州招行5188</option><option value="广州招行5321">广州招行5321</option><option value="广州中行3235">广州中行3235</option><option value="广州中行4588">广州中行4588</option><option value="广州中信银行">广州中信银行</option><option value="广州现金">广州现金</option><option value="广州财付通">广州财付通</option><option value="广州环迅">广州环迅</option><option value="广州易宝">广州易宝</option><option value="广州支付宝">广州支付宝</option><option value="广州支票">广州支票</option><option value="广州POS机">广州POS机</option><option value="广州--纵横国内平台">广州--纵横国内平台</option><option value="美亚工行">美亚工行</option><option value="美亚广发">美亚广发</option><option value="美亚交行">美亚交行</option><option value="去哪儿财付通">去哪儿财付通</option><option value="去哪儿快钱">去哪儿快钱</option><option value="去哪儿支付宝">去哪儿支付宝</option><option value="商旅部工行">商旅部工行</option><option value="商旅部建行">商旅部建行</option><option value="商旅部交行">商旅部交行</option><option value="商旅部农行">商旅部农行</option><option value="商旅部招行">商旅部招行</option><option value="商旅部中行">商旅部中行</option><option value="商旅部民生">商旅部民生</option><option value="商旅部现金">商旅部现金</option><option value="商旅部支票">商旅部支票</option><option value="上海对公">上海对公</option><option value="上海工行">上海工行</option><option value="上海建行">上海建行</option><option value="上海交行">上海交行</option><option value="上海农行">上海农行</option><option value="上海浦发">上海浦发</option><option value="上海中行">上海中行</option><option value="上海银行">上海银行</option><option value="上海招行">上海招行</option><option value="上海支付宝">上海支付宝</option><option value="上海现金">上海现金</option><option value="上海POS机">上海POS机</option><option value="上海支票">上海支票</option><option value="上海--纵横国内平台">上海--纵横国内平台</option><option value="深圳对公建行">深圳对公建行</option><option value="深圳工行">深圳工行</option><option value="深圳建行">深圳建行</option><option value="深圳交行">深圳交行</option><option value="深圳招行">深圳招行</option><option value="深圳中行">深圳中行</option><option value="深圳民生">深圳民生</option><option value="深圳农行">深圳农行</option><option value="深圳现金">深圳现金</option><option value="深圳支票">深圳支票</option><option value="易飞对公工行">易飞对公工行</option><option value="易飞对公兴业">易飞对公兴业</option><option value="纵横天地工行">纵横天地工行</option><option value="纵横天地农行">纵横天地农行</option><option value="纵横天地招商">纵横天地招商</option>';
+                html += '</select>';
+				 html += '</td>';
+                html += '<td class="del">删除</td>';               
+				html += '</tr>';
+				$(this).parent().before(html);
+				//重载删除
+				$(".com .del").bind("click",function(){$(this).parent().remove();});				
+				});				
+			//删除
+			$(".com .del").bind("click",function(){$(this).parent().remove();});			
+			});
+    </script>  

@@ -1,0 +1,38 @@
+<!--//
+**
+** 备注 付款人
+**
+//-->
+<style type="text/css">
+.div{margin-top:5px; margin-left:10px;}
+.div li{list-style:none; margin-top:8px;}
+</style>
+<div class="div">
+	<if condition="$info['audit_sk'] eq 0">
+    	<center><span style="color:#999;">（该账单收款人还没进行审核，不能进行备注）</span></center>
+	<elseif condition="$info['audit_fk'] eq 1" />
+    	<center><span style="color:#999;">（该账单已经审核，不能再备注）</span><br/><br/>
+        	<if condition="$type eq 'pay'">{$info.bz_pay|default='无'}</if>
+            <if condition="$type eq 'tpk'">{$info.bz_tpk|default='无'}</if>
+            <if condition="$type eq 'fkf'">{$info.bz_fkf|default='无'}</if>
+            <if condition="$type eq 'nwf'">{$info.bz_nwf|default='无'}</if>            
+        </center>
+	<else/>
+        <form method="post" action="__URL__/bz_sk/navTabId/__MODULE__-index" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone)" >
+            <input type="hidden" name="t" value="{$type}"/>  
+            <input type="hidden" name="id" value="{$id}" />          
+            <if condition="$type eq 'pay'"><textarea style="width:380px; height:95px;" name="bz">{$info.bz_pay}</textarea></if>
+            <if condition="$type eq 'tpk'"><textarea style="width:380px; height:95px;" name="bz">{$info.bz_tpk}</textarea></if>
+            <if condition="$type eq 'fkf'"><textarea style="width:380px; height:95px;" name="bz">{$info.bz_fkf}</textarea></if>            
+            <if condition="$type eq 'nwf'"><textarea style="width:380px; height:95px;" name="bz">{$info.bz_nwf}</textarea></if>  
+           <div class="formBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+                    <li><div class="button"><div class="buttonContent"><button type="button" callback="dialogAjax" class="close">取消</button></div></div></li>
+                </ul>
+            </div>     
+        </form>
+    </if>
+</div>
+
+

@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我要开店-品悦手机网</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="__PUBLIC__/css/mui.min.css">
+		<link href="__PUBLIC__/css/mui.picker.css" rel="stylesheet" />
+		<link href="__PUBLIC__/css/mui.poppicker.css" rel="stylesheet" />
+		<style>
+			.red{color:red;}
+			.mui-btn-block{margin-top: 20px;padding:7px 0px !important;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">我要开店</h1>
+		</header>
+		<div class="mui-content">
+			<h5 style="margin: 15px;font-size: 18px;">微店信息：</h5>
+			<div class="mui-card">				
+				<form class="mui-input-group">					
+					<div class="mui-input-row">
+						<label><span class="red">*</span> 微店名称</label>
+						<input type="text" id="shopName" value="{$data.shop_name}" placeholder="填写公司名称或微店名称">
+					</div>
+					<div class="mui-input-row">
+						<label><span class="red">*</span> 联系人</label>
+						<input type="text" id="realName" value="{$data.cantent_name}" placeholder="真实姓名">
+					</div>
+					<div class="mui-input-row">
+						<label><span class="red">*</span> 联系手机</label>
+						<input type="text" id="mobile" value="{$data.cantent_mobile}" placeholder="手机号码">
+					</div>
+					<div class="mui-input-row">
+						<label>所在省份</label>
+						<input type="text" value="{$data.provice_name}" id='showProvicePicker' provice_id="{$data.provice_id}" placeholder="=请选择省份=">
+					</div>
+					<div class="mui-input-row">
+						<label>所在城市</label>
+						<input type="text" city_id="{$data.city_id}" value="{$data.city_name}" id="showCityPicker" placeholder="=请选择城市=">
+					</div>
+					
+				</form>
+			</div>
+			<h5 style="margin: 15px;font-size: 18px;">帐号信息：</h5>
+			<div class="mui-card">				
+				<form class="mui-input-group">					
+					<div class="mui-input-row">
+						<label>支付宝号</label>
+						<input type="text" id="account_no" value="{$data.account_no}" placeholder="支付宝号">
+					</div>
+					<div class="mui-input-row">
+						<label> 支付姓名</label>
+						<input type="text" id="account_name" value="{$data.account_name}" placeholder="支付姓名">
+					</div>
+				</form>
+			</div>
+			<div class="mui-content-padded">
+				<button type="button" id="submitApply" class="mui-btn mui-btn-primary mui-btn-block">提交申请</button>
+			</div>
+			
+		</div>
+		<script type="text/javascript" src="__PUBLIC__/js/jquery-2.0.3.min.js" ></script>
+		<script src="__PUBLIC__/js/mui.min.js"></script>
+		<script src="__PUBLIC__/js/mui.picker.js"></script>
+		<script src="__PUBLIC__/js/mui.poppicker.js"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				$.init();
+				$.ready(function() {
+					//省份
+					var proviceData = {$region};
+					var cityData={$cityData};
+					var provicePicker =cityPicker= new $.PopPicker();
+					provicePicker.setData(proviceData);
+					var showProvicePicker = doc.getElementById('showProvicePicker');
+					showProvicePicker.addEventListener('tap', function(event) {
+						provicePicker.show(function(items) {
+							showProvicePicker.value = items[0].text;
+							showProvicePicker.setAttribute('provice_id',items[0].value);
+							mui.getJSON("{:U('Microshop/getCity')}",{provice_id:items[0].value},function(data){
+								cityPicker.setData(data.cityData);
+							});
+							//返回 false 可以阻止选择框的关闭
+							//return false;
+						});
+					}, false);	
+					
+					//城市
+					var showCityPicker = doc.getElementById('showCityPicker');
+					showCityPicker.addEventListener('tap', function(event) {
+						var provice_id = showProvicePicker.getAttribute('provice_id');
+						if(!provice_id){
+							mui.alert('请先选择省份');
+							return false;
+						}
+						cityPicker.show(function(items) {
+							showCityPicker.value = items[0].text;
+							showCityPicker.setAttribute('city_id',items[0].value);							
+							//return false;
+						});
+					}, false);
+					
+					//提交申请
+					var submitApply = doc.getElementById('submitApply');
+					submitApply.addEventListener('tap',function(event){
+						var shopName = doc.getElementById('shopName').value;
+						var realName = doc.getElementById('realName').value;
+						var mobile = doc.getElementById('mobile').value;
+						var accountNo = doc.getElementById('account_no').value;
+						var accountName = doc.getElementById('account_name').value;
+						var proviceId = showProvicePicker.getAttribute('provice_id');
+						var cityId = showCityPicker.getAttribute('city_id');
+						//验证必填
+						if(!shopName){
+							mui.alert('请先填写微店名称');
+							return false;
+						}
+						if(!realName){
+							mui.alert('请先填写联系人');
+							return false;
+						}
+						if(!mobile || validatemobile(mobile)){
+							mui.alert('手机号格式不正确');
+							return false;
+						}
+						mui.post("{:U('Microshop/saveShop')}",{shop_name:shopName,cantent_name:realName,cantent_mobile:mobile,provice_id:proviceId,city_id:cityId,account_no:accountNo,account_name:accountName},function(data){
+							mui.alert(data.info, function() {
+								if(data.status){
+									window.location.href="{:U('/member/')}";
+								}
+							});
+							
+						},'json');
+					});
+				});
+			})(mui, document);
+			mui.init({
+				
+			});
+			
+			
+			
+			var validatemobile=function(par) {
+				var translatematrixREa = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;			
+				var matrix = translatematrixREa.test(par.value);			
+				return matrix;			
+			}
+
+
+		</script>
+	</body>
+
+</html>

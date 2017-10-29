@@ -1,0 +1,6 @@
+
+<!--<a href="{$url}"><img  src="{$info['img']}"  width="{$res['width']}" height="{$res['height']}"></a>-->
+<if condition="($info['is_url'] eq 1)  "> 
+ <a href="{$url}" target="_blank"><img  src="{$info['img']}"  width="{$info['width']}" height="{$info['height']}"></a>   
+ <else /><a href="{$info['link']}" target="_blank"><img  src="{$info['img']}"  width="{$info['width']}" height="{$info['height']}"></a>
+</if>

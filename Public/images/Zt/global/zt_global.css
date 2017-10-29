@@ -1,0 +1,46 @@
+@charset "utf-8";
+*{margin:0;padding:0;}
+ul,ol{list-style:none;}
+img{border:none;vertical-align:bottom;}
+html,input,select{font:14px/1.5 'microsoft yahei',simsun,sans-serif,tahoma,arial,serif}
+input,label{vertical-align:middle;}
+a:link,a:visited{text-decoration:none;}
+.left{float:left;}
+.right{float:right;}
+.mt10{margin-top:10px;}
+#kfivtwin{display:none!important;/*隐藏53客服*/}
+#header, #footer { background-color: #fff; font-size: 12px; }
+.layout{width:980px;margin:0 auto;}
+.clearfix:after{display:table;content:"";clear:both;}
+.clearfix{zoom:1;}
+#header { padding: 20px 0 12px; }
+#header .logo { float: left; padding:10px 30px 0 30px }
+#header .side { float: left; padding-right: 12px; width: 647px; overflow: hidden; }
+#header .fn { padding: 8px 0 14px; }
+#header .fn a { height: 20px; line-height: 20px; color: #666; background-repeat: no-repeat; background-position: left center; }
+#header .fn .login { background-image: url(user-icon.gif); padding: 0 22px 0 30px; }
+#header .fn .register { padding: 0 10px 0 21px; background-image: url(header-line.gif); }
+#header .info { font-family: 'microsoft yahei',simsun,sans-serif,tahoma,arial,serif; font-size: 22px; line-height: 1; color:#333;}
+#header .info .tel { float: right; font-size: 16px; color: #666; font-weight: normal; margin-top: -2px; }
+#header .info .tel em { color: #f60; font-style: normal; font-weight: bold; font-size: 26px; font-family: arial; }
+
+#footer { font-size: 12px; padding-top:26px}
+#footer .share, #footer .wechat { border: 1px solid #e3e3e3; }
+#footer .share { float: left; width: 578px; font-size: 18px; color: #000; font-family: 'microsoft yahei',simsun,sans-serif,tahoma,arial,serif; padding: 20px 0 22px 31px; height: 36px; }
+#footer .share img { vertical-align: middle; }
+#footer .wechat { float: right; width: 316px; padding: 10px 0 8px 12px; }
+#footer .wechat .qrcode { margin-right: 10px; float: left; }
+#footer .wechat .our-wechat { color: #f60; font-style: normal; }
+#footer .wechat p { line-height: 20px; }
+#footer .copyright { color: #999; text-align: center; clear: both; padding-top: 44px; line-height: 24px; }
+#footer .copyright p { color: #666; }
+#statistics_code{padding-bottom:75px;text-align:center;}
+
+#kf_box{width:141px;height:266px;background:url(kf_bg.png) no-repeat;position:absolute;top:300px;right:10px;}
+#kf_box a{display:block;cursor:pointer;}
+#kf_box .close{height:13px;text-align:right;}
+#kf_box .close a{width:13px;height:13px;}
+#kf_box dl{height:91px;padding:114px 7px 0 8px;}
+#kf_box dl a{width:59px;height:24px;line-height:100px;overflow:hidden;}
+#kf_box dt,#kf_box dd{float:left;margin-bottom:7px;}
+#kf_box dt{margin-right:8px;}

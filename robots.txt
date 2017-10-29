@@ -1,0 +1,5 @@
+User-Agent: *
+Allow:/freetour/
+Allow:/Iflight/
+Disallow: /order/index/
+Disallow: /member/login/

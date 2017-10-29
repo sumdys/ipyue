@@ -1,0 +1,215 @@
+<include file="Public:zt_header" />
+<link rel="stylesheet" href="__PUBLIC__/images/Vipzt/tdc.css">
+<script type="text/javascript" src="__PUBLIC__/js/hotcitypop/popcitylist.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" language="javascript" src="__PUBLIC__/js/hotcitypop/searchconditions.js?v=20140331"></script>
+<script type="text/javascript" language="javascript" src="__PUBLIC__/js/hotcitypop/paramfarmat.js"></script>
+	<div id="tdc">
+		<div class="layout shadow" id="advantage">
+			<ul class="clearfix list">
+				<li><a href="{:U('/about/toubu#step1')}" target="_blank">信息真实</a></li>
+				<li><a href="{:U('/about/toubu#step2')}" target="_blank">机票专营</a></li>
+				<li><a href="{:U('/about/toubu#step3')}" target="_blank">专业顾问</a></li>
+				<li><a href="{:U('/about/toubu#step4')}" target="_blank">航协认定</a></li>
+				<li><a href="{:U('/about/toubu#step5')}" target="_blank">百度认证</a></li>
+				<li><a href="{:U('/about/toubu#step6')}" target="_blank">资质公开</a></li>
+				<li><a href="{:U('/about/toubu#step7')}" target="_blank">出票保证</a></li>
+				<li><a href="{:U('/about/toubu#step8')}" target="_blank">全天服务</a></li>
+				<li><a href="{:U('/about/toubu#step9')}" target="_blank">免费送票</a></li>
+				<li><a href="{:U('/about/toubu#step10')}" target="_blank">支付灵活</a></li>
+			</ul>
+		</div>
+		<div class="layout" id="we">
+			<img src="__PUBLIC__/images/Vipzt/images/why-us.png" alt="">
+		</div>
+		<div class="layout shadow" id="vip_ticket_query">
+			<div class="inner">
+				<h2 class="hd">国际机票查询</h2>
+				<div class="chaxun">
+					<form action="/svn/newasf/iflight/flightquery" name="form0" id="chaxun_form" autocomplete="off" onsubmit="return false;">
+						<ul class="clearfix" id="chaxun_ul">
+							<li id="radio_sel"><input type="radio" name="journey" class="journey2" value="2" /><label>&nbsp;单程&nbsp;&nbsp;</label><input type="radio" name="journey" class="journey1" value="1" checked="checked" /><label>&nbsp;往返&nbsp;&nbsp;</label><!--<input type="radio" name="journey" class="journey3" value="3" /><label>&nbsp;多程</label>--></li>
+							<li><span>出发城市：</span><input type="text" class="text city" name="origincode"  value=""  placeholder="城市名"  state="1"/></li>
+							<li><span>到达城市：</span><input type="text" class="text city" name="desinationcode"  value="" placeholder="城市名"state="1"/></li>
+							<li><span>出发日期：</span><input type="text" class="text date" name="originDate" id="originDate"  value="" placeholder="出发时间" state="1" /></li>
+							<li><span>返回日期：</span><input type="text" class="text date" name="returnDate" id="returnDate"  value=""  placeholder="返回日期" state="1"/></li>
+						</ul>
+						<div class="clear">&nbsp;</div>
+						<div class="ts">
+							<p>如有更多需求，请直接联系<a>专业顾问</a></p>
+							<span id="submit_sousuo"><input type="submit" value="搜 索" class="sub" /></span>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="layout" id="map">
+			<h2 class="hd">选择您的目的地</h2>
+			<ul class="clearfix bd">
+				<li><a href="javascript:;" class="a">欧洲</a></li>
+				<li><a href="javascript:;" class="b">北美洲</a></li>
+				<li><a href="javascript:;" class="c">大洋洲</a></li>
+				<li><a href="javascript:;" class="d">亚洲</a></li>
+				<li><a href="javascript:;" class="e">非洲</a></li>
+				<li><a href="javascript:;" class="f">南美洲</a></li>
+			</ul>
+		</div>
+
+		<div class="layout shadow" id="cabin">
+			<div class="clearfix wrapper">
+				<div class="column tdc">
+					<div class="hd">
+						<a class="more" href="javascript:;">更多特价</a>
+					</div>
+					<dl class="bd">
+						<dt><span class="s1"><a href="javascript:;">北京</a><a class="icon"></a><a href="javascript:;">巴黎</a></span><span class="s2">2014-03-31&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥59860</span><span class="s4"><a href="javascript:;">预订</a></span></dt>
+						<dd><span class="s1"><a href="javascript:;">北京</a><a class="icon"></a><a href="javascript:;">罗马</a></span><span class="s2">2014-03-31&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥59860</span><span class="s4"><a href="javascript:;">预订</a></span></dd>
+						<dt><span class="s1"><a href="javascript:;">北京</a><a class="icon"></a><a href="javascript:;">阿姆斯特丹</a></span><span class="s2">2014-03-31&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥59860</span><span class="s4"><a href="javascript:;">预订</a></span></dt>
+						<dd><span class="s1"><a href="javascript:;">上海</a><a class="icon"></a><a href="javascript:;">马德里</a></span><span class="s2">2014-03-31&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥59860</span><span class="s4"><a href="javascript:;">预订</a></span></dd>
+						<dt><span class="s1"><a href="javascript:;">上海</a><a class="icon"></a><a href="javascript:;">法兰克福</a></span><span class="s2">2014-03-31&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥59860</span><span class="s4"><a href="javascript:;">预订</a></span></dt>
+						<dd><span class="s1"><a href="javascript:;">上海</a><a class="icon"></a><a href="javascript:;">米兰</a></span><span class="s2">2014-03-31&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥59860</span><span class="s4"><a href="javascript:;">预订</a></span></dd>
+						<dt><span class="s1"><a href="javascript:;">香港</a><a class="icon"></a><a href="javascript:;">悉尼</a></span><span class="s2">2014-06-30&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥34920</span><span class="s4"><a href="javascript:;">预订</a></span></dt>
+						<dd><span class="s1"><a href="javascript:;">香港</a><a class="icon"></a><a href="javascript:;">墨尔本</a></span><span class="s2">2014-06-30&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥34920</span><span class="s4"><a href="javascript:;">预订</a></span></dd>
+						<dt><span class="s1"><a href="javascript:;">香港</a><a class="icon"></a><a href="javascript:;">阿德莱德</a></span><span class="s2">2014-06-30&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥34920</span><span class="s4"><a href="javascript:;">预订</a></span></dt>
+						<dd><span class="s1"><a href="javascript:;">厦门</a><a class="icon"></a><a href="javascript:;">巴黎</a></span><span class="s2">2014-03-31&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥68410</span><span class="s4"><a href="javascript:;">预订</a></span></dd>
+						<dt><span class="s1"><a href="javascript:;">厦门</a><a class="icon"></a><a href="javascript:;">洛杉矶</a></span><span class="s2">2014-03-31&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥68410</span><span class="s4"><a href="javascript:;">预订</a></span></dt>
+						<dd><span class="s1"><a href="javascript:;">成都</a><a class="icon"></a><a href="javascript:;">苏黎世</a></span><span class="s2">2014-03-31&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥59860</span><span class="s4"><a href="javascript:;">预订</a></span></dd>
+					</dl>
+				</div>
+				<div class="column swc">
+					<div class="hd">
+						<a class="more" href="javascript:;">更多特价</a>
+					</div>
+					<dl class="bd">
+						<dt><span class="s1"><a href="javascript:;">北京</a><a class="icon"></a><a href="javascript:;">伦敦</a></span><span class="s2">2014-03-31&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥20800</span><span class="s4"><a href="javascript:;">预订</a></span></dt>
+						<dd><span class="s1"><a href="javascript:;">北京</a><a class="icon"></a><a href="javascript:;">奥克兰</a></span><span class="s2">2014-12-10&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥19600</span><span class="s4"><a href="javascript:;">预订</a></span></dd>
+						<dt><span class="s1"><a href="javascript:;">上海</a><a class="icon"></a><a href="javascript:;">洛杉矶</a></span><span class="s2">2014-12-03&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥28540</span><span class="s4"><a href="javascript:;">预订</a></span></dt>
+						<dd><span class="s1"><a href="javascript:;">上海</a><a class="icon"></a><a href="javascript:;">芝加哥</a></span><span class="s2">2014-12-03&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥36560</span><span class="s4"><a href="javascript:;">预订</a></span></dd>
+						<dt><span class="s1"><a href="javascript:;">上海</a><a class="icon"></a><a href="javascript:;">温哥华</a></span><span class="s2">2014-12-03&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥21840</span><span class="s4"><a href="javascript:;">预订</a></span></dt>
+						<dd><span class="s1"><a href="javascript:;">上海</a><a class="icon"></a><a href="javascript:;">多伦多</a></span><span class="s2">2014-12-03&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥28870</span><span class="s4"><a href="javascript:;">预订</a></span></dd>
+						<dt><span class="s1"><a href="javascript:;">香港</a><a class="icon"></a><a href="javascript:;">莫斯科</a></span><span class="s2">2014-12-31&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥24280</span><span class="s4"><a href="javascript:;">预订</a></span></dt>
+						<dd><span class="s1"><a href="javascript:;">香港</a><a class="icon"></a><a href="javascript:;">阿姆斯特丹</a></span><span class="s2">2014-12-31&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥33420</span><span class="s4"><a href="javascript:;">预订</a></span></dd>
+						<dt><span class="s1"><a href="javascript:;">香港</a><a class="icon"></a><a href="javascript:;">伦敦</a></span><span class="s2">2014-12-31&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥43680</span><span class="s4"><a href="javascript:;">预订</a></span></dt>
+						<dd><span class="s1"><a href="javascript:;">广州</a><a class="icon"></a><a href="javascript:;">悉尼</a></span><span class="s2">2014-12-31&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥15630</span><span class="s4"><a href="javascript:;">预订</a></span></dd>
+						<dt><span class="s1"><a href="javascript:;">广州</a><a class="icon"></a><a href="javascript:;">米兰</a></span><span class="s2">2014-06-30&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥18200</span><span class="s4"><a href="javascript:;">预订</a></span></dt>
+						<dd><span class="s1"><a href="javascript:;">广州</a><a class="icon"></a><a href="javascript:;">迪拜</a></span><span class="s2">2014-12-31&nbsp;&nbsp;截止&nbsp;&nbsp;往返</span><span class="s3">￥9690</span><span class="s4"><a href="javascript:;">预订</a></span></dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+		<div class="layout shadow" id="gallery">
+			<div class="clearfix wrapper">
+				<img class="item x1y2 a" src="__PUBLIC__/images/Vipzt/images/gallery-a.jpg" alt="">
+				<img class="item x1y1 b" src="__PUBLIC__/images/Vipzt/images/gallery-b.jpg" alt="">
+				<img class="item x1y1 c" src="__PUBLIC__/images/Vipzt/images/gallery-c.jpg" alt="">
+				<div class="item x1y1 d">
+					<div class="inner">
+						<p class="p28">领略各国</p>
+						<p class="p18">飞机上的头等舱</p>
+						<p class="more">
+							<a href="{:U('/vipzt/details')}" target="_blank">查看详细</a>
+						</p>
+					</div>
+				</div>
+				<div class="item x1y1 e">
+					<div class="inner">
+						<p class="p18">您会享受到的</p>
+						<p class="p28">头等舱特权</p>
+						<p class="more">
+							<a href="{:U('/vipzt/tq')}" target="_blank">查看详细</a>
+						</p>
+					</div>
+				</div>
+				<img class="item x1y2 f" src="__PUBLIC__/images/Vipzt/images/gallery-e.jpg" alt="">
+				<img class="item x1y2 g" src="__PUBLIC__/images/Vipzt/images/gallery-f.jpg" alt="">
+				<img class="item x2y1 h" src="__PUBLIC__/images/Vipzt/images/gallery-d.jpg" alt="">
+			</div>
+		</div>
+	</div>
+<include file="Public:zt_footer" />
+<script type="text/javascript">
+$(function(){
+	
+	//解决IE下左侧栏鼠标以上点击时不能打开的问题
+	if($.browser.msie){
+		$("#service ul li label").click(function(){
+			$(this)[0].parentNode.click();
+		});
+	}
+	$("#chaxun_form").find("li .city").each(function(i){
+		$(this).click(function(){
+            textInputDIs($(this));
+			if(i==0){popCityList($(this)[0]);}
+			if(i==1){popCityList($(this)[0],"guowai");}
+		});
+	});
+	$("#chaxun_form").find("li .date").each(function(i){
+		$(this).click(function(){
+            textInputDIs($(this));
+			if(i==0){WdatePicker({minDate:'%y-%M-%d',doubleCalendar:true});}
+			if(i==1){WdatePicker({minDate:'%y-%M-{%d+1}',doubleCalendar:true});}
+		});
+	});
+        function textInputDIs(dom){
+            if(dom.attr("state")!="1"){
+                dom.css("color","#333");
+                dom.val("");
+                dom.attr("state","1");
+            }
+        }
+	$("#radio_sel input").each(function(i){
+		var ul=$(this).parent().parent();
+		$(this).click(function(){
+			var li=ul.find("li");
+			if(i==2){
+				li.eq(4).hide();
+				var div=$("<ul class='clear'></ul>");
+				var html="<li><span>出发城市：</span><input type='text' class='text city' name='startCity1' value='城市名'/></li><li><span>到达城市：</span><input type='text' class='text city' name='arriveCity1' value='城市名'/></li><li><span>出发日期：</span><input type='text' class='text date' name='startTIme1' value='出发时间' /></li>";
+                div.html(html);
+				var lis=div.find("li");
+				lis.find(".city").eq(0).click(function(){textInputDIs($(this));popCityList($(this)[0]);});
+				lis.find(".city").eq(1).click(function(){textInputDIs($(this));popCityList($(this)[0],"guowai");});
+				lis.find(".date").click(function(){textInputDIs($(this));WdatePicker({minDate:'%y-%M-%d',doubleCalendar:true});});
+				$("#chaxun_ul").append(div);
+			}else{
+				if(ul.find("ul").length>0){ul.find("ul").remove();}
+				if(i==0){
+					li.eq(4).hide();
+				}
+				if(i==1){
+					li.eq(4).show();
+				}
+			}
+		});
+	});
+	//查询提交
+	$("#chaxun_form").submit(function(e){
+        var state=0;
+		$(this).find("input.text").each(function(i){
+            if($(this).parent().css("display")==="none") return true;
+			if($(this).attr("state")!="1"||$(this).val()==""){
+				if($(this).hasClass("city"))$(this).click();
+				else{alert("请输入日期");}
+				state=1;
+				return false;   
+			}
+		});
+        if(state==1) return false;
+        searChAagin();
+	});
+	//订单查询
+	$("#order_query input:text").click(function(){$(this).val("");});
+	
+	$('#map a').click(function(){
+		open_kf();
+		});
+	$('#cabin a').click(function(){
+		open_kf();
+		});
+	$('.ts a').click(function(){
+		open_kf();
+		});
+
+	});
+</script>

@@ -1,0 +1,57 @@
+<include file="Public:header" />
+<style type="text/css">
+#kfivtwin{display:none!important;/*隐藏53客服*/}
+#partner h2{height:40px;line-height:40px;margin-top:10px;font-family:"微软雅黑";font-size:24px;font-weight:bold;color:#06c;border-bottom:1px dashed #ccc;}
+#partner h2 em{padding-left:10px;font-style:normal;font-size:20px;font-family:Arial,Helvetica,sans-serif;color:#ccc;}
+#partner .none{display:none;}
+#partner .more{height:25px;border-top:1px solid #e0e0e0;}
+#partner .more a{display:block;width:70px;height:20px;line-height:20px;margin:0 auto;border:1px solid #e0e0e0;border-top:none;background:#f5f5f5;color:#666;cursor:pointer;}
+#partner .more a span{float:left;display:block;width:9px;height:5px;margin:8px 5px 0 15px; background:url(__PUBLIC__/images/arrow_icon.gif) no-repeat;}
+#partner .more a span.up{background-position:0 0;}
+#partner .more a span.down{background-position:0 -5px;}
+</style>
+    <div id="cont">
+        <div class="wd980 mt10 bgWhite about_asf">
+        	<h1 class="h1_tit_nav">你当前所在位置：<a href="{:U('/')}" class="sy">首页</a> > <a class="cur">合作伙伴</a></h1>
+            <include file="left" />
+            <div class="list_right_gy" id="partner">
+            	<div class="partner_list">
+                	<h2>国际航空公司<em>International Airlines</em></h2>
+                    <img src="__PUBLIC__/images/partner01.jpg" />
+                    <div class="show_more none"><img src="__PUBLIC__/images/partner02.jpg" /></div>
+                    <div class="more"><a><span class="down"></span>更多</a></div>
+                </div>
+                <div class="partner_list">
+                	<h2>国内航空公司<em>Domestic Airlines</em></h2>
+                    <img src="__PUBLIC__/images/partner03.jpg" />
+                    <div class="show_more none"><img src="__PUBLIC__/images/partner04.jpg" /></div>
+                    <div class="more"><a><span class="down"></span>更多</a></div>
+                </div>
+                <div class="partner_list">
+                	<h2>各界企业团体<em>From All Walks Of Life Companies And </em></h2>
+                    <img src="__PUBLIC__/images/partner05.jpg" />
+                    <div class="show_more none"><img src="__PUBLIC__/images/partner06.jpg" /></div>
+                    <div class="more"><a><span class="down"></span>更多</a></div>
+                </div>
+                <div class="partner_list">
+                	<h2>国内著名大学<em>Domestic Famous Universities</em></h2>
+                    <img src="__PUBLIC__/images/partner07.jpg" />
+                </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+	$(function(){
+		$(".more a").click(function(){
+			var showMore=$(this).parent().prev();
+			if(showMore.hasClass("none")){
+				showMore.removeClass("none");
+				$(this).html('<span class="up"></span>更多');
+				}else{
+					showMore.addClass("none");
+					$(this).html('<span class="down"></span>更多');
+					}
+			});
+		});
+</script>
+<include file="Public:footer" />

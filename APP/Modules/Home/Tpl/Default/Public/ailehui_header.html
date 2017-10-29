@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{$title} - {:C('WEB_NAME')}</title>
+    <link rel="stylesheet" href="__PUBLIC__/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="__PUBLIC__/css/ailehui.css" type="text/css" />
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/main.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/layer/layer.min.js"></script>
+    <style type="text/css">#kfivtwin{display:none!important;/*隐藏53客服*/}</style>
+</head>
+<body>
+<script type="text/javascript">
+    var BaseInfo = {
+        'path':"{:U('/')}"
+    };
+
+    function open_kf(){
+    <?php if($userinfo): ?>
+        window.open('http://wpa.qq.com/msgrd?v=3&uin={$userinfo.user.qq|trim}&site=qq&menu=yes');
+    <?php else: ?>
+        setIsinvited();hz6d_cus_web_msg_open();
+    <?php endif;?>
+    }
+</script>
+<div id="hd_top">
+        <div class="wd960"><script type="text/javascript"  src="{:U('/Public/topMenu')}"></script></div>
+    </div>
+    <div id="hd_logo">
+        <div class="wd960">
+            <a href="{:U('/')}" class="left"><img src="__PUBLIC__/images/logo.gif" alt="logo" class="logo" /></a><span id="logo_txt">爱乐汇</span>
+        </div>
+    </div>
+    <div id="alh_nav">
+        <div class="wd980">
+            <ul class="nav">
+                <li><a <?php if(MODULE_NAME=='Ailehui' and ACTION_NAME!='upgrade' and ACTION_NAME!='myprivilege') echo "class='active'"; ?> href="{:U('/ailehui')}">爱乐汇首页                                                   </a></li>
+                <li><a <?php if(MODULE_NAME=='Ailehui' and ACTION_NAME=='upgrade') echo "class='active'"; ?> href="{:U('/Ailehui/upgrade')}">会员升级</a></li>
+                <li><a <?php if(MODULE_NAME=='Ailehui' and ACTION_NAME=='myprivilege') echo "class='active'"; ?> href="{:U('/Ailehui/myprivilege')}">会员特权</a></li>
+                <li><a href="{:U('/Member')}">账户管理</a></li>
+            </ul>
+        </div>
+	</div>

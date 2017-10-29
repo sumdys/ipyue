@@ -1,0 +1,33 @@
+<!--//
+**
+** 导出账单
+**
+//-->
+ <style type="text/css">
+.daochu li{;margin-top:10px;}
+.sm p{margin-top:5px; margin-left:20px;line-height:20px;}
+</style>
+<center>
+    <form action="__URL__/daochu/navTabId/__MODULE__-index" method="post">
+        <ul class="daochu">
+        <li><h3>按出票日期</h3></li>
+         <li>开始日期：<input type="text"  name="cp1"  class="date textInput " style=" float:none;"/></li>
+         <li>结束日期：<input type="text"  name="cp2"  class="date textInput " style="float:none;"/></li>
+        <input type="submit" value="确定" size="30" style="float:none; margin-top:10px;"/>
+    </form>
+</center>
+<div class="sm">
+<h2>导入说明：</h2>
+<p>1、开始日期不能大于结束日期</p>
+<p>2、暂不支持多个条件同时查询；如果没有选择条件而直接按确定，表示导出全部订单</p>
+<p>3、导出后的excel表中，一些数字类的单元如手机号、票面价格、应付金额等可能会出现格式问题，可以通过设置单元格格式恢复</p>
+</div>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+﻿	<div id="footer">
+		<div class="layout">
+			<div class="share">
+				<!--<img src="__PUBLIC__/images/zt/global/share-bar.png" alt="">-->
+                <span class="left mt10">分享到：</span><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_kaixin001" data-cmd="kaixin001" title="分享到开心网"></a><a href="#" class="bds_bdhome" data-cmd="bdhome" title="分享到百度新首页"></a><a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a></div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+			</div>
+			<div class="wechat">
+				<img class="qrcode" src="__PUBLIC__/images/Zt/global/wechat-qrcode.png" alt="品悦官方微信">
+				<p><strong>品悦官方微信</strong></p>
+				<p>微信号：<em class="our-wechat">aishangfeiweixin</em></p>
+				<p>或直接扫描左侧二维码</p>
+			</div>
+			<div class="copyright">
+				<p>Copyright &copy; 2009-2017 品悦旅行网 广州讯悦商务服务有限公司</p>
+				此网页内容最终解释权归讯悦商务服务有限公司所有<br />
+                <script language="javascript" type="text/javascript" src="http://js.users.51.la/16991750.js"></script>
+<script type="text/javascript">
+	var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+	document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F9bb60244498ccc09dd9a81c6428d1e9f' type='text/javascript'%3E%3C/script%3E"));
+</script>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 咨询弹窗 -->
+	<div id="kf_box">
+    	<div class="close"><a></a></div>
+        <dl>
+        	<dt><a>欧洲线</a></dt>
+            <dd><a>美洲线</a></dd>
+            <dt><a>大洋线</a></dt>
+            <dd><a>亚洲线</a></dd>
+            <dt><a>非洲线</a></dt>
+            <dd><a>南美线</a></dd>
+        </dl>
+    </div>
+	
+</body>
+</html>
+<script id="kf53" language="JavaScript" src ="http://chat.53kf.com/kf.php?arg=aaa&style=1"></script>
+<script type="text/javascript">
+//调用53kf
+	var BaseInfo = {'path':"{:U('/')}"};
+    function open_kf(){
+    <?php if($userinfo): ?>
+        window.open('http://wpa.qq.com/msgrd?v=3&uin={$userinfo.user.qq|trim}&site=qq&menu=yes');
+    <?php else: ?>
+        setIsinvited();hz6d_cus_web_msg_open();
+    <?php endif;?>
+    }
+	var kfurl="http://www17.53kf.com/webCompany.php?"+$("#ivt_script").attr("src").match(/arg=.*/gim);
+
+	//kf_box
+	$(window).scroll(function(){
+		var top=$(this).scrollTop()+300+'px';
+		$('#kf_box').css('top',top);
+		});
+	$('#kf_box .close a').click(function(){
+		$('#kf_box').hide();
+		});
+	$('#kf_box dl a').click(function(){
+		open_kf();
+		});
+</script>

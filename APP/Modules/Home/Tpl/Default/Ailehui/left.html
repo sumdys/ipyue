@@ -1,0 +1,47 @@
+<div class="alh_box">
+	<h2><a class="icon i0"></a>会员信息</h2>
+    <empty name="userInfo">
+    <div class="notlogin">
+		<span><a href="{:U('/Member/login')}" class="a0">登录查看我的信息</a></span>
+		<div class="link"><a href="{:U('/help/members#help_ul1')}" class="right">如何快速升级</a><a href="{:U('/Ailehui/myprivilege')}" class="left">我的会员特权</a></div>
+		<span><a href="{:U('/Member/register')}" class="a1">免费注册</a></span>
+		<p>注册即获赠50元现金券及1000积fun</p>
+		<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+		<script type="text/javascript">
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+		</script>
+	</div>
+    <else />
+    <div class="login">
+		<div class="info">
+			<ul class="right">
+				<li><b>{$userInfo.name}</b></li>
+				<li>现金券:<strong>{$xjjpoints|default=0}</strong>元</li>
+				<li>积fun:<strong>{$jfpoints|default=0}</strong></li>
+				<li>爱钻:<span>x{$azpoints|default=0}</span></li>
+			</ul>
+		<div class="left"><a href="{:U('/Member')}"><img height="90px" src="__PUBLIC__/member/images/{$userinfo['headimg'] | default='Icon.gif'}" /><span class="mgi m{$userInfo.rank_id}"></span></a></div>
+		</div>
+	</div>
+    </empty>
+</div>
+
+<notempty name="userInfo">
+<div class="alh_box">
+	<h2><a class="icon i7"></a>我的会员特权</h2>
+    <ul id="priv52">
+        <volist name="myPrivilege" id="vo">
+            <?php if($i==1)$vo['name']=str_replace('专人','',$vo['name']); ?>
+            <li><a href="{:U('/Ailehui/myprivilege')}#p{$vo.class}"><span class="p{$vo.class}"></span>{$vo.name}</a></li>
+        </volist>
+    </ul>
+</div>
+</notempty>
+<div class="alh_box">
+	<h2><a class="icon i8"></a>会员动态</h2>
+    <ul id="upgrade_list">
+        <volist name="upgrade_list" id="v">
+    	    <li><span>升级到<em>{$rankArr[$v['rank_id']]['name']}</em></span>会员{:cutStr($v['username'],9)}</li>
+        </volist>
+    </ul>
+</div>

@@ -1,0 +1,73 @@
+﻿<include file="Public:header" />
+<script type="text/javascript" src="__PUBLIC__/js/hotcitypop/popcitylist.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/chaxun.js"></script>
+<div class="w1200">
+	<div class="ft-b">
+		<img src="__PUBLIC__/images/ft-banner.jpg" alt="境外自由行">
+		<div class="ft-s">
+			<include file="search" />
+			<div class="ft-diy">
+				<div class="ft-d-t">对这些线路不满意？仅需一分钟定制您的私人旅行方案</div>
+				<form action="{:U('/freetour/diy')}" id="sD" method="get">
+					<input id="sDs"  placeholder="输入您想去的地方，我们免费为您设计方案" type="text" name="place">
+					<input id="sDd" type="submit" value="马上定制" >
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="ft-content">
+		<div class="ft-tj">
+			<h2 class="ft-tj-tit">特价推荐</h2>
+			<div class="ft-tj-b">
+				<ul>
+                    <volist name="list.tj_line" id="vo">
+					<li>
+                        <a href="{:U('freetour/detail')}/id/{$vo.id}"><img src="__PUBLIC__/uploads{$vo[images][0]}" alt="">  </a>
+						<div class="ft-tj-d">
+							<a href="{:U('freetour/detail')}/id/{$vo.id}">{$vo.title}</a>
+							<span class="ft-tj-pri">现价：AUD {$vo.price}</span><span class="ft-tj-m-pri">原价：AUD {$vo.old_price}</span>
+						</div>
+					</li>
+                    </volist>
+				</ul>
+			</div>
+		</div>
+<!-- 路线 -->
+		<div class="ft-tj">
+			<h2 class="ft-tj-tit">周边游路线</h2>
+			<div class="ft-tj-b">
+				<ul>
+                    <volist name="list.short_line" id="vo">
+					<li>
+                        <a href="{:U('freetour/detail')}/id/{$vo.id}"><img src="__PUBLIC__/uploads{$vo[images][0]}" alt="">  </a>
+						<div class="ft-tj-d">
+							<a href="{:U('freetour/detail')}/id/{$vo.id}">{$vo.title}</a>
+							<span class="ft-tj-pri">现价：AUD {$vo.price}</span><span class="ft-tj-m-pri">原价：AUD {$vo.old_price}</span>
+						</div>
+					</li>
+                    </volist>
+				</ul>
+			</div>
+		</div>
+<!-- 长路线 -->
+		<div class="ft-tj">
+			<h2 class="ft-tj-tit">体验式路线</h2>
+			<div class="ft-tj-b">
+				<ul>
+                    <volist name="list.long_line" id="vo">
+					<li>
+                        <a href="{:U('freetour/detail')}/id/{$vo.id}"><img src="__PUBLIC__/uploads{$vo[images][0]}" alt="">  </a>
+						<div class="ft-tj-d">
+							<a href="{:U('freetour/detail')}/id/{$vo.id}">{$vo.title}</a>
+							<span class="ft-tj-pri">现价：AUD {$vo.price}</span><span class="ft-tj-m-pri">原价：AUD {$vo.old_price}</span>
+						</div>
+					</li>
+                    </volist>
+				</ul>
+			</div>
+		</div>		
+		
+
+	</div>
+</div>
+<include file="Public:footer" />

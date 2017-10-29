@@ -1,0 +1,150 @@
+<!----------------
+
+******预约名单
+
+----------------->
+<style type="text/css">	
+	.lib_Menubox {height:28px;line-height:28px;position:relative;}
+	.lib_Menubox ul{margin:0px;padding:0px;list-style:none; position:absolute; top:3px; left:0; margin-left:10px; height:25px;text-align:center;}
+	.lib_Menubox li{float:left;display:block;cursor:pointer;width:114px;color:#949694;font-weight:bold; margin-right:2px;height:25px;line-height:25px; background-color:#E4F2FD}
+	.lib_Menubox li.hover{padding:0px;background:#fff;width:116px;color:#739242;height:25px;line-height:25px;}
+	.lib_Contentbox{clear:both;margin-top:0px; height:181px; text-align:center;padding-top:8px;}
+	td{text-align:center!important;}
+	.subBar a {margin-left:20px;}
+</style>
+
+<form id="pagerForm" action="__URL__/appointment" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+    <input type="hidden" name="so" value="{$_REQUEST.so}" />
+    <input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST['_sort']|default='1'}"/>
+    <input type="hidden" name="listRows" value="{$_REQUEST['listRows']}"/>
+    <volist name="map" id="m">
+        <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/appointment" method="post">
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li>
+                    <label>搜索：</label>
+                    <input type="text" name="so" value="{$_REQUEST.so}" placeholder ="搜索帐号、姓名、手机"/>
+                </li>
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>   
+</div>
+    
+<div class="pageContent">
+    <div class="lib_Menubox lib_tabborder">
+        <ul>
+           <li><a href="{:U('/Meile_admin/Sales/index')}" target="navTab" rel="Order-index" style="color:#06F;">新客户名单</a><span style="color:#999;">（{$totle['newORold']}）</span></li>
+           <li class="hover">预约名单<span style="color:#999;">（{$totle['appointment']}）</span></li>
+            <if condition='($type eq 0)or($type eq 2)'>
+           <li><a href="{:U('/Meile_admin/Sales/audit')}" target="navTab" rel="Order-index" style="color:#06F;">待审核名单</a><span style="color:#999;">（{$totle['audit']}）</span></li>
+           </if>
+           <li><a href="{:U('/Meile_admin/Sales/audit_yes')}" target="navTab" rel="Order-index" style="color:#06F;">审核通过名单</a><span style="color:#999;">（{$totle['auditYes']}）</span></li>
+           <li><a href="{:U('/Meile_admin/Sales/no_need')}" target="navTab" rel="Order-index" style="color:#06F;">不需要名单</a><span style="color:#999;">（{$totle['no_need']}）</span></li>
+           <li><a href="{:U('/Meile_admin/Sales/invalid')}" target="navTab" rel="Order-index" style="color:#06F;">无效名单</a><span style="color:#999;">（{$totle['invalid']}）</span></li>
+        </ul>
+    </div>
+    	<form action="__URL__/save" method="post" name="submit_form" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone)">
+        <table class="table" width="100%" layoutH="115">
+            <thead>
+                <tr>    
+                	<th width="80" style="text-align:center;">编号</th>          
+                	<th width="60" style="text-align:center;">姓名</th>
+                    <th width="100" style="text-align:center;">手机</th>
+                    <th width="100"  style="text-align:center;">电话</th>
+                    <th width="80"  style="text-align:center;">邮箱</th>
+                    <th width="40"  style="text-align:center;">性别</th>
+                    <th width="60"  style="text-align:center;">QQ号</th>
+                    <th width="60"  style="text-align:center;">微信</th>
+                    <th width="100"  style="text-align:center;">地址</th>
+                    <th width="100"  style="text-align:center;" >备注</th>
+                    
+                    <!---主管显示这一块-->
+                    <if condition="$type eq 0">
+                        <th width="100"  style="text-align:center;" >业务员</th>
+                        <th width="100"  style="text-align:center;" >拨打情况</th>
+                    <else/>
+                    <!---业务员显示这一块-->
+                        <th width="100" style="text-align:center;">上次拨打情况</th> 
+                        <th width="190" style="text-align:center;">本次拨打情况</th> 
+                        <th width="160" style="text-align:center;">设置重拨</th>  
+                        <th width="90" style="text-align:center;">操作</th>
+                    </if>                      
+                </tr>
+            </thead>
+            <tbody>
+                <volist name="info" id="vo">                      
+                    <tr target="sid_user" rel=""> 
+                    	<td>{$vo.bh}</td>                    
+                    	<td>{$vo.xm}</td>
+                        <td>{$vo.mobi}</td>
+                        <td>{$vo.tel}</td>
+                        <td>{$vo.mail}</td>
+                        <td>{$vo.sex}</td>
+                        <td>{$vo.qq}</td>
+                        <td>{$vo.wechat}</td>
+                        <td>{$vo.address}</td>
+                        <td>{$vo.remark}</td>
+                        
+                         <!---主管显示这一块-->
+                         <if condition="$type eq 0">                         
+                            <td>{$vo.name}</td>
+                            <td>{$vo.dial_case}</td>                         
+                         <else/>
+                         <!---业务员才显示这一块-->
+                            <td>{$vo.dial_case}</td>
+                            <td class="select">
+                                <select name="bigclass[{$vo.id}]">
+                                    <option  selected></option>                               
+                                    <option value="接通">接通</option>
+                                    <option value="无人接听">无人接听</option>
+                                    <option value="无效">无效</option>
+                                </select>
+                                <select name="smallclass[{$vo.id}]">
+                                    <option selected></option>
+                                    <option value="再联系" >再联系</option>
+                                    <option value="不需要" >不需要</option>
+                                    <option value="成功" >成功</option>
+                                </select>                         
+                            </td> 
+                            <td> 
+                                <input type="text" size="10" class="date textInput valid"  name="date[{$vo.id}]">&nbsp;
+                                <select name="time[{$vo.id}]"><option value=""></option><option value="上午">上午</option><option value="下午">下午</option></select>
+                            </td>  
+                            <td>
+                                <a class="edit" href="__URL__/edit" height="250" width="575" target="dialog" mask="true" title="编辑"><input type="button" value="编辑" /></a>
+                                <input type="submit" value="提交" />
+                            </td> 
+                        </if>                         
+                    </tr> 
+                </volist>  
+            </tbody>
+        </table>
+        </form>                      
+        <div class="panelBar">
+            <div class="pages">
+                <span>显示</span>
+                <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                    <option value="10" <eq name="numPerPage" value="10">selected=selected</eq>>10</option>
+                    <option value="20" <eq name="numPerPage" value="20">selected=selected</eq>>20</option>
+                    <option value="30" <eq name="numPerPage" value="30">selected=selected</eq>>30</option>
+                    <option value="50" <eq name="numPerPage" value="50">selected=selected</eq>>50</option>
+                    <option value="100" <eq name="numPerPage" value="100">selected=selected</eq>>100</option>
+                </select>
+                <span>共{$totalCount}条</span>
+            </div>
+            <div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}"></div>
+        </div> 
+    </div>
+</div><!---pageContent end-->

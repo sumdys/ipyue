@@ -1,0 +1,27 @@
+<div class="pageContent">
+    <form method="post" action="__ACTION__/dialogId/edit" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden"  value="{$vo['id']}" name="id"/>
+        <input type="hidden"  value="{$vo['id']}" name="member_id" />
+        <div class="pageFormContent" layoutH="58"> 
+            <p><label>帐号:</label><input type="text"  value="{$vo['username']}" class="text" name="username" <if condition="$admin neq 1"> disabled="true"/></if></p>
+            <p><label>姓名:</label><input type="text"  value="{$vo['name']}" class="text" name="name" /></p>
+           <p><label>会员级别:</label><input type="text"  size="8" value="{$vo.rank.name}" class="text" disabled="true"/> </p>
+            <p>
+                <label>选择升级等级:</label>
+                <select name="rank_id">
+                    <volist name="rankInfo" id="v">
+                        <option value="{$v.id}">{$v.name}</option>
+                    </volist>
+                </select>
+            </p>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">Submit</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">Cancel</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+
+</div>
+

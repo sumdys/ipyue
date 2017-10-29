@@ -1,0 +1,97 @@
+<include file="Public:ailehui_header" />
+	<div id="cont">
+    	<div class="wd980">
+        	<h1 class="h1_tit_nav">你当前所在位置：<a href="{:U('/')}" class="sy">首页</a> > <a href="{:U('/Ailehui')}" class="sy">爱乐汇</a> > <a href="{:U('/Ailehui/myprivilege')}" class="sy">我的特权</a> > <a class="sy">生日大礼包</a></h1>
+            <div class="wd270 left"><include file="left" /></div>
+            <div class="wd700 right">
+            	<div id="birthdaygift">
+                	<h2>预订生日大礼包</h2>
+                     <h3><empty name="userInfo.birthday">花1分钟填写您的生日日期并进行提交，即可完成生日大礼包预订！<else /> &nbsp;</empty></h3>
+                    <div class="birthday">
+                      <empty name="userInfo.birthday">
+                   	  <form action="" method="post">
+                        生日日期：
+                        <select class="wd86" name="year" id="idYear" on="{$birthday[0]}"><option value="0">请选择年份</option></select>年
+                        <select class="wd56" name="month" id="idMonth"  on="{$birthday[1]}"><option value="0">请选择月份</option></select>月
+                        <select class="wd56" name="day" id="idDay" on="{$birthday[2]}"><option value="0">请选择日期</option></select>日
+                        <input type="submit" value="提交" />
+                        </form>
+                          <else />
+                          您的生日日期：{$userInfo.birthday}
+                        </empty>
+                    </div>
+                    <h4>说明：</h4>
+                    <if condition="$userInfo.rank_id eq 1 or !$userInfo">
+                    <p><!--蓝钻会员-->
+                    	1.您在成功预订生日大礼包后的每次生日当天起1个月内可根据网站提示领取该大礼包；<br />
+						2.礼品为100元现金券一张，可用于票价5000元或以上（不含税）的机票订单优惠100元；<br />
+						3.现金券有效期为6个月，请及时使用；<br />
+						4.生日日期提交后，不可进行更改；
+                    </p>
+                     </if>
+                    <eq name="userInfo.rank_id" value="2">
+                    <p><!--银钻会员-->
+						1.您在成功预订生日大礼包后的每次生日当天起1个月内可根据网站提示领取该大礼包；<br />
+						2.礼品为100元及150元现金券各一张，可分别用于票价5000元或以上（不含税）的机票订单优惠100元、票价10000元或以上（不含税）的机票订单优惠150元；<br />
+						3.现金券有效期为6个月，请及时使用；<br />
+						4.生日日期提交后，不可进行更改。
+                    </p>
+                    </eq>
+                    <eq name="userInfo.rank_id" value="3">
+                    <p><!--金钻会员-->
+                    	1.您在成功预订生日大礼包后的每次生日当天起1个月内可根据网站提示领取该大礼包；<br />
+						2.礼品为100元、150元及200元现金券各一张，可分别用于票价5000元或以上（不含税）的机票订单优惠100元、票价10000元或以上（不含税）的机票订单优惠150元及票价15000元或以上（不含税）的机票订单优惠200元；<br />
+						3.现金券有效期为6个月，请及时使用；<br />
+						4.生日日期提交后，不可进行更改。
+                    </p>
+                    </eq>
+                    <eq name="userInfo.rank_id" value="4">
+                    <p><!--黑钻会员-->
+                    	1.您在成功预订生日大礼包后的每次生日当天起1个月内可根据网站提示领取该大礼包；<br />
+						2.礼品为100元、150元、200元及250元现金券各一张，可分别用于票价5000元或以上（不含税）的机票订单优惠100元、票价10000元或以上（不含税）的机票订单优惠150元、票价15000元或以上（不含税）的机票订单优惠200元及票价20000元或以上（不含税）的机票订单优惠250元；<br />
+						3.现金券有效期为6个月，请及时使用；<br />
+						4.生日日期提交后，不可进行更改。
+                    </p>
+                    </eq>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    	$(function(){
+			optionDate("#idYear","#idMonth","#idDay");
+			});
+			
+		//出生年月日
+		function optionDate(idYear,idMonth,idDay){
+			var htmlYear="",htmlMonth="",htmlDay="";
+			var y=$(idYear).attr('on'),m=$(idMonth).attr('on'),d=$(idDay).attr('on');
+			for(var i=1900;i<=2100;i++){
+				if(i==y){
+					htmlYear += '<option selected="selected" value="'+ i +'">'+ i +'</option>'
+					}else{
+						htmlYear += '<option value="'+ i +'">'+ i +'</option>'
+						}
+			}
+		
+			for(var j=1;j<=12;j++){
+				if(j==m){
+					htmlMonth += '<option selected="selected" value="'+ j +'">'+ j +'</option>'
+					}else{
+						htmlMonth += '<option value="'+ j +'">'+ j +'</option>'
+						}
+			}
+		
+			for(var k=1;k<=31;k++){
+				if(k==d){
+					htmlDay += '<option selected="selected" value="'+ k +'">'+ k +'</option>'
+					}else{
+						htmlDay += '<option value="'+ k +'">'+ k +'</option>'
+						}
+			}
+		$(idYear).html(htmlYear);
+		$(idMonth).html(htmlMonth);
+		$(idDay).html(htmlDay);
+	}
+    </script>
+<include file="Public:footer" />

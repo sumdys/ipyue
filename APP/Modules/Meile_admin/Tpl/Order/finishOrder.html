@@ -1,0 +1,108 @@
+<!----------------
+******已完成订单【业务组】
+----------------->
+<style type="text/css">	
+.lib_Menubox {height:28px;line-height:28px;position:relative;}
+.lib_Menubox ul{margin:0px;padding:0px;list-style:none; position:absolute; top:3px; left:0; height:25px;text-align:center;}
+.lib_Menubox li{float:left;display:block;cursor:pointer;width:114px;color:#949694;font-weight:bold; margin-right:2px;height:25px;line-height:25px; background-color:#E4F2FD}
+.lib_Menubox li.hover{padding:0px;width:116px;color:#F00;height:25px;line-height:25px;}
+.lib_Contentbox{clear:both;margin-top:0px; height:181px; text-align:center;padding-top:8px;}
+td{text-align:center!important;}
+.subBar a {margin-left:20px;}
+.subBar{float:right;}
+.total{color:#999;}
+.title{color:#06F!important;}
+.edit{color:#06F!important;}
+</style>
+<form id="pagerForm" action="__URL__/finishOrder" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+    <input type="hidden" name="so" value="{$_REQUEST.so}" />
+    <input type="hidden" name="date" value="{$_REQUEST.date}" />
+    <input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST['_sort']|default='1'}"/>
+    <input type="hidden" name="listRows" value="{$_REQUEST['listRows']}"/>
+    <volist name="map" id="m">
+        <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+<div class="pageContent">
+    <div class="lib_Menubox lib_tabborder">
+        <ul>
+           <li><a href="{:U('/Meile_admin/Order/newOrder')}"        target="navTab" rel="Order-newOrder"  class="title">新订单</a><span class="total">（{$total[0]}）</span></li>
+           <li><a href="{:U('/Meile_admin/Order/waitTicketOrder')}" target="navTab" rel="Order-newOrder"  class="title">待出票订单</a><span class="total">（{$total[1]}）</span></li>          
+           <li><a href="{:U('/Meile_admin/Order/hasTicketOrder')}"  target="navTab" rel="Order-newOrder"  class="title">已出票订单</a><span class="total">（{$total[2]}）</span></li>
+           <li class="hover">已完成订单<span class="total">（{$total[3]}）</span></li>
+           <li><a href="{:U('/Meile_admin/Order/abolishOrder')}"    target="navTab" rel="Order-newOrder"  class="title">已取消订单</a><span class="total">（{$total[4]}）</span></li>          
+        </ul>
+    </div>
+    <div class="pageHeader">
+        <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/finishOrder" method="post">
+            <div class="searchBar">
+                <ul class="searchContent">
+                    <li><label>下单日期</label><input type="text" size="10"  class="date textInput valid"  name="date" value="{$_REQUEST.date}"></li>
+                    <li> <label>订单内容：</label><input type="text" name="so" value="{$_REQUEST.so}" placeholder ="姓名、手机或PNR"/></li>
+                </ul>
+                <div class="subBar">
+                    <ul><li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li></ul>
+                </div>
+            </div>
+        </form> 
+    </div>   
+     	<table width="100%" layoutH="115" class="table">
+            <thead>
+                <tr>              	
+                	<th width="60" style="text-align:center;">订单ID</th>          
+                	<th width="80" style="text-align:center;">订单状态</th>                    
+  					<th width="60"  style="text-align:center;">出票员</th>
+                    <th width="60"  style="text-align:center;">票号</th>
+                    <th width="60"  style="text-align:center;">出票日期</th>
+                    <th width="60"  style="text-align:center;">业务员</th>
+                    <th width="60"  style="text-align:center;">下单日期</th>
+                    <th width="40"  style="text-align:center;">PNR</th>
+                    <th width="60"  style="text-align:center;">订票人</th>
+                    <th width="60"  style="text-align:center;">手机号码</th>
+                    <th width="60"  style="text-align:center;">采购价</th>
+                    <th width="60"  style="text-align:center;" >利润</th>
+                    <th width="60" style="text-align:center;">税费</th> 
+                    <th width="60" style="text-align:center;">保险金额</th>
+                    <th width="60" style="text-align:center;">应收金额</th>  
+                </tr>
+            </thead>
+            <tbody>                   
+            	<volist name="list" id="vo">                   
+                <tr> 
+                    <td style="color:#09F;"><a class="edit" href="__URL__/viewOrder?id={$vo.id}" width="950" height="600" target="dialog" mask="true" title="查看订单">{$vo.orderID}</a></td>                 
+                    <td>已完成</td>
+                     <td>{$vo['ticket']['name']}</td>
+                    <td>{$vo.ticketNO}</td>
+                    <td>{$vo.hasTicketTime|date="Y-m-d",###}</td>
+                    <td>{$vo['user']['name']}</td>
+                    <td>{$vo.create_time|date="Y-m-d",###}</td>
+                    <td>{$vo.PNR}</td>
+                    <td>{$vo.memberName}</td>
+                    <td>{$vo.memberTel}</td>
+                    <td>￥{$vo.procurementPrice}</td>
+                    <td>￥{$vo.profit}</td>                        
+                    <td>￥{$vo.taxation}</td> 
+                    <td>￥{$vo.insurance}</td> 
+                    <td>￥{$vo.payableAmount}</td>                                                 
+                </tr>
+                </volist>          
+            </tbody>
+        </table>
+        <div class="panelBar">
+            <div class="pages">
+                <span>显示</span>
+                <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                    <option value="10" <eq name="numPerPage" value="10">selected=selected</eq>>10</option>
+                    <option value="20" <eq name="numPerPage" value="20">selected=selected</eq>>20</option>
+                    <option value="30" <eq name="numPerPage" value="30">selected=selected</eq>>30</option>
+                    <option value="50" <eq name="numPerPage" value="50">selected=selected</eq>>50</option>
+                    <option value="100" <eq name="numPerPage" value="100">selected=selected</eq>>100</option>
+                </select>
+                <span>共{$totalCount}条</span>
+            </div>
+            <div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}"></div>
+        </div> 
+</div><!---pageContent end-->

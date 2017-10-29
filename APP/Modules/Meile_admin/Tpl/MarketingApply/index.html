@@ -1,0 +1,112 @@
+<form id="pagerForm" action="__URL__/index" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+    <input type="hidden" name="_order" value="{$_REQUEST['_order']}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST['_sort']|default='1'}"/>
+    <input type="hidden" name="listRows" value="{$_REQUEST['listRows']}"/>
+    <volist name="map" id="m">
+        <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+
+
+    <div class="pageHeader">
+        <form onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+            <div class="searchBar">
+                <ul class="searchContent">
+                    <li>
+                        <input type="text" name="title" value="{$_REQUEST.title}" class="medium" placeholder="联系人/联系电话" >
+                    </li>
+                    <li>
+                        <label>状态：</label>
+                        <select class="combox" name="status">
+                            <option value="">请选择</option>
+                            <option value="1" <eq name="_REQUEST.status" value="1">selected=selected</eq>>已审核</option>
+                            <option value="0" <eq name="_REQUEST.status" value="0">selected=selected</eq>>未审核</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label>审请日期：</label>
+                        <input type="text" class="date textInput valid"  name="start_date" value="{$_REQUEST.start_date}">
+                        <a class="inputDateButton" href="javascript:;">选择</a> &nbsp;&nbsp;<span style="float: left;margin-top: 5px;">至</span><input type="text" class="date textInput valid"  name="end_date" value="{$_REQUEST.end_date}">
+                        <a class="inputDateButton" href="javascript:;">选择</a> &nbsp;&nbsp;
+                    </li>
+
+                </ul>
+                <div class="subBar">
+                    <ul>
+                        <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="pageContent">
+        <div class="panelBar">
+            <ul class="toolBar">
+                <!--<li><a class="add" href="__URL__/add" target="dialog" mask="true" width="890" height="550"><span>新增</span></a></li>-->
+                <!--<li><a class="delete" href="__URL__/foreverdelete/id/{sid_node}/navTabId/__MODULE__-index" target="ajaxTodo"  title="你确定要删除吗？" warn="请选择节点"><span>删除</span></a></li>-->
+                <!--<li><a class="edit" href="__URL__/edit/id/{sid_node}" target="dialog" mask="true" warn="请选择节点"  width="890" height="550"><span>修改</span></a></li>-->
+                <!--<li><a title="确实要删除这些记录吗?" target="selectedTodo" target="dialog" rel="ids[]" href="__URL__/delAll" class="delete" ><span>批量删除</span></a></li>-->
+            </ul>
+        </div>
+        <table class="list" width="100%" layoutH="116">
+            <thead>
+            <tr>
+                <th width="20"><input type="checkbox" group="ids[]" class="checkboxCtrl"></th>
+                <th width="100">店铺名称</th>
+                <th width="50">联系人</th>
+                <th width="50" >联系电话</th>
+                <th width="80" >申请时间</th>
+                <th width="100">操作员</th>
+                <th width="100">状态</th>
+                <th width="100">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            <volist id="vo" name="list">
+                <tr target="sid_node" rel="{$vo['id']}">
+                    <td><input name="ids[]" value="{$vo['id']}" type="checkbox">:{$vo['id']}</td>
+                    <td>{$vo['shop_name']}</td>
+                    <td>{$vo.cantent_name}</td>
+                    <td>{$vo.cantent_mobile}</td>
+                    <td>{$vo.create_time}</td>
+                    <td>{$vo.applictioner}</td>
+                    <td>
+                        <switch name="vo.status" >
+                            <case value="0">未审核</case>
+                            <case value="1">通过</case>
+                            <case value="2">不通过</case>
+                        </switch>
+                    </td>
+                    <td>
+                        <if condition="$vo.status lt 1">
+                        <a href="__URL__/changeStatus/status/1/id/{$vo.id}/navTabId/__MODULE__-index" target="navTabTodo" title="你确定要审核通过吗？">通过</a>
+                        <!--<a href="__URL__/edit/id/{$vo['id']}" target="dialog" rel="edit" width="890" height="400">编辑</a>-->
+                        <a href="__URL__/changeStatus/status/2/id/{$vo['id']}/navTabId/__MODULE__-index" target="navTabTodo" title="你确定要审核不通过吗？">不通过</a>
+                        </if>
+                    </td>
+                </tr>
+            </volist>
+
+            </tbody>
+        </table>
+        <div class="panelBar">
+            <div class="pages">
+                <span>显示</span>
+                <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                    <option value="5" <eq name="numPerPage" value="5">selected=selected</eq>>5</option>
+                    <option value="10" <eq name="numPerPage" value="10">selected=selected</eq>>10</option>
+                    <option value="15" <eq name="numPerPage" value="15">selected=selected</eq>>15</option>
+                    <option value="20" <eq name="numPerPage" value="20">selected=selected</eq>>20</option>
+                    <option value="30" <eq name="numPerPage" value="30">selected=selected</eq>>30</option>
+                </select>
+                <span>共{$totalCount}条</span>
+
+            </div>
+            <div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}"></div>
+        </div>
+    </div>

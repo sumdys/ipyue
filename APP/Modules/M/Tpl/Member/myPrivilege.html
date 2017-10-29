@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{$title}-品悦手机网</title>
+<link href="__PUBLIC__/mobile/css/global.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+#topnav .icon{width:80px;}
+.box h2{padding-right:42px;}
+#myprivilege{background:#fff;}
+#myprivilege li{padding:10px;border-bottom:1px solid #e7e5e5;}
+#myprivilege li span{float:left;display:block;width:52px;height:52px;margin-right:12px;background:url(__PUBLIC__/mobile/images/privilege_52.png) no-repeat;}
+#myprivilege li span.p1{background-position:0 0;}
+#myprivilege li span.p2{background-position:-52px 0;}
+#myprivilege li span.p3{background-position:-104px 0;}
+#myprivilege li span.p4{background-position:0 -52px;}
+#myprivilege li span.p5{background-position:-52px -52px;}
+#myprivilege li span.p6{background-position:-104px -52px;}
+#myprivilege li span.p7{background-position:0 -104px;}
+#myprivilege li span.p8{background-position:-52px -104px;}
+#myprivilege li span.p9{background-position:-104px -104px;}
+#myprivilege li span.p10{background-position:0 -156px;}
+#myprivilege li span.p11{background-position:-52px -156px;}
+#myprivilege li span.p12{background-position:-104px -156px;}
+#myprivilege li span.p13{background-position:0 -208px;}
+#myprivilege li span.p14{background-position:-52px -208px;}
+#myprivilege li span.p15{background-position:-104px -208px;}
+#myprivilege li span.p16{background-position:0 -260px;}
+#myprivilege li span.p17{background-position:-52px -260px;}
+#myprivilege li span.p18{background-position:-104px -260px;}
+#myprivilege li h4{line-height:20px;font-size:14px;font-weight:bold;color:#444;}
+#myprivilege li p{margin-top:10px;line-height:24px;}
+</style>
+</head>
+
+<body>
+<div id="page">
+  <div id="content">
+    <h1 id="topnav"><span class="left icon"><a href="{:U('/')}" class="icon-home">首页</a></span>我的品悦<span class="right" id="exit">退出登录</span></h1>
+    <div class="box">
+        <h2><span class="left icon"><a href="{:U('/Member')}" class="icon-return">返回</a></span>我的特权</h2>
+        <ul id="myprivilege">        
+           <volist name="privilege" id="vo">
+                <li>
+                    <span class="p{$vo.class}"></span>
+                    <h4>{$vo.name}</h4>
+                    <p>{$vo.description}</p>
+                </li>
+            </volist>            
+        </ul>
+    </div>
+    
+  </div>
+</div>
+<include file="Public:CommonJs" />
+<script type="text/javascript">
+$(function(){
+
+	});
+</script>
+</body>
+</html>

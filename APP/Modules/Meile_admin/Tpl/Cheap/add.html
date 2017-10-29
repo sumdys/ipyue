@@ -1,0 +1,55 @@
+<div class="page">
+	<div class="pageContent">
+
+	<form method="post" action="__URL__/add/navTabId/__MODULE__-index"enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+           <div class="pageFormContent" layoutH="58">
+	
+            <div class="unit">
+				<label>洲：</label>
+				<input type="text"  name="zhou" id="zhou">
+	       </div>
+                <div class="unit">
+                <label>状态：</label>
+                <input type="radio" name="info[status]" value="0" <if condition="$info.status eq 0"> checked="checked"</if> /> 有效 &nbsp; <input type="radio" name="info[status]" value="1" <if condition="$info.status eq 1"> checked="checked"</if> /> 过期
+                </div>
+
+            <div class="unit">
+                <label width="100">出发城市：</label>
+                <input type="text"  class="input"  name="from_city" id='from_city'/>
+            </div>
+         
+            <div class="unit">
+                <label>到达城市：</label>
+                <input type="text" class="input" name="to_city" value="" id='to_city'/>
+            </div>
+            <div class="unit">
+                <label>截止日期：</label>
+                <input type="text" class="input" name="time" value="" />
+            </div>
+
+            <div class="unit">
+                <label>航空公司：</label>
+                <input type="text" class="input" name="air" value="" />
+            </div>
+            <div class="unit">
+                <label>价格：</label>
+                <input type="text" class="input" name="price" value="" />
+            </div>
+            <div class="unit">
+                <label>图片：</label>
+                <input type="file" style="width: 150px;" class="input"  name="img" value="" />
+                <span class="info"></span>
+            </div>
+		</div>
+		
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+	</div>
+</div>
+

@@ -1,0 +1,35 @@
+<div class="pageContent">
+	<form method="post" action="__ACTION__" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="user_id" value="<?php echo $_SESSION[C('USER_AUTH_KEY')] ?>"/>
+		<input type="hidden" name="id" value="{$vo.id}" />
+		<div class="pageFormContent" layoutH="58">
+
+			<p>
+				<label>分配规则：</label>
+				<input  type="radio"  name="auto" value="1" checked/>自动分配
+                <input  type="radio"  name="auto" value="0">手动指定分配
+			</p>
+            <p>
+                <label>指定分配：</label>
+                <input type="text"  value="{$vo['user']['name']}" class="text"  lookup="org.name"  readonly="readonly" name="user_name" />
+                <a class="btnLook" href="__GROUP__/User/userData" lookupGroup="org" width="650" height="300" title="查找带回">查找带回</a>
+                <input type="hidden"  value="" class="text" lookup="org.id"  readonly="readonly" name="to_user_id" />(分配给另一个帐号)
+            </p>
+
+            <div class="unit">
+                <label>验证码</label>
+                <input type="text" class="required" name="verify">
+                <img src="__GROUP__/Public/verify/" BORDER="0" ALT="click" id="verifyImg" onClick="fleshVerify()" style="cursor:pointer" align="absmiddle">
+            </div>
+
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">Submit</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">Cancel</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+

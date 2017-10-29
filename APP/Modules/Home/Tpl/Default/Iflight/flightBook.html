@@ -1,0 +1,428 @@
+<include file="Public:header" />
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/css/Iflight.css" />
+<script type="text/javascript" src="__PUBLIC__/js/Iflight.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/hotcitypop/popcitylist.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" language="javascript" src="__PUBLIC__/js/hotcitypop/searchconditions.js"></script>
+<script type="text/javascript" language="javascript" src="__PUBLIC__/js/hotcitypop/paramfarmat.js"></script>
+<script type="text/javascript">
+    var flightBookUrl="{:U('/iflight/searchTicket')}";
+    var flightOrderUrl="{:U('/iflight/flightOrder')}";
+</script>
+
+<div class="wd980">
+	<h1 class="iflight_tit_nav">您当前所处的位置：<a href="{:U('/')}">首页</a><em>></em><a href="{:U('/iflight')}">国际机票</a><em>></em>选择航班</h1>
+    <div class="mt10">
+    	<div class="wd250 left">
+        	<!--国际机票新版搜索框-->
+            <div id="flight_search_box">
+            	<h2>总比市场低一点</h2>
+                <div class="search_box">
+                	<form action="{:U('/iflight/flightBook')}" name="flight_search_form" id="flight_search_form" >
+                    	<ul id="sel_required">
+                        	<li id="iflight_rad" class="iflight_rad">
+                            	<input type="radio" name="journey" value="2" <if condition="$_REQUEST.journey eq 2">checked="checked"</if>/><label>单程</label>
+                				<input type="radio" name="journey" value="1" <if condition="$_REQUEST.journey eq 1">checked="checked"</if> /><label>往返</label>
+                				<!--<input type="radio" name="journey" class="journey3" value="3" /><label>多程</label>-->
+                            </li>
+                            <li>
+                				<span>出发城市：</span>
+                				<input type="text" class="text city" name="originCode" id="originCode" value="{$_GET['originCode']}"  placeholder="城市名"  state="1"/>
+            				</li>
+            				<li>
+                				<span>到达城市：</span>
+                				<input type="text" class="text city" name="desinationCode" id="desinationCode" value="{$_GET['desinationCode']}" placeholder="城市名"state="1"/>
+            				</li>
+            				<li>
+                				<span>出发日期：</span>
+                				<input type="text" class="text date" name="originDate" id="originDate"  value="{$_GET['originDate']}" placeholder="时间/日期" state="1" />
+            				</li>
+            				<li <if condition="$_REQUEST.journey eq 2">style="display:none;"</if>>
+                				<span>返回日期：</span>
+                				<input type="text" class="text date" name="returnDate" id="returnDate"  value="{$_GET['returnDate']}"  placeholder="时间/日期" state="1"/>
+            				</li>
+                        </ul>
+                        <ul id="sel_minor">
+                        	<!--<li>
+                            	<span>舱位等级：</span>
+                                <select name="selInCabinType" id="selInCabinType">
+                                  <option value="经济舱">经济舱</option>
+                                  <option value="公务舱">公务舱</option>
+                                  <option value="头等舱">头等舱</option>
+                                </select>
+                       	    </li>-->
+                            <li>
+                            	<span>乘客类型：</span>
+                                <select name="selInPassengersType" id="selInPassengersType">
+                                  <option value="ADT" <if condition="$_REQUEST.selInPassengersType eq 'ADT'">selected="selected"</if>>普通成人</option>
+                                  <option value="STU" <if condition="$_REQUEST.selInPassengersType eq 'STU'">selected="selected"</if>>学生</option>
+                                  <!--<option value="劳工">劳工</option>-->
+                                  <!--<option value="新移民">新移民</option>-->
+                                  <!--<option value="海员">海员</option>-->
+                                </select>
+                            </li>
+                            <li>
+                            	<span>成人人数：</span>
+                                <select name="selInAdult" id="selInAdult">
+                                    <option value="1" <if condition="$_REQUEST.selInAdult eq 1">selected="selected"</if>>1</option>
+                                    <option value="2" <if condition="$_REQUEST.selInAdult eq 2">selected="selected"</if>>2</option>
+                                    <option value="3" <if condition="$_REQUEST.selInAdult eq 3">selected="selected"</if>>3</option>
+                                    <option value="4" <if condition="$_REQUEST.selInAdult eq 4">selected="selected"</if>>4</option>
+                                    <option value="5" <if condition="$_REQUEST.selInAdult eq 5">selected="selected"</if>>5</option>
+                                    <option value="6" <if condition="$_REQUEST.selInAdult eq 6">selected="selected"</if>>6</option>
+                                    <option value="7" <if condition="$_REQUEST.selInAdult eq 7">selected="selected"</if>>7</option>
+                                    <option value="8" <if condition="$_REQUEST.selInAdult eq 8">selected="selected"</if>>8</option>
+                                    <option value="9" <if condition="$_REQUEST.selInAdult eq 9">selected="selected"</if>>9</option>
+                                </select>
+                            </li>
+                            <li <if condition="$_REQUEST.selInPassengersType eq 'STU'">class="none"</if>>
+                            	<span>儿童人数：</span>
+                                <select name="selInChild" id="selInChild">
+                                    <option value="0" <if condition="$_REQUEST.selInChild eq 0">selected="selected"</if>>0</option>
+                                    <option value="1" <if condition="$_REQUEST.selInChild eq 1">selected="selected"</if>>1</option>
+                                    <option value="2" <if condition="$_REQUEST.selInChild eq 2">selected="selected"</if>>2</option>
+                                </select>
+                            </li>
+                        </ul>
+                      	<a class="advanced_search"><span class="as_icon"></span>高级搜索</a>
+                      	<input type="submit" id="submitSearch" class="submitSearch" value="搜 索" />
+                        <p>更多需求,请直接联系<a href="#">专业顾问</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="wd720 right">
+        	<!--票类型-->
+        	<div id="resultInfo" class="fly_tickstyle">
+            	<h1>
+                	<div class="ticket_left">
+                    	<span id="flyOriginCity">出发城市</span>
+                        <span id="flyTips" class="fly_tips round"></span>
+                        <span id="flyDesinationCity">到达城市</span>
+                        <span id="flyType">(单程)</span>
+                    </div>
+                </h1>
+                <div class="timeHint">
+                	<span id="departTime" class="left mr10">出发日期：2014年04月25日</span>
+                    <span id="backTime" class="left none">返回日期：2014年05月08日</span>
+                    <p class="right">友情提示：所有航班起抵时间均为当地时间(24小时制)；价格均为全程总票价</p>
+                </div>
+            </div>
+
+            <div id="resultLoading" class="result_loading">
+                <h3>正在为您实时搜索：</h3>
+                <p>从<strong>{$_GET['originCode']}</strong>到<strong>{$_GET['desinationCode']}</strong>的 往返 航班</p>
+                <p>出发时间：{$_GET['originDate']}</p>
+                <p>返回时间：{$_GET['returnDate']}</p>
+                <div><img src="__PUBLIC__/images/f_loading.gif" width="180" height="8" /><span></span></div>
+            </div>
+            <!--返回的列表-->
+            <div id="resultList" class="result_list none">
+            	<div id="ftickListTop" class="ftick_list_top">
+                	<span id="filterTransit" class="filter_transit"><input type="checkbox"/>仅显示直飞</span>
+                    <select id="ftickListSet" class="ftick_list_set allSortTips">
+                        <option value="1" updown="1" sorttype="price">按价格从低到高</option>
+                        <option value="2" updown="2" sorttype="price">按价格从高到低</option>
+                        <option value="3" updown="1" sorttype="offtime">按起飞从早到晚</option>
+                        <option value="4" updown="2" sorttype="offtime">按起飞从晚到早</option>
+                        <option value="5" updown="1" sorttype="arrtime">按到达从早到晚</option>
+                        <option value="6" updown="2" sorttype="arrtime">按到达从晚到早</option>
+                        <option value="7" updown="1" sorttype="stroketime">按行程从短到长</option>
+                        <option value="8" updown="2" sorttype="stroketime">按行程从长到短</option>
+                      </select>
+					<div class="up">
+                    	<a sorttype="offtime" class="flight_effect">起飞时间</a>
+                    </div>
+                    <div class="up">
+                    	<a sorttype="arrtime" class="flight_effect">到达时间</a>
+                    </div>
+                    <div class="down">
+                    	<a sorttype="stroketime" class="flight_effect">行程时长</a>
+                    </div>
+                    <div class="up">
+                    	<a sorttype="price" class="flight_effect on">价格</a>
+                    </div>
+                    <!--<select class="flight_list_set">
+                        <option value="all">全部航空公司</option>
+                    </select>-->
+                </div>
+                
+                <div class="all_iflight">
+                	<table class="top_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="175">起飞到达时间/机场</td>
+                            <td width="140">航空公司/航班/机型</td>
+                            <td width="75">飞行总时长</td>
+                            <td width="270">机票价格/参考税费</td>
+						</tr>
+					</table>
+                    <div id="ifallList" class="ifall_list" journey="" originCode="" desinationCode="" originDate="" returnDate=""  selInCabinType=""  selInPassengersType=""  selInAdult=""  selInChild="">
+                        <!--iflistBox-->
+                    	<div class="iflist_box" offtime="5000" arrtime="8000" stroketime="5000" price="1000" nonstop="n">
+                        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td width="345" class="flight_show">
+                                    <table class="list_info" width="330" border="0" align="center" cellpadding="0" cellspacing="0">
+										<tr>
+                                        	<td width="190">
+                                            	<p><em class="offTime">18:25</em><span>北京首都机场</span></p>
+                                                <p><em class="arrTime">21:10</em><span>厦门高崎机场</span></p>
+                                            </td>
+                                            <td width="125">
+                                            	<p><span class="if_logo"></span><span>韩亚航空</span></p>
+                                                <p><span>OZ336</span><span>计划机型<a>321</a></span></p>
+                                            </td>
+                                        </tr>
+                                     </table>
+									<div class="tran_flight">
+                                    	<div class="transit_text">
+                                        	<p>
+                                                <span class="icon"></span>
+                                                <span>厦门中转</span>
+                                                <span class="stay_time">停留16时20分</span>
+                                            </p>
+                                        </div>
+                                        <table width="330" border="0" align="center" cellpadding="0" cellspacing="0" class="list_info">
+										<tr>
+                                        	<td width="190">
+                                            	<p><em class="offTime">18:25</em><a>第二天</a><span>北京首都机场</span></p>
+                                                <p><em class="arrTime">21:10</em><a>第二天</a><span>厦门高崎机场</span></p>
+                                            </td>
+                                            <td width="125">
+                                            	<p><span class="if_logo"></span><span>韩亚航空</span></p>
+                                                <p><span>OZ336</span><span>计划机型<a>321</a></span></p>
+                                            </td>
+                                        </tr>
+                                     </table>
+                                    </div>
+                                    </td>
+                                  	<td width="90" align="center">
+                                    	<p><span>3时55分钟</span></p>
+                                        <p><a>退改签</a></p>
+                                    </td>
+                                  	<td width="145">
+                                   		<p><span class="if_price">票价<em>￥</em><b>1000</b></span></p>
+                                        <p><span class="if_tax">参考税￥525</span></p>
+                                    </td>
+                                  	<td width="140" class="if_reserve">
+                                    	<p><a>预订</a></p>
+                                        <p><span>剩余4张</span></p>
+                                    </td>
+                                </tr>
+							</table>
+                        </div>
+                        <div class="iflist_box" offtime="8000" arrtime="2000" stroketime="2000" price="2000" nonstop="y">
+                        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td width="345" class="flight_show">
+                                    <table class="list_info" width="330" border="0" align="center" cellpadding="0" cellspacing="0">
+										<tr>
+                                        	<td width="190">
+                                            	<p><em class="offTime">18:25</em><span>北京首都机场</span></p>
+                                                <p><em class="arrTime">21:10</em><span>厦门高崎机场</span></p>
+                                            </td>
+                                            <td width="125">
+                                            	<p><span class="if_logo"></span><span>韩亚航空</span></p>
+                                                <p><span>OZ336</span><span>计划机型<a>321</a></span></p>
+                                            </td>
+                                        </tr>
+                                     </table>
+                                    </div>
+                                    </td>
+                                  	<td width="90" align="center">
+                                    	<p><span>3时55分钟</span></p>
+                                        <p><a>退改签</a></p>
+                                    </td>
+                                  	<td width="145">
+                                   		<p><span class="if_price">票价<em>￥</em><b>2000</b></span></p>
+                                        <p><span class="if_tax">参考税￥525</span></p>
+                                    </td>
+                                  	<td width="140" class="if_reserve">
+                                    	<p><a>预订</a></p>
+                                        <p><span>剩余4张</span></p>
+                                    </td>
+                                </tr>
+							</table>
+                        </div>
+                        <div class="iflist_box" offtime="2000" arrtime="5000" stroketime="8000" price="3000" nonstop="n">
+                        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td width="345" class="flight_show">
+                                    <table class="list_info" width="330" border="0" align="center" cellpadding="0" cellspacing="0">
+										<tr>
+                                        	<td width="190">
+                                            	<p><em class="offTime">18:25</em><span>北京首都机场</span></p>
+                                                <p><em class="arrTime">21:10</em><span>厦门高崎机场</span></p>
+                                            </td>
+                                            <td width="125">
+                                            	<p><span class="if_logo"></span><span>韩亚航空</span></p>
+                                                <p><span>OZ336</span><span>计划机型<a>321</a></span></p>
+                                            </td>
+                                        </tr>
+                                     </table>
+									<div class="tran_flight">
+                                    	<div class="transit_text">
+                                        	<p>
+                                            	<span class="icon"></span>
+                                                <span>厦门中转</span>
+                                                <span class="stay_time">停留16时20分</span>
+                                            </p>
+                                        </div>
+                                        <table width="330" border="0" align="center" cellpadding="0" cellspacing="0" class="list_info">
+										<tr>
+                                        	<td width="190">
+                                            	<p><em class="offTime">18:25</em><a>第二天</a><span>北京首都机场</span></p>
+                                                <p><em class="arrTime">21:10</em><a>第二天</a><span>厦门高崎机场</span></p>
+                                            </td>
+                                            <td width="125">
+                                            	<p><span class="if_logo"></span><span>韩亚航空</span></p>
+                                                <p><span>OZ336</span><span>计划机型<a>321</a></span></p>
+                                            </td>
+                                        </tr>
+                                     </table>
+                                    </div>
+                                    </td>
+                                  	<td width="90" align="center">
+                                    	<p><span>3时55分钟</span></p>
+                                        <p><a>退改签</a></p>
+                                    </td>
+                                  	<td width="145">
+                                   		<p><span class="if_price">票价<em>￥</em><b>3000</b></span></p>
+                                        <p><span class="if_tax">参考税￥525</span></p>
+                                    </td>
+                                  	<td width="140" class="if_reserve">
+                                    	<p><a>预订</a></p>
+                                        <p><span>剩余4张</span></p>
+                                    </td>
+                                </tr>
+							</table>
+                        </div>
+                        <!--iflistBox End-->
+                    
+                  </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+	$(function(){
+        //切换单程和往返
+        $("#iflight_rad input").click(function(){
+            var val=$(this).val();
+            $("#iflight_rad").attr("journey",val);
+        });
+
+		//搜索输入框获得焦点或失去焦点后变色
+		$("#flight_search_box .text").focus(function(){
+            $(this).addClass("focus");
+        }).blur(function(){
+            $(this).removeClass("focus");
+        });
+
+
+		//显示或隐藏高级搜索
+		$(".advanced_search").click(function(){
+			if($(this).hasClass("as_show")){
+				$(this).removeClass("as_show");
+				$("#sel_minor").hide();
+			}else{
+				$(this).addClass("as_show");
+				$("#sel_minor").show();
+			}
+		});
+
+        //当乘客类型为学生不显示儿童人数输入框
+        $("#selInPassengersType").change(function(){
+            var val=$(this).val();
+            if(val=="STU"){
+                $("#sel_minor li").eq(2).hide().find("select").val("0");
+            }else if(val=="ADT"){
+                $("#sel_minor li").eq(2).show();
+            }
+        });
+
+        //点击打开城市列表
+        $("#flight_search_form").find("li .city").each(function(i){
+            $(this).click(function(){
+                textInputDIs($(this));
+                if(i==0){popCityList($(this)[0]);}
+                if(i==1){popCityList($(this)[0],"guowai");}
+            });
+        });
+
+        //点击打开日期
+        $("#flight_search_form").find("li .date").each(function(i){
+            $(this).click(function(){
+                textInputDIs($(this));
+                if(i==0){WdatePicker({minDate:'%y-%M-%d',doubleCalendar:true});}
+                if(i==1){WdatePicker({minDate:'%y-%M-{%d+1}',doubleCalendar:true});}
+            });
+        });
+        function textInputDIs(dom){
+            if(dom.attr("state")!="1"){
+                dom.css("color","#999");
+                dom.val("");
+                dom.attr("state","1");
+            }
+        }
+
+        //切换单程、往返和多程
+        $("#iflight_rad input").each(function(i){
+            var ul=$(this).parent().parent();
+            $(this).click(function(){
+                var li=ul.find("li");
+                if(i==2){
+                    li.eq(4).hide();
+                    var div=$("<ul class='clear'></ul>");
+                    var html="<li><span>出发城市：</span><input type='text' class='text city' name='originCode1' placeholder='城市名'/></li>";
+                        html+="<li><span>到达城市：</span><input type='text' class='text city' name='desinationCode1' placeholder='城市名'/></li>";
+                        html+="<li><span>出发日期：</span><input type='text' class='text date' name='originDate1' placeholder='出发时间' /></li>";
+                    div.html(html);
+                    var lis=div.find("li");
+                    lis.find(".city").eq(0).click(function(){textInputDIs($(this));popCityList($(this)[0]);});
+                    lis.find(".city").eq(1).click(function(){textInputDIs($(this));popCityList($(this)[0],"guowai");});
+                    lis.find(".date").click(function(){textInputDIs($(this));WdatePicker({minDate:'%y-%M-%d',doubleCalendar:true});});
+                    ul.append(div);
+                }else{
+                    if(ul.find("ul").length>0){ul.find("ul").remove();}
+                    if(i==0){
+                        li.eq(4).hide();
+                    }
+                    if(i==1){
+                        li.eq(4).show();
+                    }
+                }
+            });
+        });
+
+        //查询提交
+        $("#flight_search_form").submit(function(e){
+            var state=0;
+            $("#sel_required").find("input.text").each(function(i){
+                if($(this).parent().css("display")==="none"){return true;}
+                if($(this).attr("state")!="1"||$(this).val()==""){
+                    if($(this).hasClass("city")){
+                        $(this).click();
+                    }else{
+                        alert("请输入日期");
+                    }
+                    state=1;
+                    return false;   
+                }
+            });
+            if(state==1){
+                return false;
+            }else{
+                return true;
+            }
+            //searChAagin();
+        });
+
+
+
+	});
+</script>
+<include file="Public:footer" />

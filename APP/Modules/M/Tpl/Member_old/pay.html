@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{$title}-品悦手机网</title>
+<link href="__PUBLIC__/mobile/css/global.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+#topnav .icon{width:80px;}
+.box h2{padding-right:42px;}
+.block{background:#FFF;padding:0px 10px;margin-top:10px;}
+.block h2{width:100px;background:url(__PUBLIC__/mobile/images/title_bg.png) no-repeat 0px -40px;color:#FFF;height:31px;line-height:31px;text-align:center;}
+.block label{display:inline-block;width:30%;height:60px;background:url(__PUBLIC__/mobile/images/payTerrace2.jpg) no-repeat;}
+.block label.alipay{background-position:0 0;}
+.block label.yeepay{background-position:0 -117px;}
+.block label.kuaiqian{background:url('/Public/mobile/images/kuaiq.jpg') no-repeat ;}
+
+
+.block input{margin:22px 0 0 10px;}
+#order{padding:10px;color:#666;}
+#order p{background-color:#FFF;line-height:50px;text-align:center;}
+#tab a{display:inline-block;width:45%;margin-right:10px;background-color:#67b1e4;text-align:center;color:#FFF;line-height:30px; cursor:pointer;}
+#tab a:hover,#tab a.on{background-color:#FFF;color:#ff8400;}
+#explain,#total{padding:10px;background:#FFF;}
+#explain span,#total span{display:block;padding:5px 10px;line-height:24px;background:#f2f1f0;}
+#explain span{text-indent:2em;}
+.list{background-color:#FFF;padding:10px;border-bottom:1px solid #e7e5e5;}
+.list li{line-height:26px;}
+.list li span{display:inline-block;width:65px;padding-right:5px;color:#333;text-align:right;}
+.list li em,#total b{font-style:normal;font-weight:bold;color:#ff840f;}
+.list li a{color:#2690d8;}
+#total{font-size:14px;}
+#total b{font-size:18px;}
+#pay{background:#ff980f;line-height:30px;margin-top:10px;font-size:16px;font-weight:bold;color:#FFF;text-align:center; cursor:pointer;}
+</style>
+</head>
+
+<body>
+<div id="page">
+	<div id="content">
+    	<h1 id="topnav"><span class="left icon"><a href="{:U('/')}" class="icon-home">首页</a></span>我的品悦<span class="right" id="exit">退出登录</span></h1>
+    	<div class="box">
+        	<h2><span class="left icon"><a href="{:U('/Member')}" class="icon-return">返回</a></span>订单在线支付</h2>
+    	</div>
+		<div id="order">
+    		<div id="tab">
+            	<a class="on">在线支付</a>
+            	<a href="{:U('/Member/payList')}">交易记录</a>
+			</div>
+    		<div id="order_list" status="pending" page="1">
+                <div id="explain"><span>您的订单已经审核通过，我们建议您尽快付款，延迟未付款系统会自动取消订单，且航空公司很可能会随时取消您的舱位。</span></div>
+                
+                <volist name="list" id="vo">
+                    <ul class="list">
+                        <li><span>订单 ID ：</span>{$vo.ddbh}</li>
+                        
+                        <if condition="$vo['lx'] eq 1"><!---单程--->
+                            <li><span>航班行程：</span>去程&nbsp;{$vo['hc1'][0]['hbh']}&nbsp;&nbsp;{$vo['hc1'][0]['hc']}</li>
+                            <li><span>&nbsp;</span>日期：{$vo['hc1'][0]['cfsj']}</li>
+                        <elseif	condition="$vo['lx'] eq 2" /><!---往返--->
+                            <li><span>航班行程：</span>去程&nbsp;{$vo['hc1'][0]['hbh']}&nbsp;&nbsp;{$vo['hc1'][0]['hc']}</li>
+                            <li><span>&nbsp;</span>日期：{$vo['hc'][0]['cfsj']}</li>
+                            <li><span>航班行程：</span>回程&nbsp;{$vo['hc1'][1]['hbh']}&nbsp;&nbsp;{$vo['hc1'][1]['hc']}</li>
+                            <li><span>&nbsp;</span>日期：{$vo['hc1'][1]['cfsj']}</li>                         
+                        <else/> <!---多程--->
+                        	<volist name="vo['hc1']" id="vo1" key="n"> 							
+                                <li><span>航班行程{$n}：</span>去程&nbsp;{$vo1.hbh}&nbsp;&nbsp;{$vo1.hc}</li>
+                                <li><span>&nbsp;</span>日期：{$vo1.cfsj}</li>
+                            </volist> 
+                         </if>
+						
+                        <volist name="vo['cjr']" id="vo2" key="c">							
+                            <li><span>乘客信息{$c}：</span>{$vo2.cjr_lx}&nbsp;&nbsp;{$vo2.cjr_cjrxm}</li>
+                            <li><span>&nbsp;</span>{$vo2.cjr_zjlx}&nbsp;&nbsp;{$vo2.cjr_clkid}</li>
+                        </volist>
+                        
+                        <li><span>应付金额：</span><em>￥{$vo.ysje}</em></li>
+                    </ul>
+				</volist>
+                
+              	<div id="total">
+                    <span>合计应付金额：<b>￥{$totleMoney}</b></span>
+                </div>
+			</div>             
+            <form  method="post" id="form">
+            	<input name="WIDseller_email" type="hidden"  value="mlcw@aishangfei.net"/>
+                <input name="WIDout_trade_no" type="hidden"  value="{$order_pay_id}"/> 
+                <input name="WIDsubject"      type="hidden"  value="机票预订-在线支付"/>   
+                <input name="WIDtotal_fee"    type="hidden"  value="{$totleMoney}">
+                <input name="route"           type="hidden"  value="{$route}">
+                <input name="trade_mode"      type="hidden"  value="1" />
+                <input name="order_id_arr"    type="hidden"  value="{$order_id_arr}">           
+                <div class="block">
+                    <h2>选择支付平台</h2>
+                    <label class="alipay"><input name="payTerrace" type="radio" id="payTerrace_0" value="alipay" checked></label>
+                    <label class="yeepay"><input name="payTerrace" type="radio" id="payTerrace_1" value="yeepay" ></label>
+                    <label class="kuaiqian"><input name="payTerrace" type="radio" id="payTerrace_2" value="kuaiqian" ></label>
+                </div>            
+            	<div id="pay"><input type="button" value="下一步" style="background-color:#ff980f;color:#fff;border:none;cursor:hand;" onClick="goto()"/></div>                
+            </form> 
+		</div>
+	</div>
+</div>
+<include file="Public:CommonJs" />
+<script type="text/javascript">
+function goto(){
+  var temp = document.getElementsByName("payTerrace");
+  for(var i=0;i<temp.length;i++){
+	  if(temp[i].checked)
+		var intHot = temp[i].value;  
+  }
+   if(intHot == 'alipay'){
+		document.getElementById("form").action="alipay.php";   
+		document.getElementById("form").submit();    
+   }else if(intHot == 'yeepay'){
+		document.getElementById("form").action="yee.php";   
+		document.getElementById("form").submit(); 
+   }else{
+		document.getElementById("form").action="bill.php";   
+		document.getElementById("form").submit();    
+   }
+}
+</script>
+</body>
+</html>

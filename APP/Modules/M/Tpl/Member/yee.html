@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>YeePay 易宝支付 - 品悦</title>
+<style type="text/css">
+.top a{text-decoration:none;color:#33cc33;}
+.required{color:#F00;}
+.table input{border:none; background-color:#CCC; height:37px; width:100%;}
+.table tr{margin-top:5px; margin-bottom:5px;}
+.label{color:#999999;}
+#content{background:#FFF;}
+.top-link{ margin-left:100px;}
+.form{background:#CCC; }
+.form1{background-color:#FFF;margin:10px 10px; padding-top:10px; padding-left:10px;}
+</style>
+</head>
+<body>
+<div id="page">
+  <div id="content">
+        <table width="100%" class="top">
+            <tr>
+                <td><img src="__PUBLIC__/mobile/images/yeelogo.jpg" /></td>
+                <td style="text-align:right;vertical-align:top">
+                    <a href="http://m.aishangfei.com" class="top-link">品悦首页</a> 
+                   <!--  |  <a href="http://m.aishangfei.com/pay" class="top-link">财付通支付</a>-->
+                </td>
+            </tr>
+        </table>    
+        <div class="form">
+       	 	<div style="padding-left:10px; padding-top:10px;"><span class="required">*</span>为必填项</div>
+        	<div class="form1">
+            <form accept-charset="GB2312" name="yeepay" action="{:U('/yeepay/req.php')}"  method='post'>
+                  <table class="table" width="100%">
+                    <tr><td class="label"><span class="required">*</span>消费金额</td></tr>
+                    <tr><td><input type='text' name='p3_Amt' value='{$info['total_fee']}' disabled="disabled"></td></tr>                    
+                    <tr> <td class="label">商品名称</td></tr>
+                    <tr><td><input type='text' name='p5_Pid' value='{$info['subject']}' disabled="disabled"></td></tr>
+                    
+                    <tr><td class="label"><span class="required">*</span>证件类型</td></tr>
+                    <tr><td><select   name='pa_CredType' >
+                          <option value="IDCARD">身份证</option>
+                          <option value="OFFICERPASS">军官证</option>
+                          <option value="HM_VISITORPASS">澳居民往来内地通行证</option>
+                          <option value="T_VISITORPASS">台湾居民来往大陆通行证</option>
+                        </select>
+                    </td></tr>
+                    
+                    <tr><td class="label"><span class="required">*</span>证件号码</td></tr>
+                    <tr> <td><input type='text' name='pb_CredCode' value=''></td></tr>
+                    
+                    
+                    <tr><td class="label"><span class="required">*</span>发卡行</td></tr>    
+                     <tr><td><!--<input type='text' name='pd_FrpId' value='ICBCCREDIT'>(必填)其他发卡行通道编码请见帮助文档-->
+                        <select name="pd_FrpId">
+                          <option value="BOCOCREDIT" selected="selected">交通银行</option>
+                          <option value="ECITICCREDIT">中信银行</option>
+                          <option value="ICBCCREDIT">工商银行</option>
+                          <option value="BOCCREDIT">中国银行</option>
+                          <option value="CIBCREDIT">兴业银行</option>
+                          <option value="CCBCREDIT">建设银行</option>
+                          <option value="PINGANCREDIT">平安银行</option>
+                          <option value="CMBCHINACREDIT">招商银行</option>
+                          <option value="ABCCREDIT">中国农业银行</option>
+                          <option value="CMBCCREDIT">中国民生银行</option>
+                          <option value="GDBCREDIT">广发银行</option>
+                          <option value="BCCBCREDIT">北京银行</option>
+                          <option value="BOSHCREDIT">上海银行</option>
+                        </select>
+                        </td></tr>
+                    
+                    <tr><td class="label"><span class="required">*</span>手机号</td></tr>
+                    <tr><td><input type='text' name='pe_BuyerTel' value=''></td></tr>
+                    
+                    <tr><td class="label"><span class="required">*</span>消费者姓名</td></tr>
+                    <tr><td><input type='text' name='pf_BuyerName' value=''></td></tr>
+                    
+                    <tr><td class="label"><span class="required">*</span>支付卡号</td></tr>
+                    <tr><td><input type='text' name='pt_ActId' value=''></td></tr>
+                    
+                    <tr><td class="label"><span class="required">*</span>信用卡有效期(年)</td></tr>
+                    <tr><td><input type='text' name='pa2_ExpireYear' value=''></td></tr>
+                    <tr><td class="label">有效期截止年份，必须在2007-2099年之间，比如2015</td></tr>
+                    
+                    <tr><td class="label"><span class="required">*</span>信用卡有效期(月)</td></tr>
+                    <tr><td><input type='text' name='pa3_ExpireMonth' value=''></td></tr>
+                    <tr><td class="label">有效期截止月份，必须为1-12之间，比如2015</td></tr>
+                    
+                    <tr><td class="label"><span class="required">*</span>CVV</td></tr>
+                    <tr><td><input type='text' name='pa4_CVV' value=''></td></tr>
+                    <tr><td class="label">信用卡背面的3或4位CVV码</td></tr>
+                    
+                    <tr><td></td></tr>
+                    <tr><td><input type='submit' value='提交表单'  style="height:30px;width:100%; background-color:#33cc33;  color:#FFF; font-weight:bold;"></td></tr>
+                  </table>
+                  <input type='hidden' name='p2_Order' value='{$info['trade_no']}'><!--订单号-->
+         		  <input type='hidden' name='p8_Url'  value='http://m.aishangfei.com/yeepay/callback.php' size="50" maxlength="400"><!--用于易宝服务器通知返回数据-->
+          		  <input type="hidden" name="pr_NeedResponse"  value="0"><!-- 应答机制 为“1”: 需要应答机制;为“0”: 不需要应答机制 --> 
+                  <input type='hidden' name='p3_Amt' value='{$info['total_fee']}'>
+                  <input type='hidden' name='p5_Pid' value='{$info['subject']}' >
+        	</form>
+        	</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

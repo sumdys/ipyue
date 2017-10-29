@@ -1,0 +1,16 @@
+<!--/****
+	接受订单---出票部
+****/-->
+<style type="text/css">
+p{margin-top:10px; margin-bottom:20px;}
+</style>
+<form action="__URL__/ticketAccept/navTabId/__MODULE__-ticketWaitForAccept"  method="post" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)"> 
+    <center><p>你确定要接受该订单吗？</p> <p>（订单ID号：{$orderID}）</p></center>
+    <div class="formBar">
+        <ul>
+            <li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定接受</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+        </ul>
+    </div>         
+   <input type="hidden" name="id" value="{$id}" />
+</form>

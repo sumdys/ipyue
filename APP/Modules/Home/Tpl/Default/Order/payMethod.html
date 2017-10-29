@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>在线支付_{$title} - {:C('WEB_NAME')}</title>
+    <meta name="keywords" content="<?php echo $keywords ? $keywords : C('WEB_KEYWORD'); ?>" />
+    <meta name="description" content="<?php echo $description ? $description : C('WEB_DESCRIPTION'); ?>" />
+	<meta name="baidu-site-verification" content="sTECrKJdXz" />
+    <link rel="stylesheet" href="__PUBLIC__/css/main.css" type="text/css" />
+     <link rel="stylesheet" href="__PUBLIC__/css/pay.css" type="text/css" />
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/layer/layer.min.js"></script>
+	<include file="Public:tj" />
+  
+
+</head>
+<body>
+<include file="Public:top_nav" />
+<div class="w1200">
+	<div class="center order">
+		<div class="centbox">
+			<ul class="process">
+				<li>1、选择产品
+					<em class="icon-a"></em>
+				</li>
+				<li>2、填写订单信息
+					<em class="icon-c"></em>
+				</li>
+				<li class="now">3、在线支付
+					<em class="icon-b"></em>
+				</li>
+				<li class="no">4、支付成功
+					
+				</li>
+			</ul>
+			<div class="clear"></div>
+			<div class="pay">
+				<p class="payHeader">
+					在线支付
+				</p>
+				<div class="payDetail">
+					<div class="payDetail-left">
+						<p class="copeWith">应付金额</p>
+						<p class="copeWith-mon">￥<span>{$info.total_price}</span></p>
+					</div>
+					<div class="payDetail-right">
+						<p class="des">{$info.dcity}出发，{$info.title}</p>
+						<p class="infor">人数：{$info.num}成人 <i>出发日期：{$info.start_date}</i></p>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="payBox">
+				<ul class="methodNum">
+					<li onclick="onLi(this);" class="borderCur">支付宝</li>
+					<li onclick="onLi(this);">银联</li>
+					<li onclick="onLi(this);">微信支付</li>
+                    <form method="post" action='{:U("/order/pay")}'id='orderForm'>
+                    <input type='hidden' name='tripOrderId' value='{$info.id}'>
+                    <input type='hidden' name='order_price' value='{$info.total_price}'>
+                    <input type='hidden' name='order_no' value='{$info.order_num}'>
+                         <input type='hidden' name='WIDbody' value=''>
+                              <input type='hidden' name='product_name' value='{$info.title}'>
+                   </form>
+				</ul>
+				<div class="methodAll">
+					<div class="method">
+						<div class="alipay">
+							<i class="alipayIcon"></i>进入支付宝完成付款
+							<p class="alipayWarn">如果您没有支付宝账号，建议选择银联或微信支付进行付款</p>
+							<a class="paymentBtn" id='alipay'>去支付</a>
+						</div>
+					</div>
+					<div class="method">
+						<div class="alipay">
+							<i class="bankIcon"></i>银联卡直接支付
+							<input class="band" type="tel" placeholder="请输入银行卡号" />
+							<input class="band" type="tel" placeholder="请输入手机号码" />
+							<div class="yan">
+								<input type="tel" class="scoreNum" />
+								<button>请输入验证码</button>
+							</div>
+							<a class="paymentBtn">去支付</a>
+						</div>
+					</div>
+					<div class="method">
+						<div class="alipay">
+							<i class="weixinIcon"></i>微信支付
+							<p class="alipayWarn">跳转后，请使用微信扫描二维码完成支付</p>
+							<a class="paymentBtn">去支付</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<include file="Public:footer" />
+		<link href="__PUBLIC__/Themes/v3/css/style.min.css" rel="stylesheet" />
+
+	<!--<script type="text/javascript" src="Public/js/layer/layer.min.js"></script>-->
+	<script type="text/javascript">
+		$(function(){
+			$(".method").eq(0).show();
+            $('#alipay').click(function(){
+                $('#orderForm').submit();
+            });
+		})
+	  //tab栏切换
+		function onLi(target){
+			$(".method").eq($(target).index()).show().siblings().hide();
+			$(target).addClass("borderCur").siblings().removeClass("borderCur");
+		}
+	</script>
+</body>
+</html>

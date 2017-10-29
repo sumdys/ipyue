@@ -1,0 +1,17 @@
+<!--/****
+	取消订单
+****/-->
+<style type="text/css">
+.ti{margin-top:8px; margin-bottom:10px;}
+.pageForm textarea{float:none;width:300px; height:50px; vertical-align:top;}
+</style>
+<form action="__URL__/ticketPostBack/navTabId/__MODULE__-ticketWaitForAccept"  method="post" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)"> 
+    <div class="ti">打回说明：<textarea  name="PostBackRemark" value=""></textarea></div>
+    <div class="formBar">
+        <ul>
+            <li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定打回</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+        </ul>
+    </div> 
+<input type="hidden" name="id" value="{$id}" />
+</form>

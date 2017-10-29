@@ -1,0 +1,227 @@
+<include file="Public:ailehui_header" />
+	<div id="cont">
+    	<div class="wd980">
+        	<h1 class="h1_tit_nav">你当前所在位置：<a href="{:U('/')}" class="sy">首页</a> > <a class="sy">爱乐汇</a></h1>
+            <div id="member_ad">
+            	<div id="member">
+                	<h2><a class="icon i0"></a>会员信息</h2>
+                    <empty name="userInfo">
+                    <div class="notlogin">
+                    	<span><a href="{:U('/Member/login')}" class="a0">登录查看我的信息</a></span>
+                        <div class="link"><a href="{:U('/help/members#help_ul1')}" class="right">如何快速升级</a><a href="#" class="left">我的会员特权</a></div>
+                        <span><a href="{:U('/Member/register')}" class="a1">免费注册</a></span>
+                        <p>注册即获赠50元现金券及1000积fun</p>
+                        <div class="bdsharebuttonbox">
+                            <a href="#" class="bds_more" data-cmd="more"></a>
+                            <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+                            <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+                            <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+                            <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+                            <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+                        </div>
+                        <script type="text/javascript">
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+						</script>
+                    </div>
+                    <else />
+                    <div class="login">
+                    	<div class="info">
+                        	<ul class="right">
+                            	<li><b>{$userInfo.username}</b></li>
+                                <li>现金券:<strong>{$xjjpoints|default=0}</strong>元</li>
+                                <li>积fun:<strong>{$jfpoints|default=0}</strong></li>
+                                <li>爱钻:<span>x{$azpoints|default=0}</span></li>
+                            </ul>
+                        	<div class="left"><a href="{:U('/Member')}"><img height="90px" src="__PUBLIC__/member/images/{$userinfo['headimg'] | default='Icon.gif'}" /><span class="mgi m{$userInfo.rank_id}"></span></a></div>
+                        </div>
+                        <dl id="my_privilege" url="{:U('/Ailehui/myprivilege')}">
+                        	<dt>我的会员特权</dt>
+                            <volist name="myPrivilege" id="vo">
+                            <dd class="p{$vo.class}" name="{$vo.name}" description="{$vo.description}"></dd>
+                            </volist>
+                        </dl>
+                        <dl id="up_privilege">
+                        	<dt>高一级特权</dt>
+                            <volist name="gjPrivilege" id="vo">
+                                <dd class="p{$vo.class}" name="{$vo.name}" description="{$vo.description}"></dd>
+                            </volist>
+                        </dl>
+                        <a href="#" target="_blank" id="my_privilege_explain" class="privilege_explain" style="display:none;">
+                        	<div class="priv_expl_box">
+                            	<span class="sharp_corner"></span>
+                            	<div class="priv_expl_cont">
+                            		<span class="p0"></span>
+                                    <h4>&nbsp;</h4>
+                                    <p>&nbsp;</p>
+                            	</div>
+                            </div>
+                        </a>
+                        <div id="up_privilege_explain" class="privilege_explain" style="display:none;">
+                        	<div class="priv_expl_box">
+                            	<span class="sharp_corner"></span>
+                            	<div class="priv_expl_cont">
+                            		<span class="p0"></span>
+                                    <h4>&nbsp;</h4>
+                                    <p>&nbsp;</p>
+                            	</div>
+                            </div>
+                        </div>
+                    </div><!--login-->
+                    </empty>
+                </div>
+
+                <div id="ailehui_ad">
+                	<div id="ad_list">
+                    	<ul>
+                        	<li><a href="{:U('/ailehui/birthdaygift')}" target="_blank"><img src="__PUBLIC__/images/Ailehui/ad001.jpg" /></a></li>
+                            <li><a href="{:U('/jifen')}" target="_blank"><img src="__PUBLIC__/images/Ailehui/ad002.jpg" /></a></li>
+                            <li><a href="{:U('/zt/hnair_sales')}" target="_blank"><img src="__PUBLIC__/images/Ailehui/ad003.jpg" /></a></li>
+                        </ul>
+                    </div>
+                    <ol>
+                    	<li><img src="__PUBLIC__/images/Ailehui/ad_s_001.jpg" /><div class="active">&nbsp;</div></li>
+                        <li><img src="__PUBLIC__/images/Ailehui/ad_s_002.jpg" /><div>&nbsp;</div></li>
+                        <li><img src="__PUBLIC__/images/Ailehui/ad_s_003.jpg" /><div>&nbsp;</div></li>
+                    </ol>
+                </div>
+                
+            </div>
+            
+          	<div class="choiceness">
+              	<h2><span></span><b>会员活动</b>精选</h2>
+                <dl>
+                	<dd><a href="{:U('/activity/share')}" target="_blank"><img src="__PUBLIC__/images/Ailehui/activity001.jpg" /></a></dd>
+                    <dd><a href="{:U('/zt/golf')}" target="_blank"><img src="__PUBLIC__/images/Ailehui/activity002.jpg" /></a></dd>
+                    <dd><a href="{:U('/Zt/wishtree')}" target="_blank"><img src="__PUBLIC__/images/Ailehui/activity003.jpg" /></a></dd>
+                    <dt>
+                    	<h3>会员专享推荐</h3>
+                        <ul>
+                        	<li><a href="{:U('activity/share')}"><span class="icon i1"></span>邀请好友送积fun</a></li>
+                            <li><a href="{:U('/jifen')}"><span class="icon i2"></span>积fun兑换好礼</a></li>
+                            <li><a href="{:U('activity/share')}"><span class="icon i3"></span>好友fun享送大礼</a></li>
+                        </ul>
+                    </dt>
+                </dl>
+        	</div>
+            <div class="choiceness">
+              	<h2><span></span><b>国际机票</b>精选</h2>
+                <dl>
+                	<dd><a href="{:U('/zt/americanairlines_sales')}" target="_blank"><img src="__PUBLIC__/images//zt/americanairlines_sales/Ailehui_ad.jpg" /></a></dd>
+                    <dd><a href="{:U('/zt/virgin_atlantic_sales')}" target="_blank"><img src="__PUBLIC__/images/Ailehui/iflight002.jpg" /></a></dd>
+                    <dd><a href="{:U('/zt/asianaAirlines_sales')}" target="_blank"><img src="__PUBLIC__/images/Ailehui/iflight003.jpg" /></a></dd>
+                    <dt>
+                    	<h3>机票工具箱</h3>
+                        <ul>
+                        	<li><a href="{:U('/member/booking')}"><span class="icon i4"></span>我的机票</a></li>
+                            <li><a href="{:U('/iflight/orderflight')}"><span class="icon i5"></span>低价预约</a></li>
+                            <li><a href="{:U('/help/members')}#help_ul3"><span class="icon i6"></span>订票攻略</a></li>
+                        </ul>
+                    </dt>
+                </dl>
+        	</div>
+            <!--
+            <div id="travel_pictures">
+            	<div id="travel">
+                	<h2><a href="#">更多>></a><span></span><b>游记</b>精选</h2>
+                    <div id="tra_list">
+                    	<dl>
+                        	<dt><a href="#"><img src="__PUBLIC__/images/Ailehui/Icon.gif"/></a></dt>
+                            <dd><span>2013-8-15</span><a href="#">青山绿水间的美丽--白鹤林</a></dd>
+                            <dd><ul><li class="t1">5000</li><li class="t2">500</li><li class="t3">5</li></ul>作者:186tjfxh315</dd>
+                        </dl>
+                        <dl>
+                        	<dt><a href="#"><img src="__PUBLIC__/images/Ailehui/Icon.gif"/></a></dt>
+                            <dd><span>2013-8-15</span><a href="#">青山绿水间的美丽--白鹤林</a></dd>
+                            <dd><ul><li class="t1">5000</li><li class="t2">500</li><li class="t3">5</li></ul>作者:186tjfxh315</dd>
+                        </dl>
+                    </div>
+                </div>
+                <div id="pictures">
+                	<h2><a href="#">更多>></a><span></span><b>美图</b>精选</h2>
+                    <ul>
+                      <li><a href="#"><img src=""/></a></li>
+                      <li><a href="#"><img src=""/></a></li>
+                    </ul>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+<script type="text/javascript">
+	$(function(){
+		
+		$("#my_privilege dd").mouseenter(function(){
+			var thisleft=($(this).position().left-20)+"px",thistop=($(this).position().top+23)+"px";
+			var thisclass=$(this).attr("class"),thisname=$(this).attr("name"),thisdescription=$(this).attr("description");
+			var thisurl=$("#my_privilege").attr("url")+"#"+thisclass;
+			$("#my_privilege_explain .priv_expl_cont span").attr("class",thisclass);
+			$("#my_privilege_explain .priv_expl_cont h4").html(thisname);
+			$("#my_privilege_explain .priv_expl_cont p").html(thisdescription);
+			$("#my_privilege_explain").attr("href",thisurl);
+			$("#my_privilege_explain").css({"top":thistop,"left":thisleft,"display":"block"});
+			}).mouseleave(function(){
+				$("#my_privilege_explain").css({"display":"none"});
+				});
+			$("#my_privilege_explain").mouseenter(function(){
+					$(this).css({"display":"block"});
+				}).mouseleave(function(){
+					$(this).css({"display":"none"});
+					});
+				
+			$("#up_privilege dd").mouseenter(function(){
+			var thisleft=($(this).position().left-20)+"px",thistop=($(this).position().top+23)+"px";
+			var thisclass=$(this).attr("class"),thisname=$(this).attr("name"),thisdescription=$(this).attr("description");
+			$("#up_privilege_explain .priv_expl_cont span").attr("class",thisclass);
+			$("#up_privilege_explain .priv_expl_cont h4").html(thisname);
+			$("#up_privilege_explain .priv_expl_cont p").html(thisdescription);
+			$("#up_privilege_explain").css({"top":thistop,"left":thisleft,"display":"block"});
+			}).mouseleave(function(){
+				$("#up_privilege_explain").css({"display":"none"});
+				});
+			$("#up_privilege_explain").mouseenter(function(){
+					$(this).css({"display":"block"});
+				}).mouseleave(function(){
+					$(this).css({"display":"none"});
+					});
+		
+		slider($("#ailehui_ad"),1000,6000,0,3,580);
+		});
+
+//动画制作
+(function(){
+var timer = null;var timer1 = null;
+//t轮换时间，s等待时间,n当前图片位置，m总共张数，w图片宽度
+function slider(div,t, s, n, m, w) {
+	sliderChange(div,t, s, n, m, w);
+	sliderClick(div,t, s, m, w);
+}
+function sliderChange(div,t, s, n, m, w) {
+	div.find("ul").animate({ "margin-left": -(n * w) + "px" }, t, function () {
+			timer = setTimeout(function () {
+			var j = n + 1;
+			if (j > m - 1) { j = 0; }
+			div.find("ol li div").eq(n).removeClass("active");
+			div.find("ol li div").eq(j).addClass("active");
+			sliderChange(div,t, s, j, m, w);
+		}, s);
+	});
+}
+function sliderClick(div,t, s, m, w) {
+	div.find("ol li").each(function (i) {
+		$(this).click(function () {
+			clearTimeout(timer); clearTimeout(timer1);
+			div.find("ul").stop(true);
+			div.find("ol li div").removeClass("active");
+			div.find("ol li div").eq(i).addClass("active");
+			div.find("ul").animate({ "margin-left": -(i * w) + "px" }, t);
+			timer1 = setTimeout(function () {
+				sliderChange(div,t, s, i, m, w) 
+			},s);
+		});
+	});
+}
+window.slider=slider;
+})()
+
+</script>
+<include file="Public:footer" />

@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{$title}-品悦手机网</title>
+<link href="__PUBLIC__/mobile/css/global.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+#topnav .icon{width:80px;}
+.box h2{padding-right:42px;}
+#cart{padding:10px;color:#666;}
+#cart p{background-color:#FFF;line-height:50px;text-align:center;}
+#tab a{display:inline-block;width:25%;margin-right:10px;background-color:#67b1e4;text-align:center;color:#FFF;line-height:30px;}
+#tab a:hover,#tab a.on{background-color:#FFF;color:#ff8400;}
+#cart_list{padding:10px;background:#fff;}
+#cart_list li{padding:25px 5px;height:130px;border-bottom:1px solid #e7e5e5;}
+#cart_list li .img,#cart_list li .info,#cart_list li .info span,#cart_list li .info span *{float:left;}
+#cart_list li .img{width:60px;margin:15px 30px 0 0;}
+#cart_list li .info div{height:26px;line-height:26px;}
+#cart_list li .info b{color:#ff8400;}
+#cart_list li .info a{display:inline-block;background:url(/Public/images/s_small_tb.gif) no-repeat;width:11px;height:11px;margin-top:7px;cursor:pointer;}
+#cart_list li .info a.minus{background-position:-270px -84px;}
+#cart_list li .info a.plus{background-position:-259px -84px;}
+#cart_list li .info .gift_num{display:inline-block;width:29px;height:16px;line-height:18px;margin:3px 5px;padding:0 3px;text-indent:0px!important;text-align:center;border:1px solid #ccc!important;}
+#cart_list li .check{float:right;margin-top:30px;}
+#cart_list .az_icon{height:14px;display:inline-block;padding-left:25px;background:url(/Public/images/assistant.png) no-repeat -10px -159px;font-family:Arial;font-weight:normal;}
+
+#cart_bot{height:30px;padding:0 10px 10px 10px;background:#fff;}
+#cart_bot a{margin-left:10px;cursor:pointer;}
+#cart_bot .cart_bot{line-height:30px;padding:0 10px;background:#f2f1f0;}
+#cart_bot .checkbox{float:left;margin:8px 10px 0 0;}
+
+#integral_aizuan{height:39px;}
+#integral_aizuan a{float:left;display:block;width:50%;line-height:39px;color:#fff;font-size:16px;font-weight:bold;text-align:center;background:#67b1e4;cursor:pointer;}
+#integral_aizuan a.on{background:#ff980f;}
+</style>
+</head>
+
+<body>
+<div id="page">
+  <div id="content">
+    <h1 id="topnav"><span class="left icon"><a href="{:U('/')}" class="icon-home">首页</a></span>我的品悦<span class="right" id="exit">退出登录</span></h1>
+    <div class="box"><h2><span class="left icon"><a href="{:U('/Member')}" class="icon-return">返回</a></span>我的礼品</h2></div>
+    <div id="cart">
+        <div id="tab">
+            <a href="{:U('/Member/myFavorite')}">我的收藏</a>
+            <a class="on">我的购物车</a>
+            <a href="{:U('/Member/myGift')}">已兑换礼品</a>
+        </div>
+        
+        <if condition="$tag eq 1">
+         <div id="list">
+            <empty name="aizuan"><p>您还没有礼品哦，赶快去选换吧！</p> </empty>      
+            <ul id="cart_list">
+                <volist name="aizuan" id="vo">
+                    <li gid="{$vo.mall_id}">
+                        <div class="check"><input type="checkbox" checked="checked"></div>
+                        <div class="img"><a href="#"><img name="" src="__PUBLIC__/uploads/mall/{$vo.img}" width="60" height="60" alt=""></a></div>
+                        <div class="info">
+                            <div>礼品名称：{$vo.title|msubstr=0,12}<br/>{$vo.title|msubstr=12,50}</div>
+							<div></div>		
+                            <div>兑换爱钻：<b class="price az_icon">x{$vo.jifen}</b></div>
+                            <div><span>数量：</span><span><a class="minus"></a><input type="text" class="gift_num" value="{$vo.num}"><a class="plus"></a></span></div>
+                            <div>爱钻小计：<b class="subtotal az_icon">x{$vo['jifen']*$vo['num']}</b></div>
+                        </div>
+                    </li>
+                </volist>
+            </ul>
+            <div id="cart_bot">
+                <div class="cart_bot"><input type="checkbox" class="checkbox" checked="checked"/>全选<a class="all_del_gift">删除</a><a class="del_invalid">清除失效礼品</a><a class="all_move_favo">批量移入收藏夹</a></div>
+            </div>
+        </div>
+       <else /> 
+         <div id="list">
+            <empty name="jifen"><p>您还没有礼品哦，赶快去选换吧！</p> </empty>      
+            <ul id="cart_list">
+                <volist name="jifen" id="vo">
+                    <li gid="{$vo.mall_id}">
+                        <div class="check"><input type="checkbox" checked="checked"></div>
+                        <div class="img"><a href="#"><img name="" src="__PUBLIC__/uploads/mall/{$vo.img}" width="60" height="60" alt=""></a></div>
+                        <div class="info">
+                            <div>礼品名称：{$vo.title|msubstr=0,12}<br/>{$vo.title|msubstr=12,50}</div>
+							<div></div>		
+                            <div>兑换积fun：<b class="price">{$vo.jifen}</b></div>
+                            <div><span>数量：</span><span><a class="minus"></a><input type="text" class="gift_num" value="{$vo.num}"><a class="plus"></a></span></div>
+                            <div>积fun小计：<b class="subtotal">{$vo['jifen']*$vo['num']}</b></div>
+                        </div>
+                    </li>
+                </volist>
+            </ul>
+            <div id="cart_bot">
+                <div class="cart_bot"><input type="checkbox" class="checkbox" checked="checked"/>全选<a class="all_del_gift">删除</a><a class="del_invalid">清除失效礼品</a><a class="all_move_favo">批量移入收藏夹</a></div>
+            </div>
+        </div>        
+       </if>
+    </div>
+    <div id="integral_aizuan">
+    	<a href="{:U('/Member/myCart')}?type=jifen" <if condition="$tag eq 0">class="on"</if>>积fun礼品</a>
+    	<a href="{:U('/Member/myCart')}?type=aizuan"  <if condition="$tag eq 1">class="on"</if>>爱钻礼品</a>
+    </div>        
+  </div>
+</div>
+<include file="Public:CommonJs" />
+<script type="text/javascript">
+$(function(){
+	//修改礼品数量
+	giftNum();
+	function giftNum(){
+		//输入数量不是数字
+		$("#cart_list .gift_num").change(function(){
+			var num=parseInt($(this).val()),li=$(this).parents("li");
+			if(isNaN(num)){
+				$(this).val(0);
+				li.find(".subtotal").html(0);
+				}else{
+					var priceVal=parseInt(li.find(".price").text());
+					var subtotalVak=priceVal*num;
+					li.find(".subtotal").html(subtotalVak);
+					};
+			});
+		//减少礼品数量
+		$(".minus").click(function(){
+			var inp=$(this).next("input"),li=$(this).parents("li");
+			var num=parseInt(inp.val())-1;
+			if(num<=0){num=0;}
+			inp.val(num);
+			//修改小计
+			var priceVal=parseInt(li.find(".price").text());
+			var subtotalVak=priceVal*num;
+			li.find(".subtotal").html(subtotalVak);
+			});
+		//增加礼品数量
+		$(".plus").click(function(){
+			var inp=$(this).prev("input"),li=$(this).parents("li");
+			var num=parseInt(inp.val())+1;
+			if(num>=100){num=100;}
+			inp.val(num);
+			//修改小计
+			var priceVal=parseInt(li.find(".price").text());
+			var subtotalVak=priceVal*num;
+			li.find(".subtotal").html(subtotalVak);
+			});
+		
+		//购物车-积Fun礼品 全选功能
+		$("#cart_bot .checkbox").change(function(){
+			if(this.checked){
+				$("#cart_list input:checkbox").each(function(){this.checked="checked";});
+				}else{
+					$("#cart_list input:checkbox").each(function(){this.checked="";});
+                    }
+                });
+		//购物车-积Fun礼品 当某个产品取消选择时，取消全选
+		$("#cart_list input:checkbox").change(function(){
+			$('#cart_bot .checkbox').removeAttr('checked');
+			});
+		
+		//多选的把购物车礼品删除
+		$("#cart .all_del_gift").click(function(){
+			var act="del";//设置类型为删除
+			var gid=new Array();
+			$("#cart_list .check input").each(function(i){
+				if(this.checked){
+					gid.push($(this).parents("li").attr('gid'));
+					}
+				});
+			if(gid.length<=0){
+				alert("请选择礼品再删除！");
+				}else{
+					cartAjax(gid,act,function(t){
+						if(t==true){
+							$("#cart_list .check input").each(function(i){
+								if(this.checked){$(this).parents("li").remove();}
+								});
+							}else if(t==false){alert("操作失败！");}
+						});
+					}
+				});
+		//清除失效礼品
+		$("#cart_bot .del_invalid").bind("click",function(){
+			var act="invalid";//设置类型为删除
+			var gid = new Array();
+			$("#cart_list .check input").each(function(i){
+				if(this.checked){
+					gid.push($(this).parents("li").attr('gid'));
+					}
+				});
+			if(gid.length<=0){
+				alert("请选择礼品，再清除失效礼品！");
+				}else{
+					$.getJSON("{:U('/Member/myCart')}",{id:gid,act:act},function(data){
+						if(data.status==1){
+							var return_gid=data.gid;
+							$.each(return_gid,function(i,item){
+								$("#cart_list li").each(function(){
+									if($(this).attr('gid')==item.id){
+										$(this).remove();
+										}
+									});
+								});
+							}else{
+								alert(data.info);
+							}
+					});
+				}
+			});
+		
+		//多选的把购物车礼品移入收藏
+		$("#cart_bot .all_move_favo").bind("click",function(){
+			var act="move";//设置类型为移入收藏
+			var gid=new Array();
+			$("#cart_list .check input").each(function(i){
+				if(this.checked){
+					gid.push($(this).parents("li").attr('gid'));
+					}
+				});
+			if(gid.length<=0){
+				alert("请选择礼品再移入收藏夹！");
+				}else{
+					cartAjax(gid,act,function(t){
+						if(t==true){
+							$("#cart_list .check input").each(function(i){
+								if(this.checked){$(this).parents("li").remove();}
+								});
+							}else if(t==false){alert("操作失败！");}
+						});
+					}
+				});
+		//购物车的AJAX
+		function cartAjax(gid,act,fn){
+			$.getJSON("{:U('/Member/myCart')}",{id:gid,act:act},function(data){
+				if(data.status==1){
+					fn(true);
+					}else{
+						fn(false);
+						}
+				});		
+			}
+			
+		}
+	});
+</script>
+</body>
+</html>

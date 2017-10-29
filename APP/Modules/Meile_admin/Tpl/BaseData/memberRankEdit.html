@@ -1,0 +1,59 @@
+<div class="page">
+    <style type="text/css">
+        .bank{margin-left: 120px;}
+        .bank label{width: 100px;}
+        .unit label{ padding:0}
+    </style>
+	<div class="pageContent">
+
+	<form method="post" action="__URL__/memberRank/act/edit/navTabId/__MODULE__-{$Think.ACTION_NAME}" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>名称：</label>
+				<input type="text" class="text"  name="name" value="{$vo.name}">
+			</div>
+            <div class="unit">
+                <label>升级规则：</label>
+                <textarea  name="rank_rule" cols="50" rows="2">{$vo.rank_rule}</textarea>
+            </div>
+            <div class="unit">
+                <label>积分规则：</label>
+                <textarea  name="points_rule" cols="50" rows="2">{$vo.points_rule}</textarea>
+            </div>
+            <div class="unit">
+                <label>变量：</label>
+                <textarea  name="variables" cols="50" rows="2">{$vo.variables}</textarea>
+            </div>
+            <div class="unit">
+                <label>特权：<input type="checkbox" group="privilege[]" class="checkboxCtrl"/></label>
+                <div class="bank">
+                <volist name="privilege" id="v">
+                    <label><input type="checkbox"  name="privilege[]" value="{$v.id}" {$v.ch} />{$v.name}</label>
+                </volist>
+                </div>
+
+            </div>
+          <div class="unit">
+			<label>描述：</label>
+            <textarea name="description" editor="{:uniqid()}" cols="60" rows="6">{$vo.description}</textarea>
+          </div>
+            <div class="unit">
+                <label>排序：</label>
+                <input type="text" class="text number"  name="sort" value="{$vo.sort}">
+            </div>
+		</div>
+		
+		<div class="formBar">
+			<ul>
+				<li>
+                    <input type="hidden" name="id" value="{$vo.id}">
+                    <input type="hidden" name="book_id" value="{$vo.book_id}">
+                    <div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+	</div>
+</div>
+

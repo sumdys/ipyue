@@ -1,0 +1,45 @@
+<div class="page">
+    <div class="pageContent">
+        <div class="panelBar">
+            <ul class="toolBar">            
+                <li><a class="add" href="__URL__/ad_add" target="dialog" mask="true" width="450" height="250"><span>新增</span></a></li>
+            </ul>
+        </div>
+        <table class="table" width="100%" layoutH="116" class="cen"> 
+            <thead>
+                <tr><th width='30' style="text-align:center;">编号</th><th width='450' style="text-align:center;">图片</th><th width='250' style="text-align:center;">标题</th><th>链接</th><th width='30' style="text-align:center;">排序</th><th style="text-align: center;">显示位置</th><th width='70' style="text-align:center;">创建时间</th><th width='70' style="text-align:center;">更新时间</th><th width='70' style="text-align:center;">操作</th></tr>
+            </thead>
+            <tbody>
+            	<volist name="img" id="vo">
+                <tr>
+                    <td style="text-align:center;">{$i}</td>
+                    <td style="text-align:center;"><a href="__PUBLIC__/uploads/ad/{$vo.img}" target="_blank">{$vo.img}</a></td>
+                    <td style="text-align:center;">{$vo.title}</td>
+                    <td style="text-align:center;">{$vo.src}</td>
+                    <td style="text-align:center;">{$vo.rand}</td>
+                    <td style="text-align:center;"><if condition="$vo.type eq 1">手机版路线列列表<elseif condition="$vo.type eq 2"/>手机片首页</if></td>
+                    <td style="text-align:center;">{$vo.create_time|date="Y-m-d",###}</td>
+                    <td style="text-align:center;">{$vo.update_time|date="Y-m-d",###}</td>
+                     <td style="text-align:center;">
+                     <a href="__URL__/ad_edit/id/{$vo.id}" target="dialog" mask="true" width="450" height="200">修改</a>&nbsp;&nbsp;
+                     <a href="__URL__/ad_del/id/{$vo.id}" target="dialog" mask="true" width="450" height="200">删除</a>
+                     </td>
+                </tr>
+           	 	</volist>
+            </tbody>
+        </table>
+        <div class="panelBar">
+            <div class="pages">
+                <span>显示</span>
+                <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                    <option value="5" <eq name="numPerPage" value="5">selected=selected</eq>>5</option>
+                    <option value="10" <eq name="numPerPage" value="10">selected=selected</eq>>10</option>
+                    <option value="15" <eq name="numPerPage" value="15">selected=selected</eq>>15</option>
+                    <option value="20" <eq name="numPerPage" value="20">selected=selected</eq>>20</option>
+                </select>
+                <span>共{$totalCount}条</span>
+            </div>
+            <div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}"></div>
+        </div>
+    </div>
+</div>

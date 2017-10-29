@@ -1,0 +1,171 @@
+@charset "utf-8";
+/*查询列表页*/
+#query_flight{color:#333333;height:auto;}
+#query_date{height:40px;line-height:40px;}
+#query_date dd,#query_date dt{float:left;font-size:14px;text-align:center;cursor:pointer;}
+#query_date dt{width:60%;}
+#query_date dd{width:20%;}
+
+/*过场动画*/
+.result_loading{margin:0 10px;padding:30px 0;text-align:center;font-family:"微软雅黑";color:#666;/*border:2px solid #80bdfa;*/background:#fff; }
+.result_loading h3{line-height:32px;font-size:16px;font-weight:bold;color:#333;}
+.result_loading p{line-height:28px;}
+.result_loading p strong{padding:0 5px;color:#f60;}
+.result_loading span{display:block;line-height:32px;margin-top:10px;text-align:center;}
+
+/*排序*/
+#order_by li{float:left;display:none;width:50%;height:44px;font-size:16px;font-weight:bold;}
+#order_by li a{display:block;color:#FFF;text-align:center;line-height:44px;background:#67b1e4 url(../images/flight/flightlist.png) no-repeat;cursor:pointer;}
+#order_by li.on a{color:#ff840f;background-color:#FFF;}
+#order_by li .up{background-position:center 0px;}
+#order_by li.on .up{background-position:center -44px;}
+#order_by li .down{background-position:center -394px;}
+#order_by li.on .down{background-position:center -350px;}
+
+/*航班列表*/
+.ifall_list{display:none;background-color:#FFF;clear:both;}
+.ifall_list li{border-bottom:1px solid #e7e5e5;padding:0 10px;}
+.ifall_list dl.none{display:none;}
+.ifall_list dt{height:32px;line-height:32px;font-size:16px;font-weight:bold;}
+.ifall_list dd{display:block;padding-bottom:10px;}
+.ifall_list .material{padding-top:10px;}
+.ifall_list .material span{display:inline-block;width:49%;line-height:24px;}
+.ifall_list .material span.t{color:#2690d8;}
+.ifall_list .material strong{font-size:16px;}
+.ifall_list .material strong,.ifall_list .material em{color:#ff840f;font-style:normal;padding:0 4px;}
+.ifall_list .details{margin:10px 0;height:28px;line-height:28px;width:90px;padding-right:6px;color:#FFF;font-size:14px;text-align:center;background:#ff840f url(../images/flight/flightlist.png) no-repeat right -228px;cursor:pointer;}
+.ifall_list .airport,.ifall_list .airline{float:left;display:block;}
+.ifall_list .airport span,.ifall_list .airline span{height:24px;line-height:24px;display:block;}
+.ifall_list .airline{padding-left:25px;}
+.ifall_list .airline em{padding-left:15px;color:#666;font-style:normal;}
+.ifall_list .turn{height:72px;background:url(../images/flight/flightlist.png) no-repeat right -280px;cursor:pointer;}
+.ifall_list .turn .airline{background:url(../images/flight/flightlist.png) no-repeat 0 -80px;height:72px;}
+.ifall_list .turn .airline span{padding:6px 0;}
+.ifall_list .turn .turn_icon{padding-left:20px;background:url(../images/flight/flightlist.png) no-repeat 0 -252px;}
+.ifall_list .donot_turn{height:48px;background:url(../images/flight/flightlist.png) no-repeat right -290px;cursor:pointer;}
+.ifall_list .donot_turn .airline{background:url(../images/flight/flightlist.png) no-repeat 0 -152px;height:48px;}
+.ifall_list .donot_turn .airline span{padding:12px 0;}
+
+
+/*订单填写*/
+.login{padding:8px 10px 0 10px;height:28px;line-height:28px;}
+.login a{display:block;width:82px;text-align:center;font-size:14px;color:#FFF;background-color:#ff840f;}
+#booking_info{height:auto;padding:10px;color:#333;}
+#booking_info .mileage,#booking_info p{height:38px;line-height:38px;color:#666;}
+#booking_info .mileage{text-align:center;font-size:13px;}
+#booking_info .ticket_price,#booking_info .tax_price{height:42px;line-height:42px;padding:0 10px;margin-bottom:10px;background-color:#fff;}
+#booking_info .ticket_price b,#booking_info .tax_price b{color:#ff840f;}
+#booking_info .ticket_price em,#booking_info .tax_price em{font-style:normal;}
+.flight_info{background-color:#FFF;}
+.flight_info dt{height:31px;line-height:31px;color:#FFF;}
+.flight_info dt .left,#boarding dt .left{width:99px;background:url(../images/flight/bookinginfo.png) no-repeat;text-align:center;font-size:16px;}
+.flight_info dt .right{width:135px;padding-left:25px;font-size:12px;}
+.flight_info dt .right em{font-size:14px;font-style:normal;padding:0 8px;}
+.flight_info dt .trip{background:url(../images/flight/bookinginfo.png) no-repeat -100px 0;}
+.flight_info dt .goback{background:url(../images/flight/bookinginfo.png) no-repeat -260px 0;}
+.flight_info h5{height:60px;padding-left:10px;font-weight:normal;}
+.flight_info h5 span{display:block;line-height:30px;}
+.flight_info h5 span.f_logo{padding-left:35px;background:url(../images/flight/f_logo.png) no-repeat;}
+.flight_info h5 span.f0{background-position:0 0;/*航空公司LOGO*/}
+.flight_info ul{height:140px;}
+.flight_info li{float:left;width:35%;height:110px;padding:15px 0;display:block;}
+.flight_info li.f_icon{width:30%;background:url(../images/flight/bookinginfo_bg.png) no-repeat center 0;}
+.flight_info li span{text-align:center;display:block;}
+.flight_info li .addr{font-size:18px;font-weight:bold;line-height:32px;}
+.flight_info li .time{font-size:16px;font-weight:bold;line-height:32px;}
+.flight_info li .date,.flight_info li .site{color:#666;line-height:22px;}
+.flight_info .turn{height:25px;line-height:25px;background:url(../images/flight/bookinginfo_bg.png) repeat-x center -140px;text-align:center;}
+.flight_info .turn span{background-color:#FFF;color:#2690d8;padding:0 3px;}
+#flight_details,#distribution{height:41px;line-height:41px;background:#FFF url(../images/flight/flightlist.png) no-repeat right -295px;cursor:pointer;}
+#flight_details{margin-bottom:10px;text-align:center;color:#666;}
+#boarding{margin-bottom:10px;}
+#boarding dt,#boarding dd{background-color:#FFF;}
+#boarding dt,#insurance,#payment{height:41px;line-height:41px;}
+#boarding dt.mb9{margin-bottom:9px;}
+#boarding dt .left{height:31px;line-height:31px;color:#fff;}
+#boarding dt .right{width:80px;padding-right:35px;text-align:right;font-size:14px;background:url(../images/flight/flight_bg.png) no-repeat right -108px;cursor:pointer;}
+#boarding dd{padding:9px 0;height:75px;border-top:1px solid #f2f1f0;}
+#boarding dd div,#boarding dd ul{float:left;height:75px;}
+#boarding dd div{width:15%;line-height:75px;text-align:center;cursor:pointer;}
+#boarding dd div.bi_del{background:url(../images/flight/bi_del.png) no-repeat center center;}
+#boarding dd div.bi_edit{color:#2690d8;}
+#boarding dd ul{width:70%;}
+#boarding dd ul li{height:25px;line-height:25px;}
+#boarding dd ul li span{width:55px;margin-right:15px;display:inline-block;}
+.h80{height:80px;}
+.import{padding:10px 10px 0 10px;margin-bottom:10px;background-color:#fff;}
+.import span{margin-bottom:10px;display:block;}
+#insurance{padding:0 10px;background-color:#FFF;margin-bottom:10px;}
+#insurance .left,#distribution .left{font-size:14px;}
+#insurance input{margin-right:5px;}
+#insurance span{color:#ff840f;margin-right:10px;}
+#insurance a{color:#2690d8;cursor:pointer;}
+#distribution{padding:0 45px 0 10px;}
+#distribution .right{color:#ff840f;}
+
+#payment{padding-left:20px;font-size:14px;font-weight:bold;background-color:#ffba2f;color:#fff;cursor:pointer;}
+#payment span{font-size:18px;}
+#payment .right{width:40%;font-size:16px;background-color:#ff840f;text-align:center;}
+
+/*通用头部*/
+.header{display:block;width:100%;position:fixed;top:0;left:0;background-color:#FFF;z-index:400;}
+.header a{cursor:pointer;}
+.header .lgog{padding:4px;}
+.header .topnav{padding-right:42px;}
+
+/*乘机人共用*/
+#select_boarding_box,#boarding_info_box,#edit_boarding_info_box,#country_code_box,#name_explain_box,#line_tgq_box{width:100%;z-index:200;background-color:#f2f1f0;position:absolute;top:0;left:0;color:#666;display:none;}
+#select_boarding,#boarding_info,#edit_boarding_info,.explain_box{height:auto;padding:96px 10px 30px 10px;color:#333;}
+#select_boarding .sub,#boarding_info .sub,#edit_boarding_info .sub{height:40px;line-height:40px;font-size:16px;}
+/*选择乘机人*/
+#select_boarding .add_boarding{height:40px;line-height:40px;padding-left:24px;background:#fff url(../images/flight/flight_bg.png) no-repeat right -108px;cursor:pointer;}
+#select_boarding .boarding_list li{height:64px;margin-top:10px;background-color:#fff;}
+#select_boarding .boarding_list .checkbox{float:left;width:17px;height:17px;padding:23px 20px;cursor:pointer;}
+#select_boarding .boarding_list .checkbox span{display:block;width:17px;height:17px;background:url(../images/flight/flight_bg.png) no-repeat -17px -200px;}
+#select_boarding .boarding_list .checkbox span.active{background:url(../images/flight/flight_bg.png) no-repeat 0 -200px;}
+#select_boarding .boarding_list dl{float:left;padding:8px 0;}
+#select_boarding .boarding_list dt,#select_boarding .boarding_list dd{line-height:24px;}
+#select_boarding .boarding_list .edit{float:right;width:54px;line-height:64px;text-align:center;color:#2690d8;cursor:pointer;}
+
+/*新增乘机人&修改乘机人*/
+.info_list{padding:10px;background-color:#fff;}
+.info_list li{height:40px;line-height:40px;margin-bottom:10px;background-color:#f2f1f0;}
+.info_list li span{display:inline-block;width:80px;padding-right:10px;text-align:right;}
+.info_list li i{padding-right:5px;font-style:normal;color:#f00;}
+.info_list li input{width:60%;height:40px;background-color:#f2f1f0;color:#666;}
+.info_list li a{float:right;display:block;height:40px;color:#2690d8;cursor:pointer;}
+.info_list li.mb0{margin-bottom:0px;}
+.info_list .doubt{width:30px;background:url(../images/flight/flight_bg.png) no-repeat 5px -150px;}
+.info_list .select_class{width:110px;padding-right:30px;text-align:right;background:url(../images/flight/title_bg.png) no-repeat -5px -125px;}
+.info_list .radio{background-color:#c3c3c3;text-align:center;color:#fff;}
+.info_list .active{background-color:#68b1e4;}
+.info_list .sexr{width:40px;}
+.info_list .passenger_type,.info_list .credentials_type{width:80px;}
+
+/*签发国家列表*/
+#country_code{height:auto;padding-top:86px;color:#333;}
+#country_code li{height:42px;line-height:42px;padding-left:20px;font-size:14px;background-color:#cbe4f6;border-bottom:1px solid #96caee;cursor:pointer;}
+#country_code li.designate{background:#cbe4f6 url(../images/flight/flight_bg.png) no-repeat right -37px;}
+
+/*说明的弹窗*/
+.explain_box .explain{padding:10px;background:#fff;}
+.explain_box .explain p{line-height:24px;padding:10px;}
+
+/*支付订单*/
+#paybox{padding:10px;}
+#paytype li{height:40px;line-height:40px;padding:10px;margin-bottom:10px;background:#fff;cursor:pointer;}
+#paytype li span{float:right;width:80px;height:40px;background:url(../images/flight/paybg.jpg) no-repeat;}
+#paytype li span.bill{background-position:0 0;}
+#paytype li span.alipay{background-position:-80px 0;}
+#paytype li span.yeepay{background-position:-160px 0;}
+#paytype li span.tenpay{background-position:-240px 0;}
+#pricejour{height:65px;padding:10px;margin-bottom:10px;background:#fff;}
+#pricejour h4{line-height:24px;}
+#pricejour p{line-height:36px;}
+#pricejour dt,#pricejour dd{display:inline-block;}
+#pricejour dt{padding:0 25px 0 15px;border-right:2px solid #ccc;}
+#pricejour dt p{font-size:28px;font-family:Arial;color:#f60;}
+#pricejour dt p em{font-size:24px;font-style:normal;}
+#pricejour dd{padding-left:30px;}
+#pricejour dd b{margin-right:15px;font-size:14px;}
+#paybox .sub{height:40px;line-height:40px;font-size:16px;}

@@ -1,0 +1,84 @@
+<div class="page">
+	<div class="pageContent">
+         
+        <script type="text/javascript">
+    $(function(){
+
+        $('.del_img').click(function(){
+            $.get('__URL__/edit','act=del_img&id={$info.id}',function(data){
+                layer.load(1,0,0);
+                if(data){
+                    $('.img').hide();
+                }
+            })
+        })
+
+        $('.submits').click(function(){
+            $('form').ajaxSubmit({
+                url:$('form').attr('action'),
+                type:"POST",
+                success:function(data) {
+                    if(data && (typeof data)=='string'){
+                        var data = eval("(" + data + ")");
+                    };
+                    $('#msg').val(data.info);
+                }
+            });
+        })
+
+    });
+</script>
+
+	<form method="post" action="__URL__/edit/navTabId/__MODULE__-index"  enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+            <input type="hidden" name="id" value="{$info['id']}" />
+            <div class="pageFormContent" layoutH="58">
+	       
+            <div class="unit">
+		       <label>洲：</label>
+                                <input type="text" class="required"  name="zhou" id="zhou" value="{$info['zhou']}" >
+			</div>
+              <div class="unit">
+                <label>发布状态：</label>
+                <input type="radio" name="info[status]" value="0" <if condition="$info.status eq 0"> checked="checked"</if> /> 有效 &nbsp; <input type="radio" name="info[status]" value="1" <if condition="$info.status eq 1"> checked="checked"</if> /> 过期
+              </div>
+            <div class="unit">
+                <label width="100">出发城市：</label>
+                <input type="text"  class="input"  name="from_city" id='from_city' value="{$info['from_city']}" />
+            </div>
+         
+            <div class="unit">
+                <label>到达城市：</label>
+                <input type="text" class="input" name="to_city" id='to_city' value="{$info['to_city']}" />
+            </div>
+            <div class="unit">
+                <label>截止日期：</label>
+                <input type="text" class="input" name="time" value="{$info['time']}" />
+            </div>
+
+            <div class="unit">
+                <label>航空公司：</label>
+                <input type="text" class="input" name="air" value="{$info['air']}" />
+            </div>
+            <div class="unit">
+                <label>价格：</label>
+                <input type="text" class="input"  name="price" value="{$info['price']}" />
+            </div>
+            <div class="unit">
+                <label>图片：</label>
+                <input type="file" style="width: 150px;" class="input"  name="img" value="" />
+                <a class="img">{$info.img} <notempty name="info.img"><input   type="button"  class="del_img" value="删除图片"></notempty></a>  
+                <span class="info"></span>
+            </div>
+		</div>
+		
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+	</div>
+</div>
+

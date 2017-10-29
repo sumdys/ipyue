@@ -1,0 +1,29 @@
+<include file="Public:activity_header2" />
+<div class="wd980">
+	<include file="share_left"/>
+
+	<div class="wd700 right">
+    	<div id="act_int">
+        	<h3><strong>活动介绍</strong></h3>
+            <p><em>凡在品悦有购票记录并顺利出行的会员，每推荐一位新顾客，且被推荐的新顾客成功购票，该会员便可获得一枚“爱钻”奖励。</em>介绍的新顾客越多，获得“爱钻”越多，“爱钻”可用于在品悦官网积fun商城进行消费，兑换丰厚的礼品 会员，每推荐一位新顾客，且被推荐的新顾客成功购票，该会员便可获得一枚“爱钻”奖励。介绍的新顾客越多，获得“爱钻”越多，“爱钻”可用于在品悦官网积fun商城进行消费，兑换丰厚的礼品......</p>
+            <a  href="{:U('/activity/sharerule')}" >详细>></a>
+        </div>
+        <div class="class_list">
+            	<h2><a href="{:U('/jifen/lists/cid/56')}">更多好礼》</a><span></span>爱钻好礼推荐</h2>
+                <ul>
+                    <volist name="fun_list" id="vo">
+                        <li style="height: 212px;">
+                            <a href="{:U('/jifen')}/info/id/{$vo.id}">
+                                <img src="__PUBLIC__/uploads/mall/m_{$vo.img}" title="{$vo.title}"></a>
+                                <h3> <a href="{:U('/jifen')}/info/id/{$vo.id}">{$vo.title}</a></h3>
+                                <p>爱钻：<b>{$vo.jifen}</b></p>
+
+                        </li>
+                    </volist>
+                </ul>
+            </div>
+        
+    </div>
+
+</div>
+<include file="Public:footer" />

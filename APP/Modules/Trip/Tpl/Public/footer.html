@@ -1,0 +1,70 @@
+ <div id="footer">
+    	<div class="wd960">
+            <div id="ft_link">
+                <ul>
+                    <li><a href="{:U('/about')}" target="_blank">关于品悦</a> |</li>
+                    <li><a href="{:U('/Adviser')}" target="_blank">专业顾问</a> |</li>
+                    <li><a href="{:U('/about/service')}" target="_blank">会员服务</a> |</li>
+                    <li><a href="{:U('/about/privacy')}" target="_blank">隐私保护</a> |</li>
+                    <li><a href="{:U('/about/job')}" target="_blank">人才招聘</a> |</li>
+                    <li><a href="http://www.cata.org.cn/clientWeb/frm_Single_Search.aspx?name=%u5E7F%u5DDE%u7F8E%u4E50%u5546%u52A1%u670D%u52A1%u6709%u9650%u516C%u53F8&type=agentname&leixing=&chengshi=&chengqu=" target="_blank">中国航空运输协会</a> |</li>
+                    <li><a href="__PUBLIC__/images/zz_08.jpg" target="_blank">企业营业执照</a> |</li>
+                    <li><a href="__PUBLIC__/images/ylzg.jpg" target="_blank">民航客运一类代理</a></li>
+                </ul>
+            </div>
+            <?php
+            //设置备案号
+            if($_SERVER['HTTP_HOST']=='www.aishangfei.cn'){
+                $bah="粤ICP备11009654号-7";
+            }elseif($_SERVER['HTTP_HOST']=='www.aishangfei.org'){
+                $bah="粤ICP备11009654号-9";
+            }else{
+                $bah="粤ICP备15024109号-1";
+            }
+            ?>
+            <div id="ft_copyright">Copyright © 2009-2014 品悦旅行网 讯悦商务服务有限公司. All Rights Reserved
+                <img src="__PUBLIC__/images/ft_icp.jpg" alt="icp" />
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">{$bah}</a>
+            </div>
+            <div id="ft_icons">
+                <a class="a0" href="#" target="_blank"></a>
+                <a class="a1" href="#" target="_blank"></a>
+                <a class="a2" href="#" target="_blank"></a>
+                <a class="a3" href="http://trust.360.cn/search.php" target="_blank"></a>
+                <a class="a4" href="#" target="_blank"></a>
+                <a class="a5" href="http://www.gzaic.gov.cn/GZCX/WebUI/credit/qiyeInfo.htm#" target="_blank"></a>
+                <a class="a6" href="http://net.china.com.cn/index.htm" target="_blank"></a>
+                <a class="a7" href="http://www.cyberpolice.cn/wfjb/" target="_blank"></a>
+            </div>
+
+
+
+
+
+    	</div>        
+	</div>
+
+
+
+    <style type="text/css">
+    #line_query_qq{width:140px;height:248px;background:url(__PUBLIC__/images/line_query_qq.gif) no-repeat;position:absolute;top:170px;right:0;}
+	#line_query_qq dt{height:18px;}
+	#line_query_qq dt span{float:right;width:18px;height:18px;line-height:60px;cursor:pointer;overflow:hidden;}
+	#line_query_qq dd{height:115px;}
+	#line_query_qq dd.kf a{width:140px;height:115px;line-height:300px;display:block;overflow:hidden;}
+	#line_query_qq dd span{display:block;margin-top:80px;height:22px;text-align:center;}
+    </style>
+    <script type="text/javascript">
+	$(function(){
+		$(window).scroll(function(){
+			var top=$(this).scrollTop()+170+'px';
+			$('#line_query_qq').css('top',top);
+			});
+		$('#line_query_qq span').click(function(){
+			$('#line_query_qq').hide();
+			});
+	});
+    </script>
+ 
+</body>
+</html>

@@ -1,0 +1,226 @@
+<include file="Public:header" />
+<link rel="stylesheet" href="__PUBLIC__/css/Iflight.css" type="text/css" />
+<div class="wd980">
+	<h1 class="iflight_tit_nav">您当前所处的位置：<a href="{:U('/')}">首页</a><em>></em><a href="{:U('/iflight')}">国际机票</a><em>></em>选择航班</h1>
+    <div class="mt10">
+    	<div class="wd250 left">
+        	<!--国际机票新版搜索框-->
+            <div id="flight_search_box">
+            	<h2>总比市场低一点</h2>
+                <div class="search_box">
+                	<form action="{:U('/iflight/searchTicket')}" name="form0" id="flight_search_form">
+                    	<ul id="sel_required">
+                        	<li class="iflight_rad">
+                            	<input type="radio" name="journey" class="journey2" value="2" /><label>单程</label>
+                				<input type="radio" name="journey" class="journey1" value="1" checked="checked" /><label>往返</label>
+                				<input type="radio" name="journey" class="journey3" value="3" /><label>多程</label>
+                            </li>
+                            <li>
+                				<span>出发城市：</span>
+                				<input type="text" class="text city" name="origincode"  value="{$_GET['origin_name']}"  placeholder="城市名"  state="1"/>
+            				</li>
+            				<li>
+                				<span>到达城市：</span>
+                				<input type="text" class="text city" name="desinationcode"  value="{$_GET['desination_name']}" placeholder="城市名"state="1"/>
+            				</li>
+            				<li>
+                				<span>出发日期：</span>
+                				<input type="text" class="text date" name="originDate" id="originDate"  value="{$_GET['originDate']}" placeholder="时间/日期" state="1" />
+            				</li>
+            				<li>
+                				<span>返回日期：</span>
+                				<input type="text" class="text date" name="returnDate" id="returnDate"  value="{$_GET['returnDate']}"  placeholder="时间/日期" state="1"/>
+            				</li>
+                        </ul>
+                        <ul id="sel_minor">
+                        	<li>
+                            	<span>舱位等级：</span>
+                                <select name="sel_inCabinType" id="sel_inCabinType">
+                                  <option value="经济舱">经济舱</option>
+                                  <option value="公务舱">公务舱</option>
+                                  <option value="头等舱">头等舱</option>
+                                </select>
+                       	  </li>
+                            <li>
+                            	<span>乘客类型：</span>
+                                <select name="sel_inPassengersType" id="sel_inPassengersType">
+                                  <option value="普通成人">普通成人</option>
+                                  <option value="学生">学生</option>
+                                  <option value="劳工">劳工</option>
+                                  <option value="新移民">新移民</option>
+                                  <option value="海员">海员</option>
+                                </select>
+                            </li>
+                            <li>
+                            	<span>成人人数：</span>
+                              	<input type="text" class="text" name="sel_inAdult" id="sel_inAdult"  value="1"  placeholder="1" />
+                            </li>
+                            <li>
+                            	<span>儿童人数：</span>
+                              	<input type="text" class="text" name="sel_inChild" id="sel_inChild"  value="1"  placeholder="1" />
+                            </li>
+                        </ul>
+                      	<a class="advanced_search"><span class="as_icon"></span>高级搜索</a>
+                      	<input name="submitSearch" class="submitSearch" id="submitSearch" type="submit" value="搜 索" />
+                        <p>更多需求,请直接联系<a href="#">专业顾问</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="wd720 right">
+        	<!--票类型-->
+        	<div id="resultInfo" class="fly_tickstyle">
+            	<h1>
+                	<div class="ticket_left">
+                    	<span class="fly_departCity"> {$list.OriginCity}</span>
+                        <span class="fly_tips round"></span>
+                        <span class="fly_backCity">{$list.DestinationCity}</span>
+                        <span class="fly_type">(<if condition="$list.FlightType eq 1">往返<elseif condition="$list.FlightType eq 2"/> 单程<else />缺口程</if>)</span>
+                    </div>
+                </h1>
+                <div class="timeHint">
+                	<span class="departTime left">出发日期：2014年04月25日</span>
+                    <span class="backTime left none">返回日期：2014年05月08日</span>
+                    <p class="right">友情提示：所有航班起抵时间均为当地时间(24小时制)；价格均为全程总票价</p>
+                </div>
+            </div>
+            <!--返回的列表-->
+            <div id="resultList" class="result_list">
+            	<div class="ftick_list_top">
+                	<span class="filter_transit" id="filter_transit"><input name="" type="checkbox" value="" />仅显示直飞</span>
+                    <select class="ftick_list_set allSortTips">
+                        <option value="1" attr="price">按价格从低到高</option>
+                        <option value="2" attr="price">按价格从高到低</option>
+                        <option value="1" attr="offtime">按起飞从早到晚</option>
+                        <option value="2" attr="offtime">按起飞从晚到早</option>
+                        <option value="1" attr="arrtime">按到达从早到晚</option>
+                        <option value="2" attr="arrtime">按到达从晚到早</option>
+                        <option value="1" attr="stroketime">按行程从短到长</option>
+                        <option value="2" attr="stroketime">按行程从长到短</option>
+                      </select>
+					<div class="down">
+                    	<a sorttype="offtime" class="flight_effect flight_time offtime on">起飞时间</a>
+                    </div>
+                    <div class="up">
+                    	<a sorttype="arrtime" class="flight_effect flight_time arrtime">到达时间</a>
+                    </div>
+                    <div class="up">
+                    	<a sorttype="stroketime" class="flight_effect flight_time stroketime">行程时长</a>
+                    </div>
+                    <div class="up">
+                    	<a sorttype="price" class="flight_effect flight_price price at">价格</a>
+                    </div>
+                    <select class="flight_list_set">
+                        <option value="all">全部航空公司</option>
+                    </select>
+                </div>
+                
+                <div class="all_iflight">
+                	<table class="top_table" width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="175">起飞到达时间/机场</td>
+                            <td width="140">航空公司/航班/机型</td>
+                            <td width="75">飞行总时长</td>
+                            <td width="270">机票价格/参考税费</td>
+						</tr>
+					</table>
+                  <div class="ifall_list">
+
+                      <volist name="list.OriginDestinationOption" id="vo">
+                  		<!--iflistBox-->
+                    	<div class="iflist_box" FlightNos="{$vo.FlightNos}" PosId="{$vo.PosId}">
+                        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td width="345" class="flight_show">
+
+                                    <volist name="vo.FlightSegment" id="Flight" mod="2">
+                                      <eq name="mod" value="0">
+                                    <table class="list_info" width="330" border="0" align="center" cellpadding="0" cellspacing="0">
+										<tr>
+                                        	<td width="190">
+                                            	<p><em class="offTime">{$Flight.DepartureDate|date='H:i',###}</em><span>{$Flight.DepartureAirportName}</span></p>
+                                                <p><em class="arrTime">{$Flight.ArrivalDate|date='H:i',###}</em><span>{$Flight.ArrivalAirportName}</span></p>
+                                            </td>
+                                            <td width="125">
+                                            	<p><span class="if_logo"></span><span>{$Flight.AirCompanyName}</span></p>
+                                                <p><span>{$Flight.OperatorCode}{$Flight.FlightNumber}</span><span>计划机型<a>{$Flight.Equipment}</a></span></p>
+                                            </td>
+                                        </tr>
+                                     </table>
+                                      </eq>
+                                     <eq name="mod" value="1">
+
+								  	<div class="tran_flight">
+                                    	<div class="transit_text">
+                                        	<p>
+                                            	<span class="icon"></span>
+                                       	  	  <span>{$Flight.DepartureCityName}中转</span>
+                                       		  <span class="stay_time">{$Flight.FlyTime}</span>
+                                            </p>
+                                        </div>
+                                        <table width="330" border="0" align="center" cellpadding="0" cellspacing="0" class="list_info">
+										<tr>
+                                        	<td width="190">
+                                            	<p><em class="offTime">{$Flight.DepartureDate|date='H:i',###}</em><a><if condition="$Flight.DepartureSpanDays gt 0">第二天</if></a><span>{$Flight.DepartureAirportName}</span></p>
+                                                <p><em class="arrTime">{$Flight.ArrivalDate|date='H:i',###}</em><a><if condition="$Flight.ArrivalSpanDays gt 0">第二天</if></a><span>{$Flight.ArrivalAirportName}</span></p>
+                                            </td>
+                                            <td width="125">
+                                            	<p><span class="if_logo"></span><span>{$Flight.AirCompanyName}</span></p>
+                                                <p><span>{$Flight.OperatorCode}{$Flight.FlightNumber}</span><span>计划机型<a>{$Flight.Equipment}</a></span></p>
+                                            </td>
+                                        </tr>
+                                     </table>
+                                    </div>
+                                      </eq>
+                                    </volist>
+                                    </td>
+                                  	<td width="90" align="center">
+                                    	<p><span>{$vo.FlightTime|sec2time=###,'i'}</span></p>
+                                        <p><a title="{$vo.FareInfo.Remarks.string}">退改签</a></p>
+                                    </td>
+                                  	<td width="145">
+                                   		<p><span class="if_price">票价<em>￥</em><b>{$vo.PriceFare}</b></span></p>
+                                        <p><span class="if_tax">参考税￥{$vo.PriceTax}</span></p>
+                                    </td>
+                                  	<td width="140" class="if_reserve">
+                                    	<p><a>预订</a></p>
+                                        <p><span>剩余{$vo.CabinLeft}张</span></p>
+                                    </td>
+                                </tr>
+							</table>
+                    </div><!--iflistBox End-->
+                    </volist>
+                    
+                  </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+	$(function(){
+        $('.if_reserve a').click(function(){
+            $.getJSON("",function(data){
+                alert(data);
+            })
+        })
+		//搜索输入框获得焦点或失去焦点后变色
+		$("#flight_search_box .text").focus(function(){
+			$(this).addClass("focus");
+			}).blur(function(){
+				$(this).removeClass("focus");
+				});
+		//显示或隐藏高级搜索
+		$(".advanced_search").click(function(){
+			if($(this).hasClass("as_show")){
+				$(this).removeClass("as_show");
+				$("#sel_minor").hide();
+				}else{
+					$(this).addClass("as_show");
+					$("#sel_minor").show();
+					}
+			});
+		});
+</script>
+<include file="Public:footer" />

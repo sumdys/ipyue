@@ -1,0 +1,66 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Test</title>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" action="">
+    <p>
+        <textarea name="inter_xml"   cols="100" rows="20"><TSK_AirfareFlightShop>
+            <TSK_AirfareFlightShopRQ>
+                <OTA_AirLowFareSearchRQ>
+                    <DirectFlightsOnly>false</DirectFlightsOnly>
+                    <POS>
+                        <PseudoCityCode>CAN526</PseudoCityCode>
+                        <AirportCode>CAN</AirportCode>
+                        <ChannelID>1E</ChannelID>
+                        <IataNo></IataNo>
+                    </POS>
+                    <OriginDestinationInformation>
+                        <RPH>01</RPH>
+                        <OriginLocationCode>pvg</OriginLocationCode>
+                        <DestinationLocationCode>hkg</DestinationLocationCode>
+                        <DepartureDate>
+                            <Date>2014-04-15</Date>
+                        </DepartureDate>
+                        <ConnectionLocations>
+                            <ConnectionLocation>
+                                <LocationCode>  </LocationCode>
+                                <Inclusive></Inclusive>
+                            </ConnectionLocation>
+                        </ConnectionLocations>
+                    </OriginDestinationInformation>
+                    <TravelPreferences>
+                        <VendorPref>
+                            <Code>MU</Code>
+                            <PreferLeve>only</PreferLeve>
+                        </VendorPref>
+                    </TravelPreferences>
+                    <AirTravelerAvail>
+                        <PassengerTypeQuantity>
+                            <Code>ADT</Code>
+                            <Quantity>1</Quantity>
+                        </PassengerTypeQuantity>
+                    </AirTravelerAvail>
+                    <TravelerInfoSummary>
+                        <PriceRequestInformation>
+                            <CurrencyCode>CNY</CurrencyCode>
+                            <PricingSource>Both</PricingSource>
+                        </PriceRequestInformation>
+                    </TravelerInfoSummary>
+                </OTA_AirLowFareSearchRQ>
+                <AdditionalShopRQData>
+                    <IncludeFlightAvailability>true</IncludeFlightAvailability>
+                    <LowestOrAll>Lowest</LowestOrAll>
+                    <IncludeTax>True</IncludeTax>
+                </AdditionalShopRQData>
+            </TSK_AirfareFlightShopRQ>
+        </TSK_AirfareFlightShop></textarea>
+    </p>
+    <p>
+        <input type="submit" name="button" id="button" value="提交" />
+    </p>
+</form>

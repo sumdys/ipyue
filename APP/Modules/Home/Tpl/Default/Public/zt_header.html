@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Zhouxu Yan">
+	<meta name="generator" content="GVIM 7.4">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<title>{$title}</title>
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/images/Zt/global/zt_global.css">
+</head>
+<body>
+	<div id="header">
+		<div class="clearfix layout">
+			<h1 class="logo">
+				<a href="{:U('/')}"><img src="__PUBLIC__/images/Zt/global/logo.gif" alt="品悦"></a>
+			</h1>
+			<div class="side">
+            	<div class="clearfix fn">
+            	<if condition="$userinfo">
+                	<span class="right">
+                	您好,  <a href="{:U('/Member/index')}" title="进入会员中心" target="_blank"><if condition="$userinfo['name']">{$userinfo.name}<else/>{$userinfo.username}</if></a>  普通会员  <a href="{:U('/member/common/out')}">退出</a>
+                    </span>
+                <else/>
+					<a href="{:U('/member/register')}" target="_blank" class="right register">注册</a>
+					<a href="{:U('/member/login')}" target="_blank" class="right login">登录</a>
+                </if>
+                </div>
+				<div class="clearfix info">
+					<h2 class="tel">全国预订服务专线：18824906653</h2>
+					{$htmltitle}
+				</div>
+			</div>
+		</div>
+	</div>

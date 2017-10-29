@@ -1,0 +1,25 @@
+<style type="text/css">
+.img{ margin-left:15px; margin-top:10x;}
+.img input{float:none; margin-bottom:10px;}
+.img span{font-size:12px; color:#999;}
+</style>
+<form action="__URL__/ad_edit/navTabId/__MODULE__-index" method="post" enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+	<input type="hidden" name="id" value="{$info['id']}"/>
+    <div class="img">       
+        <br/>
+        <!--<input type="hidden" name="images" value="{$info['img']}"/>-->
+        <!--图片：<input type="file" name="img"/>-->
+        
+        标题：<input type="text" name="title" size="50" value="{$info['title']}"/>
+        <br/>
+        链接：<input type="text" name="src" size="50" value="{$info['src']}"/>
+        <br/>
+        排序：<input type="text" name="num" value="{$info['rand']}"/><span>(1-2位数字)</span>
+    </div>
+    <div class="formBar">
+        <ul>
+            <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+        </ul>
+    </div> 
+</form>

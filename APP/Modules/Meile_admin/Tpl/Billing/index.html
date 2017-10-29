@@ -1,0 +1,295 @@
+<!--
+**
+**登帐平台首页
+**2014.4
+**
+-->
+<style type="text/css">
+.billing span{margin-left:5px;}
+.ulclass li{float:right; margin-right:20px;}
+</style>
+<form id="pagerForm" action="__URL__/index" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>    
+    <input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST['_sort']|default='1'}"/>
+    <input type="hidden" name="listRows" value="{$_REQUEST['listRows']}"/>
+    <input type="hidden" name="book_id" value="{$_REQUEST.book_id}" />
+    <input type="hidden" name="so" value="{$_REQUEST.so}" />
+    <input type="hidden" name="so_date1" value="{$_REQUEST.so_date1}" />
+    <input type="hidden" name="so_date2" value="{$_REQUEST.so_date2}" />
+    <volist name="map" id="m">
+        <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/index" method="post">
+        <div class="searchBar" style="float:left;">
+            <ul class="searchContent">
+                <li><label>搜索：</label><input type="text" name="so" value="{$_REQUEST.so}" placeholder ="搜索出票地"/></li>
+            </ul>
+            <div class="subBar">
+                <ul><li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li></ul>
+            </div>
+        </div>
+    </form>
+     <ul class="ulclass">      
+        <li><a class="icon" href="__URL__/daochu" height="450" width="650" target="dialog" mask="true"><input type="button" value="导出账单" style="width:80px;"/></a></li>
+        <li><a class="edit" href="__URL__/daoru"  height="450" width="650" target="dialog" mask="true"><input type="button" value="导入账单" style="width:80px;"/></a></li>
+        <li><a class="edit " href="__URL__/add"   height="500" width="680" target="dialog" mask="true" ><input type="button" value="新增账单" style="width:80px;"/></a></li>
+    </ul>   
+</div>
+
+
+    <table class="table" width="101%" layoutH="115"  >
+        <thead>
+            <tr>
+                 <th width="70">出票日期</th>
+                 <th width="80">出票地</th>                                             
+                 <th width="75">收入金额</th> 
+                 <th width="85">到账银行</th>                  
+                 <th width="80">抵票款</th> 
+                 <th width="80">取票金额</th>
+                  <th width="45">拿位地</th>
+                 <th width="80">拿位费</th>            
+                 <th width="80">刷卡费</th>
+                 <th width="80">退票款</th>
+                 <th width="80">返客费</th>
+                 <th width="70">利润</th> 
+                 <if condition="($type eq 1)or($type eq 2)or($type eq 3)">
+                 	<th width="70">盈利差额</th>
+                 </if>   
+                 <th width="45">承担人</th>
+                 <th width="45">到账地</th>
+                 <th width="85">备注</th> 
+                 <th width="80">支付时间</th>
+                 <th width="85">支付明细</th> 
+                 <th width="85">退客明细</th> 
+                 <th width="85">返客明细</th>
+                 <th width="85">详情</th>                   
+                 <th width="60">收款审核</th> 
+                 <th width="60">付款审核</th> 
+            </tr>
+        </thead>
+        <tbody>     
+        	<volist name="data" id="vo" key="k">
+                <tr class="billing">
+                    <td rowspan="{$vo.count}">{$vo.cpdate|date="Y/m/d",###}</td>
+                    <td rowspan="{$vo.count}" title="{$vo.cpd}">{$vo.cpd}</td>  
+                    <td >{$vo['incomebank'][0][0]}<!-----收入金额 收款添备注----->
+                    	<if condition="$vo.audit_sk eq 1"><!----收款财务已审核 将不再能备注------>
+                        	<if condition="$vo['incomebank'][0][2] neq ''"><span title="{$vo['incomebank'][0][2]}" style="color:#F00;">注</span></if>     
+                       <else/><!----收款财务未审核------>
+                   			<if condition="($type eq 1)or($type eq 3)"><!---有修改权--->
+                                 <if condition="$vo['incomebank'][0][2] eq ''"><!----未审核 未备注 颜色为黑 可以备注--->
+                                    <span><a href="__URL__/bz_sk/t/income/id/{$vo.id}" height="195" width="420" target="dialog" title="添加备注">注</a></span>                               
+                                <else/><!----未审核 已备注 颜色为蓝 可以修改备注--->
+                                    <span><a href="__URL__/bz_sk/t/income/id/{$vo.id}" height="195" width="420" target="dialog" title="{$vo['incomebank'][0][2]}" style="color:#00F;">注</a></span>
+                                </if> 
+                        	<else/><!---无修改权--->
+                                <if condition="$vo['incomebank'][0][2] neq ''"><<span title="{$vo['incomebank'][0][2]}" style="color:#F00;">注</span></if>                      	
+                             </if> 
+                         </if>
+                    </td>                    
+					 <td>{$vo['incomebank'][0][1]}</td> 
+                    <td rowspan="{$vo.count}">{$vo.dpk}<!-----抵票款 收款添备注----->
+                    	<if condition="$vo.audit_sk eq 1"><!----收款财务已审核 将不再能备注------>
+                        	<if condition="$vo['bz_dpk'] neq ''"><span title="{$vo['bz_dpk']}" style="color:#F00;">注</span></if>     
+                       <else/><!----收款财务未审核------>
+                   			<if condition="($type eq 1)or($type eq 3)"><!---有修改权--->
+                                 <if condition="$vo['bz_dpk'] eq ''"><!----未审核 未备注 颜色为黑 可以备注--->
+                                    <span><a href="__URL__/bz_sk/t/dpk/id/{$vo.id}" height="195" width="420" target="dialog" title="添加备注">注</a></span>                               
+                                <else/><!----未审核 已备注 颜色为蓝 可以修改备注--->
+                                    <span><a href="__URL__/bz_sk/t/dpk/id/{$vo.id}" height="195" width="420" target="dialog" title="{$vo['bz_dpk']}" style="color:#00F;">注</a></span>
+                                </if> 
+                        	<else/><!---无修改权--->
+                                <if condition="$vo['bz_dpk'] neq ''"><span title="{$vo['bz_dpk']}" style="color:#F00;">注</span></if>                      	
+                             </if> 
+                         </if> 
+                    </td> 
+                          
+                    <td rowspan="{$vo.count}">{$vo.pay}<!-----取票金额 付款添备注----->
+                    	<if condition="$vo.audit_sk eq 1"><!----收款没有审核 空--->  
+                            <if condition="$vo.audit_fk eq 1"><!---付款已审核-->
+                                <if condition="$vo.bz_pay eq ''"><else/><span title="{$vo.bz_pay}" style="color:#F00;">注</span></if> 
+                            <else/><!---付款未审核-->
+                            	<if condition="($type eq 2)or($type eq 3)"><!---有修改权--->
+                                     <if condition="$vo.bz_pay eq ''"><!---- 未备注 颜色为黑 可以备注--->
+                                        <span><a href="__URL__/bz_fk/t/pay/id/{$vo.id}" height="195" width="420" target="dialog" title="备注">注</a></span>
+                                    <else/><!---- 已备注 颜色为蓝 可以修改备注--->
+                                        <span><a href="__URL__/bz_fk/t/pay/id/{$vo.id}" height="195" width="420" target="dialog" title="{$vo.bz_pay}" style="color:#00F;">注</a></span>
+                                    </if>                                  
+                            	<else/><!---无修改权--->
+                                    <if condition="$vo.bz_pay neq ''"><span style="color:#F00;">注</span></if>                              
+                            	</if>
+                            </if>
+                        </if> 
+                    </td>
+                    
+                    <td rowspan="{$vo.count}">{$vo.nwd}</td>
+                                  
+                    <td rowspan="{$vo.count}">{$vo.nwf}<!-----拿位费 付款添备注----->
+                    	<if condition="$vo.audit_sk eq 1"><!----收款没有审核 不可备注 颜色为灰--->
+                            <if condition="$vo.audit_fk eq 1"><!---付款已审核-->
+                                <if condition="$vo.bz_nwf neq ''"><span title="{$vo.bz_nwf}" style="color:#F00;">注</span></if> 
+                            <else/><!---付款未审核-->
+                            	<if condition="($type eq 2)or($type eq 3)"><!---有修改权--->
+                                     <if condition="$vo.bz_nwf eq ''"><!---- 未备注 颜色为黑 可以备注--->
+                                        <span><a href="__URL__/bz_fk/t/nwf/id/{$vo.id}" height="195" width="420" target="dialog" title="备注">注</a></span>
+                                    <else/><!---- 已备注 颜色为蓝 可以修改备注--->
+                                        <span><a href="__URL__/bz_fk/t/nwf/id/{$vo.id}" height="195" width="420" target="dialog" title="{$vo.bz_nwf}" style="color:#00F;">注</a></span>
+                                    </if>                                  
+                            	<else/><!---无修改权--->
+                                    <if condition="$vo.bz_nwf neq ''"><span style="color:#F00;">注</span></if>                              
+                            	</if>
+                            </if>
+                        </if>                   		
+                    </td>                    
+                    
+                    <td rowspan="{$vo.count}">{$vo.skf}<!-----刷卡费 收款添备注----->
+						<if condition="$vo.audit_sk eq 1"><!----收款财务已审核 将不再能备注------>
+                        	<if condition="$vo['bz_skf'] neq ''"><span title="{$vo['bz_skf']}" style="color:#F00;">注</span></if>     
+                       <else/><!----收款财务未审核------>
+                   			<if condition="($type eq 1)or($type eq 3)"><!---有修改权--->
+                                 <if condition="$vo['bz_skf'] eq ''"><!----未审核 未备注 颜色为黑 可以备注--->
+                                    <span><a href="__URL__/bz_sk/t/skf/id/{$vo.id}" height="195" width="420" target="dialog" title="添加备注">注</a></span>                               
+                                <else/><!----未审核 已备注 颜色为蓝 可以修改备注--->
+                                    <span><a href="__URL__/bz_sk/t/skf/id/{$vo.id}" height="195" width="420" target="dialog" title="{$vo['bz_skf']}" style="color:#00F;">注</a></span>
+                                </if> 
+                        	<else/><!---无修改权--->
+                                <if condition="$vo['bz_skf'] neq ''"><span title="{$vo['bz_skf']}" style="color:#F00;">注</span></if>                      	
+                             </if> 
+                         </if>                                         	
+                    </td>
+                                        
+                    <td rowspan="{$vo.count}">{$vo.tpk}<!-----退票款 付款添备注----->
+                    	<if condition="$vo.audit_sk eq 1">
+                            <if condition="$vo.audit_fk eq 1"><!---付款已审核-->
+                                <if condition="$vo.bz_tpk neq ''"><span title="{$vo.bz_tpk}" style="color:#00F;">注</span></if> 
+                            <else/><!---付款未审核-->
+                            	<if condition="($type eq 2)or($type eq 3)"><!---有修改权--->
+                                     <if condition="$vo.bz_tpk eq ''"><!---- 未备注 颜色为黑 可以备注--->
+                                        <span><a href="__URL__/bz_fk/t/tpk/id/{$vo.id}" height="195" width="420" target="dialog" title="备注">注</a></span>
+                                    <else/><!---- 已备注 颜色为蓝 可以修改备注--->
+                                        <span><a href="__URL__/bz_fk/t/tpk/id/{$vo.id}" height="195" width="420" target="dialog" title="{$vo.bz_tpk}" style="color:#00F;">注</a></span>
+                                    </if>                                  
+                            	<else/><!---无修改权--->
+                                    <if condition="$vo.bz_tpk neq ''"><span style="color:#00F;">注</span></if>                              
+                            	</if>
+                            </if>
+                        </if> 
+                    </td>
+                    
+                    <td rowspan="{$vo.count}">{$vo.fkf}<!-----返客费 付款添备注----->
+                    	<if condition="$vo.audit_sk eq 1">
+                            <if condition="$vo.audit_fk eq 1"><!---付款已审核-->
+                                <if condition="$vo.bz_fkf neq ''"><span title="{$vo.bz_fkf}" style="color:#F00;">注</span></if> 
+                            <else/><!---付款未审核-->
+                            	<if condition="($type eq 2)or($type eq 3)"><!---有修改权--->
+                                     <if condition="$vo.bz_fkf eq ''"><!---- 未备注 颜色为黑 可以备注--->
+                                        <span><a href="__URL__/bz_fk/t/fkf/id/{$vo.id}" height="195" width="420" target="dialog" title="备注">注</a></span>
+                                    <else/><!---- 已备注 颜色为蓝 可以修改备注--->
+                                        <span><a href="__URL__/bz_fk/t/fkf/id/{$vo.id}" height="195" width="420" target="dialog" title="{$vo.bz_fkf}" style="color:#00F;">注</a></span>
+                                    </if>                                  
+                            	<else/><!---无修改权--->
+                                    <if condition="$vo.bz_fkf neq ''"><span style="color:#F00;">注</span></if>                              
+                            	</if>
+                            </if>
+                        </if>                   	
+                    </td>
+                    
+                    <td rowspan="{$vo.count}">{$vo.profit}</td>
+                    <if condition="($type eq 1)or($type eq 2)or($type eq 3)">
+                   		<td rowspan="{$vo.count}">{$vo.ylce}</td>
+                    </if>
+                    <td rowspan="{$vo.count}">{$vo.cdr}</td>
+                    <td rowspan="{$vo.count}">{$vo.dzd}</td>
+                    
+                    <td rowspan="{$vo.count}"><!-----备注 收款添备注---->
+                    	<if condition="$vo.audit_sk eq 1"><!----已审核------>
+                    		{$vo.remark|default='无'}
+                        <else/>
+                        	<if condition="($type eq 1)or($type eq 3)">
+                                <if condition="$vo['remark'] eq ''">
+                                    <span><a href="__URL__/bz_sk/t/remark/id/{$vo.id}" height="195" width="420" target="dialog" style="color:#00F;">添加</a></span>
+                                <else/>
+                                    <a href="__URL__/bz_sk/t/remark/id/{$vo.id}" height="195" width="420" target="dialog" title="修改备注">{$vo.remark}</a>
+                                </if>
+                            <else/>
+                             	{$vo.remark|default='无'}
+                            </if>
+                        </if>
+                    </td> 
+                    <td rowspan="{$vo.count}">{$vo.pay_time}</td>
+                    <td rowspan="{$vo.count}">{$vo.pay_detail}</td> 
+                    <td rowspan="{$vo.count}">{$vo.tkmx}</td> 
+                    <td rowspan="{$vo.count}">{$vo.fkmx}</td>
+                    <td rowspan="{$vo.count}">
+                   		<a href="__URL__/view/id/{$vo.id}" height="450" width="650" target="dialog" style="color:#00F;">查看</a>&nbsp;&nbsp;
+                        <a href="__URL__/edit/id/{$vo.id}" height="530" width="700" target="dialog" style="color:#00F;">编辑</a>
+                    </td>            
+                                     
+                    <td rowspan="{$vo.count}"><!---收款审核-->
+                    	<if condition="$vo['audit_sk'] eq 0">
+                        	<if condition="($type eq 1)or($type eq 3)">
+                        		<a href="__URL__/audit/t/sk/id/{$vo.id}" height="490" width="650" target="dialog" title="审核" style="color:#00F;">审核</a> 
+                             <else/>
+                             	<a style="color:#999;">未审核</a>
+                             </if>
+                        <else/>
+                        	已审核
+                        </if>
+                    </td> 
+                    <td rowspan="{$vo.count}"><!---付款审核-->
+                        <if condition="$vo['audit_sk'] eq 0">
+                       		<a style="color:#999;">未审核</a>
+                       	<else/>
+                            <if condition="$vo['audit_fk'] eq 0">
+                            	<if condition="($type eq 2)or($type eq 3)">
+                            		<a href="__URL__/audit/t/fk/id/{$vo.id}" height="490" width="650" target="dialog" title="审核" style="color:#00F;">审核</a>
+                                 <else/>
+                                    <a style="color:#999;">未审核</a>
+                                 </if>                                    
+                            <else/>
+                            	已审核
+                            </if>
+                        </if>                        
+                    </td>
+                </tr>
+                <volist name="vo['incomebank']" id="vo1" offset="1">
+                	<tr class="billing">                    	                      
+                        <td>{$vo1[0]}                        
+                            <if condition="$vo.audit_sk eq 1"><!----已审核------>
+                                <if condition="$vo1[2] neq ''"><span title="{$vo1[2]}" style="color:#F00;">注</span></if>
+                            <else/><!----未审核------>
+                                <if condition="($type eq 1)or($type eq 3)"><!---有修改权--->
+                                     <if condition="$vo1[2] eq ''"><!----未审核 未备注 颜色为黑 可以备注--->
+                                        <span><a href="__URL__/bz_sk/t/income/id/{$vo.id}" height="195" width="420" target="dialog" title="添加备注">注</a></span>
+                                    <else/><!----未审核 已备注 颜色为蓝 可以修改备注--->
+                                        <span><a href="__URL__/bz_sk/t/income/id/{$vo.id}" height="195" width="420" target="dialog" title="{$vo1[2]}" style="color:#00F;">注</a></span>
+                                    </if> 
+                                <else/><!---无修改权--->
+                                     <if condition="$vo1[2] neq ''"><span title="{$vo1[2]}" style="color:#F00;">注</span></if>                        	
+                                 </if>
+                            </if>                       
+                        </td>
+                        <td>{$vo1[1]}</td>  
+                    </tr>
+                </volist>
+            </volist>
+        </tbody>       
+    </table>
+
+<div class="panelBar">
+    <div class="pages">
+        <span>显示</span>
+        <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+            <option value="10" <eq name="numPerPage" value="10">selected=selected</eq>>10</option>
+            <option value="20" <eq name="numPerPage" value="20">selected=selected</eq>>20</option>
+            <option value="50" <eq name="numPerPage" value="50">selected=selected</eq>>50</option>
+            <option value="100" <eq name="numPerPage" value="100">selected=selected</eq>>100</option>
+        </select>
+        <span>共{$totalCount}条</span>  <span class="mgl_10">  页：{$currentPage}/{$totalPages}</span>
+    </div>
+    <div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}"></div>
+</div>

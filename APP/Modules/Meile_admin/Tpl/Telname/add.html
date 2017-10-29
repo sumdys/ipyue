@@ -1,0 +1,74 @@
+
+<script language="JavaScript">
+<!--
+function checkName(){
+	ThinkAjax.send('__URL__/checkAccount/','ajax=1&account='+$F('account'));
+}
+//-->
+</script>
+
+<div class="pageContent">
+	
+	<form method="post" action="__URL__/add/navTabId/__MODULE__-index"  class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="user_id" value="<?php echo $_SESSION[C('USER_AUTH_KEY')] ?>"/>
+		<input type="hidden" name="id" value="{$vo.id}" />
+        <input type="hidden" name="create_time"  value="<?php echo date('Y-m-d ',time())?>"/>
+        <div class="pageFormContent" layoutH="58">
+			<p>
+				<label>编号：</label>
+				<input type="hidden"  size="30" maxlength="20" name="b_id"  value="<?php echo 'DX'.date('YmdHis',time()).$_SESSION[C('USER_AUTH_KEY')]?>"/>
+				<?php echo 'DX'.date('YmdHis',time()).$_SESSION[C('USER_AUTH_KEY')] ?>
+			</p>
+      
+            <p>
+                <label>姓名：</label>
+                <input type="text"  name="t_name"    value="">
+            </p>
+		
+			<p>
+				<label>手机：</label>
+				<input type="text" name="tel"  class="required"  size="30" maxlength="100"/>
+			</p>
+            <p>
+                <label>电话：</label>
+                <input type="text" name="phone"  class="required" size="30"  maxlength="100"/>
+           </p>
+      
+            <p>
+                <label>邮箱：</label>
+                <input class="input" name="email" type="text" size="30" value="" />
+            </p>
+             <p>
+                <label>性别：</label>
+                <select name="sex" class="sex"><option value="先生">先生</option><option value="女士" selected='selected'>女士</option></select>
+            </p>
+            <p>
+                <label>QQ号：</label>
+                <input class="input" name="qq" type="text" size="30" value="" />
+            </p>
+            <p>
+                <label>微信：</label>
+                <input class="input" name="weixin" type="text" size="30" value="" />
+            </p>
+            <p>
+                <label>地址：</label>
+                <input class="input" name="address" type="text" size="30" value="" />
+            </p>
+             <div class="unit">
+                <label>备注:</label>
+                <textarea class="input" type="text" cols="57" rows="3" name="content"/></textarea>
+            </div>
+        
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">Submit</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">Cancel</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+
+
+

@@ -1,0 +1,11 @@
+	<form  action="__URL__/audit_confirm/navTabId/__MODULE__-index" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone)" method="post">   
+    	<center><div style="margin:20px 20px;">你确定{$vo}该名单</div></center>  
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" callback="dialogAjax" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+        <input type="hidden" name="t" value="{$t}" />
+        <input type="hidden" name="id" value="{$id}" />
+    </form>

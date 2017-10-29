@@ -1,0 +1,62 @@
+<div class="page">
+	<div class="pageContent">
+	<form method="post" action="__URL__/add/navTabId/__MODULE__-index" enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+            <div class="unit">
+				<label>活动标题：</label>
+				<input type="text" size="60" name="title" id="title">
+			</div>
+            <div class="unit">
+                <label>活动发布状态：</label>
+                <input type="radio" name="status" value="0" /> 活动审核状态 &nbsp; 
+                <input type="radio" name="status" value="1" checked="checked"/> 活动已发布状态
+            </div>
+            <div class="unit">
+                <label width="100">活动开始时间：</label>
+                <input type="text"  class="input"  name="start_time" value=""/>
+            </div>
+               <div class="unit">
+                <label width="100">活动结束时间：</label>
+                <input type="text"  class="input"  name="end_time" value=""/>
+            </div>               
+<!--            <div class="unit">
+                <label>活动关键词：</label>
+                <input type="text" class="input" size="80" name="info[keywords]"  alt="多关键词间用半角逗号（,）分开，可用于做文章关联阅读条件" />
+                <span class="info"></span>
+            </div>-->
+            <div class="unit">
+                <label>热门活动描述：</label>
+                <textarea class="alt" cols="100" rows="3" name="description" alt="用于SEO 如果不填写则系统自动截取文章前200个字符" ></textarea>
+                <span class="info"></span>
+            </div>
+           <div class="unit">
+              <label>模板选择：</label>
+               <input type="text"  value="{$vo['filename']}" class="text"  lookup="org.filename"  readonly="readonly" name="filename" />
+               <a class="btnLook" href="__GROUP__/Hot/hotmodel" lookupGroup="org" width="650" height="300" title="查找带回">查找带回</a>
+	       <input type="hidden"  value="{$vo['filename']}" class="text" lookup="org.filename"  readonly="readonly" name="filename" />
+           </div>       
+           <div class="unit">
+                <label>小图：</label>
+                <input type="file" class="input" size="60" name="pic1" value="" />
+                小图发布在往期活动，尺寸为300*148
+            </div>  
+          <div class="unit">
+                <label>大图：</label>
+                <input type="file" class="input" size="60" name="pic2" value="" />
+                大图发布在活动首页，尺寸为335*160  
+            </div>
+             <div class="unit">
+                <label>活动链接：</label>
+                <input type="text" class="input" size="60" name="url" value="" />
+            </div>         
+		</div>		
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	</div>
+</div>
+
