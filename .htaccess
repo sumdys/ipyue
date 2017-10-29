@@ -1,0 +1,26 @@
+<IfModule mod_rewrite.c>
+   RewriteEngine on
+
+   RewriteCond %{HTTP_HOST} ^aishangfei.net$ [OR]
+   RewriteCond %{HTTP_HOST} ^www.aishangfei.net$ [OR]
+   RewriteCond %{HTTP_HOST} ^aishangfei.com$
+   RewriteRule ^(.*)$ http://www.aishangfei.com/$1 [L,R=301]
+
+   RewriteCond %{HTTP_HOST} ^aishangfei.cn$ [NC]
+   RewriteRule ^(.*)$ http://www.aishangfei.cn/$1 [L,R=301]
+
+   RewriteCond %{HTTP_HOST} ^aishangfei.org$ [NC]
+   RewriteRule ^(.*)$ http://www.aishangfei.org/$1 [L,R=301]
+   
+   RewriteCond %{HTTP_HOST} ^m.aishangfei.net$ [NC]
+   RewriteRule ^(.*)$ http://m.aishangfei.com/$1 [L,R=301]
+
+    RewriteCond %{HTTP_HOST} ^aishangfei.com.cn$ [NC]
+      RewriteRule ^(.*)$ http://www.aishangfei.com.cn/$1 [L,R=301]
+
+   RewriteCond %{REQUEST_FILENAME} !-d
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteRule ^(.*)$ index.php/$1 [QSA,PT,L]
+</IfModule>
+
+deny from 220.163.11.130
