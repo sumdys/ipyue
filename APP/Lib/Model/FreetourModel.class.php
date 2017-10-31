@@ -76,8 +76,15 @@ class FreetourModel extends RelationModel {
             $data['description'] = cutStr($data['content'], 200);
         }
 
+        $id = $this->where('sorts='.$data['sorts'])->getField('id');
         if ($this->save($data)) {
 //          echo M()->getLastSql();exit;
+            //更新已的排序
+            if($id){
+                $saveData['sorts']=99;
+                $this->where('id='.$id)->save($saveData);
+            }
+
             return array('status' => 1, 'info' => "已经更新");
         } else {
             return array('status' => 0, 'info' => "更新失败，请刷新页面尝试操作");

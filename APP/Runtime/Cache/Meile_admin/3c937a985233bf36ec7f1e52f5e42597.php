@@ -1,4 +1,4 @@
-﻿<script>
+<?php if (!defined('THINK_PATH')) exit();?>﻿<script>
     $(function(){
         $(".city").live('click',function(){
             popCityList($(this)[0]);
@@ -23,10 +23,10 @@
 	<div class="pageContent">
 	<form method="post" enctype="multipart/form-data" action="__URL__/edit/navTabId/__MODULE__-index" class="pageForm required-validate" onsubmit="return  validateCallback(this,dialogAjaxDone)" novalidate="novalidate">
 		<div class="pageFormContent" layoutH="58">
-            <input type="hidden" name="info[id]" value="{$info.id}">
+            <input type="hidden" name="info[id]" value="<?php echo ($info["id"]); ?>">
             <div class="unit">
 				<label>标题：</label>
-				<input type="text" class="required" size="60" name="info[title]" id="title" value="{$info.title}">
+				<input type="text" class="required" size="60" name="info[title]" id="title" value="<?php echo ($info["title"]); ?>">
 			</div>
             <div class="unit">
                 <label>线路类型：</label>
@@ -44,12 +44,12 @@
             </div>
             <div class="unit">
                 <label>行程：</label>
-                <input type="text" name="info[dcity]" value="{$info.dcity_name}({$info.dcity})" placeholder="出发城市" class="text city textInput valid required" state="1" size="12">
-                <input type="text" name="info[acity]" value="{$info.acity_name}({$info.acity})" placeholder="目的城市" class="text city textInput valid required" state="1" size="12">
+                <input type="text" name="info[dcity]" value="<?php echo ($info["dcity_name"]); ?>(<?php echo ($info["dcity"]); ?>)" placeholder="出发城市" class="text city textInput valid required" state="1" size="12">
+                <input type="text" name="info[acity]" value="<?php echo ($info["acity_name"]); ?>(<?php echo ($info["acity"]); ?>)" placeholder="目的城市" class="text city textInput valid required" state="1" size="12">
             </div>
             <div class="unit">
                 <label>游玩天数：</label>
-                <input type="text" name="info[days]" value="{$info.days|default=1}" />
+                <input type="text" name="info[days]" value="<?php echo (($info["days"])?($info["days"]):1); ?>" />
             </div>
             <div class="unit">
                 <label>套餐包含：</label>
@@ -58,29 +58,29 @@
             </div>
             <div class="unit">
                 <label>价格：</label>
-                <input type="text" class="required" name="info[price]" value="{$info.price}" placeholder="出售价格"  />
-                &nbsp;&nbsp;| 原价：  <input type="text" style="float: none" placeholder="旧的价格" value="{$info.old_price}" name="info[old_price]" value="" />
+                <input type="text" class="required" name="info[price]" value="<?php echo ($info["price"]); ?>" placeholder="出售价格"  />
+                &nbsp;&nbsp;| 原价：  <input type="text" style="float: none" placeholder="旧的价格" value="<?php echo ($info["old_price"]); ?>" name="info[old_price]" value="" />
             </div>
             <div class="unit">
                 <label>图片：</label>
-                <input type="text" name="images[]" lookup="img1.fileName" size="12"  readonly="readonly" class="textInput readonly" value='{$info[images][0]}'>
+                <input type="text" name="images[]" lookup="img1.fileName" size="12"  readonly="readonly" class="textInput readonly" value='<?php echo ($info[images][0]); ?>'>
                 <a class="btnAttach" href="__URL__/upload" rel="upload"  lookupGroup="img1" width="560" height="300" title="查找带回">查找带回</a>
 
-                <input type="text" name="images[]" lookup="img2.fileName" size="12"  readonly="readonly" class="textInput readonly" value='{$info[images][1]}'>
+                <input type="text" name="images[]" lookup="img2.fileName" size="12"  readonly="readonly" class="textInput readonly" value='<?php echo ($info[images][1]); ?>'>
                 <a class="btnAttach" href="__URL__/upload" rel="upload"  lookupGroup="img2" width="560" height="300" title="查找带回">查找带回</a>
 
-                <input type="text" name="images[]" lookup="img3.fileName" size="12"  readonly="readonly" class="textInput readonly" value='{$info[images][2]}'>
+                <input type="text" name="images[]" lookup="img3.fileName" size="12"  readonly="readonly" class="textInput readonly" value='<?php echo ($info[images][2]); ?>'>
                 <a class="btnAttach" href="__URL__/upload" rel="upload" lookupGroup="img3" width="560" height="300" title="查找带回">查找带回</a>
 
-                <input type="text" name="images[]" lookup="img4.fileName" size="12"  readonly="readonly" class="textInput readonly" value='{$info[images][2]}'>
+                <input type="text" name="images[]" lookup="img4.fileName" size="12"  readonly="readonly" class="textInput readonly" value='<?php echo ($info[images][2]); ?>'>
                 <a class="btnAttach" href="__URL__/upload" rel="upload" lookupGroup="img4" width="560" height="300" title="查找带回">查找带回</a>
 
-                <input type="text" name="images[]" lookup="img5.fileName" size="12"  readonly="readonly" class="textInput readonly" value='{$info[images][2]}'>
+                <input type="text" name="images[]" lookup="img5.fileName" size="12"  readonly="readonly" class="textInput readonly" value='<?php echo ($info[images][2]); ?>'>
                 <a class="btnAttach" href="__URL__/upload" rel="upload" lookupGroup="img5" width="560" height="300" title="查找带回">查找带回</a>
             </div>
             <div class="unit">
                 <label width="100">发布时间：</label>
-                <input type="text"  class="input"  name="info[published]" value="{$info['published']}"/>
+                <input type="text"  class="input"  name="info[published]" value="<?php echo ($info['published']); ?>"/>
             </div>
             <div class="unit">
                 <label width="100">热门推荐：</label>
@@ -90,43 +90,37 @@
                 <label width="100">排序：</label>
                 <select name="info[sorts]">
                     <option value="99">选择排序</option>
-                    <volist name="sorts" id="vo">
-                        <option <if condition="$info.sorts eq $vo">selected</if> value="{$vo}">{$vo}</option>
-                    </volist>
+                    <?php if(is_array($sorts)): $i = 0; $__LIST__ = $sorts;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option <?php if($info["sorts"] == $vo): ?>selected<?php endif; ?> value="<?php echo ($vo); ?>"><?php echo ($vo); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
 
                 </select>
             </div>
             <div class="unit">
                 <label>描述：</label>
-                <textarea class="alt required" cols="100" rows="3" name="info[description]" alt="用于SEO 如果不填写则系统自动截取文章前200个字符" >{$info.description}</textarea>
+                <textarea class="alt required" cols="100" rows="3" name="info[description]" alt="用于SEO 如果不填写则系统自动截取文章前200个字符" ><?php echo ($info["description"]); ?></textarea>
                 <span class="info"></span>
             </div>
             <div class="unit">
                 <label>标签属性：</label>
                 <div id="tags" style="float: left;">
-                    <if condition="info.tags neq ''">
-                        <volist name="info.tags" id="vo">
-                    <input type="text" class="tag" name="tag_name[]" value="{$vo}"/>
-                        </volist>
-                    </if>
+                    <?php if(info.tags != ''): if(is_array($info["tags"])): $i = 0; $__LIST__ = $info["tags"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><input type="text" class="tag" name="tag_name[]" value="<?php echo ($vo); ?>"/><?php endforeach; endif; else: echo "" ;endif; endif; ?>
                 </div>
                 <span class="info">&nbsp;&nbsp;<a href="javascript:void(0);" id="addTag">添加+</a></span>
             </div>
             <div class="unit">
                 <label>路线行程：</label>
-                <textarea id="feature" class="editor {upImgUrl:'__GROUP__/Public/upload',upImgExt:'jpg,jpeg,gif,png'}" cols="100" rows="20" name="info[feature]">{$info.feature}</textarea>
+                <textarea id="feature" class="editor {upImgUrl:'__GROUP__/Public/upload',upImgExt:'jpg,jpeg,gif,png'}" cols="100" rows="20" name="info[feature]"><?php echo ($info["feature"]); ?></textarea>
             </div>
             <div class="unit">
                 <label>周边交通：</label>
-                <textarea id="cost_info" class="editor {upImgUrl:'__GROUP__/Public/upload',upImgExt:'jpg,jpeg,gif,png'}" cols="100" rows="20" name="info[cost_info]">{$info.cost_info}</textarea>
+                <textarea id="cost_info" class="editor {upImgUrl:'__GROUP__/Public/upload',upImgExt:'jpg,jpeg,gif,png'}" cols="100" rows="20" name="info[cost_info]"><?php echo ($info["cost_info"]); ?></textarea>
             </div>
             <div class="unit">
                 <label>产品配套：</label>
-                <textarea id="reference_route" class="editor {upImgUrl:'__GROUP__/Public/upload',upImgExt:'jpg,jpeg,gif,png'}" cols="100" rows="20" name="info[reference_route]">{$info.reference_route}</textarea>
+                <textarea id="reference_route" class="editor {upImgUrl:'__GROUP__/Public/upload',upImgExt:'jpg,jpeg,gif,png'}" cols="100" rows="20" name="info[reference_route]"><?php echo ($info["reference_route"]); ?></textarea>
             </div>
             <div class="unit">
                 <label>预订须知：</label>
-                <textarea id="	booking_notice" class="editor {upImgUrl:'__GROUP__/Public/upload',upImgExt:'jpg,jpeg,gif,png'}" cols="100" rows="20" name="info[booking_notice]">{$info.booking_notice}</textarea>
+                <textarea id="	booking_notice" class="editor {upImgUrl:'__GROUP__/Public/upload',upImgExt:'jpg,jpeg,gif,png'}" cols="100" rows="20" name="info[booking_notice]"><?php echo ($info["booking_notice"]); ?></textarea>
             </div>
 
 		</div>		
@@ -139,4 +133,3 @@
 	</form>
 	</div>
 </div>
-
