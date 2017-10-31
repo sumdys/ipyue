@@ -29,7 +29,7 @@ class FreetourAction extends CommonAction{
 //        }
         $this->map=$map;
 //        $this->relation=false;
-        $this->order='id desc';
+        $this->order='sorts ASC,id DESC';
         parent::index(D('Freetour'));
         $list = $this->list;
 //        var_dump($data);
@@ -59,6 +59,8 @@ class FreetourAction extends CommonAction{
                 $this->error($rs['info']);
             }
         } else {
+            $sorts = range(1,20);
+            $this->assign('sorts',$sorts);
             $this->display();
         }
     }
@@ -72,6 +74,8 @@ class FreetourAction extends CommonAction{
                 $this->error($rs['info']);
             }
         } else {
+            $sorts = range(1,20);
+            $this->assign('sorts',$sorts);
             $this->info = D("Freetour")->info();
             $this->display();
         }

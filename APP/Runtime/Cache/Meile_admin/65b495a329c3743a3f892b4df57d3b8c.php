@@ -1,4 +1,4 @@
-﻿<style type="text/css">
+<?php if (!defined('THINK_PATH')) exit();?>﻿<style type="text/css">
     .border_div{border:1px solid #999; font-size:12px; margin-right:10px;}
     .border_div span{font-weight:bold; clear:both;}
     .border_bottom{border-bottom:1px solid #CCC; padding-top:3px; padding-bottom:3px;padding-left:20px;}
@@ -13,7 +13,7 @@
 		<div class="pageFormContent" layoutH="58">
             <div class="unit">
 				<label>标题：</label>
-				<input type="text" class="required" size="60" name="info[title]" id="title" value="{$info.title}">
+				<input type="text" class="required" size="60" name="info[title]" id="title" value="<?php echo ($info["title"]); ?>">
 			</div>
             <div class="unit">
                 <label>线路类型：</label>
@@ -36,7 +36,7 @@
             </div>
             <div class="unit">
                 <label>游玩天数：</label>
-                <input type="text" name="info[days]" value="{$info.days|default=1}" />
+                <input type="text" name="info[days]" value="<?php echo (($info["days"])?($info["days"]):1); ?>" />
             </div>
             <div class="unit">
                 <label>套餐包含：</label>
@@ -68,7 +68,7 @@
             </div>
             <div class="unit">
                 <label width="100">发布时间：</label>
-                <input type="text"  class="input date textInput valid" dateFmt="yyyy-MM-dd HH:mm:ss"  name="info[published]" value="{:date('Y-m-d H:i:s',time())}"/>
+                <input type="text"  class="input date textInput valid" dateFmt="yyyy-MM-dd HH:mm:ss"  name="info[published]" value="<?php echo date('Y-m-d H:i:s',time());?>"/>
             </div>
             <div class="unit">
                 <label width="100">热门推荐：</label>
@@ -76,11 +76,9 @@
             </div>
             <div class="unit">
                 <label width="100">排序：</label>
-                <select name="info[sorts]">
-                    <option value="99">选择排序</option>
-                    <volist name="sorts" id="vo">
-                        <option value="{$vo}">{$vo}</option>
-                    </volist>
+                <select name="sort">
+                    <option value="30">选择排序</option>
+                    <?php if(is_array($sorts)): $i = 0; $__LIST__ = $sorts;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo); ?>"><?php echo ($vo); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
 
                 </select>
             </div>
@@ -134,4 +132,3 @@
     })
 
 </script>
-

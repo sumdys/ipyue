@@ -47,7 +47,9 @@ class FreetourAction extends IniAction {
         $model = D("Freetour");
 
         $fields = 'id,images,price,title,old_price';
-        $data['tj_line'] = $model->lists($where,$fields,'',10);
+        $order = 'sorts ASC,create_time DESC';
+        $data['tj_line'] = $model->lists($where,$fields,$order,10);
+//        echo $model->getLastSql();exit;
         $countPage=$model->where($where)->count();
 //        echo $model->getLastSql();exit;
 //           var_dump($data['tj_line']);exit;
