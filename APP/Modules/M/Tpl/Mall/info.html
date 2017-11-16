@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>积fun商城-品悦手机网</title>
+<script type="text/javascript" src="__PUBLIC__/js/mall.js"></script>
+<link href="__PUBLIC__/mobile/css/global.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+#topnav {padding-right: 42px;}
+#mall_ad{margin-bottom:10px;position:relative;}
+#mall_ad img{width:100%;border:0;}
+#mall_ad #adlist li{display:none;}
+#mall_ad #adlist .on{display:block;}
+#mall_ad #slidebar{position:absolute;left:48%;bottom:8px;}
+#mall_ad #slidebar li{font-size:10px;display:inline-block;color:#5d5d5d;cursor:pointer;padding:0 2px;}
+#mall_ad #slidebar li.select{color:#e0e0e0;}
+
+#mall_search ul{height:94px;padding:0 10px 10px 10px;background:#fff;}
+#mall_search li{height:37px;padding-top:10px;}
+#mall_search li span{display:block;width:48%;height:37px;line-height:37px;padding-left:1%;background:#f2f1f0 url(/Public/mobile/images/title_bg.png) no-repeat right -126px;color:#333;cursor:pointer;}
+#mall_search li .txt{height:37px;}
+#mall_search .sub{margin-top:10px;}
+
+.class_list{display:none;width:100%;height:auto;z-index:200;background-color:#f2f1f0;position:absolute;top:0;left:0;color:#666;}
+.class_list a,.class_list li{cursor:pointer;}
+.class_list li{height:42px;line-height:42px;padding-left:20px;font-size:14px;background-color:#cbe4f6;border-bottom:1px solid #96caee;}
+.class_list li.designate{background:#cbe4f6 url(/Public/mobile/images/flight_bg.png) no-repeat right -37px;}
+
+#mall_pro_list{margin-top:10px;}
+#mall_pro_list .tab{height:30px;}
+#mall_pro_list .tab a{display:block;width:49%;line-height:30px;text-align:center;color:#fff;background:#67b1e4;cursor:pointer;}
+#mall_pro_list .tab a.on,#mall_pro_list .tab a:hover{color:#FF8400;background:#fff;}
+#mall_pro_list .mall_pro_box{display:none;padding:10px;background:#fff;}
+#mall_pro_list div.on{display:block!important;}
+#mall_pro_list .mall_pro_box li{padding:25px 5px;height:130px;border-bottom:1px solid #e7e5e5;}
+#mall_pro_list .mall_pro_box li a{display:block;color:#333;}
+#mall_pro_list .mall_pro_box li a img{float:left;width:130px;height:130px;margin-right:18px;}
+#mall_pro_list .mall_pro_box li h4,#mall_pro_list .mall_pro_box li p{line-height:26px;font-weight:normal;}
+#mall_pro_list .mall_pro_box li p{margin-top:10px;}
+#mall_pro_list .az_icon{padding-left:25px;display:inline-block;height:26px;background:url(/Public/images/assistant.png) no-repeat -10px -147px;font-family:Arial;font-weight:normal;}
+</style>
+</head>
+<body>
+<div id="page">
+	<div id="content">
+		<h1 id="topnav"><span class="left icon"><a href="{:U('/')}" class="icon-home">首页</a></span>积fun商城</h1>
+        <div id="mall_ad">
+			<ul id="adlist">
+				<li class="on"><a href="#"><img src="__PUBLIC__/mobile/images/mall/mall_ad001.jpg" width="100%"></a></li>
+				<li><a href="#"><img src="__PUBLIC__/mobile/images/mall/mall_ad002.jpg" width="100%"></a></li>
+				<li><a href="#"><img src="__PUBLIC__/mobile/images/mall/mall_ad003.jpg" width="100%"></a></li>
+			</ul>
+			<ul id="slidebar">
+				<li class="select">●</li>
+				<li>●</li>
+				<li>●</li>
+			</ul>
+		</div>
+		
+        <div id="mall_pro_list">
+            	<div class="tab"><a class="left on">积fun好礼推介</a></div>
+                <div class="mall_pro_box on">
+                	<ul id="integral">
+                    	<li class="<if condition='$i%2 eq 0'>b1</if>">
+                        		<img name="" src="__PUBLIC__/uploads/mall/{$info.img}" width="130" height="130" alt="{$vo.title}">
+                                <h4>{$info.title}</h4>
+                                <p>总兑换数：{$vo.amount}<br/>所需积fun：{$vo.jifen}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+				
+        <div class="mall_r">
+            <!--礼品内容页-->
+            <div id="prodetial">
+                    <div class="pro_inf">
+                        <div class="pro_pic">
+                            <div class="pro"><img name="" src="__PUBLIC__/uploads/mall/{$info.img}" width="130" height="130" alt="{$info.title}"></div>
+                            </div>
+
+                        <div class="detial">
+                            <form action="{:U('/Member/Assetaccount/gift')}">
+                            <ul id="integral">
+                              <h2>{$info.title}</h2>
+                              <li class="wd">{$info.description|msubstr=0,80}</li>
+                              <li class="m"><span class="sp0">兑换方式：</span><span><if condition="$info.type eq 0">积fun<else />爱钻</if>兑换</span></li>
+                              <li class="m"><span class="sp0">总兑换数：</span><span>{$info.amount}</span></li>
+                              <if condition="$info.type eq 0">
+                              		<li class="m"><span class="sp0">所需积fun：</span><span><label class="red">{$info.jifen}</label></span></li>
+                               <else/>
+                              		<li class="m"><span class="sp0">所需爱钻：</span><span><b>X{$info.jifen}</b></span></li>
+                               </if>
+                              <li class="num"><span class="sp0">兑换数量：</span>
+                                  <span class="numPos">
+                                      <a class="a0" onclick="javascript:var ip=document.getElementById('goods_num');var val=Number(ip.value);if(val>=1) ip.value=--val;"></a>
+                                      <input type="text" value="1" id="goods_num" name="num"/><a class="a1" onclick="javascript:var ip=document.getElementById('goods_num');var val=Number(ip.value);if(val<=100) ip.value=++val;"></a></span>
+                              </li>
+                              <li class="sub">
+                                  <input type="hidden" name="act" value="add">
+                                  <input type="hidden" name="id" value="{$info.id}">
+                                  <input type="submit" class="button dh" value="" />
+                                  <input  onclick="javascript:location.href='{:U('/Member/Assetaccount/gift/')}?act=sc&id={$info[id]}'" class="button sc" type="button" />
+                              </li>
+                            </ul>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="goods_js" id="goods_d_qh"><a class="active" value="0">礼品详情</a><a value="1">兑换须知</a></div>
+                    <div id="lipin_xq">
+                        {$info.description}
+                        {$info.content}
+                    </div>
+                    <div class="clear" id="duihuan">
+                 		<h2>兑换规则：</h2>
+                    	<div class="gz">
+                        	<span><label>兑换方法：</label><a>礼品兑换只接受网上提交，暂不接受电话或上门等其他方式兑换；</a></span>
+        					<span><label>配送范围：</label><a>礼品的发送仅限于中国大陆地区，同时请用中文填写；</a></span>
+        					<span><label>配送方式：</label><a>礼品以快递形式发送；</a></span>
+        					<span><label>配送费用：</label><a>兑换的礼品提供免费送货服务，客户不需额外支付配送费用；</a></span>
+          					<span><label>发送时间：</label><a>礼品在提交兑换后一周内送出，如遇到节假日或缺货情况，配送将相应延期。奖品自发送之日起，一周后仍未收到，请及时联系您的专职客服客服顾问。快件查询信息有效期为奖品发出后90天内，逾期将不再查询；</a></span>
+        					<span><label>取消和更改：</label><a>奖品兑换一经处理，将不再接受取消或更改；</a></span>
+        					<span><label>其他说明：</label><a>品悦旅行网仅提供奖品兑换信息，奖品采购、配送等业务将由与品悦合作的供应商负责提供。</a></span>
+                        </div>
+ 						<h2>注意事项：</h2>
+                        <div class="gz">
+                            1．“配送信息”中需用中文完整填写真实有效的地址、邮编、收件人、联系电话和email地址；如为外籍人士请填写有效证件上<br/>　　的完整姓名；如姓名，地址等信息不全，品悦将自动取消您的兑换；<br />
+                            2．如因地址不详或者配送信息错误等原因导致礼品无法送达，重新配送的费用需您自理；<br />
+                            3．礼品仅供参考，具体奖品以收到的实物为准，颜色随机发放不可指定；<br />
+                            4．如礼品无质量问题，将不予退换；<br />
+                            5．任何礼品均不接受上门查看礼品实物。<br />
+                        </div>
+               		</div>
+                    <script type="text/javascript">
+						var as=document.getElementById("goods_d_qh").getElementsByTagName("a");
+						var lipin=document.getElementById("lipin_xq");
+						var duihuan=document.getElementById("duihuan");
+						for(var i=0;i<as.length;i++){
+							as[i].onclick=function(){
+								if(this.className=="active") return;
+								for(var j=0;j<as.length;j++){as[j].className="";}
+								this.className="active";
+								var val=this.getAttribute("value");
+								if(val=="0"){lipin.style.display="block";duihuan.style.display="none";}
+								if(val=="1"){duihuan.style.display="block";lipin.style.display="none";}
+							}
+						}
+					</script>
+             	</div>
+            <!--礼品内容页 END-->
+        </div>
+        </div>
+    </div>
+<include file="Public:footer" />

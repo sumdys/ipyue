@@ -844,7 +844,7 @@ function formatBytes($bytes) {
  * @param string $mobile 手号号
  */
 function verfy_mobile($mobile) {
-    return (preg_match('/^1[34578][0-9]{9}$/', $mobile)) ? true : false;
+    return (preg_match("/^1[34578]{1}\d{9}$/", $mobile)) ? true : false;
 }
 
 

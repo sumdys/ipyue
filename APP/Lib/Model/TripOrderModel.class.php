@@ -96,8 +96,8 @@ class TripOrderModel extends RelationModel {
        $field[] = 'o.linkman';
        $field[] = 'o.mobile';
        $field[] = 'o.create_time';
-       $field[] = 'o.pay_state';
-
+        $field[] = 'o.pay_state';
+        $field[] = 'o.pay_price';
        $res = M('TripOrder o')->join('LEFT JOIN asf_freetour fr ON fr.id=o.freetour_id')
                ->where($where)
                ->field($field)

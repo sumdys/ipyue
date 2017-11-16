@@ -48,6 +48,7 @@
 							<li style="margin-top: 10px;"><span style="color:white;padding: 5px;font-size:14px;background-color: #67b1e4;">返</span>&nbsp;&nbsp;{$vo.create_time}</li>
 							<li><span>单价：</span><em>￥{$vo.price}</em></li>
 							<li><span>总价：</span><em>￥{$vo.total_price}</em></li>
+							<li><span>预定金：</span><em>￥{$vo.pay_price}</em></li>
 							<li><span>订单状态：</span>{$vo.state}&nbsp;&nbsp;</li>
 							<li><span><a href="{:U('/member/orderDetail')}/id/{$vo.id}">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<if condition="$vo.pay_state neq 2"><a href="javascript:void(0);" class="cancel_order" data-order_id="{$vo.id}">取消订单</a></if></span><if condition="$vo.pay_state eq 0"><span style="width: 90%;text-align: right;display: block;"><a href="{:U('Member/onlinePay','id='.$v[id])}" style="color:white;padding: 5px;background-color: darkorange;">立即付款</a></span></if></li>
                         </ul>
@@ -93,6 +94,7 @@ function ajax_list(status,page,addto){
 				html +='<li><span>价格（含税）：</span><em>￥2514</em></li>';
 				html +='<li><span>现金券：</span>无</li>';
 				html +='<li><span>应付金额：</span><em>￥2514</em></li>';
+				html +='<li><span>预定金：</span><em>￥{$vo.pay_price}</em></li>';
 				html +='<li><span>下单时间：</span>'+ item.order_datetime+ '</li>';
 				html +='<li><span>订单状态：</span>'+ item.status +'</li>';
 				html +='</ul>';

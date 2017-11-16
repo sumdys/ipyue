@@ -9,7 +9,7 @@ class MemberAction extends IniAction {
             $rs=$member->login();
             if($rs===true){
                 if($_POST['check']) $this->updateCookie(); // 用户信息写入Cookie
-                $url=isset($_GET['u'])?$_GET['u']:U("/member/index");
+                $url=session('loginBackUrl');
                 $this->success('登陆成功',$url);
             }else{
                 $this->error($rs);
@@ -86,7 +86,8 @@ class MemberAction extends IniAction {
                 $data['name']=D('Member')->username;
                 D('Message')->message_action('reg_success',$data);//发送信息
                 $rs=D('User')->assignUserid();
-                $this->success('完成',U('/member/index'));
+				$url = session('loginBackUrl')?session('loginBackUrl'):U('/member/index');
+                $this->success('注册成功',$url);
             }else{
                 $this->error($rs,U('/member/register'));
             }
@@ -202,7 +203,7 @@ class MemberAction extends IniAction {
 		$Member=D('Member');
 		$uid['id']=getUid();
 		$where['o.member_id']=$uid['id'];
-		$list=$orderDB->field('o.id,o.order_num,o.freetour_id,o.total_price,o.num,o.mobile,o.create_time,o.remark,o.start_date,f.title,o.pay_state,f.line_type')->where($where)->order('create_time desc')->join('Left join asf_freetour f On o.freetour_id=f.id')->select();
+		$list=$orderDB->field('o.id,o.order_num,o.freetour_id,o.pay_price,o.total_price,o.num,o.mobile,o.create_time,o.remark,o.start_date,f.title,o.pay_state,f.line_type')->where($where)->order('create_time desc')->join('Left join asf_freetour f On o.freetour_id=f.id')->select();
 
 		foreach($list as $k=>$v){
 //			$v['hc_a'] = D("City")->getCity( $v['hc']);
@@ -265,19 +266,34 @@ class MemberAction extends IniAction {
         $orderDB=D("TripOrder o");
 		$where['o.member_id']=getUid();
 		$where['o.pay_state']=0;
-		$list=$orderDB->field('o.id,o.order_num,o.freetour_id,o.total_price,o.num,o.mobile,o.create_time,o.remark,o.start_date,f.title,o.pay_state,f.line_type')->where($where)->order('o.create_time desc')->join('Left join asf_freetour f On o.freetour_id=f.id')->select();
+		$list=$orderDB->field('o.id,o.order_num,o.freetour_id,o.pay_price,o.total_price,o.num,o.mobile,o.create_time,o.remark,o.start_date,f.title,o.pay_state,f.line_type')->where($where)->order('o.create_time desc')->join('Left join asf_freetour f On o.freetour_id=f.id')->select();
 //		   echo M()->getLastSql();exit;
 
         foreach($list as $k=>$v){
 			$v['hc']=str_split($v['hc'],3);
 			$v['hc_a'] = D("City")->getCity( $v['hc']);
-			$list[$k]['hc_n']=implode('-',$v['hc_a']);//航程
-			$list[$k]['jp_type']=$this->jptype($v['lx']);//机票类型
+//			$list[$k]['hc_n']=implode('-',$v['hc_a']);//航程
+//			$list[$k]['jp_type']=$this->jptype($v['lx']);//机票类型
+			$list[$k]['create_time']=date('Y-m-d H:i',$v['create_time']);
+			$list[$k]['start_date']=date('Y-m-d',$v['start_date']);
+			$list[$k]['price']=$v['total_price']/$v['num'];
+			switch($v['pay_state']){
+				case 0:
+					$str='未支付';
+					break;
+				case 1:
+					$str='已支付';
+					break;
+				case 2:
+					$str='已取消';
+					break;
+			}
+			$list[$k]['state']=$str;
         }
 	     //待支付笔数
         $pending['count']=count($list);
-        foreach($list as $val){
-            $pending['price']+=$val['ysje'];
+        foreach($list as $k=>$val){
+			$pending['price']+=$val['price'];
         }
 		if($pending['price'] <0 || $pending['price']==''){
 			$pending['price']=0;
@@ -296,7 +312,7 @@ class MemberAction extends IniAction {
 		$where['hyid']=$asmsId['asms_member_id'];
 		$where['hyid']=array(array('eq',$asmsId['asms_member_id']),array('eq',getUid()),'or');
         $where['zf_fkf']=1;
-		$list=$orderDB->field('order_num,freetour_id,total_price,num,mobile,create_time,remark')->where($where)->order('create_time desc')->select();
+		$list=$orderDB->field('order_num,freetour_id,total_price,pay_price,num,mobile,create_time,remark')->where($where)->order('create_time desc')->select();
 		$totle=count($list);
 		if($totle>0){		
 			foreach($list as $k=>$v){
@@ -318,16 +334,31 @@ class MemberAction extends IniAction {
 		$uid['id']=getUid();
 		$where['o.member_id']=$uid['id'];
 		$where['o.pay_state']=2;
-		$list=$orderDB->field('o.id,o.order_num,o.freetour_id,o.total_price,o.num,o.mobile,o.create_time,o.remark,o.start_date,f.title,o.pay_state,f.line_type')->where($where)->order('create_time desc')->join('Left join asf_freetour f On o.freetour_id=f.id')->select();
+		$list=$orderDB->field('o.id,o.order_num,o.freetour_id,o.pay_price,o.total_price,o.num,o.mobile,o.create_time,o.remark,o.start_date,f.title,o.pay_state,f.line_type')->where($where)->order('create_time desc')->join('Left join asf_freetour f On o.freetour_id=f.id')->select();
 //		echo M()->getLastSql();exit;
 		$totle=count($list);
 		if($totle>0){
 			foreach($list as $k=>$v){
 				$v['hc']=str_split($v['hc'],3);
-				$v['hc_a'] = D("City")->getCity( $v['hc']);
-				$list[$k]['hc_n']=implode('-',$v['hc_a']);
-				$list[$k]['jp_type']=$this->jptype($v['lx']);//单程-往返
-				$list[$k]['zt']=$this->ddzt($v['ddzt']);//状态
+//				$v['hc_a'] = D("City")->getCity( $v['hc']);
+//				$list[$k]['hc_n']=implode('-',$v['hc_a']);
+//				$list[$k]['jp_type']=$this->jptype($v['lx']);//单程-往返
+//				$list[$k]['zt']=$this->ddzt($v['ddzt']);//状态
+				$list[$k]['create_time']=date('Y-m-d H:i',$v['create_time']);
+				$list[$k]['start_date']=date('Y-m-d',$v['start_date']);
+				$list[$k]['price']=$v['total_price']/$v['num'];
+				switch($v['pay_state']){
+					case 0:
+						$str='未支付';
+						break;
+					case 1:
+						$str='已支付';
+						break;
+					case 2:
+						$str='已取消';
+						break;
+				}
+				$list[$k]['state']=$str;
 			}
 		}
 		$this->totle=$totle;
@@ -364,7 +395,7 @@ class MemberAction extends IniAction {
 		}
 		$where['o.id']=$id;
 		$orderDB=D("TripOrder o");
-		$res = $orderDB->field('o.id,o.order_num,o.freetour_id,o.total_price,o.num,o.mobile,o.create_time,o.remark,o.start_date,f.title,o.pay_state,f.line_type')->where($where)->join('Left join asf_freetour f On o.freetour_id=f.id')->find();
+		$res = $orderDB->field('o.id,o.order_num,o.freetour_id,o.pay_price,o.total_price,o.num,o.mobile,o.create_time,o.remark,o.start_date,f.title,o.pay_state,f.line_type')->where($where)->join('Left join asf_freetour f On o.freetour_id=f.id')->find();
 		$res['create_time']=date('Y-m-d',$res['create_time']);
 		$this->assign('list',$res);
 		$this->display('orderdetail');

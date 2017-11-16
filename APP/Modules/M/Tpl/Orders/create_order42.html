@@ -54,17 +54,16 @@
 						<!--</div>-->
 					</div>				
 			<!-- <p class="border-b1 ads_ortt3 fonts18 color3">&nbsp;使用代金卷<span class="fr"><select name="djqid" id="djqid" class="ads-sel"><option value="0" data-money="0">请选择有效代金卷</option><foreach name="djq" item="vo"><option value="{$vo.id}" data-money="{$vo.money}">{$vo.money}元代金卷</option></foreach></select></span></p> -->
-			<!-- <p class="border-b1 ads_ortt3 fonts85">&nbsp;邮费政策：<eq name="isyf" value="1">全场定邮{$yf}元，订单满{$yftop}元包邮。<else/>全场包邮</eq></p> -->
-			<!--<p class=" ads_ortt3 fonts85 ovflw"><span class="fr ">订单金额：<em class="fonts18 color3">￥<b class="totalprice">{$info.total_price}</b></em></span></p>-->
-			<p class=" ads_ortt3 fonts85 ovflw"><span class="fr ">预定金额：<em class="fonts18 color3">￥<b class="totalprice">{$info.pay_price}</b></em></span></p>
-			<p class="border-b1 ads_ortt3 fonts85 ads"><input type="text" name="msg" class="ads_orinput" placeholder="给卖家留言" value="{$info.remark}"/></p>
+			<!-- <p class="border-b1 ads_ortt3 fonts85">&nbsp;邮费政策：<eq name="isyf" value="1">全场定邮{$yf}元，订单满{$yftop}元包邮。<else/>全场包邮</eq></p> -->			
+			<p class=" ads_ortt3 fonts85 ovflw"><span class="fr ">金额：<em class="fonts18 color3">￥<b class="totalprice">{$info.price}</b></em></span></p>
+			<p class="border-b1 ads_ortt3 fonts85 ads"><input type="text" name="msg" class="ads_orinput" placeholder="给卖家留言"/></p>
 		</div>
 		<!-- 地址  -->
 		<div class="ads-hd border-b1 back2 ovflw mr-b">
-			<p class="border-b1 ads_ortt3 fonts85 ads"><!--<span class="aaaa"><b style="color: red;">*</b>&nbsp;联&nbsp;系&nbsp;人：</span>--><input type="text" name="content" class="ads_orinput" disabled id="content" value="{$info.linkman}" placeholder="联系人"/></p>
-			<p class="border-b1 ads_ortt3 fonts85 ads"><!--<span class="aaaa"><b style="color: red;">*</b>联系电话：</span>--><input type="text" name="telephone" class="ads_orinput" id="telephone" disabled value="{$info.mobile}" placeholder="联系手机号"/></p>
-			<p class="border-b1 ads_ortt3 fonts85 ads"><!--<span class="aaaa"><b style="color: red;">*</b>出发日期：</span>--><input type="text" name="msg" class="ads_orinput" id="outDate" value="{$info.start_date}" disabled placeholder="选择出发日期"/></p>
-			<p class="border-b1 ads_ortt3 fonts85 ads"><!--<span class="aaaa"><b style="color: red;">*</b>出发日期：</span>--><input type="text" name="num" class="ads_orinput" id="num" disabled value="{$info.num}" placeholder="选择出发日期"/></p>
+			<p class="border-b1 ads_ortt3 fonts85 ads"><!--<span class="aaaa"><b style="color: red;">*</b>&nbsp;联&nbsp;系&nbsp;人：</span>--><input type="text" name="content" class="ads_orinput" id="content" placeholder="联系人"/></p>
+			<p class="border-b1 ads_ortt3 fonts85 ads"><!--<span class="aaaa"><b style="color: red;">*</b>联系电话：</span>--><input type="text" name="telephone" class="ads_orinput" id="telephone" placeholder="联系手机号"/></p>
+			<p class="border-b1 ads_ortt3 fonts85 ads"><!--<span class="aaaa"><b style="color: red;">*</b>出发日期：</span>--><input type="text" name="msg" class="ads_orinput" id="outDate" placeholder="选择出发日期"/></p>
+			<p class="border-b1 ads_ortt3 fonts85 ads"><!--<span class="aaaa"><b style="color: red;">*</b>出发日期：</span>--><input type="text" name="num" class="ads_orinput" id="num" value="1" placeholder="选择出发日期"/></p>
 			<!-- <div class="ads-line"></div> -->
 			<!--<a href="#" class="ads-chs" id="changeaddress">-->
 				<!--<empty name="vip">-->
@@ -75,7 +74,7 @@
 					<!--<p class="fonts9">收货地址：{$vip.address}</p>-->
 				<!--</empty>-->
 			<!--</a>-->
-			<input type="hidden" name="oid" id="oid" value="{$info.id}">
+			<input type="hidden" name="id" id="freetour_id" value="{$info.id}">
 			<input type="hidden" name="paytype" value="" id="paytype">
 		</div>
 		</form>
@@ -90,13 +89,13 @@
 						<!--<p class="ads_pay_p1 ads_pay_lineh1">余额：<i id='money' data-money='{$_SESSION['WAP']['vip']['money']}'>￥{$_SESSION['WAP']['vip']['money']}</i></p>-->
 						<!--<p class="ads_pay_p2 ads_pay_lineh1 color10 ads_font_size2">余额支付</p>-->
 					<!--</div>-->
-					<div class="ads_pay ovflw" data-paytype = "wxpay" data-disable="0">
-						<span class="iconfont fl ads_pay_lineh dtl_mar1">&#xe656</span>
-						<div class="ads_orimg fl dtl_mar1">
-							<img src="__PUBLIC__/mobile/images/wxpay.jpg" />
-						</div>
-						<p class="ads_pay_lineh">微信支付</p>
-					</div>					
+					<!--<div class="ads_pay ovflw" data-paytype = "wxpay" data-disable="0">-->
+						<!--<span class="iconfont fl ads_pay_lineh dtl_mar1">&#xe656</span>-->
+						<!--<div class="ads_orimg fl dtl_mar1">-->
+							<!--<img src="__PUBLIC__/mobile/images/wxpay.jpg" />-->
+						<!--</div>-->
+						<!--<p class="ads_pay_lineh">微信支付</p>-->
+					<!--</div>					-->
 					<!-- div class="ads_pay ovflw" data-paytype = "alipayApp" data-disable="1">
 						<span class="iconfont fl ads_pay_lineh dtl_mar1">&#xe656</span>
 						<div class="ads_orimg fl dtl_mar1">
@@ -121,7 +120,7 @@
 						<!--<i class="iconfont">&#xe679</i>-->
 					<!--</a>-->
 				<!--</div>-->
-				<a href="javascript:void(0);" class="ads-btn back3" id="orderconfirm" style="margin-right: 10px;padding: 10px 0px;">确认支付</a>
+				<a href="javascript:void(0);" class="ads-btn back3" id="orderconfirm" style="margin-right: 10px;padding: 10px 0px;">提交订单</a>
 				<!--<span class="fr ads-sum"><em class="fonts9">商品:</em><em class="fonts1">￥<b class="totalprice">{$payprice}</b></em>&nbsp;&nbsp;&nbsp;&nbsp;<em class="fonts1">抵扣{$_SESSION["SHOP"]["set"]["pointname"]}<b class="totalprice">{$totalpoint}</b></em>&nbsp;&nbsp;&nbsp;&nbsp;邮费:<em class="fonts18 color3">￥<b>{$yf}</b></em></span>-->
 		</div>
 
@@ -143,13 +142,55 @@
 		}
 	});
 	$('#orderconfirm').on('click',function(){
-		if(!$('#paytype').val()){
-			App_gmuMsg('请选择支付方式！');
+		if(!$('#content').val()){
+			App_gmuMsg('请填写联系人！');
 			return false;
 		}
-		window.location.href="{:U('/wx/jsapi')}";
-		//调起微信支付
-//		callpay();
+		if(!$('#telephone').val()){
+			App_gmuMsg('请填写联系手机号！');
+			return false;
+		}
+		if(!$('#outDate').val()){
+			App_gmuMsg('请选择出发日期！');
+			return false;
+		}
+//		if(!$('#paytype').val()){
+//			App_gmuMsg('请选择支付方式！');
+//			return false;
+//		}
+		if(!$('#num').val()){
+			App_gmuMsg('请填写人数！');
+			return false;
+		}
+//				var okfun=function(){$('#orderform').submit();}
+		var okfun=function(){
+			$.ajax({
+//				dataType:'json',
+				type:'post',
+				url:"{:U('/orders/submitOrderAjax')}",
+				data:{'id':$('#freetour_id').val(),'mobile':$('#telephone').val(),'linkman':$('#content').val(),'start_date':$('#outDate').val(),'paytype':$('#paytype').val(),'num':$('#num').val(),'msg':$('#msg').val()},
+
+				success:function(res){
+					var data=(eval("("+res+")"));
+					if(data.status==1){
+						window.location.href="{:U('/orders/confirm')}/oid/"+data.oid;
+					}else{
+						App_gmuMsg(data.msg);
+						return false;
+					}
+				}
+
+			});
+		}
+		//alert($('#djqid').val());
+		if($('#djqid').val()==0){
+			//App_gmuAlert('确认？','确认现在生成订单并付款吗？',false,okfun);
+			okfun();
+		}else{
+			//App_gmuAlert('确认？','您选择使用代金卷，生成订单后此代金卷将立刻作废，不可再次使用！确认现在生成订单并付款吗？',false,okfun);
+			okfun();
+		}
+
 	});
 
 </script>

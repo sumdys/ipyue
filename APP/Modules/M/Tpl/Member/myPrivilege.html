@@ -1,16 +1,16 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{$title}-品悦手机网</title>
-<link href="__PUBLIC__/mobile/css/global.css" rel="stylesheet" type="text/css">
+<title>我的特权-品悦旅行网</title>
+<link href="/Public/mobile/css/global.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 #topnav .icon{width:80px;}
 .box h2{padding-right:42px;}
 #myprivilege{background:#fff;}
 #myprivilege li{padding:10px;border-bottom:1px solid #e7e5e5;}
-#myprivilege li span{float:left;display:block;width:52px;height:52px;margin-right:12px;background:url(__PUBLIC__/mobile/images/privilege_52.png) no-repeat;}
+#myprivilege li span{float:left;display:block;width:52px;height:52px;margin-right:12px;background:url(/Public/mobile/images/privilege_52.png) no-repeat;}
 #myprivilege li span.p1{background-position:0 0;}
 #myprivilege li span.p2{background-position:-52px 0;}
 #myprivilege li span.p3{background-position:-104px 0;}
@@ -37,23 +37,71 @@
 <body>
 <div id="page">
   <div id="content">
-    <h1 id="topnav"><span class="left icon"><a href="{:U('/')}" class="icon-home">首页</a></span>我的品悦<span class="right" id="exit">退出登录</span></h1>
+    <h1 id="topnav"><span class="left icon"><a href="/" class="icon-home">首页</a></span>我的品悦旅行<span class="right" id="exit">退出登录</span></h1>
     <div class="box">
-        <h2><span class="left icon"><a href="{:U('/Member')}" class="icon-return">返回</a></span>我的特权</h2>
-        <ul id="myprivilege">        
-           <volist name="privilege" id="vo">
-                <li>
-                    <span class="p{$vo.class}"></span>
-                    <h4>{$vo.name}</h4>
-                    <p>{$vo.description}</p>
-                </li>
-            </volist>            
+        <h2><span class="left icon"><a href="/Member" class="icon-return">返回</a></span>我的特权</h2>
+        <ul id="myprivilege">
+        	<li>
+            	<span class="p1"></span>
+                <h4>24小时专人服务</h4>
+                <p>品悦旅行会员均享有7×24一对一优质预订服务。</p>
+            </li>
+            <li>
+            	<span class="p2"></span>
+                <h4>积fun兑换</h4>
+                <p>品悦旅行会员均可以通过获赠积Fun兑换各类礼品。</p>
+            </li>
+            <li>
+            	<span class="p3"></span>
+                <h4>活动特权</h4>
+                <p>品悦旅行会员均可免费参加各类精彩活动，参与活动有机会赢取豪华大礼！</p>
+            </li>
+            <li>
+            	<span class="p4"></span>
+                <h4>现金券特权</h4>
+                <p>特价机票还能再优惠？可以有！品悦旅行会员可享受现金劵赠送及抵扣票价特权。</p>
+            </li>
+            <li>
+            	<span class="p5"></span>
+                <h4>生日大礼包</h4>
+                <p>品悦旅行为所有会员准备了惊喜生日大礼包，已填写生日信息的会员可在生日当月领取。</p>
+            </li>
+            <li>
+            	<span class="p6"></span>
+                <h4>代选座位</h4>
+                <p>品悦旅行为所有会员提供代选座位服务，好位置第一时间留给您。</p>
+            </li>
+            <li>
+            	<span class="p7"></span>
+                <h4>行程提醒</h4>
+                <p>担心误机？NO!品悦旅行贴心的行程提醒服务助您出行无忧。</p>
+            </li>
+            <li>
+            	<span class="p8"></span>
+                <h4>寄送行程单</h4>
+                <p>品悦旅行为所有会员免费提供寄送行程单服务，让您对行程一目了然。</p>
+            </li>
+            <li>
+            	<span class="p10"></span>
+                <h4>攻略推送</h4>
+                <p>只要轻松订阅并成功预订机票，您即可收到品悦旅行为您精心准备的目的地攻略。</p>
+            </li>
+            
         </ul>
     </div>
     
   </div>
 </div>
-<include file="Public:CommonJs" />
+<script type="text/javascript" src="/Public/mobile/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/Public/mobile/js/msg.js"></script>
+<script type="text/javascript">
+    $('#exit').click(function(){
+       msg('您将退出本次登录，是否确定？',1,'query',"out()");
+    });
+    function out(){
+        location.href="/member/out";
+    }
+</script>
 <script type="text/javascript">
 $(function(){
 

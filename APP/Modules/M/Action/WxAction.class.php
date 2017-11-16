@@ -54,7 +54,7 @@ class WxAction extends Action
         $input->SetBody($orderData['title']);
         $input->SetAttach("test");
         $input->SetOut_trade_no($orderData['order_num']);
-        $input->SetTotal_fee($orderData['total_price']*100);
+        $input->SetTotal_fee($orderData['pay_price']*100);
         if($_SERVER['REMOTE_ADDR']=='58.62.103.40'){
             $input->SetTotal_fee('1');
         }

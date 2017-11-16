@@ -1,300 +1,202 @@
-﻿<!doctype html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>品悦旅行网</title>
-	<link href="__PUBLIC__/mobile/css/global.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="__PUBLIC__/css/mui.min.css">
-	<style type="text/css">
-		#ad{margin-bottom:10px;position:relative;}
-		#ad img{width:100%;border:0;}
-		#ad #adlist li{display:none;}
-		#ad #adlist .on{display:block;}
-		#ad #slidebar{position:absolute;left:48%;bottom:8px;}
-		#ad #slidebar li{font-size:10px;display:inline-block;color:#5d5d5d;cursor:pointer;padding:0 2px;}
-		#ad #slidebar li.select{color:#e0e0e0;}
-
-		#entrance{height:320px;background-color:#fff;}
-		#entrance dt,#entrance dd{float:left;width:100%;/*height:60%;*/margin-bottom:3px;}
-		#entrance a{display:block;/*position:relative;*/}
-		#entrance a.c01{background:#e43636 url(__PUBLIC__/mobile/images/icon01.png) no-repeat right bottom;}
-		#entrance a.c02{background:#d3c41e url(__PUBLIC__/mobile/images/icon07.png) no-repeat right bottom}
-		#entrance a.c03{background:#348bd3 url(__PUBLIC__/mobile/images/icon03.png) no-repeat right bottom}
-		#entrance a.c04{background:#2ba5c9 url(__PUBLIC__/mobile/images/icon04.png) no-repeat right bottom}
-		#entrance a.c05{background:#795e6d url(__PUBLIC__/mobile/images/icon05.png) no-repeat right bottom}
-		#entrance a.c06{background:#afafac url(__PUBLIC__/mobile/images/icon06.png) no-repeat right bottom}
-		#entrance dt a{height:70%;}
-		#entrance dd a{height:70px;}
-		#entrance h3{color:#fff;font-size:16px;z-index:100;line-height:24px;position:absolute;left:15px;top:15px;}
-		#entrance span{position:absolute;right:15px;bottom:10px;}
-		#entrance .ft-tj-d{background-color:white;width:100%;color:blue;/*position:absolute;opacity: 0.8;*/bottom:0px;}
-		.search{width: 100%;text-align: center;height: 45px;margin-top:15px}
-		.search p{width: 100%;}
-		.search input{width: 50%;height: 70%;border: 2px solid #000000;border-radius:3px;}
-		#nav{width: 98.5%;height: 90px;padding-left: 10px;font-size:16px;font-family: "微软雅黑";}
-		#nav dt{width: 25%;text-align: center;float: left;
-			height: 80px;color:black;}
-		#nav dt p{font-size: 1.25em;}
-		.btn-info{border: none;background-color: blue;
-			color: white;height: 70%;text-align: center;font-size: 1.25em;border-radius:3px;}
-		.mui-table-view-chevron .mui-table-view-cell{padding-right: 0px;}
-		.mui-table-view-cell{padding:0px;}
-		.mui-bar-nav{
-			height: 50px;
-			text-align: center;
-		}
-		#keyword{height: 80%;margin-top: 5px;width: 80%;}
-		#searchdData{
-			height: 80%;margin-top: 5px;font-size: 15px;}
-		.images_c01{width: 100%;height: 100%;}
-		.mui-scroll-wrapper{top:50px;}
-		#pullrefresh{background-color: #fff;}
-		.liji{
-			float: right;padding: 3px 10px;margin-right:5px;border: 1px solid orange;color:orange;
-		}
-	</style>
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?646713249fd3ceeab66e16bc78c8e814";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-</head>
-
-<body style="height: 80%">
-<header class="mui-bar mui-bar-nav">
-	<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
-	<!--<h1 id="title" class="mui-title">-->
-	<input type="text" name="" id="keyword" placeholder="城市名称/景点名称/游玩主题" value=""><button class="btn btn-info" style="background-color:#5bc0de;" id="searchdData">搜索</button>
-	<!--</h1>-->
-</header>
-<div id="page">
-	<div id="content" class="mui-content">
-		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
-			<div class="mui-scroll">
-				<!--<div class="ad search">-->
-					<!--<input type="text" name="" id="keyword" placeholder="输入搜索" value=""><button class="btn btn-info" id="searchdData">搜索</button>-->
-				<!--</div>-->
-				<div id="ad">
-					<ul id="adlist">
-						<volist name="ad_list" id="vo">
-							<li <if condition="$key eq 0">class="on"</if>><a href="{$vo.src}"><img src="__PUBLIC__/uploads/ad/{$vo.img}" width="100%"></a></li>
-						</volist>
-						
-						<!--<li><a href="{:U('/Mydemand')}"><img src="__PUBLIC__/images/m-index-2.jpg" width="100%"></a></li>-->
-						<!-- <li><a href="{:U('/specialoffer/hnair_sales')}"><img src="__PUBLIC__/mobile/images/iad11.jpg" width="100%"></a></li> -->
-
-					</ul>
-					<ul id="slidebar">
-						<volist name="ad_list" id="vo">
-						<li <if condition="$key eq 0">class="select"</if>>●</li>
-						</volist>
-						<li>●</li>
-					</ul>
-				</div>
-
-				<dl id="nav">
-					<dt><a href="{:U('/Freetour')}">
-						<img src="__PUBLIC__/mobile/images/icon/58c8fa4d97524_thumb.png" height="58%">
-						<p>自由行</p>
-					</a>
-					</dt>
-
-					<dt><a href="{:U('/Freetour/index')}/type/4"><img src="__PUBLIC__/mobile/images/icon/58c8fa3a98564_thumb.png" height="58%"><p>别墅客栈</p></a></dt>
-					<dt><a href="{:U('/Freetour/index')}/type/5"><img src="__PUBLIC__/mobile/images/icon/58c8fa5df35a2_thumb.png" height="58%"><p>邮轮</p></a></dt>
-					<dt><a href="{:U('/Freetour/index')}/type/7"><img src="__PUBLIC__/mobile/images/icon/58c8fa194dbfd_thumb.png" height="58%"><p>独家资源</p></a></dt>
-				</dl>
-				<dl id="nav">
-					<dt><a href="{:U('/Freetour/index')}/type/8">
-						<img src="__PUBLIC__/mobile/images/icon/gentuan.png" height="58%">
-						<p>跟团游</p>
-					</a>
-					</dt>
-
-					<dt><a href="{:U('/Freetour/index')}/type/9"><img src="__PUBLIC__/mobile/images/icon/guanduan.png" height="58%"><p>高端游</p></a></dt>
-					<dt><a href="{:U('/Freetour/index')}/type/10"><img src="__PUBLIC__/mobile/images/icon/xlyy.png" height="58%"><p>亲子游学</p></a></dt>
-					<dt><a href="{:U('/Freetour/index')}/type/11"><img src="__PUBLIC__/mobile/images/icon/menpiao.png" height="58%"><p>景点门票</p></a></dt>
-				</dl>
-				<dl id="entrance" class="mui-table-view mui-table-view-chevron">
-					<volist name="list.tj_line" id="vo">
-						<dt>
-							<a href="{:U('freetour/detail')}/id/{$vo.id}" class="c01">
-								<img class="images_c01" src="__PUBLIC__/uploads{$vo[images][0]}">
-
-								<div class="ft-tj-d">
-									<div style="float: left;margin: 5px;font-size: 1.2em;width: 98%;">
-										<font color="#7A7A7A"><B>{$vo.title}</B></font><br><font color="#EE2C2C">现价:{$vo.price}RMB</font>&nbsp;&nbsp;&nbsp;<font color="#C5C1AA"><del>原价:{$vo.old_price}RMB</del></font><b class="liji">立即预订</b>
-									</div>
-								</div>
-								<!--<h3>旅游路线推荐</h3>-->
-
-							</a>
-						</dt>
-					</volist>
-				</dl>
+﻿<include file="Public:header" />
+<script type="text/javascript" src="__PUBLIC__/js/hotcitypop/popcitylist.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/chaxun.js"></script>
+<div class="w1200">
+	<div class="ft-b">
+		<img src="__PUBLIC__/images/ft-banner.jpg" alt="境外自由行">
+		<div class="ft-s">
+			<include file="search" />
+			<div class="ft-diy">
+				<div class="ft-d-t">对这些线路不满意？仅需一分钟定制您的私人旅行方案</div>
+				<form action="{:U('/freetour/diy')}" id="sD" method="get">
+					<input id="sDs"  placeholder="输入您想去的地方，我们免费为您设计方案" type="text" name="place">
+					<input id="sDd" type="submit" value="马上定制" >
+				</form>
 			</div>
 		</div>
-
-
 	</div>
-	<include file="Public:footer" />
-	<include file="Public:base_footer"/>
-	
-</div>
-
-<include file="Public:kf" />
-<script src="__PUBLIC__/js/mui.min.js"></script>
-<script src="__PUBLIC__/js/mui.pullToRefresh.js"></script>
-<script src="__PUBLIC__/js/mui.pullToRefresh.material.js"></script>
-<script>
-	var page = 0;
-	var sumPage = 0;
-	var type = '';
-	var cid = '';
-	mui.init({		
-		pullRefresh: {
-			container: '#pullrefresh',
-//			down: {
-//				callback: pulldownRefresh
-//			},
-			up: {
-				height:10,
-				contentrefresh: '正在加载...',
-				callback: pullupRefresh
-			}
-		}		
+	<div class="ft-content">
+		<div class="ft-tj">
+			<h2 class="ft-tj-tit">特价推荐</h2>
+			<div class="ft-tj-b">
+				<ul>
+                    <volist name="list.tj_line" id="vo">
+					<li>
+                        <a href="{:U('freetour/detail')}/id/{$vo.id}"><img src="__PUBLIC__/uploads{$vo[images][0]}" alt="">  </a>
+						<div class="ft-tj-d">
+							<a href="{:U('freetour/detail')}/id/{$vo.id}">{$vo.title}</a>
+							<span class="ft-tj-pri">现价：AUD {$vo.price}</span><span class="ft-tj-m-pri">原价：AUD {$vo.old_price}</span>
+						</div>
+					</li>
+                    </volist>
+				</ul>
+			</div>
+		</div>
+<!-- 邮轮产品 -->
+		<div class="ft-tj">
+			<h2 class="ft-tj-tit">国际邮轮航线</h2>
+			<div class="ft-tj-b">
+				<ul>
+                    <volist name="list.guoji_line" id="vo">
+					<li>
+                        <a href="{:U('freetour/detail')}/id/{$vo.id}"><img src="__PUBLIC__/uploads{$vo[images][0]}" alt="">  </a>
+						<div class="ft-tj-d">
+							<a href="{:U('freetour/detail')}/id/{$vo.id}">{$vo.title}</a>
+							<span class="ft-tj-pri">现价：AUD {$vo.price}</span><span class="ft-tj-m-pri">原价：AUD {$vo.old_price}</span>
+						</div>
+					</li>
+                    </volist>
+				</ul>
+			</div>
+		</div>
+<!-- 邮轮产品 -->
+		<div class="ft-tj">
+			<h2 class="ft-tj-tit">国内邮轮航线</h2>
+			<div class="ft-tj-b">
+				<ul>
+                    <volist name="list.guonei_line" id="vo">
+					<li>
+                        <a href="{:U('freetour/detail')}/id/{$vo.id}"><img src="__PUBLIC__/uploads{$vo[images][0]}" alt="">  </a>
+						<div class="ft-tj-d">
+							<a href="{:U('freetour/detail')}/id/{$vo.id}">{$vo.title}</a>
+							<span class="ft-tj-pri">现价：AUD {$vo.price}</span><span class="ft-tj-m-pri">原价：AUD {$vo.old_price}</span>
+						</div>
+					</li>
+                    </volist>
+				</ul>
+			</div>
+		</div>		
 		
-	});
-	mui('.mui-scroll').style.transform='translate3d(0px, 0px, 0px) translateZ(0px)';
-	/**
-	 * 下拉刷新具体业务实现
-	 */
-//	function pulldownRefresh() {
-//		setTimeout(function() {
-//			var table = document.body.querySelector('.mui-table-view');
-//			var cells = document.body.querySelectorAll('.mui-table-view-cell');
-//			for (var i = cells.length, len = i + 3; i < len; i++) {
-//				var li = document.createElement('dt');
-//				li.className = 'mui-table-view-cell';
-//				li.innerHTML = '<a class="mui-navigate-right">Item ' + (i + 1) + '</a>';
-//				//下拉刷新，新纪录插到最前面；
-//				table.insertBefore(li, table.firstChild);
-//			}
-//			mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-//		}, 1500);
-//	}
-	var count = 0;
-	/**
-	 * 上拉加载具体业务实现
-	 */
-	function pullupRefresh() {
-		page++;
-		//参数为true代表没有更多数据了。
-		mui('#pullrefresh').pullRefresh().endPullupToRefresh((++count > {$countPage}));
-		var table = document.body.querySelector('.mui-table-view');
-//		var cells = document.body.querySelectorAll('.mui-table-view-cell');
-		$.ajax({
-			type: "POST",
-			url: "{:U('/Freetour/ajaxList')}",
-			data: {'page':page,'type':type,'cid':cid},
-			success: function(res){
-				var data=(eval("("+res+")"));
-				if(data.status){
-					$.each(data.contact,function(k,v){
-						var li = document.createElement('dt');
-//						li.className = 'mui-table-view-cell';
-						li.innerHTML = '<a href="{:U("freetour/detail")}/id/'+ v.id+'" class="c01">'+
-						'<img class="images_c01" src="__PUBLIC__/uploads'+v.images[0]+'">'+
-						'<div class="ft-tj-d">'+
-						'<div style="float: left;margin: 5px;font-size: 1.2em;width:98%;">'+
-						'<font color="#7A7A7A"><B>'+ v.title+'</B></font><br><font color="#EE2C2C">现价:'+v.price+'RMB</font>&nbsp;&nbsp;&nbsp;<font color="#C5C1AA"><del>原价:'+ v.old_price+'RMB</del></font>'+ '<b class="liji">立即预订</b>'+
-						'</div>'+
-						'</div>'+
-						'</a>';
-						table.appendChild(li);
-					});
-				}else{
-
-				}
-			}
-		});
-	}
-
-	function getActivityLists(page,type,cid,callback){
-		$.ajax({
-			type: "POST",
-			url: "{:U('/Freetour/ajaxList')}",
-			data: {'page':page,'type':type,'cid':cid},
-			success: function(data){
-				if(data.status){
-					callback(data);
-				}else{
-					callback(false,data.msg);
-				}
-			}
-		});
-	}
-
-	if (mui.os.plus) {
-		mui.plusReady(function() {
-			setTimeout(function() {
-				mui('#pullrefresh').pullRefresh().pullupLoading();
-			}, 1000);
-
-		});
-	} else {
-		mui.ready(function() {
-			mui('#pullrefresh').pullRefresh().pullupLoading();
-		});
-	}
-</script>
-</body>
-</html>
-<script type="text/javascript" src="__PUBLIC__/js/jquery-2.0.3.min.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/jquery.query-object.js"></script>
-<!--<script type="text/javascript" src="__PUBLIC__/mobile/js/gmu.js"></script>-->
-<!--<script type="text/javascript" src="__PUBLIC__/js/iscrollAssist.js"></script>-->
-<script type="text/javascript">
-	$(function(){
-		 mui('body').on('tap','a',function(){
-			 window.location.href=this.href;
-		 });
-		 //搜索
-		$('#searchdData').click(function(e) {
-			var kw = $('#keyword').val();
-			location.search = $.query.set('keyword', kw);
-		});
-
-		//初始化变量index为0，用于保存索引
-		var index = 0;
-		//初始化变量len为为图片列表的数量
-		var len = $('#adlist li').size();
-
-		//setInterval()方法
-		setInterval(function(){
-			showPics(index);
-			index++;
-			if(index == len){index = 0;};
-		},4000);
-
-		//showPics()设置图片和滑块的显示和隐藏
-		function showPics(index){
-			$('#adlist li').eq(index).addClass('on').siblings('li').removeClass('on');
-			$('#slidebar li').eq(index).addClass('select').siblings('li').removeClass('select');
-		};
-
-		//当鼠标进入滑块,调用showPics()函数
-		$('#slidebar li').mouseenter(function(){
-			index = $(this).index();
-			showPics(index);
-		});
-
-
-
-	});
-</script>
+<!-- 别墅产品 -->
+		<div class="ft-lv">
+			<div class="ft-lv-t">
+				<h2 class="ft-tj-tit">酒店别墅</h2>
+				<div class="ft-lv-bd-p">
+					<span class="curr">广州</span>
+					<span>深圳</span>
+					<span>海南</span>
+					<span>杭州</span>
+					<span>北京</span>
+				</div>
+			</div>
+			<div class="ft-lv-bd">
+				<div class="ft-lv-db-t">
+					<a href="/freetour/kezhan.html">更多别墅》</a>
+					<h4>热门别墅</h4>
+				</div>
+				<div class="ft-lv-bd-c">
+					<ul>
+                        <volist name="list.hotle_line" id="vo">
+						<li class="<?=$i==1?'first':($i==2?'two':'')?>" >
+							<img src="__PUBLIC__/uploads{$vo[images][0]}" alt="">
+							<div class="f-l-d-d">
+								<span class="ft-tj-pri">AUD {$vo.price}</span>
+								<a href="{:U('freetour/detail')}/id/{$vo.id}">{$vo.title}</a>
+							</div>
+						</li>
+                        </volist>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+				<!-- 客栈民宿旅行 -->
+		<div class="ft-lv ft-lv-l">
+			<div class="ft-lv-t">
+				<h2 class="ft-tj-tit">客栈民宿</h2>
+				<div class="ft-lv-bd-p">
+					<span class="curr">丽江</span>
+					<span>大理</span>
+					<span>厦门</span>
+					<span>三亚</span>
+					<span>杭州</span>
+				</div>
+			</div>
+			<div class="ft-lv-bd">
+				<div class="ft-lv-db-t">
+					<a href="/freetour/kezhan.html">更多客栈》</a>
+					<h4>热门客栈</h4>
+				</div>
+				<div class="ft-lv-bd-c">
+					<ul>
+                        <volist name="list.kezhan_line" id="vo">
+                            <li class="<?=$i==1?'first':($i==2?'two':'')?>" >
+                                <img src="__PUBLIC__/uploads{$vo[images][0]}" alt="">
+                                <div class="f-l-d-d">
+                                    <span class="ft-tj-pri">AUD {$vo.price}</span>
+                                    <a href="{:U('freetour/detail')}/id/{$vo.id}">{$vo.title}</a>
+                                </div>
+                            </li>
+                        </volist>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- 自由行短线游 -->
+		<div class="ft-lv">
+			<div class="ft-lv-t">
+				<h2 class="ft-tj-tit">短线游</h2>
+				<div class="ft-lv-bd-p">
+					<span class="curr">香港</span>
+					<span>日本</span>
+					<span>泰国</span>
+					<span>普吉岛</span>
+					<span>首尔</span>
+				</div>
+			</div>
+			<div class="ft-lv-bd">
+				<div class="ft-lv-db-t">
+					<a href="/freetour/luxian.html">更多周边游路线》</a>
+					<h4>热门线路</h4>
+				</div>
+				<div class="ft-lv-bd-c">
+					<ul>
+                        <volist name="list.short_line" id="vo">
+						<li class="<?=$i==1?'first':($i==2?'two':'')?>" >
+							<img src="__PUBLIC__/uploads{$vo[images][0]}" alt="">
+							<div class="f-l-d-d">
+								<span class="ft-tj-pri">AUD {$vo.price}</span>
+								<a href="{:U('freetour/detail')}/id/{$vo.id}">{$vo.title}</a>
+							</div>
+						</li>
+                        </volist>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+				<!-- 长线游 -->
+		<div class="ft-lv ft-lv-l">
+			<div class="ft-lv-t">
+				<h2 class="ft-tj-tit">长线游</h2>
+				<div class="ft-lv-bd-p">
+					<span class="curr">悉尼</span>
+					<span>美国</span>
+					<span>关岛</span>
+					<span>法国</span>
+					<span>意大利</span>
+				</div>
+			</div>
+			<div class="ft-lv-bd">
+				<div class="ft-lv-db-t">
+					<a href="/freetour/luxian.html">更多独家路线》</a>
+					<h4>热门线路</h4>
+				</div>
+				<div class="ft-lv-bd-c">
+					<ul>
+                        <volist name="list.long_line" id="vo">
+                            <li class="<?=$i==1?'first':($i==2?'two':'')?>" >
+                                <img src="__PUBLIC__/uploads{$vo[images][0]}" alt="">
+                                <div class="f-l-d-d">
+                                    <span class="ft-tj-pri">AUD {$vo.price}</span>
+                                    <a href="{:U('freetour/detail')}/id/{$vo.id}">{$vo.title}</a>
+                                </div>
+                            </li>
+                        </volist>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer" />

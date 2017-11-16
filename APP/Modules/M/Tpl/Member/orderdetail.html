@@ -42,8 +42,10 @@
 		 <li><span>游客人数：</span><em>￥{$list.num}</em></li>
 		 <!--<li><span>单价：</span><em>￥{$list.price}</em></li>-->
 		 <li><span>应付金额：</span><em>￥{$list.total_price}</em></li>
+		 <li><span>剩下房款：</span><em>￥{$list['total_price']-$list['pay_price']}</em></li>
+		 <li><span>线下管家代收金额：</span><em>￥{$list.pay_price}</em></li>
 		 <!--<li><span>订单状态：</span>{$list.state}&nbsp;&nbsp;</li>-->
-		 <li><span><a href="{:U('/member/orderDetail')}/id/{$list.id}">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<if condition="$list.pay_state neq 2"><a href="javascript:void(0);" class="cancel_order" data-order_id="{$list.id}">取消订单</a></if></span><if condition="$list.pay_state eq 0"><span style="width: 90%;text-align: right;display: block;"><a href="{:U('Member/onlinePay','id='.$list[id])}" style="color:white;padding: 5px;background-color: darkorange;">立即付款</a></span></if></li>
+		 <li><span><a href="{:U('/member/orderDetail')}/id/{$list.id}">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<if condition="$list.pay_state neq 2"><a href="javascript:void(0);" class="cancel_order" data-order_id="{$list.id}">取消订单</a></if></span><if condition="$list.pay_state eq 0"><span style="width: 90%;text-align: right;display: block;"><a id="orderconfirm" href="javascript:void(0);" style="color:white;padding: 5px;background-color: darkorange;">立即付款</a></span></if></li>
      </ul>
 		</nempty>
     </div>
@@ -81,9 +83,21 @@ $(function(){
 			var page=parseInt($('#order_list').attr('page'))+1,addto=1;//page为页数;addto为1是追加数据,0为更迭数据
 			ajax_list(status,page,addto);//调用AJAX的函数
 			$('#order_list').attr('page',page);//更新分页数
-			}
-		});
+		}
+
 	});
+
+	//支付
+	$('#orderconfirm').on('click',function(){
+//		if(!$('#paytype').val()){
+//			App_gmuMsg('请选择支付方式！');
+//			return false;
+//		}
+		window.location.href="{:U('/wx/jsapi')}";
+		//调起微信支付
+//		callpay();
+	});
+});
 //AJAX函数
 function ajax_list(status,page,addto){
 	$('#loading').show();//显示加载中

@@ -67,18 +67,7 @@
 			<p class="border-b1 ads_ortt3 fonts85 ads"><!--<span class="aaaa"><b style="color: red;">*</b>&nbsp;联&nbsp;系&nbsp;人：</span>--><input type="text" name="content" class="ads_orinput" id="content" placeholder="联系人"/></p>
 			<p class="border-b1 ads_ortt3 fonts85 ads"><!--<span class="aaaa"><b style="color: red;">*</b>联系电话：</span>--><input type="text" name="telephone" class="ads_orinput" id="telephone" placeholder="联系手机号"/></p>
 			<p class="border-b1 ads_ortt3 fonts85 ads"><!--<span class="aaaa"><b style="color: red;">*</b>出发日期：</span>--><input id='outDate' data-options='{$beginYear}' value="" class="ads_orinput btn mui-btn mui-btn-block" placeholder="选择出发日期" /><!--<input type="text" name="msg" class="ads_orinput" id="outDate" placeholder="选择出发日期"/>--></p>
-			<p class="border-b1 ads_ortt3 fonts85 ads"><!--<span class="aaaa"><b style="color: red;">*</b>出发日期：</span>--><input type="text" name="num" class="ads_orinput" id="num" value="1"/></p>
-			<!--<if condition="info.line_type eq 3 or info.line_type eq 4"></if>-->
-			<div class="mui-input-row mui-radio">
-				<input name="pay_price" checked class="pay_price_type" value="1" type="radio" id="allPrice">
-				<label>全额：<span style="color: red;">{$info.price}</span></label>
-			</div>
-			<div class="mui-input-row mui-radio">
-				<input name="pay_price" type="radio" class="pay_price_type" value="2" id="pay_price" onclick="showCount(this);">
-				<label>预定金：<span style="color: red;" id="pay_price_text"></span></label>
-			</div>
-			<p class="ads_ortt3 fonts85 ads"><!--<span class="aaaa"><b style="color: red;">*</b>出发日期：</span>--></p>
-
+			<p class="border-b1 ads_ortt3 fonts85 ads"><!--<span class="aaaa"><b style="color: red;">*</b>出发日期：</span>--><input type="text" name="num" class="ads_orinput" id="num" value="1" placeholder="选择出发日期"/></p>
 			<!-- <div class="ads-line"></div> -->
 			<!--<a href="#" class="ads-chs" id="changeaddress">-->
 				<!--<empty name="vip">-->
@@ -91,7 +80,6 @@
 			<!--</a>-->
 			<input type="hidden" name="id" id="freetour_id" value="{$info.id}">
 			<input type="hidden" name="paytype" value="" id="paytype">
-			<input type="hidden" name="orderPrice" value="{$info.price}" id="orderPrice">
 		</div>
 		</form>
 		<!-- 支付方式 -->
@@ -149,23 +137,7 @@
 <script src="__PUBLIC__/js/mui.picker.min.js"></script>
 <script>
 	(function($) {
-		var countOrderPrice=function(){
-			$.ajax({
-				url: "{:U('/orders/countOrderPrice')}",
-//				dataType: 'json',
-				type: 'post',
-				data: {'orderPrice': $('#orderPrice')[0].value, 'outDate': $('#outDate')[0].value},
-				success: function (res) {
-					var data = (eval("(" + res + ")"));
-					console.log(data.payPrice);
-					if (data.status == 1) {
-						$('#pay_price_text')[0].innerText=data.payPrice;
-					}
-				}
-
-			});
-		};
-
+		$.init();
 		var result = $('#outDate')[0];
 		var btns = $('.btn');
 		btns.each(function(i, btn) {
@@ -190,7 +162,6 @@
 					 * rs.i 分（minutes 的第二个字母），用法同年
 					 */
 					result.value=rs.text;
-					countOrderPrice();
 					/*
 					 * 返回 false 可以阻止选择框的关闭
 					 * return false;
@@ -253,12 +224,11 @@
 		}
 //				var okfun=function(){$('#orderform').submit();}
 		var okfun=function(){
-			var pay_price_type = $('input[type="radio"][name="pay_price"]:checked').val();
 			$.ajax({
 //				dataType:'json',
 				type:'post',
 				url:"{:U('/orders/submitOrderAjax')}",
-				data:{'id':$('#freetour_id').val(),'mobile':$('#telephone').val(),'linkman':$('#content').val(),'start_date':$('#outDate').val(),'paytype':$('#paytype').val(),'num':$('#num').val(),'msg':$('#msg').val(),'pay_price_type':pay_price_type},
+				data:{'id':$('#freetour_id').val(),'mobile':$('#telephone').val(),'linkman':$('#content').val(),'start_date':$('#outDate').val(),'paytype':$('#paytype').val(),'num':$('#num').val(),'msg':$('#msg').val()},
 
 				success:function(res){
 					var data=(eval("("+res+")"));
@@ -272,9 +242,7 @@
 				}
 
 			});
-		};
-
-
+		}
 		//alert($('#djqid').val());
 		if($('#djqid').val()==0){
 			//App_gmuAlert('确认？','确认现在生成订单并付款吗？',false,okfun);
@@ -285,17 +253,5 @@
 		}
 
 	});
-
-	function showCount(item){
-		if(!$('#outDate').val()){
-			mui.alert('请选择出发日期');
-			$(this).prop('checked',false);
-			$('#allPrice').prop('checked',true);
-		}else{
-			$(this).prop('checked',true);
-			$('#allPrice').prop('checked',false);
-		}
-
-	}
 
 </script>

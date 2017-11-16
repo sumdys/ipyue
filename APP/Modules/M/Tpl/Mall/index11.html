@@ -1,10 +1,9 @@
-﻿<!doctype html>
+<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>积fun商城-品悦手机网</title>
-<script type="text/javascript" src="__PUBLIC__/js/mall.js"></script>
 <link href="__PUBLIC__/mobile/css/global.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 #topnav {padding-right: 42px;}
@@ -102,10 +101,10 @@
                 <div class="mall_pro_box on">
                 	<ul id="integral">
                     	<volist name="jifen_tj" id="vo">
-                    	<li class="<if condition='$i%2 eq 0'>b1</if>">
-                        	<a href="{:U('Mall/info','id='.$vo['id'])}">
+                    	<li>
+                        	<a href="{:U('/','id='.$vo['id'])}">
                         		<img name="" src="__PUBLIC__/uploads/mall/{$vo.img}" width="130" height="130" alt="{$vo.title}">
-                                <h4><a href="{:U('Mall/info','id='.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0,15}</a></h4>
+                                <h4>{$vo.title}</h4>
                                 <p>总兑换数：{$vo.amount}<br/>所需积fun：{$vo.jifen}</p>
                             </a>
                         </li>
@@ -116,7 +115,7 @@
                 	<ul id="aizuan">
                     	<volist name="aizuan_tj" id="vo">
                     	<li>
-                        	<a href="{:U('Mall/info','id='.$vo['id'])}">
+                        	<a href="#">
                         		<img name="" src="__PUBLIC__/uploads/mall/{$vo.img}" width="130" height="130" alt="{$vo.title}">
                                 <h4>{$vo.title}</h4>
                                 <p>总兑换数：{$vo.amount}<br/>所需爱钻：<span class="az_icon"></span>x{$vo.jifen}</p>
@@ -252,7 +251,6 @@ function porTab(){
 		});
 	}
 </script>
-<include file="Public:footer" />
 <include file="Public:kf" />
 </body>
 </html>

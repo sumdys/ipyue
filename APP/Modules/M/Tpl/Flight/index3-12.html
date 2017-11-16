@@ -67,8 +67,21 @@
   </ul>
 </div>
 
+<div id="date_list_box">
+<div class="header">
+<div class="lgog"><a href="{:U('/')}"><img src="__PUBLIC__/mobile/images/logo.png?v=2" alt="品悦手机网"></a></div>
+<h1 class="topnav"><span class="left icon"><a id="close_date_list" class="icon-returnclose">返回</a></span>出发日期选择<span class="right icon"><a href="tel:18824906653" class="icon-tel">电话</a></span></h1>
+<ul id="date_week"><li>日</li><li>一</li><li>二</li><li>三</li><li>四</li><li>五</li><li>六</li></ul>
+</div>
+<div id="date_list"></div>
+</div>
+
 <!--国际机票查询弹窗-->
 <div id="flight_query_box">
+<div class="header">
+<div class="lgog"><a href="{:U('/')}"><img src="__PUBLIC__/mobile/images/logo.png" alt="品悦手机网"></a></div>
+<h1 class="topnav"><span class="left icon"><a id="close_flight_query" class="icon-returnclose">返回</a></span>国际机票预订<span class="right icon"><a href="tel:18824906653" class="icon-tel">电话</a></span></h1>
+</div>
 <div class="cont_box">
 	<div class="white_bg">
     	<div id="load">
@@ -85,7 +98,64 @@
 				<label><input type="radio" name="cons" value="1" checked="checked"/>咨询专业旅行顾问<span><b>7</b>秒</span></label>
 				<label><input type="radio" name="cons" value="2" />快速下单<em>&nbsp;&nbsp;&nbsp;&nbsp;（1分钟轻松完成低价预约）</em></label>
 			</div>
-            <div id="counseling"><B>您也可以点击</B><a href="http://tb.53kf.com/code/client/10151330/1" class="service"><B>在线咨询</B></a></div>
+
+<div id="page">
+  <div id="content">
+    <h1 id="topnav"><span class="left icon"><a href="{:U('/')}" class="icon-home">首页</a></span>独家定制旅行</h1>
+    <div class="box">
+      <form action="" method="post">
+        <div id="import">
+          <span><input name="name" type="text" id="name" maxlength="20" required placeholder="您的姓名" class="txt" value="{$userinfo.name}"></span>
+          <span><input name="phone" type="text" id="phone" maxlength="11" required placeholder="您的手机号" class="txt" value="{$userinfo.mobile}"></span>
+          <span><input name="qq" type="text" id="qq" required placeholder="您的QQ号" class="txt" value=""></span>
+          <span><textarea name="content" id="demand" maxlength="60" required placeholder="您的定制需求,例如：目的地，主题景点，旅游时间，人数,往返时间限30个字符以内"></textarea></span>
+        </div>
+        <input type="submit" value="完成" class="sub" id="sub">
+      </form>
+      <p>我们将尽快与您联系，敬请留意。（为避免影响您的休息，我们会在9:00-21:00联系您）</p>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/mobile/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//提交表单
+	$('form').submit(function(){
+		var url="{:U('/Mydemand/index')}";
+		if(!(verify('#name','姓名',20,''))){
+			return false;
+			}else if(!(verify('#phone','手机',11,/^(1(([35][0-9])|(47)|[8][01236789]))\d{8}$/))){
+				return false;
+				}else if(!(verify('#qq','QQ号码',50,''))){
+					return false;
+					}else if(!(verify('#demand','需求',60,''))){
+						return false;
+						}else{
+							$.post(url,$(this).serialize(),function(data){
+                            	if(data.status==1){
+									alert(data.info);
+									location.href=data.url;
+                            	}else{
+                               	 	alert(data.info);
+                            		}
+							},'json');
+					}
+                     return false;
+		});
+});
+
+function verify(id,name,maxlength,expression){
+	var value=$(id).val(),content="";
+	/*alert(expr);*/
+	if(expression!=""){
+		content=value==""?name+"不能为空！":value.length>maxlength?name+"内容超出限制！":(!expression.test(value))?name+"输入不正确！":"";
+		}else{
+			content=value==""?name+"不能为空！":value.length>maxlength?name+"内容超出限制！":"";
+			}
+	if(content!=""){return alert(content);}else{return true;}
+	}
+</script>
+            <div id="counseling">您也可以点击<a href="tel:18824906653">&nbsp;</a>进行电话咨询</div>
             <div id="commitment">
             	<h2>品悦郑重承诺</h2>
                 <ul>
@@ -139,7 +209,6 @@ function updateDepartBack(addDepartDay,addBackDay){
 	upDate(departDate,'#js_departDate');upDate(backDate,'#js_backDate');
 }
 </script>
-<include file="Public:footer" />
 <include file="Public:kf" />
 </body>
 </html>

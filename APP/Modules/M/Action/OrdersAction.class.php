@@ -20,6 +20,7 @@ class OrdersAction extends Action {
             $this->assign('id', $_REQUEST['id']);
             $this->display();
         }else{
+            session('loginBackUrl',U('/freetour/detail',array('id'=>$_REQUEST['id'])));
             $this->redirect('/Member/login');
         }
     }
@@ -151,6 +152,24 @@ class OrdersAction extends Action {
                 $res['status']=0;
                 $this->ajaxReturn($res);
             }
+            $outDate=$Input['start_date'];
+            $pay_price_type = $Input['pay_price_type'];
+            $orderPrice = $info['price']*$Input['num'];
+            if(in_array($info['line_type'],array(3,4)) && $pay_price_type==2){
+                $payDate = (int)((strtotime($outDate)-$now_time)/(24*3600));
+                if($payDate>=15){
+                    $payPrice = $orderPrice*0.1;
+                }elseif($payDate<15 && $payDate>=7){
+                    $payPrice = $orderPrice*0.3;
+                }elseif($payDate<7 && $payDate>=3){
+                    $payPrice = $orderPrice*0.5;
+                }else{
+                    $payPrice= $orderPrice;
+                }
+            }else{
+                $payPrice= $orderPrice;
+            }
+
             $data['mobile']=$Input['mobile'];
             $data['linkman']=$Input['linkman'];
             $data['start_date']=strtotime($Input['start_date']);
@@ -159,6 +178,7 @@ class OrdersAction extends Action {
             $data['member_id']=getUid();
             $data['update_time']=$now_time;
             $data['create_time']=$now_time;
+            $data['pay_price']=$payPrice;
             $data['total_price']=$info['price']*$Input['num'];
             $data['num']=$Input['num'];
             $data['pay_state']=0;
@@ -172,6 +192,34 @@ class OrdersAction extends Action {
                 $res['msg']='下单失败';
                 $res['status']=0;
             }
+        }else{
+            $res['oid']=0;
+            $res['status']=0;
+        }
+        $this->ajaxReturn($res);
+    }
+
+    /*
+     * 预定金
+     */
+    public function countOrderPrice(){
+        if(IS_AJAX){
+            $now_time = time();
+            $Input=I('post.');
+            $orderPrice=$Input['orderPrice'];
+            $outDate=$Input['outDate'];
+            $payDate = (int)((strtotime($outDate)-$now_time)/(24*3600));
+            if($payDate>=15){
+                $payPrice =  $orderPrice*0.1;
+            }elseif($payDate<15 && $payDate>=7){
+                $payPrice =  $orderPrice*0.3;
+            }elseif($payDate<7 && $payDate>=3){
+                $payPrice =  $orderPrice*0.5;
+            }else{
+                $payPrice= $orderPrice;
+            }
+            $res['status']=1;
+            $res['payPrice']=sprintf('%0.2f',$payPrice);
         }else{
             $res['oid']=0;
             $res['status']=0;
