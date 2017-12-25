@@ -1,0 +1,127 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{$title}-品悦手机网</title>
+<link href="__PUBLIC__/mobile/css/global.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+#topnav .icon{width:80px;}
+.box h2{padding-right:42px;}
+#favorite{padding:10px;color:#666;}
+#favorite p{background-color:#FFF;line-height:50px;text-align:center;}
+#tab a{display:inline-block;width:25%;margin-right:10px;background-color:#67b1e4;text-align:center;color:#FFF;line-height:30px;}
+#tab a:hover,#tab a.on{background-color:#FFF;color:#ff8400;}
+#favorite_list{padding:10px;background:#fff;}
+#favorite_list li{padding:25px 5px;height:130px;border-bottom:1px solid #e7e5e5;}
+#favorite_list li a{display:block;color:#333;}
+#favorite_list li a img{float:left;width:130px;height:130px;margin-right:18px;}
+#favorite_list li h4,.mall_pro_box li div{line-height:26px;font-weight:normal;background:#fff;}
+#favorite_list li div{margin-top:10px;}
+#favorite_list .az_icon{padding-left:25px;display:inline-block;height:26px;background:url(/Public/images/assistant.png) no-repeat -10px -147px;font-family:Arial;font-weight:normal;}
+#integral_aizuan{height:39px;}
+#integral_aizuan a{float:left;display:block;width:50%;line-height:39px;color:#fff;font-size:16px;font-weight:bold;text-align:center;background:#67b1e4;cursor:pointer;}
+#integral_aizuan a.on{background:#ff980f;}
+</style>
+</head>
+
+<body>
+<div id="page">
+  <div id="content">
+    <h1 id="topnav"><span class="left icon"><a href="{:U('/')}" class="icon-home">首页</a></span>我的品悦<span class="right" id="exit">退出登录</span></h1>
+    <div class="box">
+        <h2><span class="left icon"><a href="{:U('/Member')}" class="icon-return">返回</a></span>我的礼品</h2>
+    </div>
+    <div id="favorite" page="1" type="jifen">
+        <span id="tab">
+            <a class="on">我的收藏</a>
+            <a href="{:U('/Member/myCart')}">我的购物车</a>
+            <a href="{:U('/Member/myGift')}">已兑换礼品</a>
+        </span>
+         <div id="list">
+            <empty name="jifen"><p>您还没有积分哦，赶快去下单吧！</p></empty>       
+            <ul id="favorite_list">
+                <volist name="jifen" id="vo">
+                <li>
+                    <a href="#">
+                        <img name="" src="__PUBLIC__/uploads/mall/{$vo.img}" width="130" height="130" alt="">
+                        <h4>{$vo.title}</h4>
+                        兑换方式：积fun兑换<br/>总兑换数：{$vo.amount}<br/>所需积fun：{$vo.jifen}
+                    </a>
+                </li>
+                </volist>
+            </ul>
+        </div>      
+    </div>
+    
+    <div id="loading"><img src="__PUBLIC__/mobile/images/loading.gif"></div>
+    <div id="reminder"></div>    
+    <div id="integral_aizuan"><a type="jifen" class="on">积fun礼品</a><a type="aizuan">爱钻礼品</a></div>          
+  </div>
+</div>
+<include file="Public:CommonJs" />
+
+<script type="text/javascript">
+$(function(){
+	//更换类别
+	$("#integral_aizuan a").click(function(){
+		var type=$(this).attr("type"),page=1,addto=0;//page为页数;type这类型;addto为1是追加数据,0为更迭数据
+		$(this).addClass("on").siblings().removeClass("on");
+		$('#favorite').attr('page',page);//更新页数
+		$('#favorite').attr('type',type);//更新类型
+		ajax_list(type,page,addto);
+		});
+	
+	//自动刷新内容
+	$(window).scroll(function(){
+		//被卷去的高度
+		var scrollTop=$(this).scrollTop();
+		//可视区域高度
+		var viewHeight=$(window).height();
+		//页面高度
+		var pageHeight=$('body').height();
+		if((scrollTop+viewHeight)>=(pageHeight)){
+			var page=parseInt($('#favorite').attr('page'))+1,type=$('#favorite').attr('type'),addto=1;//page为页数;type这类型;addto为1是追加数据,0为更迭数据
+			ajax_list(type,page,addto);//调用AJAX的函数
+			$('#favorite').attr('page',page);
+			}
+		});
+	});
+//AJAX函数
+function ajax_list(type,page,addto){
+	$('#loading').show();//显示加载中
+	$('#reminder').hide();
+	$.getJSON("{:U('/Member/myFavorite')}",{type:type,p:page},function(data){
+		if(data.status==1){
+			var html='',list=data.list;
+			$.each(list,function(i,item){
+				html +='<li>';
+            	html +='<a href="#">';
+                html +='<img name="" src="__PUBLIC__/uploads/mall/'+ item.img +'" width="130" height="130" alt="'+ item.title +'">';
+                html +='<h4>'+ item.title +'</h4>';
+                html +='兑换方式：'+ item.dhfs +'<br/>总兑换数：'+ item.amount +'<br/>';
+				if(item.t=="积fun"){
+					html +='所需积fun：'+ item.jifen +'</div>';
+					}else if(item.t=="爱钻"){
+						html +='所需爱钻：<span class="az_icon"></span>x'+ item.jifen;
+						}
+				html +='</a>';
+				html +='</li>';
+				});
+			if(addto==0){
+				$('#loading').hide();
+				$('#favorite_list').html(html);
+				}else{
+					$('#loading').hide();
+				    $('#favorite_list').append(html);
+				    }
+			}else{
+				$('#loading').hide();
+				$('#reminder').show().text(data.info);
+				}
+		});
+	}
+</script>
+</body>
+</html>

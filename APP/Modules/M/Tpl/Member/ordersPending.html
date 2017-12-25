@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{$title}-品悦手机网</title>
+<link href="__PUBLIC__/mobile/css/global.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+#topnav .icon{width:80px;}
+.box h2{padding-right:42px;}
+#order{padding:10px;color:#666;}
+#order p{background-color:#FFF;line-height:50px;text-align:center;}
+#tab a{display:inline-block;width:25%;margin-right:10px;background-color:#67b1e4;text-align:center;color:#FFF;line-height:30px; cursor:pointer;}
+#tab a:hover,#tab a.on{background-color:#FFF;color:#ff8400;}
+#explain,#checkall_total{padding:10px;background:#FFF;}
+#explain span,#checkall{padding:10px;line-height:24px;background:#f2f1f0;}
+#explain span{display:block;text-indent:2em;}
+.list{background-color:#FFF;padding:10px;border-bottom:1px solid #e7e5e5;}
+.list li{line-height:26px;}
+.list li input{float:right;margin-right:10px;}
+.list li span{color:#333;}
+.list li em,#explain em,#total b{font-style:normal;color:#ff840f;}
+.list li a{color:#2690d8;}
+#checkall{text-align:right;}
+#checkall span{color:#2690d8;padding:0 10px;}
+#checkall span#cancel{cursor:pointer;}
+#checkall input{float:right;margin-top:5px;}
+#total{font-size:14px;padding-top:10px;}
+#total b{font-size:18px;}
+#pay{background:#ff980f;line-height:30px;margin-top:10px;font-size:16px;font-weight:bold;color:#FFF;text-align:center; cursor:pointer;}
+</style>
+</head>
+
+<body>
+<div id="page">
+	<div id="content">
+    	<h1 id="topnav"><span class="left icon"><a href="{:U('/')}" class="icon-home">首页</a></span>我的品悦<span class="right" id="exit">退出登录</span></h1>
+    	<div class="box">
+        	<h2><span class="left icon"><a href="{:U('/Member')}" class="icon-return">返回</a></span>我的订单</h2>
+    	</div>
+		<div id="order">
+    		<div id="tab">
+            	<a href="{:U('/Member/orders')}">所有订单</a>
+            	<a class="on">待付款</a>
+            	<a href="{:U('/Member/ordersCancel')}">已取消</a>
+			</div>
+    		<div id="order_list" status="pending" page="1">
+            	<if condition="$pending.count eq 0">
+					<p>您没有待付款订单！</p>
+                <else/>
+                    <volist name="list" id="vo">
+                        <ul class="list">
+							<li><span style="font-size: 16px;">{$vo.type}</span></li>
+							<li><span>订单号 ：</span>{$vo.order_num}</li>
+							<li><span>下单时间：</span>{$vo.create_time}</li>
+							<li><span>{$vo.title}</span></li>
+							<li style="margin-top: 10px"><span style="color:white;font-size:14px;padding: 5px;background-color:#c5862b;">去</span>&nbsp;&nbsp;{$vo.create_time}</li>
+							<li style="margin-top: 10px;"><span style="color:white;padding: 5px;font-size:14px;background-color: #67b1e4;">返</span>&nbsp;&nbsp;{$vo.create_time}</li>
+							<li><span>单价：</span><em>￥{$vo.price}</em></li>
+							<li><span>总价：</span><em>￥{$vo.total_price}</em></li>
+							<li><span>预定金：</span><em>￥{$vo.pay_price}</em></li>
+							<li><span>订单状态：</span>{$vo.state}&nbsp;&nbsp;</li>
+							<li><span><a href="{:U('/member/orderDetail')}/id/{$vo.id}">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<if condition="$vo.pay_state neq 2"><a href="javascript:void(0);" class="cancel_order" data-order_id="{$vo.id}">取消订单</a></if></span><if condition="$vo.pay_state eq 0"><span style="width: 90%;text-align: right;display: block;"><a href="{:U('/member/orderDetail')}/id/{$vo.id}" style="color:white;padding: 5px;background-color: darkorange;">立即付款</a></span></if></li>
+                        </ul>
+                    </volist>
+                </if>
+				<if condition="$pending.count neq 0">
+				<div id="checkall_total">
+                	<div id="checkall"><span id="cancel">取消</span><span>全选<input type="checkbox" class="checkbox"  checked="checked"></span></div>
+                    <div id="total">合计应付金额：<b>￥<span>{$pending.price}</span></b></div>
+                </div>
+					</if>
+			</div>
+			<if condition="$pending.count neq 0">
+            <div id="pay">立即支付</div>
+				</if>
+            
+		</div>
+	</div>
+</div>
+<include file="Public:CommonJs" />
+
+<script type="text/javascript">
+$(function(){
+	//待处理订单单选
+	$("#order_list input:checkbox").change(function(){
+		if($(this).hasClass('checkbox') != true){$('#order_list .checkbox').removeAttr('checked');}
+		fun_price_js();
+		});
+	//待处理订单全选
+	$("#order_list .checkbox").change(function(){
+		if(this.checked){
+			$("#order_list input:checkbox").each(function(){this.checked="checked";});
+			fun_price_js();
+			}else{
+				$("#order_list input:checkbox").each(function(){this.checked="";});
+				$("#total span").html(0);
+				}
+		});
+	//待处理订单合计
+	function fun_price_js(){
+		var money=0;
+		$("#order_list input:checkbox").each(function(){
+			if($(this).hasClass('checkbox') != true && this.checked){
+				money=money+Number($(this).attr("cope"));
+				}
+			});
+		$("#total span").html(money);
+		}
+	
+	$("#pay").click(function(){
+		var gid = new Array();
+		$("#order_list input:checkbox").each(function(){
+			if($(this).hasClass('checkbox') != true && this.checked){
+				gid.push($(this).attr('gid'));
+				}
+			});
+		if(gid.length<=0){
+			alert("请选择订单！");
+			}else{
+				window.location="{:U('/m/Member/pay')}"+"?gid="+gid;
+				}
+		});
+
+	})
+</script>
+</body>
+</html>

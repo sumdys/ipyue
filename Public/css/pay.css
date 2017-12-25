@@ -1,0 +1,31 @@
+
+.payHeader{ height: 38px; line-height: 38px; width: 100%; border-bottom: 1px solid #9eb7bc; margin-top: 6px; color: #666; font-size: 16px; text-align: left; }
+.payDetail{ height: auto; width: 100%; padding: 10px 20px; box-sizing: border-box; background: #ffefe2; margin-top: 15px;}
+.payDetail-left{ float: left; width: 86px; border-right: 1px solid #333; text-align: left;}
+.copeWith{ font-size: 14px; color: #333;}
+.copeWith-mon{ font-size: 7px; color: #786a5f;}
+.copeWith-mon span{ font-size: 18px !important; color: #be7265 !important;}
+.payDetail-right p{ text-align: left; font-size: 12px; margin-top: 3px; margin-left: 30px;}
+.des{ color: #333;}
+.infor{ color: #666;}
+
+.payBox{ margin-top: 28px;}
+.methodNum li{ height: 30px; line-height: 30px; width: 87px; border-top: 1px solid #979797;  border-right: 1px solid #979797;  border-left: 1px solid #979797; color: #666; float: left; margin-left: 15px; font-size: 14px;} 
+.methodNum li:first-of-type{ margin-left: 0; }
+.methodNum li.borderCur{ border-bottom: 1px solid #fff; z-index: 999; border-top: 1px solid #7fc9e2; color: #7fc9e2; border-right: 1px solid #7fc9e2;  border-left: 1px solid #7fc9e2;}
+.methodAll{ border: 1px solid #7fc9e2; margin-top: -1px; text-align: left; font-size: 14px; color: #333; }
+.alipay{ margin-left: 108px; margin-top: 31px; }
+.alipayIcon{ height: 28px; width: 86px; vertical-align: middle; background: url(../images/help_alipay.gif) no-repeat; background-size: contain; display: inline-block;}
+.method{ display: none; }
+.alipayWarn{ font-size: 12px; color: #666 !important;}
+.paymentBtn{ height: 29px; line-height: 29px; width: 116px; margin: 15px 0 47px 0; display: block; background: #0296fa; color: #fff; text-align: center;}
+.weixinIcon{ height: 22px; width: 22px; margin-right: 10px; vertical-align: middle; background:url(../images/weixin.jpg) no-repeat; background-size: contain; display: inline-block;}
+.bankIcon{ height: 25px; width: 102px; vertical-align: middle; background:url(../images/yinlian.jpg) no-repeat; background-size: contain; display: inline-block;}
+.band{ height: 20px; width: 139px; line-height: 20px; display: block; border: 1px solid #cdcdcd; font-size: 12px; margin-top: 10px;}
+.scoreNum{  height: 20px; width: 83px; line-height: 18px; border: 1px solid #cdcdcd; font-size: 12px; background: #f2f2f2; }
+.yan{ margin-top: 10px;}
+
+
+.paySuccess{ border: 1px solid #7fc9e2; font-size: 24px; color: #666; padding: 48px 0 61px 0; box-sizing: border-box; }
+.successBtn{ height: 66px; width: 66px; margin-right: 12px; vertical-align: middle; background: url(../images/success.png) no-repeat; background-size: contain; display: inline-block;}
+.look{ font-size: 12px !important; color: #296780 !important; margin-left: 68px;}

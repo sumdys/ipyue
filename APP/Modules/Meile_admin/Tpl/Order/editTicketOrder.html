@@ -1,0 +1,322 @@
+<!---------------
+/****
+**
+**编辑已出票订单【业务员】
+**
+****/---------->
+<style type="text/css">
+.div{margin-left:10px;}
+.div li{list-style:none;}
+.ul input{float:none!important; width:130px;}
+.ul select{float:none!important;}
+.floatLeft li{float:left; margin-right:25px; padding-bottom:10px; margin-top:10px;}
+.borderbottom{border-bottom:1px solid #CCC; clear:both;}
+.clear{clear:both; margin-bottom:10px;}
+.style{color:#03F;cursor:pointer; margin-top:14px!important;}
+.pageFormContent{border:none!important;}
+.add{background:url('__PUBLIC__/admin/Img/add.gif') no-repeat; padding-left:18px;}
+.inputBcak{background:url('__PUBLIC__/admin/Img/rmb.gif') no-repeat left center!important; background-color:#FFF!important;padding-left:10px!important;}
+.sk1{width:83px;}
+.ring{margin-right:10px; margin-left:10px; color:#999;}
+.spanCo{border:none;background-color:#eef4f5;; color:#999;}
+b{color:#F00;}
+</style>
+<script>
+    $(function(){
+		$(".city").live('click',function(){			
+			popCityList($(this)[0]);						 
+		})
+    })		
+</script>
+<script type="text/javascript" src="__PUBLIC__/js/member.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/hotcitypop/popcitylist.js"></script>
+
+<div class="div">
+    <form action="__URL__/editTicketOrder/navTabId/__MODULE__-newOrder"  method="post" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" value="{$list['id']}" name="id"/>
+   		<input type="hidden" value="edit" name="type" />    
+  		<div class="pageFormContent" layoutH="58">   
+             <div style="float:right;">   
+                <span class="ring">财务状态：{$list['financeStatus']}</span><b>|</b>
+                <span class="ring">业务员：{$list['user']['name']}</span><b>|</b>
+                <span class="ring">出票员：{$list['ticket']['name']}</span>
+            </div>  
+            <ul class="ul">
+                <li style="clear:both; margin-left:22px;">
+                    <ul class="floatLeft">
+                        <li>订单ID号：<span style="color:#09F;">{$list['orderID']}</span></li>
+                        <li>PNR：<span class="spanCo">{$list['PNR']}</span></li>
+                    </ul>
+                </li>
+                
+                 <li class="borderbottom">
+                    <ul class="floatLeft">
+                        <li style="margin-left:6px;"><b>*</b>订票人姓名：<input value="{$list['memberName']}" type="text" name="memberName"/></li>
+                        <li><b>*</b>手机号：<input value="{$list['memberTel']}" type="text" name="memberTel" placeholder="即会员号，重要"/></li>
+                        <li><b>*</b>客户类型：
+                        	<select name="customerType">
+                            	<option value="1" <if condition="$list['customerType'] eq 1">selected="selected"</if>>新客</option>
+                                <option value="2" <if condition="$list['customerType'] eq 2">selected="selected"</if>>老客</option>
+                                <option value="3" <if condition="$list['customerType'] eq 3">selected="selected"</if>>介绍</option>
+                                <option value="4" <if condition="$list['customerType'] eq 4">selected="selected"</if>>同行</option>
+                                <option value="5" <if condition="$list['customerType'] eq 5">selected="selected"</if>>大客户</option>                                
+                            </select>
+                        </li>                        
+                        <li>QQ号：<input value="{$list['memberQQ']}" type="text" name="memberQQ"/></li>
+                        <li>企业邮箱：<input value="{$list['memberEmail']}" type="text" name="memberEmail"/></li>
+                    </ul>
+                </li>
+                
+                 <li class="borderbottom">
+                	<volist name="list['passengers']" id="vo">
+                        <ul class="floatLeft" id="cjrinfo">
+                            <li><b>*</b>乘机人姓名{$i}：<input value="{$vo.first_name}/{$vo.last_name}" type="text" name="cjrInfo[{$i}][name]" placeholder="例：zhang/san" /></li>
+                             <li><b>*</b>票号{$i}：<input value="{$vo.ticketNO}" type="text"  disabled="disabled" class="spanCo"/></li>
+                            <li><b>*</b>DOCS{$i}：<input value="{$vo.DOCS}" type="text" name="cjrInfo[{$i}][DOCS]" style="width:600px;"/></li>
+                        </ul>                           
+                    </volist>    
+                </li>               
+                 
+                 <li class="borderbottom">
+                	<volist name="list['voyage']" id="vo">
+                        <ul class="floatLeft" id="hcinfo">
+                            <li style="margin-left:40px;"><b>*</b>航程{$i}：<input value="{$vo.departure}" type="text" name="hcInfo[{$i}][departure]" class="text city"/>　-　<input value="{$vo.destination}" type="text" name="hcInfo[{$i}][destination]" class="text city"/></li>
+                            <li><b>*</b>日期{$i}：<input value="{$vo.date}" type="text" name="hcInfo[{$i}][date]" class="date textInput valid"/></li>
+                            <li class="del style" >删除</li>
+                        </ul>  
+                        <li style="clear:both;"/></li>        
+                    </volist>
+                    <if condition="$list['gatheringOrNot'] neq 1">
+                    	<li class="clear" id="hcapper"><span class="add style" id="hc" num="{$list['countVoyage']}">添加航程</span></li>
+                    </if>
+                    
+                    <li class="clear" style="margin-left:46px;" ><b>*</b>航线：
+                        <select name="airLine" style="width:130px;">
+                            <option value="1" <if condition="$list['airLine'] eq 1">selected="selected"</if>>国内</option>
+                            <option value="2" <if condition="$list['airLine'] eq 2">selected="selected"</if>>美国</option>
+                            <option value="3" <if condition="$list['airLine'] eq 3">selected="selected"</if>>欧洲</option>
+                            <option value="4" <if condition="$list['airLine'] eq 4">selected="selected"</if>>亚洲</option>
+                            <option value="5" <if condition="$list['airLine'] eq 5">selected="selected"</if>>非洲</option>
+                            <option value="6" <if condition="$list['airLine'] eq 6">selected="selected"</if>>南美洲</option>
+                            <option value="7" <if condition="$list['airLine'] eq 7">selected="selected"</if>>加拿大</option>
+                        </select>
+                    </li>
+                </li>
+                 
+                 <li class="borderbottom">
+                    <ul class="floatLeft">
+                    	<li>出票OFFIC号：<input value="{$list['ticketOfficNO']}" type="text"  disabled="disabled" class="spanCo"/></li>
+                        <li>供应商：<input value="{$list['gongyingshang']['supplier']}" type="text"  disabled="disabled" class="spanCo"/></li>
+                        <li>文件号：<input value="{$list['fileNumber']}" type="text" name="fileNumber"/></li>
+                    </ul>
+                    <li class="clear" style="margin-left:23px;">返点政策：<span class="spanCo">{$list['rebatePolicy']}</span></li>
+                </li>  
+             
+                 <li class="borderbottom">
+                    <ul class="floatLeft">
+                     	<li><span style="color:#F00;margin-left:36px;"></span>采购价：￥<input value="{$list['procurementPrice']}" type="text"  disabled="disabled" class="spanCo" id="cg"/></li>
+                    	<li>销售价：￥<input value="{$list['salePrice']}" type="text"  disabled="disabled" class="spanCo" id="xs"/></li>                       
+                        <li>税费：￥<input value="{$list['taxation']}" type="text"  disabled="disabled" class="spanCo" id="sf"/></li>
+                        <li>保险类型：
+                           <select name="insuranceType">
+                          	  <option value="1" <if condition="$vo['insuranceType'] eq 1">selected="selected"</if>>华泰A</option><option value="2" <if condition="$vo['insuranceType'] eq 2">selected="selected"</if>>中国人保</option>
+                           </select>
+                       </li>
+                        <li>保险金额：<input value="{$list['insurance']}" type="text" name="insurance"  class="inputBcak" id="bx" onKeyUp="value=value.replace(/[^\d\.]/g,'');SumNum();"/></li>
+                        <li class="clear" style="margin-left:27px;">
+                            应收金额：￥<input value="{$list['payableAmount']}" type="text" disabled="disabled" id="res" class="spanCo"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            应付金额：￥<input value="{$list['procurementPrice']+$list['taxation']}" type="text"  disabled="disabled" id="fu" class="spanCo"/>
+                        </li>      
+                    </ul>
+                </li> 
+                
+                 <li class="borderbottom">
+                    <ul class="floatLeft">
+                        <li style="margin-left:12px;"><b>*</b>供应商费用：
+                            <select name="supplierCostType" >
+                                <option value="1" <if condition="$list['supplierCostType'] eq 1">selected="selected"</if>>其它供应商收入费用</option>
+                                <option value="2" <if condition="$list['supplierCostType'] eq 2">selected="selected"</if>>其它供应商支出费用</option>
+                                <option value="3" <if condition="$list['supplierCostType'] eq 3">selected="selected"</if>>供应商改期手续费</option>
+                                <option value="4" <if condition="$list['supplierCostType'] eq 4">selected="selected"</if>>供应商退票手续费</option>
+                                <option value="5" <if condition="$list['supplierCostType'] eq 5">selected="selected"</if>>供应商签证费</option>
+                                <option value="6" <if condition="$list['supplierCostType'] eq 6">selected="selected"</if>>供应商机票款</option>
+                                <option value="7" <if condition="$list['supplierCostType'] eq 7">selected="selected"</if>>航空公司改签</option>
+                            </select>                
+                            <input value="{$list['supplierCost']}" type="text" name="supplierCost" class="inputBcak"/>            
+                        </li>           
+                        <li><b>*</b>内部费用：            
+                            <select name="interiorCostType">
+                                <option value="1" <if condition="$list['interiorCostType'] eq 1">selected="selected"</if>>转账费</option>
+                                <option value="2" <if condition="$list['interiorCostType'] eq 2">selected="selected"</if>>刷卡费</option>
+                                <option value="3" <if condition="$list['interiorCostType'] eq 3">selected="selected"</if>>追位费</option>
+                                <option value="4" <if condition="$list['interiorCostType'] eq 4">selected="selected"</if>>汇款手续费</option>
+                                <option value="5" <if condition="$list['interiorCostType'] eq 5">selected="selected"</if>>燃气费</option>
+                                <option value="6" <if condition="$list['interiorCostType'] eq 6">selected="selected"</if>>有线电视费</option>
+                                <option value="7" <if condition="$list['interiorCostType'] eq 7">selected="selected"</if>>办公费用</option>
+                                <option value="8" <if condition="$list['interiorCostType'] eq 8">selected="selected"</if>>快递费</option>
+                                <option value="9" <if condition="$list['interiorCostType'] eq 9">selected="selected"</if>>电话费</option>
+                                <option value="10" <if condition="$list['interiorCostType'] eq 10">selected="selected"</if>>社保</option>
+                                <option value="11" <if condition="$list['interiorCostType'] eq 11">selected="selected"</if>>管理费</option>
+                                <option value="12" <if condition="$list['interiorCostType'] eq 12">selected="selected"</if>>支、取、转账手续费</option>
+                                <option value="13" <if condition="$list['interiorCostType'] eq 13">selected="selected"</if>>广告费</option>
+                                <option value="14" <if condition="$list['interiorCostType'] eq 14">selected="selected"</if>>软件支持费</option>
+                                <option value="15" <if condition="$list['interiorCostType'] eq 15">selected="selected"</if>>无线上网</option>
+                            </select>                                      
+                            <input value="{$list['interiorCost']}" type="text" name="interiorCost"  class="inputBcak"/>            
+                        </li>
+                         <li><b>*</b>其他费用：
+                            <select name="otherCostType">
+                                <option value="1" <if condition="$list['otherCostType'] eq 1">selected="selected"</if>>eterm租金支出</option>
+                                <option value="2" <if condition="$list['otherCostType'] eq 2">selected="selected"</if>>行程单收入</option>
+                                <option value="3" <if condition="$list['otherCostType'] eq 3">selected="selected"</if>>行程单支出</option>
+                                <option value="4" <if condition="$list['otherCostType'] eq 4">selected="selected"</if>>UR租金收入</option>
+                                <option value="5" <if condition="$list['otherCostType'] eq 5">selected="selected"</if>>航空保险收入</option>
+                                <option value="6" <if condition="$list['otherCostType'] eq 6">selected="selected"</if>>航空保险支出</option>
+                                <option value="7" <if condition="$list['otherCostType'] eq 7">selected="selected"</if>>第三方保险支出</option>
+                            </select>             
+                            <input value="{$list['otherCost']}" type="text" name="otherCost"  class="inputBcak"/>
+                         </li>
+                    </ul>
+                </li> 
+                
+                 <li class="borderbottom">
+                 	<volist name="list['payInfo']" id="vo">
+                        <ul class="floatLeft" id='zfinfo'>
+                            <li style="margin-left:22px;"><b>*</b>收入金额{$i}：<input value="{$vo.procurementPrice}" type="text" name="zfInfo[{$i}][procurementPrice]" class="inputBcak"/></li>
+                            <li><b>*</b>收款账号{$i}：
+                                <select name="zfInfo[{$i}][amount_type]" class="sk">
+                                    <option value="">-请选择-</option>
+                                    <option value="1" <if condition="$vo['amount_type'] eq 1">selected="selected"</if>>广州账号</option>
+                                    <option value="2" <if condition="$vo['amount_type'] eq 2">selected="selected"</if>>北京账号</option>
+                                    <option value="3" <if condition="$vo['amount_type'] eq 3">selected="selected"</if>>上海账号</option>
+                                    <option value="4" <if condition="$vo['amount_type'] eq 4">selected="selected"</if>>深圳账号</option>
+                                    <option value="5" <if condition="$vo['amount_type'] eq 5">selected="selected"</if>>商旅账号</option>
+                                    <option value="6" <if condition="$vo['amount_type'] eq 6">selected="selected"</if>>其他账号</option>
+                                </select>
+                                <select name="zfInfo[{$i}][bank]" class="bank">
+                                <volist name="vo['banklist']" id="ko" key="j">                                 
+                                    <option value="{$ko.id}" <if condition="$vo['bank'] eq $ko['id']">selected="selected"</if>>{$ko['bank']}</option>
+                                 </volist>
+                                </select>                                 
+                            </li>
+                            <li><b>*</b>汇款人{$i}：<input value="{$vo.remitter}" type="text" name="zfInfo[{$i}][remitter]" /></li>
+                            <li><b>*</b>支付日期{$i}：<input value="{$vo.payTime}" type="text" name="zfInfo[{$i}][payTime]" class="date textInput valid"/></li>
+                            <li><b>*</b>支付方式{$i}：
+                                <select name="zfInfo[{$i}][payType]">
+                                	 <option value="">-请选择-</option>
+                                    <option value="1" <if condition="$vo['payType'] eq 1">selected="selected"</if>>在线支付</option>
+                                    <option value="2" <if condition="$vo['payType'] eq 2">selected="selected"</if>>转账支付</option>
+                                    <option value="3" <if condition="$vo['payType'] eq 3">selected="selected"</if>>刷卡支付</option>
+                                    <option value="4" <if condition="$vo['payType'] eq 4">selected="selected"</if>>现金支付</option>
+                                </select>
+                            </li>
+                            <if condition="$i neq 1"><li class="del style" >删除</li></if>
+                        </ul>
+                        <li style="clear:both;"/></li>
+                    </volist>
+                     <li class="clear" id="zfapper"><span class="add style" id="zf" num="{$list['countPay']}">添加收入信息</span></li>
+                     <li class="clear" style="margin-left:30px;">收入备注：<input value="{$list['remark2']}" type="text" name="remark2" style="width:814px;" /></li>
+                </li>                                             
+                                            
+                <li class="borderbottom" style="margin-left:30px;"><ul class="floatLeft"> <li>出票备注：<span class="spanCo">{$list['remark1']}</span></li></ul></li>                
+                <if condition="$BackByFinance eq 1">
+                    <li class="borderbottom"><ul class="floatLeft"> <li>财务打回备注：<span class="spanCo">{$list['remarkByFinance']}</span></li></ul></li>
+                    <input type="hidden" name="pass" value="1" />	
+                </if>
+             </ul>
+        </div>
+        <div class="formBar">	
+            <ul>
+                <li><div class="button"><div class="buttonContent"><button type="submit">提交财务</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button onclick="submitpath()">临时保存</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>    
+            </ul>
+        </div>
+    </form>
+</div>
+        	
+<script type="text/javascript">
+$(function(){		
+	//添加航程
+	$('#hc').click(function(){
+		var num=parseInt($(this).attr('num')) + 1;
+		var html='';
+		html += '<ul class="floatLeft" style="clear:both;" id="addhc">';
+		html +='<li style="margin-left:40px;">航程'+num+'：<input value="" type="text" name="hcInfo['+num+'][departure]" class="text city" style="width:133px;"/>';
+		html +='&nbsp;-&nbsp;<input value="" type="text" name="hcInfo['+num+'][destination]" class="text city" style="width:133px;"/></li>';
+		html +='<li>日期'+num+'：<input value="" type="text" name="hcInfo['+num+'][date]" /></li>';
+		html += '<li class="del style" >删除</li>';
+		html += '</ul>';
+		$("#hcapper").before(html);
+		$(this).attr("num",num);
+		//重载删除
+		$("#addhc .del").bind("click",function(){$(this).parent().remove();});				
+		});				
+	//删除
+	$("#hcinfo .del").bind("click",function(){$(this).parent().remove();});			
+	
+	//添加支付信息
+	$('#zf').click(function(){
+		var num=parseInt($(this).attr('num')) + 1;
+		var html='';
+		html +='<ul class="floatLeft" style="clear:both;" id="addzf">';
+		html +='<li style="margin-left:22px;">收入金额'+num+'：<input value="" type="text" name="zfInfo['+num+'][procurementPrice]" style="width:133px;"/></li>';
+		html +='<li>收款账号'+num+'：<select name="zfInfo['+num+'][amount_type]" class="sk"><option value="0">-请选择-</option><option value="1">广州账号</option><option value="2">北京账号</option><option value="3">上海账号</option><option value="4">深圳账号</option><option value="5">商旅账号</option><option value="6">其他账号</option></select><select name="zfInfo['+num+'][bank]" class="bank"><option value="0">-请选择-</option></select> ';
+		html +='<li>汇款人'+num+'：<input value="" type="text" name="zfInfo['+num+'][remitter]" style="width:133px;"/></li>';
+		html +='<li>支付日期'+num+'：<input value="" type="text" name="zfInfo['+num+'][payTime]" style="width:133px;"/></li>';
+		html +='<li>支付方式'+num+'：<select name="zfInfo['+num+'][payType]"><option value="1">在线支付</option><option value="2">转账支付</option><option value="3">刷卡支付</option><option value="4">现金支付</option></select></li>';
+		html +='<li class="del style" >删除</li>';
+		html +='</ul>';
+		$("#zfapper").before(html);
+		$(this).attr("num",num);
+		//重载删除
+		$("#addzf .del").bind("click",function(){$(this).parent().remove();});				
+		});				
+	//删除
+	$("#zfinfo .del").bind("click",function(){$(this).parent().remove();});	
+});
+</script>
+<script type="text/javascript">
+	$(function(){
+		$(".sk").live('change',function(){
+			var typeID=$(this).val();
+			var type='type';
+			var sk=$(this);
+			$.getJSON("__URL__/addOrder",{type:type,typeID:typeID},function(data){
+				if(data.status==1){																	
+					var html="";							
+					html +='<select name="[bank]">';
+					$.each(data.list,function(i,item){
+						html +='<option value="'+item.id+'">'+item.bank+'</option>';										
+					})									
+					html +='</select>';
+					sk.next("select").html(html);
+				}else{
+					var html=""
+					html +='<select name="bank" class="bank"><option value="0">-请选择-</option></select>';
+					sk.next("select").html(html);
+				}
+			})
+		})							
+	})	                         
+</script> 
+<script type="text/javascript">
+function submitpath(){
+	var put='<input type="hidden" value="1" name="t"/>';	
+	$('.pageForm').append(put);
+	$('.pageForm').submit();
+}
+</script>
+<script language="javascript">
+function SumNum(){
+	var sumValue;	
+	xsj=document.getElementById('xs').value;
+	sfj=document.getElementById('sf').value;
+	bxj=document.getElementById('bx').value;	
+	xs=parseFloat(xsj);
+	sf=parseFloat(sfj);
+	bx=parseFloat(bxj);		
+	sumValue = xs+sf+bx;
+	self['res'].value =sumValue;		
+}
+</script>

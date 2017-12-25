@@ -1,0 +1,50 @@
+<!--
+**
+**主管 分发新客户
+**
+-->
+<style type="text/css">
+.fenfa{list-style:none; border:1px solid #000; font-size:14px; margin-left:10px; margin-top:15px; margin-right:10px;}
+li{margin-right:60px; float:left; margin-bottom:20px; padding-left:20px; padding-top:10px;}
+.fenfa input{margin-right:5px;}
+
+</style>
+<form action="__URL__/fenfa/navTabId/__MODULE__-index" method="post" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone)" name='checkboxform'>
+	<div class="fenfa">
+        <h1 style="border-bottom:1px solid #000;"><span style="font-size:16px; color:#333; padding-left:20px;">分发新客户</span><span style="margin-left:100px">分发数：{$totle| default='0'}</span></h1> 
+        <ul > 
+        	<volist name="yewu" id="vo">
+            <li><input type="checkbox" name="C{$i}" value="{$vo.id}"/>{$vo.name}</li>
+ 			</volist>     
+            <li>
+                <input type="button" onClick="checkAll()" value="全选">&nbsp;&nbsp;
+                </input><input type="button" onClick="uncheckAll()" value="撤销">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </input><input type="submit" value="确定分发" />
+            </li>
+        </ul>
+        <div style="clear:both;">
+    </div>
+</form>
+
+<script type="text/javascript">
+function checkAll() {
+for (var j = 1; j <= 14; j++) {
+box = eval("document.checkboxform.C" + j);
+if (box.checked == false) box.checked = true;
+   }
+}
+function uncheckAll() {
+for (var j = 1; j <= 14; j++) {
+box = eval("document.checkboxform.C" + j);
+if (box.checked == true) box.checked = false;
+   }
+}
+function switchAll() {
+for (var j = 1; j <= 14; j++) {
+box = eval("document.checkboxform.C" + j);
+box.checked = !box.checked;
+   }
+}
+</script>
+
+ 

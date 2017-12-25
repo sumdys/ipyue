@@ -1,0 +1,25 @@
+<style type="text/css">
+.img{ margin-left:15px; margin-top:10x;}
+.img input{float:none; margin-bottom:10px;}
+.img span{font-size:12px; color:#999;}
+</style>
+<form action="__URL__/ad_add/navTabId/__MODULE__-index" method="post" enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+    <div class="img">
+        图片：<input type="file" name="img"/><!--<span>(图片尺寸为335px*160px)</span>-->
+        <br/>
+        标题：<input type="text" name="title" size="50"/>
+        <br/>
+        链接：<input type="text" name="src" size="50"/>
+        <br/>
+        排序：<input type="text" name="num" /><span>(1-2位数字)</span>
+        <br/>
+        <input type="radio" checked name="type" value="1" class="type"/>手机版路线列表&nbsp;&nbsp;
+        <input type="radio" name="type" value="2" class="type"/>手机版首页
+    </div>
+    <div class="formBar">
+        <ul>
+            <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+        </ul>
+    </div> 
+</form>

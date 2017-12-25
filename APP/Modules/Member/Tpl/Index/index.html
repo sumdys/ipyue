@@ -1,0 +1,70 @@
+<include file="Public:header" />
+    <link rel="stylesheet" href="__PUBLIC__/css/member.css" type="text/css" />
+    <script type="text/javascript" src="__PUBLIC__/js/member.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/layer/layer.min.js"></script>
+    <script src="__PUBLIC__/admin/Js/jquery.form.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/modify.js"></script>
+    <div class="member">
+    	<!--会员中心导航-->
+    	<include file="Public:left" />
+        
+		<div class="right" id="memberR">
+			<div id="user_info">
+            	<div class="icon left">
+               		<a href="{:U('/Member/Setting/seticon')}">								
+                        <empty name="userInfo['headimg']">
+                            <img src="__PUBLIC__/images/member/icon.gif" />
+                        <else/>
+                            <img src="__PUBLIC__/member/images/{$userinfo['headimg']}" />
+                        </empty>
+                    设置头像
+                     </a>
+				</div>
+                <div class="info right">
+               	  <ul>
+                    	<li>
+                        	<div class="verify right">
+                                <if condition="$userInfo['verify_mobile'] eq 0">
+                                    <b class="a1"></b><a class="mr20" href="{:U('/Member/Setting/securitycenter')}">手机未验证</a>
+                                <else/>
+                                    <b class="a0"></b><a class="mr20" href="{:U('/Member/Setting/securitycenter')}">手机已验证</a>
+                                </if>
+
+                                <if condition="$check_email neq 1">
+                               		<b class="a3"></b><a href="{:U('/Member/Setting/securitycenter')}">邮箱未验证</a>
+                                <else/>
+                                	<b class="a4"></b><a href="{:U('/Member/Setting/securitycenter')}">邮箱已验证</a>
+                                </if>
+                            </div>
+                            <span>用户名：{$userinfo.username}</span>
+							<span>账户安全： <if condition="$userInfo['check_email'] eq 1"> 高<else/> 中</if>[<a href="{:U('/Member/Setting/securitycenter')}">修改</a>]</span>
+                         </li>
+                        <li>
+                        	<span>会员等级：<strong>{$userinfo.rank.name}</strong><!-- <a href="{:U('/help/members#help_ul1')}" target="_blank">如何升级</a> --></span>
+                        </li>
+                        <li>
+                        	<span>待支付订单：[<a href="{:U('/Member/booking')}?status=pending">{$common.pending_count}</a>]</span>
+                            <span>已付款订单：[<a href="{:U('/Member/booking')}?status=process">{$common.process_count}</a>]</span>
+                            <span>已取消订单：[<a href="{:U('/Member/booking')}?status=cancel">{$common.cancel_count}</a>]</span>
+                        </li>
+                        <li>
+                        	<span>消息提醒：[<a href="{:U('/Member/Setting/message')}">{$common.message_count}</a>]</span>
+                        </li>
+                    </ul>
+                    <dl>
+                   	  <dd><span>预付款余额：0元</span></dd>
+                      <dd><span>现金券：{$overage}元</span><!-- <a href="{:U('/Member/Assetaccount/integral')}" target="_blank">查看明细</a><a href="{:U('/help/assetaccount#help_ul0')}" target="_blank">如何使用？</a>--></dd>
+                      <dd><span>我的积分：{$totlejf}</span><!--<a href="{:U('/jifen/lists/cid/55')}" target="_blank">兑换好礼</a><a href="{:U('/help/assetaccount#help_ul1')}" target="_blank">积分规则</a>--></dd>
+                      <dd>&nbsp;</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+    	$(function(){
+			});
+    </script>
+    
+<include file="Public:footer" />

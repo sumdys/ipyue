@@ -1,0 +1,73 @@
+<script>
+    $(function(){
+        $(".readonly").change(function(){
+            alert(1);
+            $('.avatarImg').src="__PUBLIC__/uploads/"+$(this).attr('src');
+        })
+    })
+ </script>
+<div class="pageContent">
+	<form method="post" action="__URL__/edit/navTabId/Telname-index" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="user_id" value="<?php echo $_SESSION[C('USER_AUTH_KEY')] ?>"/>
+		<input type="hidden" name="id" value="{$vo.id}" />
+		<div class="pageFormContent" layoutH="58">
+					
+		   <p>
+				<label>编号：</label>
+				 <input type="hidden"  size="30" maxlength="20" name="b_id" value="{$vo.b_id}" />
+				  {$vo.b_id}
+			</p>
+      
+            <p>
+                <label>姓名：</label>
+                <input type="text" name="t_name"  value="{$vo.t_name}">
+            </p>
+		     <p>
+                <label>创建时间：</label>
+                <input type="text" name="create_time" value="{$vo.create_time}">
+            </p>
+			<p>
+				<label>手机：</label>
+				<input type="text" name="tel" size="30" maxlength="100"  value="{$vo.tel}"/>
+			</p>
+            <p>
+                <label>电话：</label>
+                <input type="text" name="phone" size="30" maxlength="100" value="{$vo.phone}"/>
+           </p>
+      
+            <p>
+                <label>邮箱：</label>
+                <input class="input" name="email" type="text" size="30" value="{$vo.email}"/>
+            </p>
+             <p>
+                <label>性别：</label>
+                <select name="sex" class="sex"><option value="先生" <if condition="$vo.sex eq '先生'">selected='selected'</if> >先生</option><option value="女士" <if condition="$vo.sex eq '女士'">selected='selected'</if> >女士</option></select>
+            </p>
+            <p>
+                <label>QQ号：</label>
+                <input class="input" name="qq" type="text" size="30" value="{$vo.qq}"/>
+            </p>
+            <p>
+                <label>微信：</label>
+                <input class="input" name="weixin" type="text" size="30" value="{$vo.weixin}"/>
+            </p>
+            <p>
+                <label>地址：</label>
+                <input class="input" name="address" type="text" size="30" value="{$vo.address}"/>
+            </p>
+             <div class="unit">
+                <label>备注:</label>
+                <textarea class="input" type="text" cols="57" rows="3" name="content" >{$vo.content}</textarea>
+            </div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">Submit</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">Cancel</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+

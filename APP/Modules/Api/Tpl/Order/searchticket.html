@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<style>
+    #flight li ul li {
+        float: left;
+    }
+    #flight ul {
+        clear: both;
+        display: inline-block;
+    }
+    .searchlist_outside.go_icon {
+        display: block;
+    }
+    #flight  li {
+        display: inline-block;
+    }
+    #flight  .dan{
+        background: #cccccc;
+    }
+    #flight  .one{
+         background: #49baee;
+     }
+    #flight  .dan.one{
+        background: #59CB55;
+    }
+    </style>
+<ul id="flight">
+<volist name="data" id="vo">
+    <li>
+        {$vo.PricedItineraryId}
+        <volist name="vo.OriginDestinationOption" id="option">
+            <div onclick="exchange(this);"  class='searchlist_outside go_icon <if condition="$option.RefNumber eq 1">dan</if> <if condition="$option.OptionId eq 1">one</if>' optid="{$vo.PricedItineraryId}-{$option.RefNumber}-{$option.OptionId}" airline="{$option.FilingAirline}" directflight="0" price="2318" invalidcount="0" firstdept="19:10:00" selected="selected">
+                <volist name="option.FlightSegment" id="flight">
+                <ul>
+                    <li class="gorr">&nbsp;</li>
+                    <li class="f_num">{$flight.OperatorCode} {$flight.FlightNumber}</li>
+                    <li class="comp">
+                        <img src="/front/images/airlineLOGO/CZ.gif" onerror="this.src='/front/images/airlineLOGO/allAirport.gif';"><font>{$option.AirlineName}</font>
+                    </li>
+                    <li class="str">{$flight.DepartureAirportName}, <a style="color:#005ecf; font-size:10px;" class="tooltipspay2" href="javascript:void(0)">({$flight.DepartureCityCode})<span>{$flight.DepartureAirportName}</span></a></li>
+                    <li class="arr">{$flight.ArrivalAirportName}, <a style="color:#005ecf; font-size:10px;" class="tooltipspay2" href="javascript:void(0)">({$flight.ArrivalCityCode})<span>{$flight.ArrivalAirportName}</span></a></li>
+                    <li class="strtime">{$flight.DepartureDateTime}</li>
+                    <li class="arrtime">{$flight.ArrivalDateTime}</li>
+                </ul>
+                </volist>
+            </div>
+        </volist>
+    </li>
+</volist>
+</ul>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<script type="text/javascript">
+    var BaseInfo = {
+        'path':"{:U('/')}"
+    };
+
+    function open_kf(){
+    <?php if($userinfo): ?>
+        window.open('http://wpa.qq.com/msgrd?v=3&uin={$userinfo.user.qq|trim}&site=qq&menu=yes');
+    <?php else: ?>
+        setIsinvited();hz6d_cus_web_msg_open();
+    <?php endif;?>
+    }
+</script>
+
+    <php>include '/App/Modules/Home/Tpl/Default/Public/logo.html';</php>
+    <div id="hd_nav">
+        <div class="wd980 relative">
+            <div id="index_ticket_query">
+                <h2>您的国际票务<strong>私人管家</strong></h2>
+                <include file="Public:searchform" />
+          </div>
+            <include file="Public:index_top_nav" />
+        </div>
+	</div>
+    
+	<script type="text/javascript" src="__PUBLIC__/js/jquery.fullScreenAds.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		//使用全屏轮换广告
+		$('#index_slide_ad').fullScreenAds({fadeTime:1000,showtime:4000,mainWidth:980});
+		//首页国际机票查询的不透明度设置
+		$('#index_ticket_query').css("opacity",0.9);
+	});
+	</script>
+    <div id="index_slide_ad">
+    	<ul>
+        	<li img-data="__PUBLIC__/images/fsad6.jpg"><a href="{:U('/zt/hnair_sales')}" target="_blank"></a></li>
+        	<li img-data="__PUBLIC__/images/fsad5.jpg"><a href="{:U('/zt/virgin_atlantic_sales')}" target="_blank"></a></li>
+			<li img-data="__PUBLIC__/images/fsad4.jpg"><a href="{:U('/zt/flysas_sales')}" target="_blank"></a></li>
+            <li img-data="__PUBLIC__/images/fsad1.jpg"><a href="{:U('/zt/dijialaixi')}" target="_blank"></a></li>
+		</ul>
+        <div id="slide_ad_nav"><a class="active">1</a><a>2</a><a>3</a><a>4</a></div>
+    </div>

@@ -1,0 +1,231 @@
+<!---------------
+/****
+**
+**添加订单
+**
+****/---------->
+<style type="text/css">
+table input{float:none!important;}
+table select{float:none!important;}
+.pageFormContent{margin-left:10px; border:none!important;}
+table{border-collapse: collapse;}
+td{ text-align:left!important;}
+b{color:#F00;}
+span{color:#666;}
+table,td{ border: 1px solid #999;}
+tr{height:35px;}
+td{width:200px; padding-left:5px;}
+.add{background:url('__PUBLIC__/admin/Img/add.gif') no-repeat; padding-left:18px; color:#03F;cursor:pointer;}
+</style>
+<div class="div">
+    <form action="__URL__/insertData/navTabId/__MODULE__-index"  method="post" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <input type="hidden" value="{$orderID}" name="orderID"/>
+        <input type="hidden" name="type" value="add">
+  		<div class="pageFormContent" layoutH="58"> 
+        	<table cellpadding="0" cellspacing="0" width="1260px">
+             	<tr>
+                    <td colspan="2">订单ID号：<span style="color:#09F;">{$orderID}</span></td>
+                    <td colspan="4"><b>*</b>PNR：<input value="" type="text" name="PNR" /></td>
+                </tr>
+                
+                <tr>
+                    <td  colspan="2">订票人姓名：<input value="" type="text" name="memberName" /></td>
+                    <td>手机号：<input value="" type="text" name="memberTel"/></td>
+                    <td>客户类型：
+                        <select name="customerType">
+                            <option value="1">新客</option><option value="2">老客</option><option value="3">介绍</option>
+                            <option value="4">同行</option><option value="5">大客户</option>                                
+                        </select>                   
+                    </td>
+                    <td style="border-left:none;"> QQ号：<input value="" type="text" name="memberQQ" /></td>
+                    <td>企业邮箱：<input value="" type="text" name="memberEmail" /></td>  
+            	</tr>          
+
+                <tr>
+                    <td  colspan="2" >乘机人姓名1：<input value="" type="text" name="cjrInfo[1][name]"/></td>
+                    <td colspan="4" >DOCS1：<input value="" type="text" name="cjrInfo[1][DOCS]" style="width:600px;"/></td>                    
+                </tr>    
+               <tr id="apper"><td colspan="6"><span class="add style" id="cjr" num="1">添加乘机人</td></tr> 
+                
+                <tr>
+                    <td colspan="2">航程{$i}：<span class="span"><input value="" type="text" name="hcInfo[1][departure]" />　-　<input value="" type="text" name="hcInfo[1][destination]" /></td>
+                    <td colspan="4">日期{$i}：<input value="" type="text" name="hcInfo[1][date]" class="date textInput valid"/></td>
+                </tr>  
+ 				<tr id="hcapper"><td colspan="6"><span class="add style" id="hc" num="1">添加航程</td></tr> 
+                   
+                <tr><td colspan="6">航线：
+                    <select name="airLine">
+                        <option value="1">国内</option><option value="2">美国</option><option value="3">欧洲</option>
+                        <option value="4">亚洲</option><option value="5">非洲</option><option value="6">南美洲</option><option value="7">加拿大</option>
+                    </select>                
+                </td></tr>  
+                
+                <tr>
+                    <td  colspan="2"><b>*</b>出票平台：<input value="" type="text" name="supplier" /></td>
+                    <td colspan="2"><b>*</b>供应商：<input value="" type="text" name="supplier" /></td>
+                    <td colspan="2">文件号：<input value="" type="text" name="fileNumber" /></td>
+                </tr> 
+                <tr><td  colspan="6">备注：<input value="" type="text" name="remark1" style="width:900px;"/></td></tr>                
+                
+                <tr>
+                    <td><b>*</b>采购价：<input value="" type="text" name="procurementPrice" /></td>
+                    <td><b>*</b>销售价：<input value="" type="text" name="salePrice"  placeholder ="￥" id="js1" onKeyUp="value=value.replace(/[^\d\.]/g,'');SumNum();"/></td>
+                    <td><b>*</b>税费：<input value="" type="text" name="taxation"  placeholder ="￥" id="js2" onKeyUp="value=value.replace(/[^\d\.]/g,'');SumNum();"/></td>
+                    <td>保险名称：<select name="insuranceType" id="insuranceType"><option value="1">华泰</option><option value="2">中国人保</option></select></td>
+                    <td>保险金额：<input value="" type="text" name="insurance"  placeholder ="￥" id="js3" onKeyUp="value=value.replace(/[^\d\.]/g,'');SumNum();"/></td>
+                    <td><b>*</b>应收金额：<input value="" type="text" placeholder ="￥" disabled="disabled" id="res"/></td>
+                </tr>      
+                          
+                <tr>
+                    <td  colspan="2">供应商费用：
+                        <select name="supplierCostType">
+                            <option value="1">其它供应商收入费用</option><option value="2">其它供应商支出费用</option><option value="3">供应商改期手续费</option>
+                            <option value="4">供应商退票手续费</option><option value="5">供应商签证费</option><option value="6">供应商机票款</option><option value="7">航空公司改签</option>
+                        </select>                
+                        <input value="" type="text" name="supplierCost" placeholder ="￥"/>                     
+                    </td>
+                    <td  colspan="2">内部费用：
+                        <select name="interiorCostType">
+                            <option value="1">转账费</option><option value="2">刷卡费</option><option value="3">追位费</option><option value="4">汇款手续费</option>
+                            <option value="5">燃气费</option><option value="6">有线电视费</option><option value="7">办公费用</option><option value="8">快递费</option>
+                            <option value="9">电话费</option><option value="10">社保</option><option value="11">管理费</option><option value="12">支、取、转账手续费</option>
+                            <option value="13">广告费</option><option value="14">软件支持费</option><option value="15">无线上网</option>
+                        </select>                                       
+                        <input value="" type="text" name="interiorCost"  placeholder ="￥"/>     
+                    </td>
+                    <td  colspan="2">其他费用：
+                        <select name="otherCostType">
+                            <option value="1">eterm租金支出</option><option value="2">行程单收入</option><option value="3">行程单支出</option>
+                            <option value="4">UR租金收入</option><option value="5">航空保险收入</option><option value="6">航空保险支出</option><option value="7">第三方保险支出</option>
+                        </select>             
+                        <input value="" type="text" name="otherCost"  placeholder ="￥"/>                    
+                    </td>
+                </tr>   
+                
+                <tr>
+                    <td>支付金额1：<input value="" type="text" name="zfInfo[1][procurementPrice]"/></td>
+                    <td  colspan="2">收款账号1：
+                        <select name="zfInfo[1][amount_type]" class="sk">
+                            <option value="0">-请选择-</option><option value="1">广州账号</option> <option value="2">北京账号</option><option value="3">上海账号</option>
+                            <option value="4">深圳账号</option><option value="5">商旅账号</option><option value="6">其他账号</option>
+                        </select>    
+                        <select name="zfInfo[1][bank]" class="bank"><option value="0">-请选择-</option></select> 
+                    </td>
+                    <td>汇款人1：<input value="" type="text" name="zfInfo[1][remitter]" /></td>
+                    <td>支付日期1：<input value="" type="text" name="zfInfo[1][payTime]" class="date textInput valid"/></td>
+                    <td>支付方式1：
+                        <select name="zfInfo[1][payType]"><option value="1">在线支付</option><option value="2">转账支付</option><option value="3">刷卡支付</option>option value="4">现金支付</option></select>
+                     </td>
+                </tr>                 
+                <tr id="zfapper" ><td colspan="6"><span class="add style" id="zf" num="1">添加支付信息</td></tr> 
+                
+                <tr><td  colspan="6">备注：<input value="" type="text" name="remark2" style="width:900px;"/></td></tr>                             
+            </table>             
+        </div>        
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div> 
+    </form>
+</div>
+        	
+<script type="text/javascript">
+	$(function(){		
+		//添加乘机人
+		$('#cjr').click(function(){
+			var num=parseInt($(this).attr('num')) + 1;
+			var html='';
+			html +='<tr id="addtr">';
+			html +='<td colspan="2">乘机人姓名'+num+'：<input value="" type="text" name="cjrInfo['+num+'][name]"/></td>';
+			html +='<td colspan="4">DOCS'+num+'：<input value="" type="text" name="cjrInfo['+num+'][DOCS]" style="width:600px;"/><span class="del style" >删除</span></td>';
+			html +='</tr>';
+			$("#apper").before(html);
+			$(this).attr("num",num);
+			//重载删除
+			$("#addtr .del").bind("click",function(){$('#addtr').remove();});				
+			});				
+		//删除
+		$("#addtr .del").bind("click",function(){$('#addtr').remove();});	
+		
+		
+		//添加航程
+		$('#hc').click(function(){
+			var num=parseInt($(this).attr('num')) + 1;
+			var html='';
+			html += '<ul class="floatLeft" style="clear:both;" id="addhc">';
+			html +='<li><span style="color:#F00;margin-left:46px;">*</span>航程'+num+'：<input value="" type="text" name="hcInfo['+num+'][departure]"/>';
+			html +='&nbsp;-&nbsp;<input value="" type="text" name="hcInfo['+num+'][destination]" /></li>';
+			html +='<li><span style="color:#F00;">*</span>日期'+num+'：<input value="" type="text" name="hcInfo['+num+'][date]" class="date textInput valid"/></li>';
+			html += '<li class="del style" >删除</li>';
+			html += '</ul>';
+			$("#hcapper").before(html);
+			$(this).attr("num",num);
+			//重载删除
+			$("#addhc .del").bind("click",function(){$(this).parent().remove();});				
+			});				
+		//删除
+		$("#addhc .del").bind("click",function(){$(this).parent().remove();});			
+		
+		//添加支付信息
+		$('#zf').click(function(){
+			var num=parseInt($(this).attr('num')) + 1;
+			var html='';
+			html += '<ul class="floatLeft" style="clear:both;" id="addzf">';
+			html +='<li style="margin-left:22px;">支付金额'+num+'：<input value="" type="text" name="zfInfo['+num+'][procurementPrice]"/></li>';
+			html +='<li>收款账号'+num+'：<select name="zfInfo['+num+'][amount_type]" class="sk"><option value="0">-请选择-</option><option value="1">广州账号</option><option value="2">北京账号</option><option value="3">上海账号</option><option value="4">深圳账号</option><option value="5">商旅账号</option><option value="6">其他账号</option></select><select name="zfInfo['+num+'][bank]" class="bank"><option value="0">-请选择-</option></select> ';
+			html +='<li>汇款人'+num+'：<input value="" type="text" name="zfInfo['+num+'][remitter]" /></li>';
+			html +='<li>支付日期'+num+'：<input value="" type="text" name="zfInfo['+num+'][payTime]" class="date textInput valid"/></li>';
+			html +=' <li>支付方式'+num+'：<select name="zfInfo['+num+'][payType]"><option value="1">在线支付</option><option value="2">转账支付</option><option value="3">刷卡支付</option><option value="4">现金支付</option></select></li>';
+			html += '<li class="del style" >删除</li>';
+			html += '</ul>';
+			$("#zfapper").before(html);
+			$(this).attr("num",num);
+			//重载删除
+			$("#addzf .del").bind("click",function(){$(this).parent().remove();});				
+			});				
+		//删除
+		$("#addzf .del").bind("click",function(){$(this).parent().remove();});	
+	});
+</script>
+<script type="text/javascript">
+	$(function(){
+		$(".sk").live('change',function(){
+			var typeID=$(this).val();
+			var type='type';
+			var sk=$(this);
+			$.getJSON("__URL__/addOrder",{type:type,typeID:typeID},function(data){
+				if(data.status==1){																	
+					var html="";							
+					html +='<select name="[bank]">';
+					$.each(data.list,function(i,item){
+						html +='<option value="'+item.id+'">'+item.bank+'</option>';										
+					})									
+					html +='</select>';
+					sk.next("select").html(html);
+				}else{
+					var html=""
+					html +='<select name="bank" class="bank"><option value="0">-请选择-</option></select>';
+					sk.next("select").html(html);
+				}
+			})
+		})							
+	})	                         
+</script>
+<SCRIPT language="javascript">
+function SumNum(){
+	var sumValue
+	
+	xs=eval(js1.value);
+	sf=eval(js2.value);
+	bx=eval(js3.value);
+	
+	if (isNaN(xs)){xs=0}
+	if (isNaN(sf)){sf=0}
+	if (isNaN(bx)){bx=0}
+	
+	sumValue = xs+sf+bx;
+	self['res'].value =sumValue;
+}
+</script>

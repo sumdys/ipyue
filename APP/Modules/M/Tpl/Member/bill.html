@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>{$title}</title>
+	</head>
+	<body>
+		<br/><br/>
+		<div align="center">	
+    		<table width="100%" border="1" bordercolor="green" align="center" style="border-collapse: collapse">
+				<tr>
+                	<td id="orderId">订单号</td>
+               	 	<td><?PHP echo $kq_orderId; ?></td>
+				</tr>
+				<tr>
+					<td id="orderAmount">订单金额</td>
+					<td><?PHP echo $kq_orderAmount/100; ?>元</td>
+				</tr>
+				<tr>
+					<td id="orderTime">下单时间</td>
+					<td><?PHP echo $kq_orderTime; ?></td>
+				</tr>
+				<tr>
+					<td id="productName">商品名称</td>
+					<td><?PHP echo $kq_productName; ?></td>
+				</tr>
+				<tr>
+					<td id="productNum">备注</td>
+					<td><?PHP echo $kq_productDesc; ?></td>
+				</tr>
+			</table>
+		</div>
+		<div align="center" style="font-weight: bold;">
+            <form method=get action="<?PHP echo $kq_target; ?>" target="_blank">
+            
+                <input type="hidden" name="inputCharset" value="<?PHP echo $kq_inputCharset; ?>">
+                <input type="hidden" name="pageUrl" value="<?PHP echo $kq_pageUrl; ?>">
+                <input type="hidden" name="bgUrl" value="<?PHP echo $kq_bgUrl; ?>">
+                <input type="hidden" name="version" value="<?PHP echo $kq_version; ?>">
+                <input type="hidden" name="language" value="<?PHP echo $kq_language; ?>">
+                
+                <input type="hidden" name="signType" value="<?PHP echo $kq_signType; ?>">
+                <input type="hidden" name="merchantAcctId" value="<?PHP echo $kq_merchantAcctId; ?>">
+                <input type="hidden" name="payerName" value="<?PHP echo $kq_payerName; ?>">
+                <input type="hidden" name="payerContactType" value="<?PHP echo $kq_payerContactType; ?>">
+                <input type="hidden" name="payerContact" value="<?PHP echo $kq_payerContact; ?>">
+                
+                <input type="hidden" name="orderId" value="<?PHP echo $kq_orderId; ?>">
+                <input type="hidden" name="orderAmount" value="<?PHP echo $kq_orderAmount; ?>">
+                <input type="hidden" name="orderTime" value="<?PHP echo $kq_orderTime; ?>">
+                <input type="hidden" name="productName" value="<?PHP echo $kq_productName; ?>">
+                <input type="hidden" name="productNum" value="<?PHP echo $kq_productNum; ?>">
+                
+                <input type="hidden" name="productId" value="<?PHP echo $kq_productId; ?>">
+                <input type="hidden" name="productDesc" value="<?PHP echo $kq_productDesc; ?>">
+                <input type="hidden" name="ext1" value="<?PHP echo $kq_ext1; ?>">
+                <input type="hidden" name="ext2" value="<?PHP echo $kq_ext2; ?>">
+                <input type="hidden" name="payType" value="<?PHP echo $kq_payType; ?>">
+                
+                <input type="hidden" name="bankId" value="<?PHP echo $kq_bankId; ?>">
+                <input type="hidden" name="redoFlag" value="<?PHP echo $kq_redoFlag; ?>">
+                <input type="hidden" name="pid" value="<?PHP echo $kq_pid; ?>">
+                <input type="hidden" name="signMsg" value="<?PHP echo $kq_sign_msg; ?>">
+                
+                <input type="submit" value="确认支付" style="font-size:32px;padding:10px;font-weight:bold;font-family:arail">
+            </form>
+		</div>
+	</body>
+</html>

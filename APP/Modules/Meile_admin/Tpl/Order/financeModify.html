@@ -1,0 +1,22 @@
+<!---
+//
+//修改采购价-财务经理
+//
+-->
+<style type="text/css">
+.div{margin-top:10px; margin-left:20px;}
+</style>
+<form action="__URL__/financeModify/navTabId/__MODULE__-financeNNOrder"  method="post" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)"> 
+	<div class="div">
+    	<div>订单ID号：{$list['orderID']}</div>
+    	<div>当前采购价：{$list['procurementPrice']}</div>
+        <div>新采购价：<input type="text" name="price" value="" /></div>
+    </div>
+    <div class="formBar">
+        <ul>
+            <li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+        </ul>
+    </div>
+    <input type="hidden" name="id" value="{$list.id}" />
+</form>

@@ -1,0 +1,121 @@
+<!--//
+**
+**审核 财务
+**
+//-->
+<style type="text/css">
+.com{margin-top:10px; margin-left:10px; color:#00F;}
+.com li{padding-bottom:15px; margin-right:50px; font-size:16px;}
+.com li span{ margin-left:10px; color:#333; text-align:right;}
+.float{float:left;}
+.float a{color:#999; margin-left:10px;}
+</style>
+<center><p>【温馨提示：一旦确认审核，将无法再更改账单，因此在确认审核前请仔细检查各项！】</p></center>
+<div class="com">
+    <ul class="float textRight">
+    	<li><span>出票日期：</span>{$data.cpdate}</li>
+   	 	<li><span>　出票地：</span>{$data.cpd}</li>
+    	<li><span>　　票号：</span>{$data.ticketNo}</li>
+    	<li><span>　　PNR：</span>{$data.PNR}</li>
+    	<li><span>　　行程：</span>{$data.route}</li>
+        <li><span>客人姓名：</span>{$data.krxm}</li>
+   	 	<li><span>　新&旧：</span>{$data.newORold}</li>
+    	<li><span>　　航线：</span>{$data.airline}</li>
+        
+        <volist name="list" id="vo">
+            <li><span>收入金额{$i}：</span>{$vo['con']}
+                <notempty name="vo['bz']"><a title="{$vo['bz']}" style="color:#F00;">注</a></notempty>
+            </li>
+            <li><span>收款银行{$i}：</span>{$vo['bank']}</li>
+        </volist>
+     </ul>
+</div>
+<div class="com">
+    <ul class="float textRight">
+    	<li><span>取票金额：</span>{$data.pay}
+        	<notempty name="data['bz_pay']"><a title="{$data.bz_pay}" style="color:#F00;">注</a></notempty>        
+        </li>     
+    	<li><span>　　单数：</span>{$data.ds}</li> 
+        <li><span>拿位地：</span>{$data.nwd}</li>
+   	 	<li><span>拿位费：</span>{$data.nwf}
+        	<notempty name="data['bz_nwf']"><a title="{$data.bz_nwf}" style="color:#F00;">注</a></notempty> 
+        </li>
+    	<li><span>刷卡费：</span>{$data.skf}
+        	<notempty name="data['bz_skf']"><a title="{$data.bz_skf}" style="color:#F00;">注</a></notempty> 
+        </li>
+    	<li><span>送票费：</span>{$data.spf}</li>     
+    	<li><span>退票款：</span>{$data.tpk}
+        	<notempty name="data['bz_tpk']"><a title="{$data.bz_tpk}" style="color:#F00;">注</a></notempty>
+        </li>
+   	 	<li><span>返客费：</span>{$data.fkf}
+        	<notempty name="data['bz_fkf']"><a title="{$data.bz_fkf}" style="color:#F00;">注</a></notempty>
+        </li>
+     	<li><span>抵票款：</span>{$data.dpk}
+        	<notempty name="data['bz_dpk']"><a title="{$data.bz_dpk}" style="color:#F00;">注</a></notempty>
+        </li>       
+    	<li><span>分利：</span>{$data.fl}</li>
+        <li><span>收利人：</span>{$data.slr}</li>    	           
+    </ul>    
+</div>
+<div class="com">
+    <ul class="float textRight" style="border-right:none;">
+    	<li><span>利润：</span>{$data.profit}</li>   
+       	<li><span>盈利差额：</span>{$data.ylce}</li>         
+        <li><span>　承担人：</span>{$data.cdr}</li>
+   	 	<li><span>　到账地：</span>{$data.dz_dzd}</li>    	
+        <li><span>到账时间：</span>{$data.dz_date}</li>
+    	<li><span>　　备注：</span>{$data.remark}</li>
+        <li><span>支付时间：</span>{$data.pay_time}</li>
+   	 	<li><span>支付明细：</span>{$data.pay_detail}</li>
+    	<li><span>退客明细：</span>{$data.tkmx}</li>
+    	<li><span>返客明细：</span>{$data.fkmx}</li> 
+       <li><span>拿位费明细：</span>{$data.nwfmx}</li>              
+    </ul>    
+</div>
+<div style="clear:both;"></div>
+<form action="__URL__/audit/navTabId/__MODULE__-index" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone)" method="post">
+<if condition="$data['audit_sk'] eq 0">
+	<if condition="($type eq 1)or($type eq 3)">
+         <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">确认审核</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" callback="dialogAjax" class="close">取消</button></div></div></li>
+            </ul>
+        </div>     
+	<else/>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent">你无审核权</div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" callback="dialogAjax" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </if>
+<elseif condition="($data['audit_sk'] eq 1)and($data['audit_fk'] eq 0)"/>
+	<if condition="($type eq 2)or($type eq 3)">
+         <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">确认审核</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" callback="dialogAjax" class="close">取消</button></div></div></li>
+            </ul>
+        </div>     
+	<else/>
+    	<div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent">你无审核权</div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" callback="dialogAjax" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </if>
+<else/>
+     <div class="formBar">
+        <ul>
+            <li><div class="buttonActive"><div class="buttonContent">不能审核</div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" callback="dialogAjax" class="close">取消</button></div></div></li>
+        </ul>
+    </div>
+</if>
+    <input type="hidden" name="t" value="{$t}" />
+     <input type="hidden" name="id" value="{$data.id}" />
+</form>
+
+

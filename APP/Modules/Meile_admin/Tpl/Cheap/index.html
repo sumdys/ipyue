@@ -1,0 +1,167 @@
+<form id="pagerForm" action="__URL__" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+    <input type="hidden" name="so" value="{$_REQUEST.so}" />
+    <input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST['_sort']|default='1'}"/>
+    <input type="hidden" name="listRows" value="{$_REQUEST['listRows']}"/>
+
+    <volist name="map" id="m">
+        <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+
+</form>
+<script>
+    var zhou='';
+    var img_path='__PUBLIC__/uploads/cheap/';
+    var url='';
+    function searchs(urls){
+        var  datas=$('#search').serialize();
+        url = urls?urls:"{:U('Cheap/cheap')}?ss=1&"+datas;
+        $.getJSON(url,function(data){
+            if(data){
+                var html='';
+                $.each(data, function(i,vo){
+                    html +='<tr align="center" id="'+vo.id+'">';
+                    html +=' <td align="left">'+vo.id+'</td>';
+                    html +=' <td>'+vo.zhou+'</td>';
+                    html +='  <td>'+vo.from_city+'</td>';
+                    html +=' <td>'+vo.to_city+'</td>';
+                    html +=' <td>'+vo.time_name+'</td>';
+                    html +=' <td>'+vo.air+'</td>';
+                    html +=' <td>'+vo.price+'</td>';
+                    if(vo.img){
+                        html +='<td><a href="'+img_path+vo.img+'" target="_blank">查看图片</a></td>';
+                    }else{
+                        html +='<td><a href="javascript:;" onclick="edit('+vo.id+')">添加图片</a></td>';
+                    }
+                    html +=' <td>'+vo.update_time+'</td>';
+                    html +=' <td>[ <a  href="javascript:;" onclick="edit('+vo.id+')">编辑 </a> ]' +
+                            ' [ <a link="?act=del&id'+vo.id+'" href="javascript:void(0)" name="'+vo.title+'" class="del">删除 </a> ]</td>';
+                    html +='</tr>';
+                });
+                $('#datalist').html(html);
+                $('#page').html(data.page);
+            }else{
+                $('#datalist').html('');
+                $('#page').html('');
+            }
+        })
+
+    }
+    function page(u,p){
+        searchs(p);
+    }
+    function gettj(dq){
+        var send=encodeURI('dq='+dq);
+        url="{:U('Cheap/cheap')}?"+send;
+        searchs(url);
+    }
+</script>
+
+
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__" method="post">
+        <div class="searchBar">
+            <ul class="searchContent">
+                <li>
+                    <label>搜索：</label>
+                    <input type="text" name="so" value="{$_REQUEST.so}"/>
+                </li>
+                <!--
+                <li>
+                    <label>状态：</label>
+                    <select class="combox" name="status">
+                        <option value="">请选择</option>
+                        <option value="0" selected=selected>有效</option>
+                        <option value="1">过期</option>
+                    </select>
+                </li>
+                -->
+            </ul>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <foreach name="zhou" key="k" item="v">
+                <li>
+                    <a class="icon" style="color: red;font-weight: bold;" target="navTab" href="__URL__/index/zhou/{$v.zhou}" <if condition="$k==4">class="active"</if>>
+                    <span>{$v.zhou}</span>
+                    </a>
+                </li>
+            </foreach>
+            <li class="line">line</li>
+            <li><a class="add" href="__URL__/add" target="dialog" rel="add" mask="true" width="810" height="400" ><span>新增</span></a></li>
+            <li><a class="delete" href="__URL__/foreverdelete/id/{sid_user}/navTabId/__MODULE__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择用户" ><span>删除</span></a></li>
+            <li><a class="edit" href="__URL__/edit/id/{sid_user}" target="dialog" rel="edit" mask="true" warn="请选择用户"><span>编辑</span></a></li>
+        </ul>
+    </div>
+
+    <table class="table" width="100%" layoutH="115">
+        <thead>
+        <tr>
+            <th width="60"><input type="checkbox" group="ids[]" class="checkboxCtrl"> :编号</th>
+            <th width="60" orderField="zhou" <if condition="$_REQUEST._order eq 'zhou'">class="{$_REQUEST._sort}"</if>>州</th>
+            <th width="100" orderField="from_city" <if condition="$_REQUEST._order eq 'from_city'">class="{$_REQUEST._sort}"</if>>出发城市</th>
+            <th width="100" orderField="to_city" <if condition="$_REQUEST._order eq 'to_city'">class="{$_REQUEST._sort}"</if>>到达城市</th>
+            <th width="100" orderField="time_name" <if condition="$_REQUEST._order eq 'time_name'">class="{$_REQUEST._sort}"</if>>截止日期</th>
+            <th width="100" orderField="air" <if condition="$_REQUEST._order eq 'air'">class="{$_REQUEST._sort}"</if>>航空公司</th>
+            <th width="100" orderField="price" <if condition="$_REQUEST._order eq 'price'">class="{$_REQUEST._sort}"</if>是>价格</th>
+            <th width="100" orderField="img" <if condition="$_REQUEST._order eq 'img'">class="{$_REQUEST._sort}"</if>>广告图</th>
+            <th width="80" orderField="update_time" <if condition="$_REQUEST._order eq 'update_time'">class="{$_REQUEST._sort}"</if>>更新时间</th>
+
+            <th width="120">操作</th>
+        </tr>
+        </thead>
+        <tbody id="datalist">
+        <volist name="list" id="vo">
+            <tr target="sid_user" rel="{$vo['id']}">
+                <td><input name="ids[]" value="{$vo['id']}" type="checkbox">:{$vo['id']}</td>
+                <td>{$vo['zhou']}</td>
+                <td>{$vo['from_city']}</td>
+                <td>{$vo['to_city']}</td>
+                <td>{$vo['time']}</td>
+                <td>{$vo['air']}</td>
+                <td>{$vo['price']}</td>
+                <td><empty name="vo.img">
+                    <a href="__URL__/edit/id/{$vo['id']}" target="dialog" rel="edit" width="810" height="400">添加图片</a>
+                    <else/>
+                    <a href="__PUBLIC__/uploads/cheap/{$vo.img}" target="_blank">查看图片</a></empty>
+                </td>
+                <td>{$vo.update_time|date="Y-m-d H:i",###}</td>
+                <td>
+                    <!--                                   {$vo['status']|showStatus=$vo['id'],'navTabAjaxDone'}&nbsp;&nbsp;&nbsp;-->
+                    <a href="__URL__/edit/id/{$vo['id']}" target="dialog" rel="edit" width="810" height="400" ><span>编辑</span></a>&nbsp;&nbsp;&nbsp;
+                    <a href="__URL__/del/id/{$vo['id']}/navTabId/__MODULE__-index" target="navTabTodo" title="你确定要删除吗？">删除</a>
+                </td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+
+    <div class="panelBar">
+        <div class="pages">
+            <span>显示</span>
+            <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                <option value="10" <eq name="numPerPage" value="10">selected=selected</eq>>10</option>
+                <option value="20" <eq name="numPerPage" value="20">selected=selected</eq>>20</option>
+                <option value="30" <eq name="numPerPage" value="30">selected=selected</eq>>30</option>
+                <option value="50" <eq name="numPerPage" value="50">selected=selected</eq>>50</option>
+                <option value="100" <eq name="numPerPage" value="100">selected=selected</eq>>100</option>
+            </select>
+            <span>共{$totalCount}条</span>
+        </div>
+        <div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}"></div>
+    </div>
+
+</div>
+
+

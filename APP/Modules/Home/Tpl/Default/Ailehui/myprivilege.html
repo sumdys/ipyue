@@ -1,0 +1,56 @@
+<include file="Public:ailehui_header" />
+	<div id="cont">
+    	<div class="wd980">
+        	<h1 class="h1_tit_nav">你当前所在位置：<a href="{:U('/')}" class="sy">首页</a> > <a href="{:U('/Ailehui')}" class="sy">爱乐汇</a> > <a class="sy">我的特权</a></h1>
+            <div class="wd270 left"><include file="left" /></div>
+            <div class="wd700 right">
+            	<div id="privilege">
+                	<h2><span></span><b>我的特权</b><em>&nbsp;</em></h2>
+                    <empty name="userInfo">
+
+                        <div id="loginbox" style="margin-top: 50px;"><span>请登录后查看我的等级&nbsp;&nbsp;<a href="{:U('/member/login')}">立即登录</a></span></div>
+
+                    <else />
+                    <ul id="priv_list">
+                        <volist name="privilege" id="vo">
+                    	<li>
+                        	<a name="p{$vo.class}" id="p{$vo.class}"></a>
+                        	<span class="p{$vo.class}"></span>
+                            <h3>{$vo.name}</h3>
+                            <p>{$vo.description}</p>
+                        </li>
+                        </volist>
+                    </ul>
+                    </empty>
+                    <notempty name="userInfo">
+                  	<div id="more_priv">
+                   	  <h3><strong>高一级会员更多特权</strong><a href="{:U('/help/members#help_ul1')}">如何快速升级?</a></h3>
+                        <ul>
+                            <volist name="gjPrivilege" id="vo">
+                        	<li explain="{$vo.description}"><span class="p{$vo.class}"></span><h4>{$vo.name}</h4><div></div></li>
+                            </volist>
+                        </ul>
+                        <div id="explain"></div>
+                  	</div>
+                    </notempty>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    	$(function(){
+			$("#priv_list li:odd").css({"background-color":"#fafafa"});
+			
+			//更多特权说明
+			$("#more_priv li").mouseover(function(){
+				var explain=$(this).attr('explain');
+				$(this).find('div').show();
+				$("#explain").html(explain).show();
+				}).mouseout(function(){
+					$(this).find('div').hide();
+					$("#explain").html("").hide();
+					});
+			});
+    </script>
+<include file="Public:footer" />

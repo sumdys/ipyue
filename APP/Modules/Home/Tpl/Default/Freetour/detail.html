@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{$info.title} - {:C('WEB_NAME')}</title>
+    <meta name="keywords" content="{$info.description}<?php echo $keywords ? $keywords : C('WEB_KEYWORD'); ?>" />
+    <mete name="description" content="{$info.title},{$info.description}品悦旅行价:{$info.price}元,<?php echo $description ? $description : C('WEB_DESCRIPTION'); ?>" />
+    <link rel="stylesheet" href="__PUBLIC__/css/main.css" type="text/css" />
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/main.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/layer/layer.min.js"></script>
+<script>
+	function post_money(){
+		var money=$('#money').html();
+		window.location.href="{:U('/Alipay/index')}/money/"+money;
+	
+	}	
+</script>
+</head>
+<body>
+<include file="Public:top_nav" />
+<script src="__PUBLIC__/js/ft-detail-play.js"></script>
+<div class="w1200">
+	<div class="ft-content ft-content-d">
+		<div class="guide">
+			<a href="/">首页</a> > <a href="{:U('/freetour/')}">自由行</a> > <a href="{:U('/freetour/diy')}">自由行</a>
+		</div>
+		<div class="f-d-l">
+			<h1 class="ft-dl-t">{$info.title}</h1>
+			<div class="ft-dl-c">
+				<div class="pic">
+					<div id="play">
+						<ul class="img_ul">
+                            <volist name="info.images" id="vo">
+							<li style="display:block;">
+                                <a class="img_a"><img src="__PUBLIC__/uploads{$vo}"></a>
+                            </li>
+                            </volist>
+						</ul>
+						<a href="javascript:void(0)" class="prev_a change_a" title="上一张"><span></span></a>
+						<a href="javascript:void(0)" class="next_a change_a" title="下一张"><span style="display:block;"></span></a>
+					</div>
+
+					<div class="img_hd">
+						<ul class="clearfix">
+                            <volist name="info.images" id="vo">
+							<li><a class="img_a"><img src="__PUBLIC__/uploads{$vo}"></a></li>
+                            </volist>
+						<a class="bottom_a next_a" style="opacity:0.7;"></a>
+						<a class="bottom_a prev_a" style="opacity:0.7;"></a>
+					</div>
+
+				</div>
+				<p><span>出发城市：</span>{$info.dcity_name}</p>
+				<p><span>抵达城市：</span>{$info.acity_name}</p>
+				<p><span>游玩天数：</span>{$info.days}天</p>
+				<p><span>套餐包含：</span>酒店</p>
+				<p class="t">
+					产品经理推荐：<br>
+					{$info.description}
+				</p>
+			</div>
+			<div id="fTr">
+				<ul>
+					
+                                        <!--<li><input type="text" id="fTrd" placeholder="选择出发日期" name="date" disabled="disabled"></li>-->
+                                        <li><a  id="fTrd" href="http://tb.53kf.com/code/client/10151330/1" class="pri"><B>在线咨询</B></a></li>
+					<li>成人：<select name="adult" class="s-i-p">
+					  <option value="1">1</option>
+					  <option value="2">2</option>
+					  <option value="3">3</option>
+					  <option value="4">4</option>
+					  <option value="5">5</option>
+					  <option value="6">6</option>
+					  <option value="7">7</option>
+					  <option value="8">8</option>
+					  <option value="9">9</option>
+					  <option value="10">10</option>
+					</select></li>
+					<li>儿童：<select name="child" class="s-i-p">
+					  <option value="1">1</option>
+					  <option value="2">2</option>
+					  <option value="3">3</option>
+					  <option value="4">4</option>
+					  <option value="5">5</option>
+					  <option value="6">6</option>
+					  <option value="7">7</option>
+					  <option value="8">8</option>
+					  <option value="9">9</option>
+					  <option value="10">10</option>
+					</select></li>
+					<li class="pri">￥<b id='money'>{$info.price}</b>元</li>
+					<!--<li><a id="fTrT" href="javascript:void(0);" onclick="post_money();">立即预定>></a></li>-->
+                    <li><a id="fTrT" href="{:U('/order/index',array('id'=>$id))}" ;">立即预定</a></li>
+				</ul>
+			</div>
+			<div class="ft-dl-ct">
+				<div class="h">
+					<a href="#lxts" class="curr" id="lxts">路线行程</a>
+					<a href="#ckhc">周边交通</a>
+					<a href="#fysm">产品配套</a>
+					<a href="#ydxz">预订须知</a>
+				</div>
+				<div class="b">{$info.feature}</div>
+			</div>
+			<div class="ft-dl-ct">
+				<div class="h">
+					<a href="#lxts">路线行程</a>
+					<a href="#ckhc" class="curr" id="ckhc">周边交通</a>
+					<a href="#fysm">产品配套</a>
+					<a href="#ydxz">预订须知</a>
+				</div>
+                <div class="b">{$info.cost_info}</div>
+
+			</div>
+			<div class="ft-dl-ct">
+				<div class="h">
+					<a href="#lxts">路线行程</a>
+					<a href="#ckhc">周边交通</a>
+					<a href="#fysm" class="curr" id="fysm">产品配套</a>
+					<a href="#ydxz">预订须知</a>
+				</div>
+                <div class="b">{$info.reference_route}</div>
+			</div>
+			<div class="ft-dl-ct">
+				<div class="h">
+					<a href="#lxts">路线行程</a>
+					<a href="#ckhc">周边交通</a>
+					<a href="#fysm">产品配套</a>
+					<a href="#ydxz" class="curr" id="ydxz">预订须知</a>
+				</div>
+				<div class="b">{$info.booking_notice}</div>
+			</div>
+		</div>
+		<div class="f-d-r">
+			<div class="diy-box">
+				<div class="h">对这些线路不满意？</div>
+				<div class="b">
+					<form action="/freetour/diy" id="sD" method="get">
+					<textarea placeholder="输入您想去的地方，我们免费为您设计方案" type="text" name="place"></textarea>
+					<input id="sDd" type="submit" value="马上定制" >
+				</form>
+				</div>
+			</div>
+			<div class="diy-box-b">
+				<div class="h">热门推荐</div>
+				<ul class="b">
+					<li>
+						<a href="http://www.ipyue.com/freetour/detail/id/105">【少年黄埔军校】超级学习力——伟人故里游学特训营</a>
+						<span class="pri">￥<i>6800</i>元</span>
+					</li>
+					<li>
+						<a href="http://www.ipyue.com/freetour/detail/id/100">【毕业之旅】阳朔三天常规游</a>
+						<span class="pri">￥<i>278</i>元</span>
+					</li>
+					<li>
+						<a href="http://www.ipyue.com/freetour/detail/id/108">【2号别墅】田涧小苑</a>
+						<span class="pri">￥<i>1588</i>元</span>
+					</li>
+					<li>
+						<a href="http://www.ipyue.com/freetour/detail/id/99">【广州出发】【错峰游】广西桂林、阳朔、龙脊 3晚4日品质跟团游 （动车）</a>
+						<span class="pri">￥<i>950</i>元</span>
+					</li>
+					<li>
+						<a href="http://www.ipyue.com/freetour/detail/id/89">【欧洲之旅】西欧和东欧经典之旅14天</a>
+						<span class="pri">￥<i>16299</i>元</span>
+					</li>
+					<li>
+						<a href="http://www.ipyue.com/freetour/detail/id/85">花都美林湖 大花园别墅 4房8床_花都度假_花都之旅</a>
+						<span class="pri">￥<i>1880</i>元</span>
+					</li>
+				</ul>
+			</div>
+			<div class="diy-box-b diy-box-b-a">
+				<div class="h">热门产品排行</div>
+				<ul class="b">
+					<li><i>1</i>
+						<img src="__PUBLIC__/images/fb-5.jpg" alt="#">
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<b>45888</b>元</span>
+					</li>
+					<li class="curr"><i>2</i>
+						<img src="__PUBLIC__/images/fb-5.jpg" alt="#">
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<b>45888</b>元</span>
+					</li>
+					<li><i>3</i>
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<b>45888</b>元</span>
+					</li>
+					<li><i>4</i>
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<b>45888</b>元</span>
+					</li>
+					<li><i>5</i>
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<b>45888</b>元</span>
+					</li>
+					<li><i>6</i>
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<b>45888</b>元</span>
+					</li>
+					<li><i>7</i>
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<b>45888</b>元</span>
+					</li>
+					<li><i>8</i>
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<b>45888</b>元</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer" />

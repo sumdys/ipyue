@@ -1,0 +1,258 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>积fun商城-品悦手机网</title>
+<script type="text/javascript" src="__PUBLIC__/js/mall.js"></script>
+<link href="__PUBLIC__/mobile/css/global.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+#topnav {padding-right: 42px;}
+#mall_ad{margin-bottom:10px;position:relative;}
+#mall_ad img{width:100%;border:0;}
+#mall_ad #adlist li{display:none;}
+#mall_ad #adlist .on{display:block;}
+#mall_ad #slidebar{position:absolute;left:48%;bottom:8px;}
+#mall_ad #slidebar li{font-size:10px;display:inline-block;color:#5d5d5d;cursor:pointer;padding:0 2px;}
+#mall_ad #slidebar li.select{color:#e0e0e0;}
+
+#mall_search ul{height:94px;padding:0 10px 10px 10px;background:#fff;}
+#mall_search li{height:37px;padding-top:10px;}
+#mall_search li span{display:block;width:48%;height:37px;line-height:37px;padding-left:1%;background:#f2f1f0 url(/Public/mobile/images/title_bg.png) no-repeat right -126px;color:#333;cursor:pointer;}
+#mall_search li .txt{height:37px;}
+#mall_search .sub{margin-top:10px;}
+
+.class_list{display:none;width:100%;height:auto;z-index:200;background-color:#f2f1f0;position:absolute;top:0;left:0;color:#666;}
+.class_list a,.class_list li{cursor:pointer;}
+.class_list li{height:42px;line-height:42px;padding-left:20px;font-size:14px;background-color:#cbe4f6;border-bottom:1px solid #96caee;}
+.class_list li.designate{background:#cbe4f6 url(/Public/mobile/images/flight_bg.png) no-repeat right -37px;}
+
+#mall_pro_list{margin-top:10px;}
+#mall_pro_list .tab{height:30px;}
+#mall_pro_list .tab a{display:block;width:49%;line-height:30px;text-align:center;color:#fff;background:#67b1e4;cursor:pointer;}
+#mall_pro_list .tab a.on,#mall_pro_list .tab a:hover{color:#FF8400;background:#fff;}
+#mall_pro_list .mall_pro_box{display:none;padding:10px;background:#fff;}
+#mall_pro_list div.on{display:block!important;}
+#mall_pro_list .mall_pro_box li{padding:25px 5px;height:130px;border-bottom:1px solid #e7e5e5;}
+#mall_pro_list .mall_pro_box li a{display:block;color:#333;}
+#mall_pro_list .mall_pro_box li a img{float:left;width:130px;height:130px;margin-right:18px;}
+#mall_pro_list .mall_pro_box li h4,#mall_pro_list .mall_pro_box li p{line-height:26px;font-weight:normal;}
+#mall_pro_list .mall_pro_box li p{margin-top:10px;}
+#mall_pro_list .az_icon{padding-left:25px;display:inline-block;height:26px;background:url(/Public/images/assistant.png) no-repeat -10px -147px;font-family:Arial;font-weight:normal;}
+</style>
+</head>
+
+<body>
+<div id="page">
+	<div id="content">
+		<h1 id="topnav"><span class="left icon"><a href="{:U('/')}" class="icon-home">首页</a></span>积fun商城</h1>
+        <div id="mall_ad">
+			<ul id="adlist">
+				<li class="on"><a href="#"><img src="__PUBLIC__/mobile/images/mall/mall_ad001.jpg" width="100%"></a></li>
+				<li><a href="#"><img src="__PUBLIC__/mobile/images/mall/mall_ad002.jpg" width="100%"></a></li>
+				<li><a href="#"><img src="__PUBLIC__/mobile/images/mall/mall_ad003.jpg" width="100%"></a></li>
+			</ul>
+			<ul id="slidebar">
+				<li class="select">●</li>
+				<li>●</li>
+				<li>●</li>
+			</ul>
+		</div>
+		<div class="box">
+        	<div id="mall_search">
+            	<ul>
+                	<li>
+                    	<span id="one_class" class="left" cid="55">积fun礼品</span>
+                  		<span id="two_class" class="right" cid="1">家居生活</span>
+                    </li>
+                    <li><input id="search_cont" type="text" class="txt" placeholder="礼品名称"></li>
+                </ul>
+                <span class="sub" id="sub">搜索</span>
+            </div>
+            <!--礼品一级分类-->
+            <div id="one_class_list" class="class_list">
+            	<div class="header">
+					<h1 class="topnav"><span class="left icon"><a class="icon-returnclose close_class_list">返回</a></span>礼品一级分类</h1>
+                    <ul>
+                    	<li><a cid="55">积fun礼品</a></li>
+                        <li><a cid="56">爱钻礼品</a></li>
+                    </ul>
+				</div>
+            </div>
+            
+            <!--礼品二级分类-->
+            <div id="two_class_list" class="class_list">
+            	<div class="header">
+					<h1 class="topnav"><span class="left icon"><a class="icon-returnclose close_class_list">返回</a></span>礼品二级分类</h1>
+                    <ul>
+                    	<volist name="jf_cate" id="vo">
+                    		<li><a cid="{$vo.cid}">{$vo.name}</a></li>
+    					</volist>
+                    </ul>
+                    <ul>
+                    	<volist name="az_cate" id="vo">
+                    		<li><a cid="{$vo.cid}">{$vo.name}</a></li>
+    					</volist>
+                    </ul>
+				</div>
+            </div>
+            
+        	<div id="mall_pro_list">
+            	<div class="tab"><a class="left on">积fun好礼推介</a><a class="right">爱钻好礼推介</a></div>
+                <div class="mall_pro_box on">
+                	<ul id="integral">
+                    	<volist name="jifen_tj" id="vo">
+                    	<li class="<if condition='$i%2 eq 0'>b1</if>">
+                        	<a href="{:U('Mall/info','id='.$vo['id'])}">
+                        		<img name="" src="__PUBLIC__/uploads/mall/{$vo.img}" width="130" height="130" alt="{$vo.title}">
+                                <h4><a href="{:U('Mall/info','id='.$vo['id'])}" title="{$vo.title}">{$vo.title|msubstr=0,15}</a></h4>
+                                <p>总兑换数：{$vo.amount}<br/>所需积fun：{$vo.jifen}</p>
+                            </a>
+                        </li>
+                        </volist>
+                    </ul>
+                </div>
+                <div class="mall_pro_box">
+                	<ul id="aizuan">
+                    	<volist name="aizuan_tj" id="vo">
+                    	<li>
+                        	<a href="{:U('Mall/info','id='.$vo['id'])}">
+                        		<img name="" src="__PUBLIC__/uploads/mall/{$vo.img}" width="130" height="130" alt="{$vo.title}">
+                                <h4>{$vo.title}</h4>
+                                <p>总兑换数：{$vo.amount}<br/>所需爱钻：<span class="az_icon"></span>x{$vo.jifen}</p>
+                            </a>
+                        </li>
+                        </volist>
+                    </ul>
+                </div>
+            </div>
+        </div>
+	</div>
+	<include file="Public:footer" />
+</div>
+<script type="text/javascript" src="__PUBLIC__/mobile/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	//商城首页广告
+	mall_ad('#adlist li','#slidebar li');
+	
+	//产品tab
+	porTab();
+	
+	//选择一级分类
+	$("#one_class").click(function(){
+		var className=$(this).text();
+		var returnClass="#one_class"
+		//设置分类
+		setClassList(className,returnClass);
+		});
+	//选择二级分类
+	$("#two_class").click(function(){
+		var className=$(this).text();
+		var returnClass="#two_class"
+		//设置一级分类和二级分类相关联
+		var oneClass=$("#one_class").text(),i;
+		if(oneClass=="积fun礼品"){i=0;}else if(oneClass=="爱钻礼品"){i=1;}
+		$("#two_class_list ul").eq(i).show().siblings("ul").hide();
+		//设置分类
+		setClassList(className,returnClass);
+		});
+	//关闭分类选择器
+	$(".close_class_list").click(function(){
+		$(".class_list").hide();
+		});
+	
+	//搜索
+	$("#sub").click(function(){
+		var oneClass=$("#one_class").attr('cid'),twoClass=$("#two_class").attr('cid'),searchCont=$("#search_cont").val();
+		var url="{:U('/mall/classlist')}";
+		window.location.href=url+"?oneClass="+oneClass+"&twoClass="+twoClass+"&searchCont="+searchCont;
+		});
+	
+});
+
+
+//设置分类
+function setClassList(className,returnClass){
+	if(returnClass=="#one_class"){
+		$("#one_class_list").show();
+		$(window).scrollTop(0);
+		eachClassList(className);
+		}else if(returnClass=="#two_class"){
+			$("#two_class_list").show();
+			$(window).scrollTop(0);
+			eachClassList(className);
+			}
+	$(document).on("click",".class_list li",function(){
+		$(document).off('click','.class_list li');
+		var returnClassName=$(this).children().text();
+		var returnCid=$(this).children().attr('cid');
+		$(returnClass).text(returnClassName);
+		$(returnClass).attr('cid',returnCid);
+		$('.class_list').hide();
+		//设置一级分类和二级分类相关联
+		if(returnClass=="#one_class"){
+			var oneClass=$("#one_class").text(),i;
+			if(oneClass=="积fun礼品"){i=0;}else if(oneClass=="爱钻礼品"){i=1;}
+			var classCont=$("#two_class_list ul").eq(i).find("li:first").children().text();
+			var classCid=$("#two_class_list ul").eq(i).find("li:first").children().attr("cid");
+			$("#two_class").text(classCont);
+			$("#two_class").attr('cid',classCid);
+			}
+		});
+	
+	}
+
+//遍历分类在对应的分类后面打勾
+function eachClassList(className){
+	//获取当前body的高度
+	var H=$("body").height()+'px';
+	//设置礼品分类的高度
+	$(".class_list").css("height",H);
+	$(".class_list li").each(function(index,element){
+		$(this).removeClass('designate');
+		if($(this).children().text()==className){
+			$(this).addClass('designate');
+			}
+	});
+}
+
+function mall_ad(adlist,slidebar){
+	//初始化变量index为0，用于保存索引
+	var index = 0;
+	//初始化变量len为为图片列表的数量
+	var len = $(adlist).size();
+	
+	//setInterval()方法
+	setInterval(function(){
+		showPics(index);                   
+		index++;
+		if(index == len){index = 0;};
+		},4000);
+		
+	//showPics()设置图片和滑块的显示和隐藏
+	function showPics(index){
+		$(adlist).eq(index).addClass('on').siblings('li').removeClass('on');
+		$(slidebar).eq(index).addClass('select').siblings('li').removeClass('select');
+		};
+	
+	//当鼠标进入滑块,调用showPics()函数
+	$(slidebar).mouseenter(function(){
+		index = $(this).index();
+		showPics(index);
+		});
+}
+
+//tab function
+function porTab(){
+	$('#mall_pro_list .tab a').click(function(){
+		var i=$(this).index();
+		$(this).addClass("on").siblings().removeClass("on");
+		$(".mall_pro_box").eq(i).addClass("on").siblings().removeClass("on");
+		});
+	}
+</script>
+<include file="Public:footer" />
+<include file="Public:kf" />
+</body>
+</html>

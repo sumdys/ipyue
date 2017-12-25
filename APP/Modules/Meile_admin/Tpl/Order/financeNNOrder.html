@@ -1,0 +1,118 @@
+<!----------------
+******待收款、待付款--财务
+----------------->
+<style type="text/css">	
+.lib_Menubox {height:28px;line-height:28px;position:relative;}
+.lib_Menubox ul{margin:0px;padding:0px;list-style:none; position:absolute; top:3px; left:0; height:25px;text-align:center;}
+.lib_Menubox li{float:left;display:block;cursor:pointer;width:160px;color:#949694;font-weight:bold; margin-right:2px;height:25px;line-height:25px; background-color:#E4F2FD}
+.lib_Menubox li.hover{padding:0px;width:160px;color:#F00;height:25px;line-height:25px;}
+.lib_Contentbox{clear:both;margin-top:0px; height:181px; text-align:center;padding-top:8px;}
+td{text-align:center!important;}
+.subBar a {margin-left:20px;}
+.subBar{float:right;}
+.total{color:#999;}
+.table a{color:#06F!important;}
+</style>
+<form id="pagerForm" action="__URL__/financeNNOrder" method="post">
+    <input type="hidden" name="pageNum" value="{$_REQUEST['pageNum']|default=1}"/>
+    <input type="hidden" name="numPerPage" value="{$numPerPage}"/>
+    <input type="hidden" name="so" value="{$_REQUEST.so}" />
+    <input type="hidden" name="date" value="{$_REQUEST.date}" />
+    <input type="hidden" name="_order" value="{$_REQUEST._order}"/>
+    <input type="hidden" name="_sort" value="{$_REQUEST['_sort']|default='1'}"/>
+    <input type="hidden" name="listRows" value="{$_REQUEST['listRows']}"/>
+    <volist name="map" id="m">
+        <input type="hidden" name="{$key}" value="{$_REQUEST[$key]}"/>
+    </volist>
+</form>
+<div class="pageContent">
+    <div class="lib_Menubox lib_tabborder">
+        <ul>
+           <li class="hover">待收款待付款订单<span class="total">（{$total[0]}）</span></li>
+           <li><a href="{:U('/Meile_admin/Order/financeNYOrder')}" target="navTab" rel="Order-financeNNOrder"  style="color:#06F;">待收款已付款订单</a><span class="total">（{$total[1]}）</span></li>          
+           <li><a href="{:U('/Meile_admin/Order/financeYNOrder')}" target="navTab" rel="Order-financeNNOrder"  style="color:#06F;">已收款待付款订单</a><span class="total">（{$total[2]}）</span></li>
+           <li><a href="{:U('/Meile_admin/Order/financeYYOrder')}" target="navTab" rel="Order-financeNNOrder"  style="color:#06F;">已收款已付款订单</a><span class="total">（{$total[3]}）</span></li> 
+           <li><a href="{:U('/Meile_admin/Order/financeHasDone')}" target="navTab" rel="Order-financeNNOrder"  style="color:#06F;">已完成订单</a><span class="total">（{$total[4]}）</span></li>         
+        </ul>
+    </div>    
+    <div class="pageHeader">
+        <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/financeNNOrder" method="post">
+            <div class="searchBar">
+                <ul class="searchContent">
+                    <li><label>下单日期：</label><input type="text" size="10"  class="date textInput valid"  name="date" value="{$_REQUEST.date}"></li>
+                    <li> <label>订单内容：</label><input type="text" name="so" value="{$_REQUEST.so}" placeholder ="姓名、手机或PNR"/></li>
+                </ul>
+                <div class="subBar">
+                    <ul><li><div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div></li></ul>
+                </div>
+            </div>
+        </form>
+    </div>
+    	<table width="100%" layoutH="115" class="table">
+            <thead>
+                <tr>              	
+                	<th width="120" style="text-align:center;">订单ID</th>          
+                	<th width="80" style="text-align:center;">财务状态</th>
+                    <th width="100" style="text-align:center;">操作</th>
+                    <th width="40"  style="text-align:center;">出票员</th>
+                    <th width="40"  style="text-align:center;">业务员</th>
+                    <th width="50"  style="text-align:center;">业务部门</th>
+                    <th width="60"  style="text-align:center;">收款银行</th>
+                    <th width="60"  style="text-align:center;">支付金额</th>
+                    <th width="60"  style="text-align:center;">支付日期</th>
+                    <th width="40"  style="text-align:center;" >汇款人</th>
+                </tr>
+            </thead>
+            <tbody>
+            	<volist name="list" id="vo">                   
+                <tr>
+                    <td style="color:#09F;" rowspan="{$vo.countPayInfo}"><a href="__URL__/viewOrder?id={$vo.id}" width="950" height="600" target="dialog"  title="查看订单" style="color:#06F;">{$vo.orderID}</a></td>                 
+                    <td rowspan="{$vo.countPayInfo}">待收款待付款<if condition="$vo['temporarySave'] eq 1"><sup style="color:#F00;">存</sup></if></td>
+                    <td style="color:#09F;" rowspan="{$vo.countPayInfo}">
+                    	<if condition="$finance eq 1">
+                        	  <a href="__URL__/financePayment?id={$vo.id}"  width="1220" height="600" target="dialog"  title="付款确认" style="color:#06F;">付款确认</a>                             
+                        <elseif condition="$finance eq 2">
+                        	 <a href="__URL__/financeGathering?id={$vo.id}" width="1220" height="600" target="dialog"  title="收款确认" style="color:#06F;"> 收款确认</a>&nbsp;&nbsp;
+                        	 <a href="__URL__/financePostBack?id={$vo.id}"  width="380"  height="150" target="dialog"  title="打回" style="color:#06F;">打回</a>
+                        <else/>                                            
+                        	<a href="__URL__/financeGathering?id={$vo.id}" width="1220"  height="600" target="dialog"  title="收款确认" style="color:#06F;"> 收款确认</a>&nbsp;&nbsp;
+                        	<a href="__URL__/financePayment?id={$vo.id}"   width="1220"  height="600" target="dialog"  title="付款确认" style="color:#06F;">付款确认</a>&nbsp;&nbsp;
+                            <a href="__URL__/financePostBack?id={$vo.id}"  width="380"   height="150" target="dialog"  title="打回" style="color:#06F;">打回</a>
+                        </if>                        	
+                    </td>
+                    <td rowspan="{$vo.countPayInfo}">{$vo['ticket']['name']}</td>
+                    <td rowspan="{$vo.countPayInfo}">{$vo['user']['name']}</td>
+                    <td rowspan="{$vo.countPayInfo}"><if condition="$vo['user']['department_id'] eq 10">国际商旅部<else/>国际客服部</if></td>
+                     
+                    <td>{$vo['payInfo'][0]['bank']}</td>
+                    <td>{$vo['payInfo'][0]['procurementPrice']}</td>
+                    <td>{$vo['payInfo'][0]['payTime']}</td>
+                    <td>{$vo['payInfo'][0]['remitter']}</td>                                                                
+                </tr>
+                <volist name="vo['payInfo']" id="vo1" offset="1">  
+                    <tr>                        	
+                        <td>{$vo1['bank']}</td>
+                        <td>{$vo1['procurementPrice']}</td>
+                        <td>{$vo1['payTime']}</td>
+                        <td>{$vo1['remitter']}</td>
+                    </tr>
+                </volist>                    
+                </volist>          
+            </tbody>
+        </table>
+                   
+        <div class="panelBar">
+            <div class="pages">
+                <span>显示</span>
+                <select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+                    <option value="10" <eq name="numPerPage" value="10">selected=selected</eq>>10</option>
+                    <option value="20" <eq name="numPerPage" value="20">selected=selected</eq>>20</option>
+                    <option value="30" <eq name="numPerPage" value="30">selected=selected</eq>>30</option>
+                    <option value="50" <eq name="numPerPage" value="50">selected=selected</eq>>50</option>
+                    <option value="100" <eq name="numPerPage" value="100">selected=selected</eq>>100</option>
+                </select>
+                <span>共{$totalCount}条</span>
+            </div>
+            <div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}"></div>
+        </div> 
+</div><!---pageContent end-->

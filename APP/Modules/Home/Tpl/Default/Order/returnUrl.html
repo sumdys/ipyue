@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>支付成功_{$title} - {:C('WEB_NAME')}</title>
+    <meta name="keywords" content="<?php echo $keywords ? $keywords : C('WEB_KEYWORD'); ?>" />
+    <meta name="description" content="<?php echo $description ? $description : C('WEB_DESCRIPTION'); ?>" />
+	<meta name="baidu-site-verification" content="sTECrKJdXz" />
+    <link rel="stylesheet" href="__PUBLIC__/css/main.css" type="text/css" />
+    <link href="__PUBLIC__/Themes/v3/css/style.min.css" rel="stylesheet" />
+       <link rel="stylesheet" href="__PUBLIC__/css/pay.css" type="text/css" />
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/layer/layer.min.js"></script>
+	<include file="Public:tj" />
+  
+
+</head>
+<body>
+<include file="Public:top_nav" />
+<div class="w1200">
+	<div class="center order">
+		<div class="centbox">
+			<ul class="process">
+				<li>1、选择产品
+					<em class="icon-a"></em>
+				</li>
+				<li>2、填写订单信息
+					<em class="icon-a"></em>
+				</li>
+				<li>3、在线支付
+					<em class="icon-c"></em>
+				</li>
+				<li class="now">4、支付成功
+					
+				</li>
+			</ul>
+			<div class="clear"></div>
+			<div class="pay">
+				<p class="payHeader">
+					支付成功
+				</p>
+			</div>
+			<div class="payBox">
+				<div class="paySuccess">
+					<i class="successBtn"></i>付款成功！
+					<p class="look">点击查看本交易详情</p>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>
+<include file="Public:footer" />
+<link href="__PUBLIC__/Themes/v3/css/style.min.css" rel="stylesheet" />
+	<!--<script type="text/javascript" src="Public/js/layer/layer.min.js"></script>-->
+	<script type="text/javascript">
+		$(function(){
+			$(".method").eq(0).show();
+		})
+	  //tab栏切换
+		function onLi(target){
+			$(".method").eq($(target).index()).show().siblings().hide();
+			$(target).addClass("borderCur").siblings().removeClass("borderCur");
+		}
+	</script>
+</body>
+</html>

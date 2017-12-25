@@ -1,0 +1,44 @@
+<div class="page">
+	<div class="pageContent">
+
+	<form method="post" action="__URL__/{$Think.ACTION_NAME}/act/{$act}/navTabId/__MODULE__-{$Think.ACTION_NAME}" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>名称：</label>
+				<input type="text" class="text"  name="name" value="{$vo.name}">
+			</div>
+            <div class="unit">
+                <label>网址：</label>
+                <input  class=""  name="weburl" value="{$vo.weburl}"/>
+            </div>
+            <div class="unit">
+                <label>电话：</label>
+                <input  class=""  name="tel" value="{$vo.tel}"/>
+            </div>
+            <div class="unit">
+                <label>是否公司：</label>
+                <select name="is_corp" class="is_corp">
+                    <option value="0" <if condition="$vo.is_corp eq 0">selected="selected"</if>>否</option>
+                    <option value="1" <if condition="$vo.is_corp eq 1">selected="selected"</if>>是</option>
+                </select>
+            </div>
+            <div class="unit">
+                <label>描述：</label>
+                <textarea  name="remark" cols="50" rows="2">{$vo.remark}</textarea>
+
+            </div>
+		</div>
+		
+		<div class="formBar">
+			<ul>
+				<li>
+                    <input type="hidden" name="id" value="{$vo.id}">
+                    <div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+	</div>
+</div>
+

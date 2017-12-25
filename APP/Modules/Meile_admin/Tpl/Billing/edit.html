@@ -1,0 +1,235 @@
+<!--//
+**
+**编辑账单 分业务员、收款人、付款人
+**
+//-->
+
+<style type="text/css">
+.com{margin-left:15px;}
+.com tr{ height:35px; line-height:35px;}
+.com td{ text-align:right; padding-right:50px;}
+.com td a:hover{ text-decoration:none;}
+.com li{padding-bottom:10px; text-align:right; }
+.com input{float:none; width:170px; height:20px; border:1px solid #999;}
+.com textarea{width:170px;height:20px; border:1px solid #999;}
+.del{float:right;margin-top:10px;}
+</style>
+<!--
+**收款财务：1
+**付款财务：2
+**-收付款财务：3
+-->
+<form  action="__URL__/edit/navTabId/__MODULE__-index" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone)" method="post">
+<if condition="($data['audit_sk'] eq 1)and($data['audit_fk'] eq 0)">
+    <if condition="$type eq 2">
+        <table cellpadding="0" cellspacing="0"  class="com">                  
+            <tr><td><span>拿位费：</span><input value="{$data.nwf}" type="text" name="nwf" /></td></tr>        
+            <tr><td><span>退票款：</span><input value="{$data.tpk}" type="text" name="tpk" /></td></tr>
+            <tr><td><span>返客费：</span><input value="{$data.fkf}" type="text" name="fkf" /></td></tr>
+            <tr><td><span>取票金额：</span><input value="{$data.pay}" type="text" name="pay" /></td></tr>
+            <tr><td><span>支付时间：</span><input value="{$data.pay_time}" type="text" name="pay_time" /></td></tr>
+            <tr><td><span>支付明细：</span><input value="{$data.pay_detail}" type="text" name="pay_detail" size="50"/></td></tr>
+            <tr><td><span>退客明细：</span><input value="{$data.tkmx}" type="text" name="tkmx" size="50"/></td></tr>
+            <tr><td><span>返客明细：</span><input value="{$data.fkmx}" type="text" name="fkmx" size="50"/></td></tr> 
+        </table>
+    <elseif condition="$type eq 3" />
+       <table cellpadding="0" cellspacing="0"  class="com">                     
+            <tr>
+                <td><span>拿位费：</span><input value="{$data.nwf}" type="text" name="nwf" /></td>       
+                <td><span>退票款：</span><input value="{$data.tpk}" type="text" name="tpk" /></td>
+            </tr>
+            <tr>
+                <td><span>返客费：</span><input value="{$data.fkf}" type="text" name="fkf" /></td>
+                <td><span>取票金额：</span><input value="{$data.pay}" type="text" name="pay" /></td>
+            </tr>
+            <volist name="list" id="vo">
+            <tr>
+                <td><span>收入金额{$i}：</span><input value="{$vo.con}" type="text" name="income[{$i}]" /></td>  
+                <td><span>收款银行{$i}：</span><include file="bank"/></td>
+            </tr>   
+            </volist>
+            <tr>
+                <td><span>抵票款：</span><input value="{$data.dpk}" type="text" name="dpk" /></td>  
+                <td><span>刷卡费：</span><input value="{$data.skf}" type="text" name="skf" /></td>
+            </tr> 
+
+             <tr>
+                 <td><span>抵票款：</span><input value="{$data.dpk}" type="text" name="dpk" /></td>
+                 <td><span>备注：</span><input value="{$data.remark}" type="text" name="remark" size="50"/></td>
+             </tr>
+            <tr>
+                <td><span>支付时间：</span><input value="{$data.pay_time}" type="text" name="pay_time" /></td>
+                <td><span>支付明细：</span><input value="{$data.pay_detail}" type="text" name="pay_detail" size="50"/></td>
+            </tr>
+            <tr>
+                <td><span>退客明细：</span><input value="{$data.tkmx}" type="text" name="tkmx" size="50"/></td>
+                <td><span>返客明细：</span><input value="{$data.fkmx}" type="text" name="fkmx" size="50"/></td>
+            </tr> 
+        </table> 
+    <else/>
+        <center><p>收款财务已审核，只有付款财务和收付款财务具有修改权</p></center>
+    </if>            
+<elseif condition="$data['audit_sk'] eq 0" />
+    <if condition="$type eq 1">
+         <table cellpadding="0" cellspacing="0"  class="com">                    
+            <tr><td><span>抵票款：</span><input value="{$data.dpk}" type="text" name="dpk" /></td></tr>  
+            <tr><td><span>刷卡费：</span><input value="{$data.skf}" type="text" name="skf" /></td></tr> 
+            <volist name="list" id="vo">
+            <tr><td><span>收入金额{$i}：</span><input value="{$vo.con}" type="text" name="income[]" /></td></tr>  
+            <tr><td><span>收款银行{$i}：</span><include file="bank"/></td></tr>               
+            </volist>
+        </table>  
+    <elseif condition="$type eq 2" />
+        <center><p>收款财务还没审核，你无修改权</p></center>         
+    <elseif condition="$type eq 3" />
+		<table cellpadding="0" cellspacing="0"  class="com">                     
+            <tr>
+                <td><span>拿位费：</span><input value="{$data.nwf}" type="text" name="nwf" /></td>       
+                <td><span>退票款：</span><input value="{$data.tpk}" type="text" name="tpk" /></td>
+            </tr>
+            <tr>
+                <td><span>返客费：</span><input value="{$data.fkf}" type="text" name="fkf" /></td>
+                <td><span>取票金额：</span><input value="{$data.pay}" type="text" name="pay" /></td>
+            </tr>
+            <volist name="list" id="vo">
+            <tr>
+                <td><span>收入金额{$i}：</span><input value="{$vo.con}" type="text" name="income[]" /></td>  
+                <td><span>收款银行{$i}：</span><include file="bank"/></td>
+            </tr>   
+            </volist>
+            <tr>
+                <td><span>抵票款：</span><input value="{$data.dpk}" type="text" name="dpk" /></td>  
+                <td><span>刷卡费：</span><input value="{$data.skf}" type="text" name="skf" /></td>
+            </tr> 
+
+             <tr>
+                 <td><span>抵票款：</span><input value="{$data.dpk}" type="text" name="dpk" /></td>
+                 <td><span>备注：</span><input value="{$data.remark}" type="text" name="remark" size="50"/></td>
+             </tr>
+            <tr>
+                <td><span>支付时间：</span><input value="{$data.pay_time}" type="text" name="pay_time" /></td>
+                <td><span>支付明细：</span><input value="{$data.pay_detail}" type="text" name="pay_detail" size="50"/></td>
+            </tr>
+            <tr>
+                <td><span>退客明细：</span><input value="{$data.tkmx}" type="text" name="tkmx" size="50"/></td>
+                <td><span>返客明细：</span><input value="{$data.fkmx}" type="text" name="fkmx" size="50"/></td>
+            </tr> 
+        </table> 
+    <else/> 
+        <table cellpadding="0" cellspacing="0"  class="com">
+            <tr>
+                <td><span>出票日期：</span><input value="{$data.cpdate|date='Y-m-d',###}" type="text" name="cpdate" class="date textInput valid"></td>
+                <td><span>出票地：</span><include file="cpd"/> </td>
+            </tr>
+             <tr>
+                <td><span>票号：</span><input  value="{$data.ticketNo}" type="text" name="ticketNo"/></td>
+                <td><span>PNR：</span><input value="{$data.PNR}" type="text" name="PNR" /></td>
+             </tr>  
+             <tr>
+                <td><span>行程：</span><input value="{$data.route}" type="text" name="route" /></td>
+                <td><span>客人姓名：</span><input value="{$data.krxm}" type="text" name="krxm" /></td>
+             </tr>           
+             <tr>
+                <td><span>新&旧：</span> <input value="{$data.newORold}"  type="text" name="newORold" /></td>
+                <td><span>航线：</span>
+                    <select name="airline" style="width:170px;height:25px; border:1px solid #999;">
+                        <option value="国内" <eq name="data['airline']" value='国内'>selected="selected"</eq>>国内</option>
+                        <option value="美国" <eq name="data['airline']" value='美国'>selected="selected"</eq>>美国</option>
+                        <option value="欧洲" <eq name="data['airline']" value='欧洲'>selected="selected"</eq>>欧洲</option>
+                        <option value="亚洲" <eq name="data['airline']" value='亚洲'>selected="selected"</eq>>亚洲</option>
+                        <option value="非洲" <eq name="data['airline']" value='非洲'>selected="selected"</eq>>非洲</option>
+                        <option value="南美洲" <eq name="data['airline']" value='南美洲'>selected="selected"</eq>>南美洲</option>
+                        <option value="加拿大" <eq name="data['airline']" value='加拿大'>selected="selected"</eq>>加拿大</option>
+                    </select>
+                </td>
+             </tr>
+              <volist name="list" id="vo">          
+             <tr class="sk">
+                <td><span>收入金额{$i}：</span> <input type="text" name="income[]" value="{$vo.con}"/></td>
+                <td><span>收款银行{$i}：</span><include file="bank"/></td>           
+             </tr>
+              </volist>           
+             <tr>
+                <td class="addpapers"><a href="#" style="cursor:hand;"><span style="color:#F00;">+</span>添加收入金额及收款银行</a></td>
+             </tr>           
+             <tr>
+                <td><span>取票金额：</span> <input value="{$data.pay}" type="text" name="pay" /></td>
+                <td><span>单数：</span> <input value="{$data.ds}" type="text" name="ds" /></td>
+             </tr>           
+             <tr>
+                <td><span>拿位地：</span>
+                    <select name="nwd" style="width:170px;height:25px; border:1px solid #999;">
+                        <option value="大雄鹰" <eq name="data['airline']" value='大雄鹰'>selected="selected"</eq>>大雄鹰</option>
+                        <option value="龙华城" <eq name="data['airline']" value='龙华城'>selected="selected"</eq>>龙华城</option>
+                        <option value="孙健" <eq name="data['airline']" value='孙健'>selected="selected"</eq>>孙健</option>
+                        <option value="燕山" <eq name="data['airline']" value='燕山'>selected="selected"</eq>>燕山</option>
+                        <option value="华特" <eq name="data['airline']" value='华特'>selected="selected"</eq>>华特</option>
+                        <option value="林晓萍" <eq name="data['airline']" value='林晓萍'>selected="selected"</eq>>林晓萍</option>
+                        <option value="飘哥" <eq name="data['airline']" value='飘哥'>selected="selected"</eq>>飘哥</option>
+                        <option value="天马国际" <eq name="data['airline']" value='天马国际'>selected="selected"</eq>>天马国际</option>
+                        <option value="文昌塔" <eq name="data['airline']" value='文昌塔'>selected="selected"</eq>>文昌塔</option>
+                    </select>
+                </td>
+                <td><span>拿位费：</span><input value="{$data.nwf}" type="text" name="nwf" /></td>
+             </tr>           
+              <tr>
+                <td><span>刷卡费：</span><input value="{$data.skf}" type="text" name="skf" /></td>
+                <td><span>送票费：</span><input value="{$data.spf}" type="text" name="spf" /></td>
+             </tr>          
+             <tr>
+                <td><span>退票款：</span><input value="{$data.tpk}" type="text" name="tpk" /></td>
+                <td><span>返客费：</span> <input value="{$data.fkf}" type="text" name="fkf" /></td>
+             </tr>           
+             <tr>
+                <td><span>分利：</span><input value="{$data.fl}" type="text" name="fl" /></td>
+                <td><span>收利人：</span><input value="{$data.slr}" type="text" name="slr" /></td>
+             </tr>  
+             <tr>
+                <td><span>承担人：</span><input value="{$data.cdr}" type="text" name="cdr" /></td>
+                <td><span>到账地：</span>
+                <select name="dzd" style="width:170px;height:25px; border:1px solid #999;">
+                    <option value="广州" <eq name="data['airline']" value='广州'>selected="selected"</eq>>广州</option>
+                    <option value="深圳" <eq name="data['airline']" value='深圳'>selected="selected"</eq>>深圳</option>
+                    <option value="北京" <eq name="data['airline']" value='北京'>selected="selected"</eq>>北京</option>
+                    <option value="上海" <eq name="data['airline']" value='上海'>selected="selected"</eq>>上海</option>
+                    <option value="数据部" <eq name="data['airline']" value='数据部'>selected="selected"</eq>>数据部</option>
+                    <option value="去哪部" <eq name="data['airline']" value='去哪部'>selected="selected"</eq>>去哪部</option>
+                </select>         
+                </td>
+             </tr>     
+        </table>   
+    </if>
+<else />
+    <center><p>账单已审核，无法再修改</p></center>
+</if>
+<div class="formBar">
+    <ul>
+        <li>   
+            <div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+        <li><div class="button"><div class="buttonContent"><button type="button" callback="dialogAjax" class="close">取消</button></div></div></li>
+    </ul>
+</div>
+<input value="{$data.id}" type="hidden" name="id" size="50"/>
+</form>
+    <script type="text/javascript">
+    	$(function(){		
+			//添加证件
+			$('.addpapers').click(function(){
+				var html='';
+				html += '<tr>';
+				html += '<td><span>收入金额：</span> <input type="text" name="income[]" /></td>';
+				html += '<td><span>收款银行：</span>';
+                html += '<select name="bank[]" style="width:170px;height:25px; border:1px solid #999;">';
+				html += '<option value="北京对公建行">北京对公建行</option><option value="北京工行">北京工行</option><option value="北京建行">北京建行</option><option value="北京交行">北京交行</option><option value="北京农行">北京农行</option><option value="北京银行">北京银行</option><option value="北京招行">北京招行</option><option value="北京中行">北京中行</option><option value="北京现金">北京现金</option><option value="北京支票">北京支票</option><option value="北京POS机">北京POS机</option><option value="北京--纵横国内平台">北京--纵横国内平台</option><option value="广州对公工行">广州对公工行</option><option value="广州对公中行">广州对公中行</option><option value="广州对公民生">广州对公民生</option><option value="广州工行0693">广州工行0693</option><option value="广州工行6176">广州工行6176</option><option value="广州建设银行">广州建设银行</option><option value="广州交通银行">广州交通银行</option><option value="广州农业银行">广州农业银行</option><option value="广州商业银行">广州商业银行</option><option value="广州招行5188">广州招行5188</option><option value="广州招行5321">广州招行5321</option><option value="广州中行3235">广州中行3235</option><option value="广州中行4588">广州中行4588</option><option value="广州中信银行">广州中信银行</option><option value="广州现金">广州现金</option><option value="广州财付通">广州财付通</option><option value="广州环迅">广州环迅</option><option value="广州易宝">广州易宝</option><option value="广州支付宝">广州支付宝</option><option value="广州支票">广州支票</option><option value="广州POS机">广州POS机</option><option value="广州--纵横国内平台">广州--纵横国内平台</option><option value="美亚工行">美亚工行</option><option value="美亚广发">美亚广发</option><option value="美亚交行">美亚交行</option><option value="去哪儿财付通">去哪儿财付通</option><option value="去哪儿快钱">去哪儿快钱</option><option value="去哪儿支付宝">去哪儿支付宝</option><option value="商旅部工行">商旅部工行</option><option value="商旅部建行">商旅部建行</option><option value="商旅部交行">商旅部交行</option><option value="商旅部农行">商旅部农行</option><option value="商旅部招行">商旅部招行</option><option value="商旅部中行">商旅部中行</option><option value="商旅部民生">商旅部民生</option><option value="商旅部现金">商旅部现金</option><option value="商旅部支票">商旅部支票</option><option value="上海对公">上海对公</option><option value="上海工行">上海工行</option><option value="上海建行">上海建行</option><option value="上海交行">上海交行</option><option value="上海农行">上海农行</option><option value="上海浦发">上海浦发</option><option value="上海中行">上海中行</option><option value="上海银行">上海银行</option><option value="上海招行">上海招行</option><option value="上海支付宝">上海支付宝</option><option value="上海现金">上海现金</option><option value="上海POS机">上海POS机</option><option value="上海支票">上海支票</option><option value="上海--纵横国内平台">上海--纵横国内平台</option><option value="深圳对公建行">深圳对公建行</option><option value="深圳工行">深圳工行</option><option value="深圳建行">深圳建行</option><option value="深圳交行">深圳交行</option><option value="深圳招行">深圳招行</option><option value="深圳中行">深圳中行</option><option value="深圳民生">深圳民生</option><option value="深圳农行">深圳农行</option><option value="深圳现金">深圳现金</option><option value="深圳支票">深圳支票</option><option value="易飞对公工行">易飞对公工行</option><option value="易飞对公兴业">易飞对公兴业</option><option value="纵横天地工行">纵横天地工行</option><option value="纵横天地农行">纵横天地农行</option><option value="纵横天地招商">纵横天地招商</option>';
+                html += '</select>';
+				 html += '</td>';
+                html += '<td class="del">删除</td>';               
+				html += '</tr>';
+				$(this).parent().before(html);
+				//重载删除
+				$(".com .del").bind("click",function(){$(this).parent().remove();});				
+				});				
+			//删除
+			$(".com .del").bind("click",function(){$(this).parent().remove();});			
+			});
+    </script>  

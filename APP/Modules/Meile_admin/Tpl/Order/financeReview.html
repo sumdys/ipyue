@@ -1,0 +1,224 @@
+<!---------------
+/****
+**
+**财务主管复核
+**
+****/---------->
+<style type="text/css">
+table input{float:none!important;}
+table select{float:none!important;}
+.add{background:url('__PUBLIC__/admin/Img/add.gif') no-repeat; padding-left:18px;color:#03F;cursor:pointer;}
+.pageFormContent{margin-left:5px; border:none!important;}
+table{border-collapse: collapse;}
+td{ text-align:left!important;}
+b{color:#F00;}
+span{color:#666;}
+table,tr,td{ border: 1px solid #999;}
+tr{height:35px;}
+td{width:200px; padding-left:10px;}
+.ring{margin-right:10px; margin-left:10px;}
+.inputBcak{background:url('__PUBLIC__/admin/Img/rmb.gif') no-repeat left center!important; background-color:#FFF!important;padding-left:10px!important;}
+</style>
+<form action="__URL__/financeReview/navTabId/__MODULE__-financeNNOrder"  method="post" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)"> 
+    <div class="pageFormContent" layoutH="58">  
+        <div style="float:right; margin-bottom:10px;">
+            <if condition="($list['newOrder'] eq 1)or($list['abolishOrder'] eq 1)">
+                <span class="ring">业务员：{$list['user']['name']}</span>    	      
+            <else/>    
+                <span class="ring">财务状态：{$list['financeStatus']}</span><b>|</b>
+                <span class="ring">业务员：{$list['user']['name']}</span><b>|</b>
+                <span class="ring">出票员：{$list['ticket']['name']}</span><b>|</b>
+                <span class="ring">收款财务：{$list['gatheringFinance']['name']}</span><b>|</b>
+                <span class="ring">付款财务：{$list['paymentFinance']['name']}</span>
+            </if>
+        </div> 
+        <table cellpadding="0" cellspacing="0" width="1200px">
+            <tr>
+                <td colspan="2">订单ID号：<span class="span" style="color:#09F;">{$list['orderID']}</span></td>
+                <td colspan="4"><b>*</b>PNR：<span class="span">{$list['PNR']}</span></td>
+            </tr>
+            
+            <tr>
+                <td><b>*</b>订票人姓名：<span class="span">{$list['memberName']}</span></td>
+                <td><b>*</b>手机号：<span class="span">{$list['memberTel']}</span></td>
+                <td><b>*</b>客户类型：<span class="span">{$list['customerType']}</span></td>
+                <td>QQ号：<span class="span">{$list['memberQQ']}</span></td>
+                <td colspan="2">企业邮箱：<span class="span">{$list['memberEmail']}</span></td>
+            </tr>
+            
+            <volist name="list['passengers']" id="vo">
+            <tr>
+                <td><b>*</b>乘机人姓名{$i}：<span class="span">{$vo.first_name}/{$vo.last_name}</span></td>
+                <td><b>*</b>票号{$i}：<span class="span">{$vo.ticketNO}</span></td>
+                <td colspan="4"><b>*</b>DOCS{$i}：<span class="span">{$vo.DOCS}</span></td>
+            </tr> 
+            </volist>  
+            
+            <volist name="list['voyage']" id="vo">
+                <tr>
+                    <td colspan="2"><b>*</b>航程{$i}：<span class="span">{$vo.departure}　-　{$vo.destination}<span></td>
+                    <td colspan="4"><b>*</b>日期{$i}：<span class="span">{$vo.date}</span></td>
+                </tr> 
+            </volist>     
+            <tr><td colspan="6">航线：<span class="span">{$list['airtdne']}</span></td></tr>     
+        
+            <tr>
+                <td  colspan="2"><b>*</b>出票OFFIC号：<span class="span">{$list['ticketOfficNO']}</span></td>               
+                <td><b>*</b>供应商：<span class="span">{$list['gongyingshang']['supplier']}</span></td>
+                <td>文件号：<span class="span">{$list['fileNumber']}</span></td>
+                <td >后返金额：<span class="span">{$list['backMoney']}</span></td>
+            </tr> 
+            <tr><td  colspan="6">返点政策：<span class="span">{$list['rebatePolicy']}</span></td></tr>   
+        
+            <tr>
+                <td><b>*</b>采购价：<input value="{$list['procurementPrice']}" type="text" name="procurementPrice" class="inputBcak" id="cg" onKeyUp="value=value.replace(/[^\d\.]/g,'');SumNum();"/></td>
+                <td><b>*</b>销售价：<input value="{$list['salePrice']}" type="text" name="salePrice"  class="inputBcak"  id="xs" onKeyUp="value=value.replace(/[^\d\.]/g,'');SumNum();" /></td>
+                <td><b>*</b>税费：<input value="{$list['taxation']}" type="text" name="taxation"  class="inputBcak" id="sf" onKeyUp="value=value.replace(/[^\d\.]/g,'');SumNum();" /></td>
+                <td><b>*</b>保险名称： 
+                	<select name="insuranceType">
+                         <option value="1" <if condition="$vo['insuranceType'] eq 1">selected="selected"</if>>华泰A</option><option value="2" <if condition="$vo['insuranceType'] eq 2">selected="selected"</if>>中国人保</option>
+                    </select>
+                </td>
+                <td><b>*</b>保险金额：<input value="{$list['insurance']}" type="text" name="insurance"  class="inputBcak" id="bx" onKeyUp="value=value.replace(/[^\d\.]/g,'');SumNum();" style="width:110px;"/></td>            
+            </tr> 
+            <tr>
+            	<td><b>*</b>应收金额：<input value="￥{$list['payableAmount']}" type="text" disabled="disabled" id="res" style="width:110px;"/></td>
+                <td><b>*</b>应付金额：<input value="￥{$list['procurementPrice']+$list['taxation']}" type="text" disabled="disabled" id="fu" style="width:110px;"/></td>
+            </tr>       
+            <tr>
+                <td  colspan="2"><b>*</b>供应商费用：
+                   <select name="supplierCostType">
+                        <option value="1" <if condition="$list['supplierCostType'] eq 1">selected="selected"</if>>其它供应商收入费用</option>
+                        <option value="2" <if condition="$list['supplierCostType'] eq 2">selected="selected"</if>>其它供应商支出费用</option>
+                        <option value="3" <if condition="$list['supplierCostType'] eq 3">selected="selected"</if>>供应商改期手续费</option>
+                        <option value="4" <if condition="$list['supplierCostType'] eq 4">selected="selected"</if>>供应商退票手续费</option>
+                        <option value="5" <if condition="$list['supplierCostType'] eq 5">selected="selected"</if>>供应商签证费</option>
+                        <option value="6" <if condition="$list['supplierCostType'] eq 6">selected="selected"</if>>供应商机票款</option>
+                        <option value="7" <if condition="$list['supplierCostType'] eq 7">selected="selected"</if>>航空公司改签</option>
+                    </select>                
+                    <input value="{$list['supplierCost']}" type="text" name="supplierCost" class="inputBcak"/>                  
+                </td>                
+                <td  colspan="2"><b>*</b>内部费用：
+                    <select name="interiorCostType">
+                        <option value="1" <if condition="$list['interiorCostType'] eq 1">selected="selected"</if>>转账费</option>
+                        <option value="2" <if condition="$list['interiorCostType'] eq 2">selected="selected"</if>>刷卡费</option>
+                        <option value="3" <if condition="$list['interiorCostType'] eq 3">selected="selected"</if>>追位费</option>
+                        <option value="4" <if condition="$list['interiorCostType'] eq 4">selected="selected"</if>>汇款手续费</option>
+                        <option value="5" <if condition="$list['interiorCostType'] eq 5">selected="selected"</if>>燃气费</option>
+                        <option value="6" <if condition="$list['interiorCostType'] eq 6">selected="selected"</if>>有线电视费</option>
+                        <option value="7" <if condition="$list['interiorCostType'] eq 7">selected="selected"</if>>办公费用</option>
+                        <option value="8" <if condition="$list['interiorCostType'] eq 8">selected="selected"</if>>快递费</option>
+                        <option value="9" <if condition="$list['interiorCostType'] eq 9">selected="selected"</if>>电话费</option>
+                        <option value="10" <if condition="$list['interiorCostType'] eq 10">selected="selected"</if>>社保</option>
+                        <option value="11" <if condition="$list['interiorCostType'] eq 11">selected="selected"</if>>管理费</option>
+                        <option value="12" <if condition="$list['interiorCostType'] eq 12">selected="selected"</if>>支、取、转账手续费</option>
+                        <option value="13" <if condition="$list['interiorCostType'] eq 13">selected="selected"</if>>广告费</option>
+                        <option value="14" <if condition="$list['interiorCostType'] eq 14">selected="selected"</if>>软件支持费</option>
+                        <option value="15" <if condition="$list['interiorCostType'] eq 15">selected="selected"</if>>无线上网</option>
+                    </select>                                      
+                   <input value="{$list['interiorCost']}" type="text" name="interiorCost"  class="inputBcak"/> 
+               </td>
+                <td  colspan="2"><b>*</b>其他费用：
+                   <select name="otherCostType">
+                        <option value="1" <if condition="$list['otherCostType'] eq 1">selected="selected"</if>>eterm租金支出</option>
+                        <option value="2" <if condition="$list['otherCostType'] eq 2">selected="selected"</if>>行程单收入</option>
+                        <option value="3" <if condition="$list['otherCostType'] eq 3">selected="selected"</if>>行程单支出</option>
+                        <option value="4" <if condition="$list['otherCostType'] eq 4">selected="selected"</if>>UR租金收入</option>
+                        <option value="5" <if condition="$list['otherCostType'] eq 5">selected="selected"</if>>航空保险收入</option>
+                        <option value="6" <if condition="$list['otherCostType'] eq 6">selected="selected"</if>>航空保险支出</option>
+                        <option value="7" <if condition="$list['otherCostType'] eq 7">selected="selected"</if>>第三方保险支出</option>
+                    </select>             
+                    <input value="{$list['otherCost']}" type="text" name="otherCost"  class="inputBcak"/> 
+                </td>
+            </tr>
+        	 <volist name="list['payInfo']" id="vo">
+            <tr>
+                <td>收入金额{$i}：<input value="{$vo.procurementPrice}" type="text" name="zfInfo[{$i}][procurementPrice]" style="width:110px;" class="inputBcak"/></td>
+                <td colspan="2">收款账号{$i}：
+                    <select name="zfInfo[{$i}][amount_type]" class="sk">
+                        <option value="0" <if condition="$vo['amount_type'] eq 0">selected="selected"</if>>-请选择-</option>
+                        <option value="1" <if condition="$vo['amount_type'] eq 1">selected="selected"</if>>广州账号</option>
+                        <option value="2" <if condition="$vo['amount_type'] eq 2">selected="selected"</if>>北京账号</option>
+                        <option value="3" <if condition="$vo['amount_type'] eq 3">selected="selected"</if>>上海账号</option>
+                        <option value="4" <if condition="$vo['amount_type'] eq 4">selected="selected"</if>>深圳账号</option>
+                        <option value="5" <if condition="$vo['amount_type'] eq 5">selected="selected"</if>>商旅账号</option>
+                        <option value="6" <if condition="$vo['amount_type'] eq 6">selected="selected"</if>>其他账号</option>
+                    </select>
+                    <select name="zfInfo[{$i}][bank]" class="bank">
+                    <volist name="vo['banklist']" id="ko" key="j">                                 
+                        <option value="{$ko.id}" <if condition="$vo['bank'] eq $ko['id']">selected="selected"</if>>{$ko['bank']}</option>
+                     </volist>
+                    </select>                                 
+                </td>
+                <td>汇款人{$i}：<input value="{$vo.remitter}" type="text" name="zfInfo[{$i}][remitter]" style="width:110px;"/></td>
+                <td>支付日期{$i}：<input value="{$vo.payTime}" type="text" name="zfInfo[{$i}][payTime]" style="width:110px;"/></td>                
+                <td>支付方式{$i}：
+                    <select name="zfInfo[{$i}][payType]">
+                        <option value="1" <if condition="$vo['payType'] eq 1">selected="selected"</if>>在线支付</option>
+                        <option value="2" <if condition="$vo['payType'] eq 2">selected="selected"</if>>转账支付</option>
+                        <option value="3" <if condition="$vo['payType'] eq 3">selected="selected"</if>>刷卡支付</option>
+                        <option value="4" <if condition="$vo['payType'] eq 4">selected="selected"</if>>现金支付</option>
+                    </select>
+                    <!--<span style="margin-left:10px;cursor:pointer;" class="del">删除</span>-->
+                </td>                   
+            </tr>
+         </volist>
+            <tr><td  colspan="6">收入备注：<span class="span">{$list['remark2']}</span></td></tr>             
+            <tr><td  colspan="6">收款财务备注：<span class="span">{$list['gatheringFinanceRemark']}</span></td></tr>            
+            <tr><td colspan="6">付款银行：{$list['gatheringBank']}</td></tr>
+            <tr><td colspan="6">付款财务备注：{$list['paymentFinanceRemark']}</td></tr>                                      
+        </table>    
+    </div>     
+    <div class="formBar">
+        <ul>
+            <li><div class="buttonActive"><div class="buttonContent"><button type="submit">复核通过</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭窗口</button></div></div></li>
+        </ul>
+    </div>
+    <input type="hidden" value="{$list['id']}" name="id"/> 
+</form> 
+<script type="text/javascript">
+$(function(){
+	$(".sk").live('change',function(){
+		var typeID=$(this).val();
+		var type='type';
+		var sk=$(this);
+		$.getJSON("__URL__/addOrder",{type:type,typeID:typeID},function(data){
+			if(data.status==1){																	
+				var html="";							
+				html +='<select name="[bank]">';
+				$.each(data.list,function(i,item){
+					html +='<option value="'+item.id+'">'+item.bank+'</option>';										
+				})									
+				html +='</select>';
+				sk.next("select").html(html);
+			}else{
+				var html=""
+				html +='<select name="bank" class="bank"><option value="0">-请选择-</option></select>';
+				sk.next("select").html(html);
+			}
+		})
+	})							
+})	                         
+</script>
+<script language="javascript">
+function SumNum(){
+	var sumValue;
+	var sumYing;
+	cgj=eval(cg.value);
+	xsj=eval(xs.value);
+	sfj=eval(sf.value);
+	bxj=eval(bx.value);	
+	
+	if (isNaN(cgj)){cgj=0}
+	if (isNaN(xsj)){xsj=0}
+	if (isNaN(sfj)){sfj=0}
+	if (isNaN(bxj)){bxj=0}	
+	
+	sumValue = xsj+sfj+bxj;
+	self['res'].value =sumValue;
+	
+	sumFu=cgj+sfj;
+	self['fu'].value =sumFu;	
+}
+</script> 

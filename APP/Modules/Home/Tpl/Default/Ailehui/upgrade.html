@@ -1,0 +1,125 @@
+<include file="Public:ailehui_header" />
+	<div id="cont">
+    	<div class="wd980">
+        	<h1 class="h1_tit_nav">你当前所在位置：<a href="{:U('/')}" class="sy">首页</a> > <a href="{:U('/Ailehui')}" class="sy">爱乐汇</a> > <a class="sy">会员升级</a></h1>
+            <div class="wd270 left">
+                <include file="left" />
+            </div>
+            <div class="wd700 right">
+           	  <div class="bor">
+                     <empty name="userInfo">
+                	<div id="loginbox"><span>请登录后查看我的等级&nbsp;&nbsp;<a href="{:U('/member/login')}">立即登录</a></span></div>
+                    <else />
+                    <div id="grade">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td>我的等级<br/><b>{$userInfo.rank.name}</b></td>
+                            <td class="bg">&nbsp;</td>
+							<td>当前消费<br/><b>￥{$upgradeInfo.current.money|default=0}</b><br/>成功预订<b>{$upgradeInfo.current.num|default=0}</b>次</td>
+                            <td class="bg">&nbsp;</td>
+							<td>升级还需要<br/>
+                            <notempty name="upgradeInfo['advanced']['money']">
+                                    消费<b>￥{$upgradeInfo.advanced.money}</b>
+                                    <notempty  name="upgradeInfo['advanced']['num']">
+                                        <br/>或成功预订<b>{$upgradeInfo.advanced.num}</b>次
+                                    </notempty>
+                             <else />
+                                    成功预订<b>{$upgradeInfo.advanced.num}</b>次
+                            </notempty>
+                            </td>
+                            <td class="bg">&nbsp;</td>
+							<td>信用记录<br/><b>良好</b></td>
+                            <td class="bg">&nbsp;</td>
+							<td>会员有效期<br/><b><empty name="upgradeInfo.valid">无限<else />{$upgradeInfo.valid}</empty></b></td>
+						</tr>
+					</table>
+                    </div>
+                    <h2 class="h2box">我的信用记录</h2>
+                    <div class="credit c0"></div>
+                    <p class="p666">说明: 1.信用记录指对频繁取消订单或拒付等违约行为的综合评估；<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.请珍惜您的信用记录，它对您的会员级别评定非常重要；如您的信用记录欠佳，您的会员级别将被下调。</p>
+                    <h2 class="h2box">我的消费记录<em>（一年内）</em></h2>
+                    <div id="expense_list">
+                    	<h2><span class="wd150">订单ID</span><span class="wd240">航班航程</span><span class="wd100">消费金额</span><span class="wd188">消费时间</span></h2>
+                    	<table width="660" border="0" align="center" cellpadding="0" cellspacing="0">
+							<volist name="orderList" id="vo">
+                            <tr>
+								<td width="141">{$vo.ddbh}</td>
+                                <td width="240">{$vo.hc_n}&nbsp;&nbsp;{$vo.lx_n}</td>
+                                <td width="100">￥{$vo.xj}</td>
+                                <td width="179">{$vo.dprq}</td>
+							</tr>
+                            </volist>
+						</table>
+                        <div class="page" totlepage="1" page="1">
+                            <span class="next ajax"></span>
+                            <span class="page_num"><em>1</em>/1页</span>
+                            <span class="prev ajax"></span>
+                        </div>
+                    </div>
+                     </empty>
+                    <h2 class="h2box">会员升级条件</h2>
+                    <dl id="upgrade">
+                    	<dt>蓝钻会员</dt>
+                        <dd>消费≥<b>￥20000</b><br/>或成交订单≥<b>5</b></dd>
+                        <dt>银钻会员</dt>
+                        <dd>消费≥<b>￥50000</b><br/>或成交订单≥<b>10</b></dd>
+                        <dt>金钻会员</dt>
+                        <dd>消费≥<b>￥100000</b><br/>或成交订单≥<b>20</b></dd>
+                        <dt>黑钻会员</dt>
+                    </dl>
+                    <p class="p999">注: 1.会员等级有效期为一年，在该有效期内任何时间如达到升级高一级别会员条件，即可立即实现升级（蓝钻会员例外，<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;会员资格长期有效，但需自注册之日起按年计算满足升级条件才能实现升级）；<br/>&nbsp;&nbsp;&nbsp;&nbsp;2.各级别会员在有效期内未达到升级条件，但能达到维持本级别会员条件，则自到期日起会员资格顺延一年；<br/>&nbsp;&nbsp;&nbsp;&nbsp;3.各级别会员在有效期内既未达到升级条件且未能达到维持本级别会员条件，则自到期之日起自动降为低一级别会员<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（蓝钻会员例外，不需考核本级别会员条件及无需降级）；</p>
+
+                  <notempty name="userInfo">
+                    <h2 class="h2box">黑钻会员维持本级条件</h2>
+                    <dl id="crown_member">
+                    	<dt>{<span>黑钻会员</span></dt>
+                      	<dd>
+                        	<div>有效期内消费 ≥ <b>￥100000</b></div>
+                            <span>或者</span>
+                            <div>成功预订次数 ≥ <b>20</b></div>
+                      	</dd>
+                    </dl>
+                    <p class="p999">注: 1.黑钻会员有效期为一年，在该有效期内消费额度达到人民币10万元或成功预订次数达到10次且信用记录良好，即能达<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;到维持本级别会员条件，自到期日起会员资格顺延一年；<br/>&nbsp;&nbsp;&nbsp;&nbsp;2.黑钻会员在有效期内如未达到上述条件，则自到期之日起自动降级为金钻会员；<br/>&nbsp;&nbsp;&nbsp;&nbsp;3.金钻会员有效期为一年，在有效期内如消费额度达到人民币10万元或成功预订次数达到10次且信用记录良好，则自达<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;到条件之日起自动升级为黑钻会员；</p>
+                  </notempty>
+              </div>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript">
+ 	$(function(){
+		//使用记录 AJAX分页
+		$('#expense_list .ajax').click(function(){
+			var totlePage=$(this).parent().attr('totlePage'),page=$(this).parent().attr('Page'),i=$(this).index();
+			if(i==0){	
+				page=parseInt(page)+1;					
+				if(page>totlePage){page=totlePage;}
+				}else if(i==2){
+					page=parseInt(page)-1;
+					if(page<=0){page=1;}
+					}
+			expense_ajax(totlePage,page);
+			});
+		//AJAX分页函数
+		function expense_ajax(totlePage,page){
+			$.getJSON("{:U('/Ailehui/upgrade')}",{t:'expense',p:page},function(data){
+				if(data.status==1){
+					var dataList=data.exchange,html='';
+					$.each(dataList,function(i,item){
+						html += '<tr>';
+						html += '<td width="141">IF51DCC0F13A800B0064</td>';
+                        html += '<td width="240">北京-芝加哥 往返</td>';
+                        html += '<td width="100">200</td>';
+                        html += '<td width="179">2013-7-10 15:35</td>';
+						html += '</tr>';
+						});
+					$('#exchange table').html(html);
+					$('#exchange .page').attr('page',page);
+					$('#exchange .page_num em').html(page);
+					}else{
+						alert(data.info);
+						}
+				});
+			}
+	});
+</script>
+<include file="Public:footer" />

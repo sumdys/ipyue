@@ -1,0 +1,256 @@
+<include file="Public:header" />
+<link rel="stylesheet" href="__PUBLIC__/css/Iflight.css" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/js/IflightOrder.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/My97DatePicker/WdatePicker.js"></script>
+<div class="wd980 pb25">
+	<h1 class="iflight_tit_nav">您当前所处的位置：<a href="{:U('/')}">首页</a><em>></em><a href="{:U('/iflight')}">国际机票</a><em>></em>填写订单</h1>
+	<div class="mt10">
+		<ul class="flight_flow ff2">
+			<li>1.查询航班</li>
+			<li class="on">2.填写订单</li>
+			<li>3.支付票款</li>
+			<li>4.支付成功</li>
+		</ul>
+		<div class="if_hint">温馨提示: 购票前请先确认乘机人的签证类型，并确保证件能够完成本次旅行；如有其它订票疑问，请访问帮助中心或致电400-608-5188。</div>
+	</div>
+	<div class="fo_box mt10">
+		<form action="{:U('/Iflight/flightOrderCheck')}" method="post" id="flight_order_form">
+			<h2>行程信息</h2>
+			<div class="fo_bor_box">
+                <volist name="list.OriginDestinationOption" id="vo">
+				<dl class="journey">
+					<dt>航班信息：</dt>
+					<dd>
+						<div class="journey_title">
+							<table>
+								<tr>
+									<td width="60"><b><eq name="vo.RefNumber" value="1">去程<else />返程</eq></b></td>
+									<td width="460"><span><eq name="vo.RefNumber" value="1">{$list.OriginCity}→{$list.DestinationCity}<else />{$list.DestinationCity}→{$list.OriginCity}</eq></span>日期：{$vo.DepartureDate|date='Y-m-d',###}</td>
+									<td width="155"><a title="{$list.AirItineraryPricingInfo.Remarks.Remark}" href="#">退改签</a></td>
+									<td width="155"><a href="#" class="right">修改航班</a></td>
+								</tr>
+							</table>
+						</div>
+                        <!--iflistBox-->
+                    	<div class="iflist_box">
+                        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td width="530" class="flight_show">
+                                    <volist name="vo.FlightSegment" id="Flight" mod="2">
+                                       <eq name="mod" value="0">
+                                    <table class="list_info" width="430" border="0" align="center" cellpadding="0" cellspacing="0">
+										<tr>
+                                        	<td width="190">
+                                            	<p><em class="offTime">{$Flight.DepartureDate|date='H:i',###}</em><span>{$Flight.DepartureAirportName}</span></p>
+                                                <p><em class="arrTime">{$Flight.ArrivalDate|date='H:i',###}</em><span>{$Flight.ArrivalAirportName}</span></p>
+                                            </td>
+                                            <td width="125">
+                                            	<p><span class="if_logo"></span><span>{$Flight.AirCompanyName}</span></p>
+                                                <p><span>{$Flight.OperatorCode}{$Flight.FlightNumber}</span><span>计划机型<a>{$Flight.Equipment}</a></span></p>
+                                            </td>
+                                            <td widt="85">
+                                            	<p>经济舱</p>
+                                            </td>
+                                        </tr>
+                                     </table>
+                                     </eq>
+                                    <eq name="mod" value="1">
+									<div class="tran_flight">
+                                    	<div class="transit_text">
+                                        	<p>
+                                                <span class="icon"></span>
+                                                <span>{$Flight.DepartureCityName}中转</span>
+                                                <span class="stay_time">停留{$Flight.FlyTime}</span>
+                                            </p>
+                                        </div>
+                                        <table width="430" border="0" align="center" cellpadding="0" cellspacing="0" class="list_info">
+										<tr>
+                                        	<td width="190">
+                                            	<p><em class="offTime">{$Flight.DepartureDate|date='H:i',###}</em><a><if condition="$Flight.DepartureSpanDays gt 0">第二天</if></a><span>{$Flight.DepartureAirportName}</span></p>
+                                                <p><em class="arrTime">{$Flight.ArrivalDate|date='H:i',###}</em><a><if condition="$Flight.ArrivalSpanDays gt 0">第二天</if></a><span>{$Flight.ArrivalAirportName}</span></p>
+                                            </td>
+                                            <td width="125">
+                                            	<p><span class="if_logo"></span><span>{$Flight.AirCompanyName}</span></p>
+                                                <p><span>{$Flight.OperatorCode}{$Flight.FlightNumber}</span><span>计划机型<a>{$Flight.Equipment}</a></span></p>
+                                            </td>
+                                            <td widt="85">
+                                            	<p>经济舱</p>
+                                            </td>
+                                        </tr>
+                                     </table>
+                                    </div>
+                                    </eq>
+                                    </volist>
+                                    </td>
+                                  	<td width="330">
+                                    	<p>普通成人</p>
+                                    </td>
+                                </tr>
+							</table>
+                    	</div><!--iflistBox End-->
+						<a class="more_journey"><em>展开航程</em><span class="mj_icon"></span></a>
+
+					</dd>
+				</dl>
+                </volist>
+			</div>
+			<h2 class="mt10"><a class="right" href="#">登录填写更便捷</a>乘机人信息<em>请准确填写登机人信息(姓名、证件号码），以免在办理登机手续时发生问题。</em></h2>
+			<div id="foBorBox" class="fo_bor_box">
+                <for start="0" end="$list['query']['PersonNum']+$list['query']['ChildNum']">
+				<div class="passenger_info">
+					<h3>第<span class="list_word">{:numToUpper($i+1)}</span>位乘客<a class="del_passenger <eq name='i' value='0'>none</eq>">删除</a></h3>
+					<ul>
+						<li>
+							<span><em>*</em>英文姓名：</span>
+							<input type="text" name="TravelerInfo[surName][]" class="sur_name wd160 mr10" value placeholder="姓(Surname)">
+							<input type="text" name="TravelerInfo[givenName][]" class="given_name wd160 mr10" value placeholder="名(Given names)">
+							<a href="#">填写说明</a>
+						</li>
+						<li>
+							<span><em>*</em>乘客类型：</span>
+							<select name="TravelerInfo[passengerType][]" class="passenger_type wd90">
+								<option value="ADT" >成人</option>
+                                <option value="CNN" <gt name="i" value="$list['query']['PersonNum']-1">selected</gt> >儿童</option>
+							</select>
+						</li>
+						<li>
+							<span><em>*</em>出生日期：</span>
+							<input type="text" name="TravelerInfo[dobDate][]" class="date_box birthday" class="wd160" value="1980-01-01">
+						</li>
+						<li>
+							<span><em>*</em>签发国家：</span>
+                            <select name="TravelerInfo[CountryCode][]" class="issuing_state" html="0">
+                            	<option value="0">请选择签发国家</option>
+                            </select>
+						</li>
+						<li class="sex_type">
+							<span><em>*</em>性别：</span>
+							<input type="radio" name="TravelerInfo[sex][{$i}]" checked="checked" value="1"><label class="sex">男</label>
+							<input type="radio" name="TravelerInfo[sex][{$i}]" value="2"><label class="sex">女</label>
+						</li>
+						<li>
+							<span><em>*</em>证件号码：</span>
+							<select name="TravelerInfo[credentialsType][]" class="credentials_type wd90 mr10">
+								<option value="护照">护照</option>
+							</select>
+							<input type="text" class="credentials_no wd160" name="TravelerInfo[ncredentialsNo][]" value>
+						</li>
+						<li>
+							<span><em>*</em>证件有效期：</span>
+							<input type="text" name="TravelerInfo[ctDate][]" class="date_box validity" class="wd160" value="1980-01-01">
+						</li>
+						<li>
+							<span>&nbsp;</span>
+							<div class="if_hint">
+								<em>品悦温馨提示：</em>亲爱的用户，为了您的顺利出行，请确认您的行程结束时间至少比证件有效期早6个月
+							</div>
+						</li>
+						<!--<li>
+							<span>保险：</span>
+							<select name="TravelerInfo[insurance][]" class="insurance wd160 color333">
+								<option value="60">保额100万  60元/份</option>
+							</select>
+							（全程2航段，每航段30元）
+							<a href="#">保险详情及条款</a>
+						</li>
+						<li>
+							<span>常旅客卡名称：</span>
+							<input type="text" class="wd160" name="TravelerInfo[frequentlyName][]" value>
+						</li>
+						<li>
+							<span>常旅客卡号：</span>
+							<input type="text" class="wd160" name="TravelerInfo[frequentlyNo][]" value>
+						</li>-->
+					</ul>
+				</div>
+                </for>
+				<div class="add_passenger" id="addPassenger">
+					<span class="add left mr10"></span>
+					每个订单最多添加9个乘机人，9人以上请填写
+					<a href="{:U('/iflight/demand')}">国际机票需求单</a>
+					<span class="right">
+						<input name="TravelerInfo[savePassengers][]" type="checkbox">保存成常用乘机人
+					</span>
+				</div>
+			</div>
+
+			<!--<h2>报销凭证</h2>
+			<div class="fo_bor_box">
+				<select name="reimbursement" class="wd160 color333" id="reimbursement" class="color333">
+					<option value="邮寄报销凭证">邮寄报销凭证</option>
+				</select>
+			</div>-->
+
+			<div class="fo_bor_box mt10">
+				<h4>联系人信息</h4>
+				<ul class="contacts_info">
+					<li>
+						<span><em>*</em>联系人姓名：</span>
+						<input type="text" class="contacts_name wd160" name="contactsName" value>
+					</li>
+					<!-- <li>
+						<span><em>*</em>通知方式：</span>
+						<select name="informType" class="wd90 color333" id="informType">
+							<option value="email">邮件通知</option>
+						</select>
+					</li> -->
+					<li>
+						<span><em>*</em>手机号码：</span>
+						<input type="text" class="cell_phone wd160" name="cellPhone" value="{$userInfo.mobile}">
+					</li>
+					<li>
+						<span>联系电话：</span>
+						<input type="text" class="wd60" name="phoneArea" value placeholder="区号"><i>-</i>
+						<input type="text" class="wd160" name="phoneNo" value placeholder="电话号码"><i>-</i>
+						<input type="text" class="wd60" name="phoneExtension" value placeholder="分机">
+						（手机号码，联系电话至少选填一项
+					</li>
+					<li>
+						<span><em>*</em>邮箱地址：</span>
+						<input type="text" class="email wd160" name="email" value="{$userInfo.email}">
+					</li>
+				</ul>
+			</div>
+			<div class="fo_bor_box mt10 exp_priv_total">
+				<dl class="expense_info">
+					<dt>费用信息：</dt>
+					<dd>
+						<div>
+							<span class="right">
+								<b id="adultPrice">{$fareInfo.ADT.Fare}</b><b>元</b>×<em id="adultNo">{$list.query.PersonNum}</em>（成人）+
+                                <b id="childPrice">{$fareInfo.CNN.Fare}</b><b>元</b> ×<em id="childNo">{$list.query.ChildNum}</em>（儿童）=<b id="subtotalPrice">{$fareInfo.FareSubtotal}</b><b>元</b>
+							</span>
+							票价
+						</div>
+						<!--
+						<div>
+							<span class="right">
+								<b id="insurancePrice">60</b>×<em id="insuranceNo">1</em>
+							</span>
+							保险价格
+						</div>
+						-->
+						<div>
+							<span class="right">
+								<b id="taxPrice" adultTaxPrice="{$fareInfo.ADT.Tax}" childTaxPrice="{$fareInfo.CNN.Tax}">{$fareInfo.TaxSubtotal}</b><b>元</b>
+							</span>
+							参考税费
+						</div>
+					</dd>
+				</dl>
+				<dl class="asf_privilege">
+					<dt>品悦特惠：</dt>
+					<dd>
+						<p><span class="left mt10 mr10 pri_type pt1"></span>成功预订改航班并出票后返利50元。<a href="" class="icon_circle"></a></p>
+					</dd>
+				</dl>
+				<dl class="if_total">
+					<dt>&nbsp;</dt>
+					<dd>费用总计：<b id="ifTotal">{$fareInfo.PriceTotal}</b><b>元</b><input id="ifTotalInput" type="hidden" name="TravelerInfo[ifTotal][]" value="{$fareInfo.PriceTotal}"></dd>
+				</dl>
+			</div>
+			<div class="fo_sub"><input type="submit" id="foSub" value="提交订单"></div>
+		</form>
+	</div>
+</div>
+<include file="Public:footer" />

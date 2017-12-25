@@ -1,0 +1,35 @@
+ <div id="footer">
+    	<div class="wd960">
+            <div id="ft_link">
+                    <a href="{:U('/about')}">关于我们</a>
+                    <a href="{:U('/about/duty')}">免责声明</a>
+                    <a href="{:U('/about/privacy')}">隐私保护</a>
+                    <a href="{:U('/about/job')}">诚聘英才</a>
+                    <a href="{:U('/about/contact')}">联系我们</a>
+            </div>
+            <?php
+            //设置备案号
+            if($_SERVER['HTTP_HOST']=='www.aishangfei.cn'){
+                $bah="粤ICP备11009654号-7";
+            }elseif($_SERVER['HTTP_HOST']=='www.aishangfei.org'){
+                $bah="粤ICP备11009654号-9";
+            }elseif($_SERVER['HTTP_HOST']=='www.aishangfei.com.cn'){
+                $bah="粤ICP备13026678号-1";
+            }else{
+                $bah="粤ICP备15024109号-1";
+            }
+            ?>
+            <div id="ft_copyright">Copyright © 2014-2015 品悦旅行网 All Rights Reserved
+                <img src="__PUBLIC__/images/ft_icp.jpg" alt="icp" />
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">{$bah}</a>
+            </div>
+            <div id="ft_icons">
+                <a class="a2" href="#" target="_blank"></a>
+                <a class="a3" href="http://trust.360.cn/search.php" target="_blank"></a>
+                <a class="a4" href="#" target="_blank"></a>
+                <a class="a5" href="http://www.gzaic.gov.cn/GZCX/WebUI/credit/qiyeInfo.htm#" target="_blank"></a>
+                <a class="a6" href="http://net.china.com.cn/index.htm" target="_blank"></a>
+                <a class="a7" href="http://www.cyberpolice.cn/wfjb/" target="_blank"></a>
+            </div>
+</body>
+</html>

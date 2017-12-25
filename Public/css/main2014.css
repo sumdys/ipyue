@@ -1,0 +1,34 @@
+body,div,ul,li,dl,dt,dd,ol,h1,h2,h3,h4,h5,h6,form,input,table,p{padding:0;margin:0;font-size:12px;color:#333;}
+ul,li,dl,dt,dd,ol{list-style:none;}
+img{border:none;}
+a{text-decoration:none;color:#333;}
+a:hover{color:#f60;}
+/*共公*/
+.box_bor{border:1px solid #e3e3e3;border-top:none;}
+.box500,#query_box,.box240b{margin-top:10px;}
+.box240a h2,.box240b h2{line-height:31px;padding-left:30px;font-size:14px;font-weight:bold;}
+.box240a h2{color:#fff;background:url(../images/tit_bg1.jpg) no-repeat;cursor:pointer;}
+.box240b h2{background:url(../images/tit_bg2.jpg) no-repeat;}
+
+.box500 h2{line-height:35px;padding-left:30px;font-size:14px;font-weight:bold;background:url(../images/tit_bg3.jpg) no-repeat;}
+/*.box500 .box_bor{height:250px;}*/
+
+/*查询盒子*/
+.box240a .box_bor{height:308px;}
+.time_query form{padding:5px 15px;}
+.time_query form h3{line-height:32px;font-size:14px;font-weight:normal;}
+.time_query form div{position:relative;}
+.time_query form div span{display:block;width:22px;height:41px;background:url(../images/tdq.gif) no-repeat;position:absolute;top:12px;right:-4px;}
+.time_query form div input{width:188px;height:27px;line-height:27px;margin-bottom:10px;text-indent:5px;border:1px solid #ccc;color:#999;}
+.time_query form .sub{width:108px;height:35px;line-height:35px;text-align:center;font-size:16px;font-weight:bold;color:#fff;border:none;background:url(../images/but20140626.gif) no-repeat;}
+.time_query .hot_query{padding:20px 15px 0 15px;line-height:20px;}
+.time_query .hot_query span{color:#666;}
+.time_query .hot_query a{color:#999;margin-right:14px;}
+.time_query .hot_query a:hover{color:#f60;}
+
+#box11box11{width:170px;border:1px solid #ccc;color:#999;}
+$box11box11 span{padding-left:50px;}
+#box11box11 form{padding:6px 20px;}
+#box11box11 form ul li input{line-height:27px;margin-bottom:10px;text-indent:5px;border:1px solid #ccc;color:#999;}
+#box11box11 form ul li span{font-size: 12px;font-weight: normal;}
+#box11box11 form .sub{width:108px;height:35px;line-height:35px;text-align:center;font-size:16px;font-weight:bold;color:#fff;border:none;background:url(../images/but20140626.gif) no-repeat;}

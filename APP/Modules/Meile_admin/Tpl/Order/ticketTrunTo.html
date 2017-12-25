@@ -1,0 +1,40 @@
+<!---
+//
+//转单--出票部
+//
+-->
+<style type="text/css">
+.not select{float:none; margin-bottom:15px;}
+.top{margin-top:10px;float:right; margin-bottom:18px; color:#999;}
+</style>
+<form action="__URL__/ticketTrunTo/navTabId/__MODULE__-ticketWaitForAccept"  method="post" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)"> 
+    <center>
+        <div class="top">业务员：{$list['user']['name']}&nbsp;&nbsp;&nbsp;&nbsp;出票员：{$list['ticket']['name']}</div>
+        <div style="clear:both;"></div>
+        <div class="not">将本订单转移给：
+            <select name="drawer">            
+            	<if condition="$list['ticket']['id'] eq 306">
+                    <option value="330">王福海</option> 
+                    <option value="331">郑成林</option> 
+             	<elseif condition="$list['ticket']['id'] eq 330" />
+                    <option value="306">陈秋艳</option>
+                    <option value="331">郑成林</option>           
+            	<elseif condition="$list['ticket']['id'] eq 331" />               
+                	<option value="306">陈秋艳</option>
+                    <option value="330">王福海</option>
+                <else/>
+                    <option value="330">王福海</option> 
+                    <option value="331">郑成林</option> 
+                    <option value="306">陈秋艳</option> 
+                </if>        
+            </select>
+        </div>   
+    </center>
+    <div class="formBar">
+        <ul>
+            <li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定转单</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+        </ul>
+    </div>
+    <input type="hidden" name="id" value="{$list.id}" />
+</form>

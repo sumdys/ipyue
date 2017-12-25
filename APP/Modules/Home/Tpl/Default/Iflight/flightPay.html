@@ -1,0 +1,74 @@
+<include file="Public:header" />
+<link rel="stylesheet" href="__PUBLIC__/css/Iflight.css" type="text/css" />
+<div class="wd980 pb25">
+	<h1 class="iflight_tit_nav">您当前所处的位置：<a href="{:U('/')}">首页</a><em>></em><a href="{:U('/iflight')}">国际机票</a><em>></em>支付订单</h1>
+	<div class="mt10">
+		<ul class="flight_flow ff3">
+			<li>1.查询航班</li>
+			<li>2.填写订单</li>
+			<li class="on">3.支付票款</li>
+			<li>4.支付成功</li>
+		</ul>
+	</div>
+	<form action="{:U('/Member/Pay/tenPay')}" method="post">
+		<div class="fp_box mt10">
+			<div class="fp_bor_box">
+				<dl class="price_jour mt10">
+					<dt>
+						<h4>订单金额：</h4>
+						<p><em>￥</em><b>{$data.PriceTotal}</b></p>
+					</dt>
+					<dd>
+						<h4><b>{$data.type}机票</b><b>{$data.DepartureCityName}→{$data.ArrivalCityName}</b></h4>
+						<p>起飞时间：{$data.DepartureDate|date='Y-m-d H:i:s',###}</p>
+					</dd>
+				</dl>
+                <input type="hidden" name="order_no" value="{$data.orderId}">
+                <input type="hidden" name="product_name" value="{$data.type}机票:{$data.DepartureCityName}→{$data.ArrivalCityName}">
+                <input type="hidden" name="order_price" value="{$data.PriceTotal}">
+                <div class="if_hint"><em>品悦温馨提示：</em>航班价格变动频繁，请在30分钟内完成支付 。</div>
+				<div class="pay_list">
+					<h3>选择支付方式：</h3>
+					<ul id="paytype">
+						<li>
+							<input type="radio" name="pay" value="bill" checked="checked">
+							<span class="bill"></span>
+						</li>
+						<li>
+							<input type="radio" name="pay" value="alipay">
+							<span class="alipay"></span>
+						</li>
+						<li>
+							<input type="radio" name="pay" value="yeepay">
+							<span class="yeepay"></span>
+						</li>
+						<li>
+							<input type="radio" name="pay" value="tenpay">
+							<span class="tenpay"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="getback mt10">
+				<span class="left"><a href="#"><上一步</a></span>
+			</div>
+		</div>
+		<div class="fo_sub"><input type="submit" id="foSub" value="下一步，支付"></div>
+	</form>
+</div>
+<script type="text/javascript">
+	$(function(){
+		//选择支付方式
+		$("#paytype li").click(function(){
+			var i=$(this).index();
+			$("#paytype input").each(function(index){
+				if(index==i){
+					this.checked="checked";
+				}else{
+					this.checked="";
+				}
+			});
+			});
+		});
+</script>
+<include file="Public:footer" />

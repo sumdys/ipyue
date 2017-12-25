@@ -1,0 +1,209 @@
+<include file="Public:header" />
+    <div id="cont">
+        <div class="wd980 mt10 bgWhite about_asf">
+			<div class="h1_tit_nav">你当前所在位置：<a href="/" class="sy">首页</a>　>　最新动态<a>　>　行业新闻</a></div>
+            <include file="About:left" />
+            <div class="list_right_gy"><!-- id="news_dt"-->
+            	<h1 class="tit">{$info.title}</h1>
+                <div class=info>
+                	<span class="info_time">发表于：{$info.published|date='Y-m-d',###}</span>
+                    <span class="info_source">来源：{$info.source|default="品悦"}</span>
+                  	<span class="info_font_size" id="info_font_size">
+                  		<em>中</em>字体：
+                    	<select name="font_size" id="font_size">
+							<option value="12px" onclick="setfont('12px')">小</option>
+							<option value="14px" selected="selected" onclick="setfont('18px')">中</option>
+							<option value="16px" onclick="setfont('24px')">大</option>
+						</select>
+					</span>
+                    <span class="info_comment"><a href="#comment">我有话说</a></span>
+                    <span class="info_handset" id="info_handset"><a href="javascript:void(0)">扫描到手机</a></span>
+                </div>
+                 <div id="Popup_QuickMark"><img src="__PUBLIC__/uploads/ad/er/{$info['id']}.png" width="100" height="100" /><a>&nbsp;</a></div>
+            	<div class="content" style="height:300px;" id="content">
+                    {$info.content}
+                </div>
+                
+              <div id="return_share">
+                	<div id="return"><a href="{:U('/news/industry')}">返回行业新闻栏目</a></div>
+                    <div id="share">
+                    	<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+						<script>
+						window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+						</script>
+                    </div>
+              </div>
+              
+              <div ><!---微博推荐-->
+              <script type="text/javascript">document.write('<iframe width="740" height="239" frameborder="0" scrolling="no" src="http://widget.weibo.com/relationship/bulkfollow.php?language=zh_cn&uids=2954102014,1708853044,1647850037,1647687670,2049259672,1686727842&wide=1&color=C2D9F2,FFFFFF,0082CB,666666&showtitle=1&showinfo=1&sense=1&verified=1&count=6&refer='+encodeURIComponent(location.href)+'&dpc=1"></iframe>')</script>           
+              </div>
+              
+              <div id="comment">
+              	<h2><span>已有<em>{$totleComment|default='0'}</em>条评论，共<em>{$totleid|default='0'}</em>人参与</span><strong>我有话说</strong></h2>
+                <form action="{:U('/news/commentContent')}" method="post" id="comment_form">
+                    <textarea cols="" rows="" name="comment_cont" id="comment_cont">请输入评论内容</textarea>
+                    <div id="comment_sub">发布</div>
+                    <input type="hidden" name="news_id" value="{$info.id}" id="news_id"/>
+                </form>
+              </div>
+              
+              <div id="new_comment">
+              	<h2><strong>最新评论</strong></h2>
+                <div class="comment_list">
+                	<empty name="comment">
+                    	<center><span style="color:#999;">无</span></center>
+                    <else/>
+                        <volist name="comment" id="vo">
+                            <div class="comment_icon"><as><img src="__PUBLIC__/member/images/{$vo.headimg}" width="42" height="42"></a></div>
+                            <div class="comment_cont">
+                                <h3><span>{$vo.time|date='Y年m月d日 H:i',###}</span><strong>{$vo.username}</strong></h3>
+                                <div class="conts">{$vo.content}</div>
+                            </div>
+                        </volist>
+                    </empty>
+                </div>
+              </div>
+
+          </div>
+        </div>
+    </div>
+              <!--会员登录弹窗-->
+              <div id="tier"></div>
+              <div id="login_popup">
+              	<h2><span id="close">关闭</span><strong>会员登录</strong></h2>
+                <dl class="login_box" id="member_login">
+                	<dt>登录名</dt>
+                    <dd><input id="username" type="text" class="wd180" value="用户名/手机" /></dd>
+                    <dt>密码</dt>
+                    <dd><input id="userpassword" class="wd180" type="text" /><a href="{:U('/member/getPassword/step1')}" class="wjma">忘记密码？</a></dd>
+                    <dt>验证码</dt>
+                    <dd><input id="usercode" class="wd70" type="text" /><img class="code" onclick="this.src=this.src+ '?ts='+ (new Date()).getTime();" title="点击重新获取验证码" src="{:U('Common/verify_code')}"></dd>
+                    <dt>&nbsp;</dt>
+                    <dd><input type="checkbox" checked="checked" name="check" class="jddl">我两周内自动登录</dd>
+                    <dt>&nbsp;</dt>
+                    <dd><div class="login_sub">登 录</div></dd>
+                    <dt>&nbsp;</dt>
+                    <dd>还不是品悦会员？<a href="{:U('/member/register')}" class="ljzc">立即注册</a></dd>
+                </dl>
+                <h3>您也可以以游客身份发布评论</h3>
+                <dl class="login_box" id="tourist_login">
+                	<dt>登录名</dt>
+                    <dd><input id="touristname" class="wd180" type="text" /></dd>
+                    <dt>验证码</dt>
+                    <dd><input id="touristcode" class="wd70" type="text" /><img class="code" onclick="this.src=this.src+ '?ts='+ (new Date()).getTime();" title="点击重新获取验证码" src="{:U('Common/verify_code')}"></dd>
+                    <dt>&nbsp;</dt>
+                    <dd><div class="login_sub">登 录</div></dd>
+                </dl>
+              </div>
+              
+  <script type="text/javascript">
+    	//改变字体大小
+	 $(document).ready(function() {
+		$("#font_size").change(function(){									
+			$("#content span").css({fontSize:this.value});						 
+			$("#content p").css({fontSize:this.value});
+			$("#content div").css({fontSize:this.value});		
+			$("#content b").css({fontSize:this.value});
+			$("#content li").css({fontSize:this.value});
+		})
+	}); 
+    $(function(){			
+		/*发布评论*/
+		$("#comment textarea").focus(function(){
+			if($(this).val() == "请输入评论内容"){
+				$(this).val("");
+            	}
+			});
+		$("#comment textarea").blur(function(){
+			if($(this).val() == ""){
+				$(this).val("请输入评论内容")
+				}
+			});
+		$("#comment_sub").click(function(){			
+			$.getJSON("__ROOT__/news/login",function(data){
+				if(data.status==1){					
+						var url=$("#comment_form").attr("action");
+						var comment_cont=$("#comment_cont").val();
+						var news_id=$("#news_id").val();
+						
+						if(comment_cont=="请输入评论内容"){
+							alert("请输入评论内容！");							
+							}else{								
+								$.getJSON(url,{comment_cont:comment_cont,news_id:news_id},function(data){
+									if(data.status==1){
+										window.location.href="__ROOT__/news/comment"+"?id="+news_id;
+										}
+									});
+								}
+					}else{
+						$("#tier").show();
+						$("#login_popup").show();
+						}
+				});
+			});
+			
+		/*会员登录弹窗*/
+		/*会员登录JS*/
+		$("#member_login .login_sub").click(function(){
+			var username=$("#username").val(),userpassword=$("#userpassword").val(),usercode=$("#usercode").val();
+			var type='hy';
+			$.getJSON("__ROOT__/news/login",{username:username,userpassword:userpassword,usercode:usercode,type:type},function(data){
+				if(data.status==1){
+						$("#login_popup").hide();
+						$("#tier").hide();
+					}else{
+						alert(data.info);
+						}
+				});
+			});
+		
+		/*游客登录JS*/
+		$("#tourist_login .login_sub").click(function(){
+			var touristname=$("#touristname").val(),touristcode=$("#touristcode").val();
+			var type='tourist';
+			if(touristname.length<4){
+				alert("登录名太短啦！");
+				}else{
+					$.getJSON("__ROOT__/news/login",{touristname:touristname,touristcode:touristcode,type:type},function(data){
+					if(data.status==1){
+							$("#login_popup").hide();
+							$("#tier").hide();
+						}else{
+							alert(data.info);
+							}
+					});
+				}
+			});
+			
+		$("#username").focus(function(){
+			if($(this).val() == "用户名/手机"){
+				$(this).val("");
+            	}
+			});
+		$("#username").blur(function(){
+			if($(this).val() == ""){
+				$(this).val("用户名/手机")
+				}
+			});
+		$("#close").click(function(){
+			$("#login_popup").hide();
+			$("#tier").hide();
+			});
+		$(window).scroll(function(){
+			var top  = $(this).scrollTop()+50 + 'px';
+			var left = ($(this).width()-402)/2 + 'px';
+			$("#login_popup").css({top:top,left:left});
+			$("#tier").css({width:$("body").width(),height:$("body").height(),opacity:0.60});
+			});
+		
+		});
+    </script>
+    
+	<script language="javascript">
+        function setfont(size){
+            var obj;
+            obj=document.getElementById("content");
+            obj.style.fontSize=size;
+        }
+    </script>  
+<include file="Public:footer" />

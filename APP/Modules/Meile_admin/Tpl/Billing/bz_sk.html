@@ -1,0 +1,45 @@
+<!--//
+**
+** 备注 收款人
+**
+//-->
+<style type="text/css">
+.div{margin-top:5px; margin-left:10px;}
+.div li{list-style:none; margin-top:8px;}
+</style>
+
+<div class="div">
+	<if condition="$info['audit_sk'] eq 1">
+    	<center><span style="color:#999;">（收款已经审核该账单，不能再备注）</span><br/><br/>
+        	<if condition="$type eq 'dpk'">{$info.bz_dpk|default='无'}</if>
+            <if condition="$type eq 'skf'">{$info.bz_skf|default='无'}</if>
+            <if condition="$type eq 'remark'">{$info.remark|default='无'}</if>
+            <if condition="$type eq 'income'">
+            	<volist name="list" id="vo">
+                	<li>收入金额{$vo.con}备注：{$vo['bz']|default='无'}</li>
+            	</volist>
+            </if>            
+        </center>
+	<else/>
+        <form method="post" action="__URL__/bz_sk/navTabId/__MODULE__-index" class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone)" >
+            <input type="hidden" name="t" value="{$type}"/>  
+            <input type="hidden" name="id" value="{$id}" />          
+            <if condition="$type eq 'dpk'"><textarea style="width:380px; height:95px;" name="bz">{$info.bz_dpk}</textarea></if>
+            <if condition="$type eq 'skf'"><textarea style="width:380px; height:95px;" name="bz">{$info.bz_skf}</textarea></if>
+            <if condition="$type eq 'remark'"><textarea style="width:380px; height:95px;" name="bz">{$info.remark}</textarea></if>            
+            <if condition="$type eq 'income'">
+                <volist name="list" id="vo">
+                    <li>收入金额{$vo.con}备注:<br/><textarea style="width:350px; height:20px;" name="bz[{$i}]">{$vo['bz']}</textarea><br/></li><br/>
+                </volist>
+            </if>  
+           <div class="formBar">
+                <ul>
+                    <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+                    <li><div class="button"><div class="buttonContent"><button type="button" callback="dialogAjax" class="close">取消</button></div></div></li>
+                </ul>
+            </div>     
+        </form>
+    </if>
+</div>
+
+

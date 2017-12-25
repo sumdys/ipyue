@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>积fun商城-品悦手机网</title>
+<link href="__PUBLIC__/mobile/css/global.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+#topnav {padding-right: 42px;}
+.collapsible h6{background-color:#67b1e4!important;border-bottom: 1px solid #fff!important;}
+.collapsible h6 a{color:#fff;}
+.mall_pro_box{padding:10px;background:#fff;}
+.mall_pro_box li{padding:25px 5px;height:130px;border-bottom:1px solid #e7e5e5;}
+.mall_pro_box li a{display:block;color:#333;}
+.mall_pro_box li a img{float:left;width:130px;height:130px;margin-right:18px;}
+.mall_pro_box li h4,.mall_pro_box li div{line-height:26px;font-weight:normal;background:#fff;}
+.mall_pro_box li div{margin-top:10px;}
+.mall_pro_box .az_icon{padding-left:25px;display:inline-block;height:26px;background:url(/Public/images/assistant.png) no-repeat -10px -147px;font-family:Arial;font-weight:normal;}
+</style>
+</head>
+
+<body>
+<div id="page">
+	<div id="content">
+		<h1 id="topnav"><span class="left icon"><a href="/mall" class="icon-returnclose">返回</a></span>搜索结果</h1>
+		<div class="box">
+        	<if condition="$type eq 1">
+        	<!--三级分类和礼品-->
+        	<div class="collapsible-set">
+            	<volist name="clist" id="vo">
+                    <div class="collapsible">
+                        <h6><a>{$vo.name}<span class="icon-up">展开</span></a></h6>
+                        <ul class="mall_pro_box" style="display:block">
+                        	<volist name="vo.info" id="vo1">
+                                <li>
+                                    <a href="#">
+                                        <img name="" src="__PUBLIC__/uploads/mall/{$vo1.img}" width="130" height="130" alt="{$vo1.title}">
+                                        <h4>{$vo1.title}</h4>
+                                        <if condition="$pid eq 55">
+                                            <div>总兑换数：{$vo1.amount}<br/>所需积fun：{$vo1.jifen} </div>
+                                        </if>
+                                        <if condition="$pid eq 56">
+                                            <div>总兑换数：{$vo1.amount}<br/>所需爱钻：<span class="az_icon"></span>x{$vo1.jifen} </div>
+                                        </if>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </div>
+                </volist>
+			</div>
+            <else/>
+            <!--搜索结果-->
+            <div class="collapsible-set">
+				<div class="collapsible">
+					<h6><a>搜索关键字<span class="icon-up">展开</span></a></h6>
+                    <ul class="mall_pro_box" style="display:block">
+                    	<empty name="result">
+                        	<center>没有找到相关产品，请重新输入查询条件</center>
+                        <else/>
+                            <volist name="result" id="vo">
+                                <li>                        	
+                                    <a href="#">
+                                        <img name="" src="__PUBLIC__/uploads/mall/{$vo.img}" width="130" height="130" alt="{$vo.title}">
+                                        <h4>{$vo.title}</h4>
+                                        <if condition="$pid eq 55">
+                                            <div>总兑换数：{$vo.amount}<br/>所需积fun：{$vo.jifen} </div>
+                                        </if>
+                                        <if condition="$pid eq 56">
+                                            <div>总兑换数：{$vo.amount}<br/>所需爱钻：<span class="az_icon"></span>x{$vo.jifen} </div>
+                                        </if>                                 
+                                    </a>                            
+                                </li>
+                            </volist>
+                        </empty>
+                    </ul>
+				</div>
+            </div>
+            </if>
+        </div>
+	</div>
+	<include file="Public:footer" />
+</div>
+<script type="text/javascript" src="__PUBLIC__/mobile/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	$('.collapsible h6').click(function(){
+		var i=$(this).parent().index();
+		$('.collapsible ul').each(function(index,element){
+			if($(this).siblings().find('span').attr('class')=='icon-up'){
+               $(this).hide().siblings().find('span').removeClass('icon-up').addClass('icon-down');
+			}else if($(this).siblings().find('span').attr('class')=='icon-down'&&index==i){
+			   $(this).show().siblings().find('span').removeClass('icon-down').addClass('icon-up');
+			}
+			});
+		});
+	
+	});
+</script>
+<include file="Public:kf" />
+</body>
+</html>

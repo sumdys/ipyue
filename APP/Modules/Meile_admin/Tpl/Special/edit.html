@@ -1,0 +1,102 @@
+<div class="page">
+	<div class="pageContent">
+         
+        <script type="text/javascript">
+    $(function(){
+        var index = parent.layer.getFrameIndex();
+        $('.close').click(function(){
+            parent.layer.close(index);
+        });
+
+        $('.del_img').click(function(){
+            $.get('__URL__/edit','act=del_img&id={$info.id}',function(data){
+                layer.load(1,0,0);
+                if(data){
+                    $('.img').hide();
+                }
+            })
+        })
+
+        $('.submits').click(function(){
+            $('form').ajaxSubmit({
+                url:$('form').attr('action'),
+                type:"POST",
+                success:function(data) {
+                    if(data && (typeof data)=='string'){
+                        var data = eval("(" + data + ")");
+                    };
+                    $('#msg').val(data.info);
+                    parent.layer.msg(data.info,2,data.status);
+                    parent.layer.close(index);
+                }
+            });
+        })
+
+    });
+</script>
+
+	<form method="post" action="__URL__/edit/navTabId/__MODULE__-index"  enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+            <input type="hidden" name="id" value="{$info['id']}" />
+            <div class="pageFormContent" layoutH="58">
+	        <div class="unit">
+                <label>活动标题：</label>
+                <input type="text"  size="40" name="title" id="title" value="{$info.title}">
+            </div>
+              <div class="unit">
+                <label>发布状态：</label>
+                <input type="radio" name="status" value="0" <if condition="$info.status eq 0"> checked="checked"</if> /> 审核状态 &nbsp; <input type="radio" name="status" value="1" <if condition="$info.status eq 1"> checked="checked"</if> /> 发布状态
+              </div>
+              <div class="unit">
+                <label>栏目选择：</label>
+                <input type="radio" name="is_new" value="0" <if condition="$info.is_new eq 0"> checked="checked"</if> /> 特价汇 &nbsp; <input type="radio" name="is_new" value="1" <if condition="$info.is_new eq 1"> checked="checked"</if> /> 最新推荐
+              </div>  
+            <div class="unit">
+                <label width="100">出发城市：</label>
+                <input type="text" size="40" class="input"  name="from_city" id='from_city' value="{$info['from_city']}" />
+            </div>
+         
+            <div class="unit">
+                <label>到达城市：</label>
+                <input type="text" size="40" class="input" name="to_city" id='to_city' value="{$info['to_city']}" />
+            </div>
+            <div class="unit">
+                <label>旅行日期：</label>
+                <input type="text" size="40" class="input" name="travel_time" value="{$info['travel_time']}" />
+            </div>
+
+            <div class="unit">
+                <label>航空公司：</label>
+                <input type="text" size="40" class="input" name="air" value="{$info['air']}" />
+            </div>
+            <div class="unit">
+                <label>价格：</label>
+                <input type="text" size="40" class="input"  name="price" value="{$info['price']}" />
+            </div>
+            <div class="unit">
+                <label>图片：</label>
+                <input type="file" style="width: 150px;" class="input"  name="img" value="" />
+                <a class="img">{$info.img} <notempty name="info.img"><input   type="button"  class="del_img" value="删除图片"></notempty></a>  
+                <span class="info"></span>
+            </div>
+                <div class="unit">
+				<label>图片：</label>
+                                <img src="__PUBLIC__/uploads/cheap/{$info['img']}" width="100" height="100"/>
+            </div>      
+                 <div class="unit">
+                <label>修改时间：</label>
+                <input type="text"  class="input"  name="update_time" <empty name="vo['update_time']">value="{:date('Y-m-d H:i:s',time())}"<else /> value="{$vo[update_time]|date='Y-m-d H:i:s',###}"</empty> />
+                <span class="info"></span>
+            </div>    
+		</div>
+		
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+	</div>
+</div>
+

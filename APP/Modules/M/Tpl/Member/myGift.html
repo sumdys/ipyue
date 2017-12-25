@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{$title}-品悦手机网</title>
+<link href="__PUBLIC__/mobile/css/global.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+#topnav .icon{width:80px;}
+.box h2{padding-right:42px;}
+#gift{padding:10px;color:#666;}
+#gift p{background-color:#FFF;line-height:50px;text-align:center;}
+#tab a{display:inline-block;width:25%;margin-right:10px;background-color:#67b1e4;text-align:center;color:#FFF;line-height:30px;}
+#tab a:hover,#tab a.on{background-color:#FFF;color:#ff8400;}
+#gift_list{padding:10px;background:#fff;}
+#gift_list li{padding:25px 5px;height:185px;border-bottom:1px solid #e7e5e5;}
+#gift_list li div{float:left;}
+#gift_list li div.img{width:60px;margin:50px 30px 0 0;}
+#gift_list li div.info{line-height:26px;}
+#gift_list .az_icon{padding-left:25px;display:inline-block;height:14px;background:url(/Public/images/assistant.png) no-repeat -10px -159px;font-family:Arial;font-weight:normal;}
+#integral_aizuan{height:39px;}
+#integral_aizuan a{float:left;display:block;width:50%;line-height:39px;color:#fff;font-size:16px;font-weight:bold;text-align:center;background:#67b1e4;cursor:pointer;}
+#integral_aizuan a.on{background:#ff980f;}
+</style>
+</head>
+
+<body>
+<div id="page">
+  <div id="content">
+    <h1 id="topnav"><span class="left icon"><a href="{:U('/')}" class="icon-home">首页</a></span>我的品悦<span class="right" id="exit">退出登录</span></h1>
+    <div class="box">
+        <h2><span class="left icon"><a href="{:U('/Member')}" class="icon-return">返回</a></span>我的礼品</h2>
+    </div>
+    <div id="gift" page="1" type="jifen">
+        <div id="tab">
+            <a href="{:U('/Member/myFavorite')}">我的收藏</a>
+            <a href="{:U('/Member/myCart')}">我的购物车</a>
+            <a class="on">已兑换礼品</a>
+        </div>
+         <div id="list">
+            <empty name="jifen"><p>您还没有兑换礼品，赶快去兑换吧！</p></empty>       
+            <ul id="gift_list">
+                <volist name="jifen" id="vo">
+                <li>
+                    <div class="img"><a href="#"><img name="" src="__PUBLIC__/uploads/mall/{$vo.img}" width="60" height="60" alt=""></a></div>
+                    <div class="info">礼品订单号：{$vo.order_num}<br/>礼品名称：{$vo.title}<br/>兑换积fun：{$vo.jifen}<br/>数量：{$vo.num}<br/>积fun小计：{$vo['num']*$vo['jifen']}<br/>兑换时间：{$vo.create_time}<br/>礼品状态：{$vo.status}</div>		
+                </li>
+                </volist>
+            </ul>
+        </div>
+    </div>     
+    
+    <div id="loading"><img src="__PUBLIC__/mobile/images/loading.gif"></div>
+    <div id="reminder"></div>    
+    <div id="integral_aizuan"><a type="jifen" class="on">积fun礼品</a><a type="aizuan">爱钻礼品</a></div>      
+  </div>
+</div>
+<include file="Public:CommonJs" />
+<script type="text/javascript">
+$(function(){
+	//更换类别
+	$("#integral_aizuan a").click(function(){
+		var type=$(this).attr("type"),page=1,addto=0;//page为页数;type这类型;addto为1是追加数据,0为更迭数据
+		$(this).addClass("on").siblings().removeClass("on");
+		$('#gift').attr('page',page);//更新页数
+		$('#gift').attr('type',type);//更新类型
+		ajax_list(type,page,addto);
+		});
+	
+	//自动刷新内容
+	$(window).scroll(function(){
+		//被卷去的高度
+		var scrollTop=$(this).scrollTop();
+		//可视区域高度
+		var viewHeight=$(window).height();
+		//页面高度
+		var pageHeight=$('body').height();
+		if((scrollTop+viewHeight)>=(pageHeight)){
+			var page=parseInt($('#gift').attr('page'))+1,type=$('#gift').attr('type'),addto=1;//page为页数;type这类型;addto为1是追加数据,0为更迭数据
+			ajax_list(type,page,addto);//调用AJAX的函数
+			$('#gift').attr('page',page);//更新分页数
+			}
+		});
+	});
+//AJAX函数
+function ajax_list(type,page,addto){
+	$('#loading').show();//显示加载中
+	$('#reminder').hide();
+	$.getJSON("{:U('/Member/myGift')}",{type:type,p:page},function(data){
+		if(data.status==1){
+			var html='',list=data.list;
+			$.each(list,function(i,item){
+				html +='<li>';
+            	html +='<div class="img"><a href="#"><img name="" src="__PUBLIC__/uploads/mall/'+ item.img +'" width="60" height="60" alt="'+ item.title +'"></a></div>';
+				if(item.t=="积fun"){
+                html +='<div class="info">礼品订单号：'+ item.order_num +'<br/>礼品名称：'+ item.title +'<br/>兑换积fun：'+ item.jifen +'<br/>数量：'+ item.num +'<br/>积fun小计：'+ item.xj +'<br/>兑换时间：'+ item.create_time +'<br/>礼品状态：'+ item.status +'</div>';	
+				}else if(item.t=="爱钻"){
+					html +='<div class="info">礼品订单号：'+ item.order_num +'<br/>礼品名称：'+ item.title +'<br/>兑换爱钻：<span class="az_icon"></span>x'+ item.jifen +'<br/>数量：'+ item.num +'<br/>爱钻小计：<span class="az_icon"></span>x'+ item.xj +'<br/>兑换时间：'+ item.create_time +'<br/>礼品状态：'+ item.status +'</div>';
+					}
+				html +='</li>';
+				});
+			if(addto==0){
+				$('#loading').hide();
+				$('#gift_list').html(html);
+				}else{
+					$('#loading').hide();
+				    $('#gift_list').append(html);
+				    }
+			}else{
+				$('#loading').hide();
+				$('#reminder').show().text(data.info);
+				}
+		});
+	}
+</script>
+
+</body>
+</html>

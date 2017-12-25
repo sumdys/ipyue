@@ -1,0 +1,16 @@
+<style type="text/css">
+*{text-align:center;}
+p{margin-top:15px;}
+
+
+</style>
+
+
+<div>
+	<form action="__URL__/ad_del/navTabId/__MODULE__-index"  method="post" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)"> 
+	<p>你确定要删除这张图片吗？</p>
+	<p>	（图片名：{$info['img']}）</p>
+    <p><button type="submit" style="width:30px;">是</button>&nbsp;&nbsp;&nbsp;<button type="button" class="close" size="10" style="width:30px;">否</button></p>
+    <input type="hidden" name="id" value="{$info['id']}" />
+	</form>
+</div>

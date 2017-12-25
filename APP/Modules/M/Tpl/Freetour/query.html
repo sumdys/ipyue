@@ -1,0 +1,167 @@
+﻿<include file="Public:header" />
+<div class="w1200">
+	<div class="ft-content ft-content-q">
+		<div class="f-d-l">
+			<div class="f-q-s">
+				<div class="ft-s">
+					<include file="search" />
+				</div>
+				<div class="ft-s-q">
+					<span>热门目的地：</span>
+					<a href="#">美国</a>
+					<a href="#">欧洲</a>
+					<a href="#">美国</a>
+					<a href="#">欧洲</a>
+					<a href="#">欧洲</a>
+				</div>
+			</div>
+			<div class="ft-q-t">
+				<ul>
+					<li>
+						<span>出发城市：</span>
+						<volist name="city_list" id="vo">
+							<a <if condition="$vo.name eq $_GET['from']"> class="curr" </if> href="{:U('/freetour/query')}?from={$vo.name}">{$vo.name}</a>
+						</volist>
+						<div class="more" data-more="1">更多<i class="triangle-down"></i></div>
+					</li>
+					<li class="more_city" style="display: none;">
+						<volist name="city_list_more" id="vo">
+							<a <if condition="$vo.name eq $_GET['from']"> class="curr" </if> href="{:U('/freetour/query')}?from={$vo.name}">{$vo.name}</a>
+						</volist>
+					</li>
+					<li>
+						<span>游玩天数：</span>
+						<a href="#">不限</a>
+						<volist name="days_list" id="vo">
+							<a href="{:U('/freetour/query')}?days={$vo.days}" <if condition="$vo.days eq $_GET['days']"> class="curr" </if> >{$vo.days}天</a>
+						</volist>
+						<div class="more">更多<i class="triangle-down"></i></div>
+					</li>
+					<li><span>出游时间：</span><input type="text" placeholder="最早出发" name="start"> - <input placeholder="最晚出发" type="text" name="end"></li>
+				</ul>
+			</div>
+			<div class="ft-q-l">
+				<div id="fQlT">
+					<a href="#" class="curr">推荐</a>
+					<a href="#">销量</a>
+					<a href="#">价格</a>
+					<a href="#" class="l">好评率</a>
+				</div>
+				<ul class="ft-q-l-c">
+                    <volist name="list" id="vo">
+					<li>
+						<div class="p"><img src="__PUBLIC__/uploads{$vo.images.0}" alt="#"></div>
+						<div class="cent">
+							<h4>{$vo.title}</h4>
+							<p><span class="ta">出发城市</span>	{$vo.dcity_name}&nbsp;&nbsp; &nbsp;&nbsp; <span class="ta">好评率</span>100%</p>
+							<p>{$vo.description}</p>
+							<p>游玩城市：{$vo.acity_name}</p>
+							<p>出发日期：<?php echo   date("Y-m-d", strtotime("+1 week", strtotime("now")));?> </p>
+
+							<span class="pri">￥<b>{$vo.price}</b>元</span>
+							<a href="{:U('/freetour/detail')}/id/{$vo.id}" class="ftButton">去看看</a>
+						</div>
+					</li>
+                    </volist>
+				</ul>
+				<div class="paging">
+                    {$page}
+                </div>
+			</div>
+		</div>
+		<div class="f-d-r">
+			<div class="diy-box">
+				<div class="h">对这些线路不满意？</div>
+				<div class="b">
+					<form action="/freetour/diy" id="sD" method="get">
+					<textarea placeholder="输入您想去的地方，我们免费为您设计方案" type="text" name="place"></textarea>
+					<input id="sDd" type="submit" value="马上定制" >
+				</form>
+				</div>
+			</div>
+			<div class="diy-box-b">
+				<div class="h">我的浏览记录</div>
+				<ul class="b">
+					<li>
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<i>45888</i>元</span>
+					</li>
+					<li>
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<i>45888</i>元</span>
+					</li>
+					<li>
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<i>45888</i>元</span>
+					</li>
+					<li>
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<i>45888</i>元</span>
+					</li>
+					<li>
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<i>45888</i>元</span>
+					</li>
+					<li>
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<i>45888</i>元</span>
+					</li>
+				</ul>
+			</div>
+			<div class="diy-box-b diy-box-b-a">
+				<div class="h">热门产品排行</div>
+				<ul class="b">
+					<li><i>1</i>
+						<img src="__PUBLIC__/images/fb-5.jpg" alt="#">
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<b>45888</b>元</span>
+					</li>
+					<li class="curr"><i>2</i>
+						<img src="__PUBLIC__/images/fb-5.jpg" alt="#">
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<b>45888</b>元</span>
+					</li>
+					<li><i>3</i>
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<b>45888</b>元</span>
+					</li>
+					<li><i>4</i>
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<b>45888</b>元</span>
+					</li>
+					<li><i>5</i>
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<b>45888</b>元</span>
+					</li>
+					<li><i>6</i>
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<b>45888</b>元</span>
+					</li>
+					<li><i>7</i>
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<b>45888</b>元</span>
+					</li>
+					<li><i>8</i>
+						<a href="#">【2017年新春特惠】广州出发，南航直飞，全程3晚清迈+1晚拜县精品酒店</a>
+						<span class="pri">￥<b>45888</b>元</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="Public:footer" />
+<script type="text/javascript">
+	$(function(){
+		$('.more').click(function(){
+			var mores = $(this).attr('data-more');
+			if(mores==1){
+				$(this).attr('data-more',2);
+				$('.more_city').show();
+			}else{
+				$(this).attr('data-more',1);
+				$('.more_city').hide();
+			}
+		})
+	})
+</script>

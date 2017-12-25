@@ -1,0 +1,63 @@
+ <div id="footer">
+    	<div class="wd960">
+            <div id="ft_link">
+                <ul>
+                    <li><a href="{:U('/about')}" target="_blank">关于我们</a> |</li>
+                    <li><a href="{:U('/Adviser')}" target="_blank">专业顾问</a> |</li>
+                    <li><a href="{:U('/about/service')}" target="_blank">会员服务</a> |</li>
+                    <li><a href="{:U('/about/privacy')}" target="_blank">隐私保护</a> |</li>
+                    <li><a href="{:U('/about/job')}" target="_blank">人才招聘</a> |</li>
+                    <li><a href="http://www.cata.org.cn/clientWeb/frm_Single_Search.aspx?name=%u5E7F%u5DDE%u7F8E%u4E50%u5546%u52A1%u670D%u52A1%u6709%u9650%u516C%u53F8&type=agentname&leixing=&chengshi=&chengqu=" target="_blank">中国航空运输协会</a> |</li>
+                    <li><a href="__PUBLIC__/images/zz_08.jpg" target="_blank">企业营业执照</a> |</li>
+                    <li><a href="http://assets.aishangfei.net/zhizhao/ylzg.jpg" target="_blank">民航客运一类代理</a></li>
+                </ul>
+            </div>
+            <div id="ft_copyright">Copyright © 2009-2014 品悦旅行网 讯悦商务服务有限公司. All Rights Reserved
+                <img src="__PUBLIC__/images/ft_icp.jpg" alt="icp" /><a href="http://www.miitbeian.gov.cn/" target="_blank">粤ICP备15024109号-1</a>
+            </div>
+            <div id="ft_icons">
+                <a class="a0" href="#" target="_blank"></a>
+                <a class="a1" href="#" target="_blank"></a>
+                <a class="a2" href="#" target="_blank"></a>
+                <a class="a3" href="http://trust.360.cn/search.php" target="_blank"></a>
+                <a class="a4" href="#" target="_blank"></a>
+                <a class="a5" href="http://www.gzaic.gov.cn/GZCX/WebUI/credit/qiyeInfo.htm#" target="_blank"></a>
+                <a class="a6" href="http://net.china.com.cn/index.htm" target="_blank"></a>
+                <a class="a7" href="http://www.cyberpolice.cn/wfjb/" target="_blank"></a>
+            </div>
+
+
+        <div style="display:none;">
+
+        </div>
+
+
+
+
+
+     <div style="display:none">
+
+     </div>
+
+        <?php
+            if($_SERVER['HTTP_HOST']=='www.aishangfei.cn'){
+        ?>
+
+        <script type='text/javascript' src='http://chat.53kf.com/kf.php?arg=aaa&style=1'></script>
+      <?php
+        }elseif($userinfo){
+         echo  '<script type="text/javascript" src="'.U("api/kf/leftKf").'"></script>';
+         }elseif(MODULE_NAME != "Jifen" && MODULE_NAME != "Member"  ){
+             if(MODULE_NAME == "Zt"){
+                 echo '<script id= "kf53" language="JavaScript" src ="http://chat.53kf.com/kf.php?arg=aaa&style=2"></script>';
+             }else{
+                 echo '<script id= "kf53" language="JavaScript" src ="http://chat.53kf.com/kf.php?arg=aaa&style=1"></script>';
+             }
+        }
+    ?>
+
+     <script type="text/javascript" src="/api/Require/sidebar"></script>
+    	</div>        
+	</div>            
+</body>
+</html>

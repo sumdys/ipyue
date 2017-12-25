@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{$title} - {:C('WEB_NAME')}</title>
+<link href="__PUBLIC__/mobile/css/global.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+#ad{padding-top:5px;position:relative;}
+#ad img{width:100%;border:0;}
+#ad #adlist li{display:none;}
+#ad #adlist .on{display:block;}
+#ad #slidebar{position:absolute;left:49%;bottom:8px;}
+#ad #slidebar li{font-size:10px;display:inline-block;color:#5d5d5d;cursor:pointer;padding:0 2px;}
+#ad #slidebar li.select{color:#e0e0e0;}
+#paddingbg{padding:10px;background:#f2f1f0;}
+#paddingbg a{color:#333;}
+.price_list{padding:0 0 4% 4%;background:#fff;clear:both;}
+.price_list li{float:left;width:44%;height:92px;margin:4% 4% 0 0;background:#f2f1f0;}
+.price_list li.h117{height:117px;}
+.price_list li h2{line-height:30px;margin-top:5px;padding-left:7px;}
+.price_list li p{line-height:25px;padding-left:7px;}
+.price_list li span{display:block;line-height:32px;padding-left:7px;font-size:15px;color:#fff;background:url(__PUBLIC__/mobile/images/price_bg.png) no-repeat;}
+.price_list li span em{font-size:14px;}
+.price_list li span b{font-size:20px;}
+.price_list .clear{clear:both;}
+</style>
+</head>
+
+<body>
+<div id="page">
+  <div id="content">
+    <h1 id="topnav"><span class="left icon"><a href="{:U('/specialoffer')}" class="icon-returnclose">返回</a></span>美航达拉斯-首航钜惠<span class="right icon"><a href="tel:4006085188" class="icon-tel">电话</a></span></h1>
+    
+    <div id="ad">
+    <ul id="adlist">
+    <li class="on"><a href="tel:4006085188"><img src="__PUBLIC__/mobile/images/specialoffer/ad10.jpg" width="100%"></a></li>
+    </ul>
+    </div>
+    
+    <div id="paddingbg">
+      <div class="price_list">
+      <ul>
+        <li class="h117">
+          <a href="javascript:open_kf()">
+          <h2>上海-达拉斯</h2>
+          <p>2014-06-12 启航</p>
+          <p>美国航空 </p>
+          <span><em>￥</em><b>5980</b>起</span>
+          </a>
+        </li>
+        <li class="h117">
+          <a href="javascript:open_kf()">
+          <h2>香港-达拉斯</h2>
+          <p>2014-06-12 启航</p>
+          <p>美国航空 </p>
+          <span><em>￥</em><b>5980</b>起</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:open_kf()">
+          <h2>北京-波士顿</h2>
+          <p>美国航空 </p>
+          <span><em>￥</em><b>3180</b>起</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:open_kf()">
+          <h2>北京-纽约</h2>
+          <p>美国航空 </p>
+          <span><em>￥</em><b>2980</b>起</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:open_kf()">
+          <h2>北京-华盛顿</h2>
+          <p>美国航空 </p>
+          <span><em>￥</em><b>3320</b>起</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:open_kf()">
+          <h2>北京-芝加哥</h2>
+          <p>美国航空 </p>
+          <span><em>￥</em><b>3480</b>起</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:open_kf()">
+          <h2>北京-拉斯维加斯</h2>
+          <p>美国航空 </p>
+          <span><em>￥</em><b>3230</b>起</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:open_kf()">
+          <h2>上海-纽约</h2>
+          <p>美国航空 </p>
+          <span><em>￥</em><b>2040</b>起</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:open_kf()">
+          <h2>上海-芝加哥</h2>
+          <p>美国航空 </p>
+          <span><em>￥</em><b>3480</b>起</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:open_kf()">
+          <h2>上海-洛杉矶</h2>
+          <p>美国航空 </p>
+          <span><em>￥</em><b>3600</b>起</span>
+          </a>
+        </li>
+        <li>
+          <a href="javascript:open_kf()">
+          <h2>上海-波士顿</h2>
+          <p>美国航空 </p>
+          <span><em>￥</em><b>3320</b>起</span>
+          </a>
+        </li>
+      </ul>
+      <div class="clear"></div>
+    </div>
+    </div>
+    
+    </div>
+  </div>
+  <include file="Public:footer" />
+</div>
+<script type="text/javascript" src="__PUBLIC__/mobile/js/jquery-1.9.1.min.js"></script>
+<include file="Public:kf" />
+</body>
+</html>

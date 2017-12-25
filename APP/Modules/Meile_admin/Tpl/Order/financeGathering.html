@@ -1,0 +1,110 @@
+<!---收款确认--财务----->
+<style type="text/css">
+table input{float:none!important;}
+table select{float:none!important;}
+.add{background:url('__PUBLIC__/admin/Img/add.gif') no-repeat; padding-left:18px;color:#03F;cursor:pointer;}
+.pageFormContent{margin-left:5px; border:none!important;}
+table{border-collapse: collapse;}
+td{ text-align:left!important;}
+b{color:#F00;}
+span{color:#666;}
+table,tr,td{ border: 1px solid #999;}
+tr{height:35px;}
+td{width:200px; padding-left:10px;}
+.ring{margin-right:10px; margin-left:10px;}
+</style>
+<form action="__URL__/updateFinance/navTabId/__MODULE__-financeNNOrder" method="post"  class="pageForm required-validate"  onsubmit="return validateCallback(this, dialogAjaxDone)" id="form1">
+    <input type="hidden" value="{$list['id']}" name="id"/>
+    <input type="hidden" value="2" name="finance" />
+    <div class="pageFormContent" layoutH="58">   
+        <div style="float:right; margin-bottom:10px;">
+            <if condition="($list['newOrder'] eq 1)or($list['abolishOrder'] eq 1)">
+                <span class="ring">业务员：{$list['user']['name']}</span>    	      
+            <else/>    
+                <span class="ring">财务状态：{$list['financeStatus']}</span><b>|</b>
+                <span class="ring">业务员：{$list['user']['name']}</span><b>|</b>
+                <span class="ring">出票员：{$list['ticket']['name']}</span><b>|</b>
+                <span class="ring">收款财务：{$list['gatheringFinance']['name']}</span><b>|</b>
+                <span class="ring">付款财务：{$list['paymentFinance']['name']}</span>
+            </if>
+        </div> 
+          
+        <table cellpadding="0" cellspacing="0"width="1170px">
+            <tr>
+                <td colspan="3">订单ID号：<span class="span" style="color:#09F;">{$list['orderID']}</span></td>
+                <td colspan="3">PNR：<span class="span">{$list['PNR']}</span></td>
+            </tr>            
+            <tr>
+                <td>订票人姓名：<span class="span">{$list['memberName']}</span></td>
+                <td>手机号：<span class="span">{$list['memberTel']}</span></td>
+                <td>客户类型：<span class="span">{$list['customerType']}</span></td>
+                <td>QQ号：<span class="span">{$list['memberQQ']}</span></td>
+                <td colspan="2">企业邮箱：<span class="span">{$list['memberEmail']}</span></td>
+            </tr>
+            
+            <volist name="list['passengers']" id="vo">
+            <tr>
+                <td>乘机人姓名{$i}：<span class="span">{$vo.first_name}/{$vo.last_name}</span></td>
+                <td>票号{$i}：<span class="span">{$vo.ticketNO}</span></td>
+                <td colspan="4">DOCS{$i}：<span class="span">{$vo.DOCS}</span></td>
+            </tr> 
+            </volist> 
+            
+            <volist name="list['voyage']" id="vo">
+                <tr>
+                    <td colspan="2">航程{$i}：<span class="span">{$vo.departure}　-　{$vo.destination}<span></td>
+                    <td colspan="4">日期{$i}：<span class="span">{$vo.date}</span></td>
+                </tr> 
+            </volist>     
+            <tr><td colspan="6">航线：<span class="span">{$list['airtdne']}</span></td></tr>
+            <tr>
+                <td  colspan="2">出票OFFIC号：<span class="span">{$list['ticketOfficNO']}</span></td>
+                <td colspan="2">供应商：<span class="span">{$list['gongyingshang']['supplier']}</span></td>
+                <td >文件号：<span class="span">{$list['fileNumber']}</span></td>
+                <td >后返金额：<span class="span">{$list['backMoney']}</span></td>
+            </tr>
+            <tr><td  colspan="6">返点政策：<span class="span">{$list['rebatePolicy']}</span></td></tr>        
+            <tr>
+                <td>采购价：<span class="span">￥{$list['procurementPrice']}</span></td>
+                <td>销售价：<span class="span">￥{$list['salePrice']}</span></td>
+                <td>税费：<span class="span">￥{$list['taxation']}</span></td>                
+                <td>保险金额：<span class="span">{$list['insuranceType']}&nbsp;&nbsp;￥{$list['insurance']}</span></td>
+                <td>应收金额：<span class="span">￥{$list['payableAmount']}</span></td>
+                <td>应付金额：<span class="span">￥{$list['procurementPrice']+$list['taxation']}</span></td>
+            </tr>        
+            <tr>
+                <td  colspan="2">供应商费用：<span class="span">{$list['supplierCostType']}&nbsp;&nbsp;￥{$list['supplierCost']}</span></td>
+                <td  colspan="2">内部费用：<span class="span">{$list['interiorCostType']}&nbsp;&nbsp;&nbsp;&nbsp;￥{$list['interiorCost']}</span></td>
+                <td  colspan="2">其他费用：<span class="span">{$list['otherCostType']}&nbsp;&nbsp;￥{$list['otherCost']}</span></td>
+            </tr> 
+        
+            <volist name="list['payInfo']" id="vo">
+            <tr>
+                <td>收入金额{$i}：<span class="span">￥{$vo.procurementPrice}</span></td>
+                <td  colspan="2">收款账号{$i}：<span class="span">{$vo.amount}&nbsp;&nbsp;{$vo.bankName}</span></td>
+                <td>汇款人{$i}：<span class="span">{$vo.remitter}</span></td>
+                <td>支付日期{$i}：<span class="span">{$vo.payTime}</span></td>
+                <td>支付方式{$i}：<span class="span">{$vo.payType}</span></td>
+            </tr> 
+            </volist>
+            <tr><td  colspan="6">收入备注：<span class="span">{$list['remark2']}</span></td></tr>             
+            <tr><td  colspan="6">收款财务备注：<input value="" type="text" name="remark" style="width:800px;"/></td></tr>            
+            <tr><td colspan="6">付款银行：{$list['gatheringBank']}</td></tr>
+            <tr><td colspan="6">付款财务备注：{$list['paymentFinanceRemark']}</td></tr>       
+        </table>       
+     </div>
+    <div class="formBar">	
+        <ul>
+            <li><div class="button"><div class="buttonContent"><button type="submit">完成收款</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="submit" onclick="submitpath()">临时保存</button></div></div></li>
+            <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>    
+        </ul>
+    </div>
+</form>
+<script type="text/javascript">
+function submitpath(){
+	var put='<input type="hidden" value="1" name="t"/>';	
+	$('#form1').append(put);
+	$('#form1').submit();
+}
+</script>

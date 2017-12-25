@@ -1,0 +1,179 @@
+<include file="Public:header" />
+<link rel="stylesheet" href="__PUBLIC__/css/Iflight.css" type="text/css" />
+<div class="wd980 pb25">
+	<h1 class="iflight_tit_nav">您当前所处的位置：<a href="{:U('/')}">首页</a><em>></em><a href="{:U('/iflight')}">国际机票</a><em>></em>核对订单</h1>
+	<div class="mt10">
+		<ul class="flight_flow ff2">
+			<li>1.查询航班</li>
+			<li class="on">2.填写订单</li>
+			<li>3.支付票款</li>
+			<li>4.支付成功</li>
+		</ul>
+		<div class="if_hint">请仔细核对预订订单信息并尽快提交，以免您所预订的航班舱位被售完！</div>
+	</div>
+	<form  action="{:U('/Iflight/ticketBooking')}" method="post">
+		<div class="fo_box mt10">
+			<h2>行程信息</h2>
+			<div class="fo_bor_box">
+                <volist name="list.OriginDestinationOption" id="vo">
+                    <input type="hidden" name="act" value="check">
+                    <dl class="journey">
+                        <dt>航班信息：</dt>
+                        <dd>
+                            <div class="journey_title">
+                                <table>
+                                    <tr>
+                                        <td width="60"><b><eq name="vo.RefNumber" value="1">去程<else />返程</eq></b></td>
+                                        <td width="460"><span>{$vo.DepartureCityName}→{$vo.ArrivalCityName}</span>日期：{$vo.DepartureDate|date='Y-m-d',###}</td>
+                                        <td width="155"><a title="{$vo.AirItineraryPricingInfo.Remarks.Remark}" href="#">退改签</a></td>
+                                        <td width="155"><a href="#" class="right">修改航班</a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!--iflistBox-->
+                            <div class="iflist_box">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
+                                        <td width="530" class="flight_show">
+                                            <volist name="vo.FlightSegment" id="Flight" mod="2">
+                                                <eq name="mod" value="0">
+                                                    <table class="list_info" width="430" border="0" align="center" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                            <td width="190">
+                                                                <p><em class="offTime">{$Flight.DepartureDate|date='H:i',###}</em><span>{$Flight.DepartureAirportName}</span></p>
+                                                                <p><em class="arrTime">{$Flight.ArrivalDate|date='H:i',###}</em><span>{$Flight.ArrivalAirportName}</span></p>
+                                                            </td>
+                                                            <td width="125">
+                                                                <p><span class="if_logo"></span><span>{$Flight.AirCompanyName}</span></p>
+                                                                <p><span>{$Flight.OperatorCode}{$Flight.FlightNumber}</span><span>计划机型<a>{$Flight.Equipment}</a></span></p>
+                                                            </td>
+                                                            <td widt="85">
+                                                                <p>经济舱</p>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </eq>
+                                                <eq name="mod" value="1">
+                                                    <div class="tran_flight">
+                                                        <div class="transit_text">
+                                                            <p>
+                                                                <span class="icon"></span>
+                                                                <span>{$Flight.DepartureCityName}中转</span>
+                                                                <span class="stay_time">停留{$Flight.FlyTime}</span>
+                                                            </p>
+                                                        </div>
+                                                        <table width="430" border="0" align="center" cellpadding="0" cellspacing="0" class="list_info">
+                                                            <tr>
+                                                                <td width="190">
+                                                                    <p><em class="offTime">{$Flight.DepartureDate|date='H:i',###}</em><a><if condition="$Flight.DepartureSpanDays gt 0">第二天</if></a><span>{$Flight.DepartureAirportName}</span></p>
+                                                                    <p><em class="arrTime">{$Flight.ArrivalDate|date='H:i',###}</em><a><if condition="$Flight.ArrivalSpanDays gt 0">第二天</if></a><span>{$Flight.ArrivalAirportName}</span></p>
+                                                                </td>
+                                                                <td width="125">
+                                                                    <p><span class="if_logo"></span><span>{$Flight.AirCompanyName}</span></p>
+                                                                    <p><span>{$Flight.OperatorCode}{$Flight.FlightNumber}</span><span>计划机型<a>{$Flight.Equipment}</a></span></p>
+                                                                </td>
+                                                                <td widt="85">
+                                                                    <p>经济舱</p>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </eq>
+                                            </volist>
+                                        </td>
+                                        <td width="330">
+                                            <p>普通成人</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div><!--iflistBox End-->
+                            <a class="more_journey"><em>展开航程</em><span class="mj_icon"></span></a>
+
+                        </dd>
+                    </dl>
+                </volist>
+			</div>
+			<h2 class="mt10">乘机人信息<em>请准确填写登机人信息(姓名、证件号码），以免在办理登机手续时发生问题。</em></h2>
+			<div class="fo_bor_box check">
+                <volist name="list.TravelerInfo" id="vo">
+				<div class="passenger_info">
+					<p><span>姓名：</span><i><b>{$vo.GivenName}/{$vo.Surname}</b></i><i>({$vo.passengerType})</i><i>{$vo.sex}</i></p>
+					<p><span>出生日期：</span><i>{$vo.BirthDate}</i></p>
+					<p><span>证件信息：</span><i>{$vo.CountryName}</i><i>护照</i><i><b>{$vo.IDNumber}</b></i><i>{$vo.IDValidTo}</i></p>
+				</div>
+                </volist>
+			</div>
+			<!--
+			<h2 class="mt10">报销凭证</h2>
+			<div class="fo_bor_box check">
+				<p>邮寄报销凭证</p>
+			</div>
+			-->
+			<h2 class="mt10">联系人信息</h2>
+			<div class="fo_bor_box check">
+					<p><span>联系人：</span>{$list.Contact.GivenName}/{$list.Contact.Surname}</p>
+					<p><span>电话：</span>{$list.Contact.Phone}</p>
+					<p><span>邮箱地址：</span>{$list.Contact.Email}</p>
+			</div>
+			<div class="fo_bor_box mt10 exp_priv_total">
+				<dl class="expense_info">
+					<dt>费用信息：</dt>
+					<dd>
+						<div>
+							<span class="right">
+								<b id="adultPrice">{$fareInfo.ADT.Fare}</b><b>元</b>×<em id="adultNo">{$fareInfo.ADT.num}</em>（成人）+
+                                <b id="childPrice">{$fareInfo.CNN.Fare}</b><b>元</b> ×<em id="childNo">{$fareInfo.CNN.num}</em>（儿童）=<b id="subtotalPrice">{$fareInfo.FareSubtotal}</b><b>元</b>
+								</span>
+							票价
+						</div>
+					    <!--
+					    <div>
+							<span class="right">
+								<b id="insurancePrice">60</b>×<em id="insuranceNo">1</em>
+							</span>
+							保险价格
+						</div>
+						-->
+						<div>
+							<span class="right">
+								<b id="taxPrice">{$fareInfo.TaxSubtotal}</b><b>元</b>
+							</span>
+							参考税费
+						</div>
+					</dd>
+				</dl>
+				<dl class="asf_privilege">
+					<dt>品悦特惠：</dt>
+					<dd>
+						<p><span class="left mt10 mr10 pri_type pt1"></span>成功预订改航班并出票后返利50元。<a href="" class="icon_circle"></a></p>
+					</dd>
+				</dl>
+				<dl class="if_total">
+					<dt>&nbsp;</dt>
+					<dd>费用总计：<b id="ifTotal">{$fareInfo.PriceTotal}</b><b>元</b></dd>
+				</dl>
+			</div>
+			<div class="getback mt10">
+				<span class="left"><a href="#"><上一步</a></span>
+				<span class="right"><i>温馨提示：</i>航班价格变动频繁， <i><b>30分钟</b></i> 内完成支付可确保您的位和价格。</span>
+			</div>
+		</div>
+		<div class="fo_sub"><input type="submit" id="foSub" value="下一步，支付"></div>
+	</form>
+</div>
+<script type="text/javascript">
+	$(function(){
+		//显示或隐藏航班信息
+		$(".more_journey").click(function(){
+			var ifbox=$(this).prev();
+			if($(this).hasClass("mj_show")){
+				$(this).removeClass("mj_show");
+				ifbox.hide();
+				}else{
+					$(this).addClass("mj_show");
+					ifbox.show();
+					}
+			});
+		});
+</script>
+<include file="Public:footer" />

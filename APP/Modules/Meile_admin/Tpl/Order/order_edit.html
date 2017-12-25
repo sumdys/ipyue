@@ -1,0 +1,218 @@
+﻿<!--
+/****
+	编辑订单
+****/
+-->
+
+
+<script>
+    $(function(){
+		$(".city").live('click',function(){			
+			popCityList($(this)[0]);						 
+		})
+    })
+</script>
+<style type="text/css">
+.border_div{border:1px solid #999; font-size:12px; margin-right:10px;}
+.border_div span{font-weight:bold; clear:both;}
+.border_bottom{border-bottom:1px solid #CCC; padding-top:3px; padding-bottom:3px;padding-left:20px;}
+.border_div input{ border:1px solid #999; color:#666;margin-top:2px; margin-left:5px; margin-right:5px;float:none;}
+.in{width:100px; margin:0 auto; padding:0px;}
+ul,li{margin:0 auto; padding:0px;list-style:none;}
+td{width:110px; text-align:center; font-size:14px; font-weight:bold;}
+.bt table{border:1px solid #CCC; background:#0CF;}
+input{text-align:center;}
+</style>
+<script type="text/javascript" src="__PUBLIC__/js/member.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/hotcitypop/popcitylist.js"></script>
+  
+<div class="border_div">
+    <form action="__URL__/order_edit/navTabId/__MODULE__-index"  method="post" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">   
+        <div class="border_bottom"><span>订单ID号:</span>{$list.ddbh}&nbsp;&nbsp;&nbsp;[待支付]</div> 	
+        <div class="border_bottom"><span>会员ID号:</span>{$list.hyid}</div>
+        	<input type="hidden" name="ddbh" value="{$list.ddbh}"/>           
+        <div class="border_bottom chaxun"><span>航程信息:</span>         
+            <ul  id="type" style="margin-left:70px; margin-top:-15px;">
+                <li>
+                    <input type="radio" id="t1"  value="1"  name="t"  onClick="type1()" <if condition="$list['lx'] eq 1">checked</if>/>单程
+                    <input type="radio" id="t2"  value="2"  name="t"  onClick="type2()" <if condition="$list['lx'] eq 2">checked</if>/>往返
+                    <input type="radio" id="t2"  value="3"  name="t"  onClick="type3()" <if condition="$list['lx'] eq 3">checked</if>/>多程
+                </li>
+            </ul> 
+                       
+            <ul  style="<if condition="$list['lx'] neq 1">display:none;</if> margin-left:80px;" id="t11"><!---单程--->
+            	<volist name="hdinfo" id="vo">
+                    <li> 
+                         <span>去程</span>
+                        <input type="text"  name="hbh1"   value="{$vo.hbh}"  placeholder="航班号" size="12"/>
+                        <input type="text"  name="cw1"    value="{$vo.cw}"  placeholder="舱位" size="12"/>
+                        <input type="text"  name="fjjx1"  value="{$vo.jx}"  placeholder="机型" size="12"/>           
+                        <input type="text"  name="from1"  value="{$vo.cfcity}"  placeholder="出发城市" size="12" class="text city" state="1"/>
+                        <input type="text"  name="to1"    value="{$vo.ddcity}"  placeholder="到达城市" size="12" class="text city" state="1"/>
+                        <input type="text"  name="date1"  value="{$vo.date}"  placeholder="出发日期" size="12"/>
+                        <input type="text"  name="time1"  value="{$vo.time}"  placeholder="出发时间" size="12"/> 
+                        <input type="text"  name="ddsj1"  value="{$vo.hc_ddsj}"  placeholder="到达日期" size="12" class="date textInput "/>
+                   		<input type="text"  name="ddsj_p1"  value="{$vo.hc_ddsj_p}"  placeholder="到达时间" size="12"/>        
+                    </li>
+                </volist>
+            </ul>   
+                     
+            <ul  style="<if condition="$list['lx'] neq 2">display:none;</if> margin-left:80px;" id="t22"><!---往返--->
+            	<volist name="hdinfo" id="vo">             
+                <li>        	
+                	<span><if condition="$i eq 1">去程<else/>返程</if></span>
+                        <input type="text"  name="hbh{$i+1}"   value="{$vo.hbh}"  placeholder="航班号" size="12"/>
+                        <input type="text"  name="cw{$i+1}"    value="{$vo.cw}"  placeholder="舱位" size="12"/>
+                        <input type="text"  name="fjjx{$i+1}"  value="{$vo.jx}"  placeholder="机型" size="12"/>           
+                        <input type="text"  name="from{$i+1}"  value="{$vo.cfcity}"  placeholder="出发城市" size="12" class="text city" state="1"/>
+                        <input type="text"  name="to{$i+1}"    value="{$vo.ddcity}"  placeholder="到达城市" size="12" class="text city" state="1"/>
+                        <input type="text"  name="date{$i+1}"  value="{$vo.date}"  placeholder="出发日期" size="12"/>
+                        <input type="text"  name="time{$i+1}"  value="{$vo.time}"  placeholder="出发时间" size="12"/> 
+                        <input type="text"  name="ddsj{$i+1}"  value="{$vo.hc_ddsj}"  placeholder="到达日期" size="12" class="date textInput "/>
+                   		<input type="text"  name="ddsj_p{$i+1}"  value="{$vo.hc_ddsj_p}"  placeholder="到达时间" size="12"/>   
+                    <br/>                       
+                </li>
+               </volist>   
+            </ul>              
+            <ul  style="<if condition="$list['lx'] neq 3">display:none;</if>" id="t33"><!---多程--->
+            	<volist name="hdinfo" id="vo">         
+                    <li style="margin-left:80px;">                     	
+                       <span>行程{$i}</span>
+                       <input type="text"  name="hcdata[hbh][4]"   value="{$vo.hbh}"  placeholder="航班号"  size="12"/>
+                       <input type="text"  name="hcdata[cw][4]"    value="{$vo.cw}"  placeholder="舱位"    size="12"/>
+                       <input type="text"  name="hcdata[fjjx][4]"  value="{$vo.jx}"  placeholder="机型"    size="12"/>           
+                       <input type="text"  name="hcdata[from][4]"  value="{$vo.cfcity}"  placeholder="出发城市" size="12" class="text city" state="1"/>
+                       <input type="text"  name="hcdata[to][4]"    value="{$vo.ddcity}"  placeholder="到达城市" size="12" class="text city" state="1"/>
+                       <input type="text"  name="hcdata[date][4]"  value="{$vo.date}"  placeholder="出发日期" size="12"/>
+                       <input type="text"  name="hcdata[time][4]"  value="{$vo.time}"  placeholder="出发时间" size="12"/>
+                       <input type="text"  name="hcdata[ddsj][4]"  value="{$vo.ddsj}"  placeholder="出发日期" size="12"/>
+                       <input type="text"  name="hcdata[ddsj_p][4]"  value="{$vo.ddsj_p}"  placeholder="出发时间" size="12"/>                         
+                    </li>
+                </volist>
+                  <li style="float:right; margin-top:-15px;color:#09F"><a id="hctype" num="4">添加航程</a></li>
+            </ul>    
+        </div>        
+       
+        <div class="border_bottom">
+             <span>票面总价：</span><input type="text"  name="xsj"  value="{$list.xsj}"/>
+             <span>总税费：</span>  <input type="text"  name="sf"   value="{$list.sf}"/>
+             <span>总保险费：</span><input type="text"  name="taxa" value="{$list.taxa}"/>
+             <span>总机建费：</span><input type="text"  name="jsf"  value="{$list.jj}"/>
+        </div>
+        
+        <!--<div class="border_bottom"><span>现金券使用：</span>无</div>  -->      
+        <div class="border_bottom"><span>应付金额：</span> <input type="text" name="ysje" value="{$list['ysje']}"/></div>
+        <div class="border_bottom"><span>支付状态：</span> 
+        	<select name="zf_fkf">
+            	<option value="0" <if condition="$list['zf_fkf'] eq 0">selected="selected"</if>>未支付</option>
+                <option value="1" <if condition="$list['zf_fkf'] eq 1">selected="selected"</if>>已支付</option>
+            </select>
+        </div>          
+        <div class="border_bottom"><span>出票时间：</span><input type="text" class="date textInput "  name="cpsj" value="{$list['cpsj']|date='Y-m-d',###}"><input type="text"  name="cpsj_p"  value="{$list['cpsj']|date='H:i:s',###}"/></div>    
+         
+        <div class="border_bottom"><span>乘客信息：</span>
+            <input type="text" size="2" value="<empty name="men">0<else/>{$men}</empty>"   name="athud"   style="clear:both;">成人/
+            <input type="text" size="2" value="<empty name="chl">0<else/>{$chl}</empty>"   name="chilren" style="clear:both;">儿童/
+            <input type="text" size="2" value="<empty name="baby">0<else/>{$baby}</empty>" name="baby"    style="clear:both;">婴儿
+            <br/><br/>
+            <div id="passenger">            	
+               <ul class="bt">
+                 <li>
+                 	<table><tr><td>姓名</td> <td>乘客类型</td> <td>证件类型</td> <td>证件号码</td> <td>票价</td> <td>机建</td> <td>参考税</td> <td>保险</td> <td>结算价</td></tr></table>
+                 </li>
+                    <volist name="cjr_info" id="vo">
+                        <li>                   
+                            <input type="text" name="info[cjr_cjrxm][1]" value="{$vo->cjr_cjrxm}" class="in"  size="11" >                             
+                            <select name="info[cjr_lx][1]" style="width:90px;"><option value="1">成人</option><option value="2">儿童</option><option value="3">婴儿</option></select>						<input type="text" name="info[cjr_zjlx][1]" value="{$vo->cjr_zjlx}" class="in"  size="11" />
+                            <input type="text" name="info[cjr_clkid][1]" value="{$vo->cjr_clkid}" class="in"  size="11" />
+                            <input type="text" name="info[cjr_xsj][1]"   value="{$vo->cjr_xsj}"   class="in"  size="11" />
+                            <input type="text" name="info[cjr_jsf][1]"   value="{$vo->cjr_jsf}"   class="in"  size="11" />
+                            <input type="text" name="info[cjr_tax[1]"    value="{$vo->cjr_tax}"   class="in"  size="11" />
+                            <input type="text" name="info[cjr_bx[1]"    value="{$vo->cjr_bx}"   class="in"  size="11" />                          
+                            <input type="text" value="{$vo->cjr_xsj+$vo->cjr_jsf+$vo->cjr_tax}"   class="in"  size="11" /> 
+                            <a class="del">删除</a>
+                        </li>             
+                    </volist> 
+                 <li style="float:right; margin-top:-15px;"><span>&nbsp;</span><a id="addpapers" num="1">添加乘客</a></li>                   
+               </ul>
+            </div>            
+        </div>        
+        <div class="border_bottom"><span>联系人信息：</span>
+             姓名<input type="text" name="nklxr" value="{$list.nklxr}"/>         
+             手机号<input type="text" name="lxdh" value="{$list.lxdh}"/>
+             邮箱<input type="text" name="email" value="{$list.email}"/>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">返回</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+$(function(){		
+	//添加多程
+	$('#hctype').click(function(){
+		var num=parseInt($(this).attr('num')) + 1;
+		var html='';
+		html +='<li style="margin-left:80px;"id="t33">';
+		html +='<span>去程</span>';
+		html +='<input type="text"  name="hcdata[hbh]['+num+']"   value=""  placeholder="航班号"  size="11" />';
+		html +='<input type="text"  name="hcdata[cw]['+num+']"    value=""  placeholder="舱位"    size="11" />';
+		html +='<input type="text"  name="hcdata[fjjx]['+num+']"  value=""  placeholder="机型"    size="11" />';
+		html +='<input type="text"  name="hcdata[from]['+num+']"  value=""  placeholder="出发城市" size="11" class="text city" state="1"/>';
+		html +='<input type="text"  name="hcdata[to]['+num+']"    value=""  placeholder="到达城市" size="11" class="text city" state="1"/>';
+		html +='<input type="text"  name="hcdata[date]['+num+']"  value=""  placeholder="出发日期" size="11" class="date textInput "/>';
+		html +='<input type="text"  name="hcdata[time]['+num+']"  value=""  placeholder="出发时间" size="11"/>';
+		html +=' <input type="text"  name="hcdata[ddsj]['+num+']"  value=""  placeholder="到达日期" size="11" class="date textInput "/>';
+		html +='<input type="text"  name="hcdata[ddsj_p]['+num+']"  value=""  placeholder="到达时间" size="11"/>';  
+		html +='</li>';
+		$(this).parent().before(html);
+		$(this).attr("num",num);
+	});	
+});
+
+$(function(){		
+	//添加乘客
+	$('#addpapers').click(function(){
+		var num=parseInt($(this).attr('num')) + 1;
+		var html='';
+		html += '<li>';
+		html +='<input type="text" name="info[cjr_cjrxm]['+num+']" class="in" value=""/>';
+		html +='<select name="info[cjr_lx]['+num+']" style="width:108px;"><option value="1">成人</option><option value="2">儿童</option><option value="3">婴儿</option></select>';
+		html +='<input type="text" name="info[cjr_zjlx]['+num+']" class="in" value=""/>';
+		html +='<input type="text" name="info[cjr_clkid]['+num+']" class="in" value=""/>';
+		html +='<input type="text" name="info[cjr_xsj]['+num+']" class="in" value=""/>';
+		html +='<input type="text" name="info[cjr_jsf]['+num+']" class="in" value=""/>';
+		html +='<input type="text" name="info[cjr_tax]['+num+']" class="in" value="" />';
+		html +='<input type="text" name="info[cjr_bx]['+num+']" class="in" value="" />';//保险
+		html +='<input type="text" name="" class="in"/>';
+		html += '<a class="del">删除</a>';
+		html += '</li>';
+		$(this).parent().before(html);
+		$(this).attr("num",num);
+		//重载删除
+		$("#passenger .del").bind("click",function(){$(this).parent().remove();});				
+		});				
+	//删除
+	$("#passenger .del").bind("click",function(){$(this).parent().remove();});			
+	});
+
+function type1(){
+  document.getElementById("t11").style.display = "block";
+  document.getElementById("t22").style.display = "none";
+  document.getElementById("t33").style.display = "none";
+}
+function type2(){  
+  document.getElementById("t11").style.display = "none";
+  document.getElementById("t22").style.display = "block";
+  document.getElementById("t33").style.display = "none";
+}
+function type3(){  
+  document.getElementById("t11").style.display = "none";
+  document.getElementById("t22").style.display = "none";
+  document.getElementById("t33").style.display = "block";
+}
+</script>

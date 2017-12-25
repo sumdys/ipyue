@@ -1,0 +1,192 @@
+@charset "utf-8";
+/*国际机票栏目 通用CSS*/
+em,i{font-style:normal;}
+.wd60{width:60px;}
+.wd90{width:90px;}
+.wd160{width:160px;}
+.wd250{width:250px;}
+.wd720{width:720px;}
+.mr10{margin-right:10px;}
+.mt10{margin-top:10px;}
+.pb25{padding-bottom:25px;}
+.none{display:none;}
+.iflight_tit_nav{line-height:34px;padding:0 15px;background-color:#f0f0f0;}
+.iflight_tit_nav a{color:#000;}
+.iflight_tit_nav a:hover{color:#06c;}
+.iflight_tit_nav em{padding:0 14px;font-style:normal;color:#999;}
+
+/*隐藏53客服*/
+#kfivtwin{display:none!important;}
+
+/*国际机票新版搜索框*/
+#flight_search_box{background-color:#1679dd;color:#333;}
+#flight_search_box h2{height:41px;line-height:100px;background:url(../images/Iflight/flight.png) no-repeat;overflow:hidden;}
+#flight_search_box p{padding-left:10px;line-height:40px;margin-top:14px;border-top:1px dashed #ccc;}
+#flight_search_box p a{color:#f00;}
+.search_box{margin:0 2px 2px 2px;padding:0 8px;background-color:#fff;}
+.search_box li{height:26px;margin-top:14px;}
+.search_box li.iflight_rad{height:20px;line-height:20px;padding-left:5px;}
+.search_box li.iflight_rad label{padding:0 18px 0 5px;}
+.search_box li span{float:left;width:60px;height:26px;line-height:26px;padding-left:5px;}
+.search_box input.text{float:left;width:145px;height:24px;line-height:24px;padding-left:9px;color:#999;border:1px solid #ccc;background:url(../images/Iflight/flight.png) no-repeat 0 -41px;}
+.search_box input.focus{border:1px solid #ffa63c;background:url(../images/Iflight/flight.png) no-repeat 0 -64px;}
+.search_box select{width:155px;height:22px;line-height:22px;padding:1px 1px 1px 5px;color:#999;border:1px solid #ccc;}
+.advanced_search{display:block;width:60px;line-height:32px;padding:0 105px 0 65px;color:#06c;cursor:pointer;}
+.advanced_search .as_icon{float:right;width:9px;height:5px;margin-top:14px;background:url(../images/Iflight/flight.png) no-repeat -255px -5px;}
+.as_show .as_icon{margin-top:14px;background-position:-255px 0;}
+#sel_minor{display:none;}
+.submitSearch{display:inline-block;width:121px;height:32px;margin-left:65px;font-size:16px;font-weight:bold;font-family:"Microsoft YaHei",Arial,sans-serif;color:#fff;text-align:center;border:none;background:url(../images/Iflight/flight.png) no-repeat 0 -88px;cursor:pointer;}
+.submitSearch:hover{ background-position:-121px -88px;}
+
+.fly_tickstyle{color:#333}
+.fly_tickstyle h1{line-height:20px;}
+.ticket_left{font-weight:bold;color:#f60;}
+.ticket_left span{float:left;display:inline-block;height:20px;}
+.ticket_left span.fly_tips{width:18px;margin:0 5px;background:url(../images/Iflight/flight.png) no-repeat -280px 0;}
+.ticket_left span.round{background-position:-300px 0;}
+.timeHint{line-height:30px;}
+.timeHint p{color:#f60;}
+
+.result_loading{padding:30px 0;text-align:center;font-family:"微软雅黑";color:#666;border:2px solid #80bdfa;}
+.result_loading h3{line-height:32px;font-size:16px;font-weight:bold;color:#333;}
+.result_loading p{line-height:28px;}
+.result_loading p strong{padding:0 5px;color:#f60;}
+.result_loading span{padding-left:10px;}
+
+.result_list{color:#333;}
+.ftick_list_top{height:20px;padding:6px 8px;margin-top:2px;background:#f0f0f0;}
+.ftick_list_top select,ftick_list_top div{float:left;margin-right:14px;}
+.ftick_list_top select{float:left;height:20px;line-height:20px;color:#333;border:1px solid #ccc;}
+.ftick_list_top div{display:inline;}
+.ftick_list_top div a{float:left;display:block;height:18px;line-height:18px;margin-right:14px;padding:0 16px 0 4px;color:#333;border:1px solid #ccc;cursor:pointer;background:url(../images/Iflight/flight.png) no-repeat;}
+.ftick_list_top div a:hover{border:1px solid #bbdfff;}
+.ftick_list_top div a.on{color:#ff6600;border:1px solid #ffbf95;}
+.ftick_list_top div.down a{background-position:right -89px;}
+.ftick_list_top div.up a{background-position:right -107px;}
+.ftick_list_top div.down a:hover{background-position:right -125px;}
+.ftick_list_top div.up a:hover{background-position:right -143px;}
+.ftick_list_top div.down a.on{background-position:right -161px;}
+.ftick_list_top div.up a.on{background-position:right -179px;}
+.ftick_list_top .filter_transit{float:right;line-height:20px;}
+.ftick_list_top .filter_transit input{float:left;margin:4px 6px 0 0;}
+
+.top_table{height:32px;margin-top:10px;background:#f0f0f0;}
+.top_table td{padding-left:15px;}
+
+/*机票列表*/
+.iflist_box em{font-style:normal;}
+.iflist_box{border-top:1px solid #cecece;}
+.iflist_box td p{line-height:25px;}
+.iflist_box a{margin-right:6px;color:#06c;cursor:pointer;}
+.iflist_box a:hover{color:#f60;}
+.list_info{height:75px;}
+.list_info em{display:inline-block;width:55px;font-family:Arial;}
+.list_info em.offTime{font-size:18px;font-weight:bold;}
+.list_info em.arrTime{font-size:14px;}
+.list_info span{display:inline-block;margin-right:6px;}
+.list_info span a{padding-left:6px;}
+.list_info .if_logo{float:left;width:16px;height:25px;margin-right:6px;background:url(../images/Iflight/flight.png) no-repeat -280px -90px;}
+.transit_text{width:320px;height:30px;background:url(../images/Iflight/flight.png) repeat-x 0 -200px;}
+.transit_text p{margin-left:90px;}
+.transit_text span{float:left;display:inline-block;height:25px;background:#fff;padding:0 4px;}
+.transit_text .icon{width:12px;background:#fff url(../images/Iflight/flight.png) no-repeat -256px -90px;}
+.transit_text .stay_time{color:#666;}
+.if_price{color:#f60;font-family:"微软雅黑";}
+.if_price em{font-size:12px;}
+.if_price b{font-size:18px;}
+.if_tax{color:#999;}
+.if_reserve_back p{width:65px;text-align:center;}
+.if_reserve_back a{display:block;width:62px;height:23px;line-height:23px;font-weight:bold;color:#fff;background:url(../images/Iflight/flight.png) no-repeat 0px -120px;}
+.if_reserve_back a:hover{color:#fff;background-position:-62px -120px;}
+.if_reserve_back span{color:#f60;}
+
+/*填写订单&核对订单*/
+.flight_flow{width:980px;height:30px;background:url(../images/Iflight/flight_flow_bg.gif) no-repeat;}
+.ff1{background-position:0 0;}
+.ff2{background-position:0 -30px;}
+.ff3{background-position:0 -60px;}
+.ff4{background-position:0 -90px;}
+.flight_flow li{float:left;width:245px;line-height:30px;font-size:14px;font-weight:bold;text-align:center;color:#333;}
+.flight_flow li.on{color:#fff;}
+.if_hint{line-height:24px;padding-left:10px;margin-top:10px;color:#666;border:1px solid #ffbba0;background:#fff3ec;}
+.if_hint em,.if_hint b{color:#f60;}
+.fo_box,.fp_box{margin-top:10px;padding:10px;color:#333;background:#d9eeff;}
+.fo_box h2{line-height:36px;padding:0 5px;font-size:14px;font-weight:bold;color:#333;}
+.fo_box h2 em{padding-left:12px;font-size:12px;font-weight:normal;font-style:normal;}
+.fo_box a,.fp_box a{color:#06c;}
+.fo_box .fo_bor_box,.fp_box .fp_bor_box{padding:12px;border:1px solid #d4d5d6;background:#fff;}
+.fo_box .fo_bor_box h3,.fo_box .fo_bor_box h4{line-height:32px;font-size:14px;font-weight:bold;}
+.fo_box .fo_bor_box h3{border-bottom:1px solid #e3e3e3;}
+.fo_box .fo_bor_box h3 a{padding-left:10px;font-size:12px;font-weight:normal;color:#06C; cursor:pointer;}
+.fo_box i{padding: 0 10px;}
+.fo_box label.sex{padding:0 22px 0 5px;}
+.fo_box .if_hint{display:inline-block;margin-top:0;padding-right:10px;}
+.fo_box .color333{color:#333!important;}
+.fo_box .journey dt,.fo_box .journey dd{float:left;}
+.fo_box .journey dt{width:74px;line-height:44px;font-weight:bold;}
+.fo_box .journey dd{width:860px;}
+.fo_box .journey .journey_title{line-height:44px;padding-left:10px;border-bottom:1px dashed #ccc;}
+.fo_box .journey .journey_title span{margin-right:15px;}
+.fo_box .journey .iflist_box{display:none;border-top:none;}
+.fo_box .journey .transit_text{width:430px;}
+.fo_box .more_journey{display:block;width:60px;line-height:32px;cursor:pointer;}
+.fo_box .more_journey .mj_icon{float:right;width:9px;height:5px;margin-top:14px;background:url(../images/Iflight/flight.png) no-repeat -255px -5px;}
+.fo_box .mj_show .mj_icon{margin-top:14px;background-position:-255px 0;}
+
+.fo_box .check p{line-height:30px;}
+.fo_box .check p span{display:inline-block;width:140px;padding-right:10px;text-align:right;}
+.fo_box .check p i{margin-right:15px;padding:0;}
+.fo_box .passenger_info,.fo_box .contacts_info{margin-top:10px;}
+.fo_box .passenger_info li,.fo_box .contacts_info li{height:26px;margin-top:10px;}
+.fo_box .passenger_info li span,.fo_box .contacts_info li span{display:inline-block;width:126px;line-height:26px;text-align:right;}
+.fo_box .passenger_info li span em,.fo_box .contacts_info li span em{padding-right:2px;color:#f00;}
+.fo_box .passenger_info input,.fo_box .contacts_info input{line-height:24px;text-indent:9px;color:#a9a9a9;border:1px solid #ccc;}
+.fo_box  select{height:26px;line-height:20px;padding:3px;margin:0;color:#a9a9a9;border:1px solid #ccc;}
+.fo_box .add_passenger{height:26px;line-height:26px;padding:26px 0 15px 35px;}
+.fo_box .add_passenger .add{width:92px;height:26px;background:url(../images/Iflight/flight.png) no-repeat -124px -120px;cursor:pointer;}
+.fo_box .add_passenger .right input{float:left;margin:6px 6px 0 0;}
+.fo_box .exp_priv_total dl{clear:both;margin-top:10px;}
+.fo_box .exp_priv_total dt,.fo_box .exp_priv_total dd{float:left;}
+.fo_box .exp_priv_total dt{width:126px;line-height:40px;font-size:14px;font-weight:bold;text-align:right;}
+.fo_box .exp_priv_total dd{width:800px;}
+.fo_box .exp_priv_total dd div{line-height:40px;padding:0 10px;border-bottom:1px dashed #ccc;}
+.fo_box .exp_priv_total b{color:#f60;}
+.fo_box .expense_info{height:123px;}
+.fo_box .asf_privilege dd{line-height:40px;}
+.fo_box .pri_type{display:inline-block;width:17px;height:17px;background:url(../images/Iflight/flight.png) no-repeat;}
+.fo_box .pt1{background-position: 0 -143px;}
+.fo_box .icon_circle{display:inline-block;width:13px;height:13px;background:url(../images/Iflight/flight.png) no-repeat 0 -160px;}
+.fo_box .if_total dt,.fo_box .if_total dd{line-height:32px;}
+.fo_box .if_total dd{width:790px;padding-right:10px;font-weight:bold;text-align:right;background:#f0f0f0;}
+.fo_box .if_total dd b{font-size:16px;}
+.fo_sub{width:148px;height:39px;padding:18px 0;margin:0 auto;}
+.fo_sub input{width:148px;line-height:39px;font-size:18px;font-weight:bold;text-align:center;color:#fff;border:none;background:url(../images/Iflight/flight.png) no-repeat 0 -230px;cursor:pointer;}
+.getback{line-height:30px;color:#999;}
+.getback a{font-size:14px;}
+.getback i{color:#f60;padding:0;}
+
+.fp_box .price_jour{height:65px;}
+.fp_box .price_jour h4{line-height:24px;}
+.fp_box .price_jour p{line-height:36px;}
+.fp_box .price_jour dt,.fp_box .price_jour dd{display:inline-block;}
+.fp_box .price_jour dt{padding:0 25px 0 15px;border-right:2px solid #ccc;}
+.fp_box .price_jour dt p{font-size:28px;font-family:Arial;color:#f60;}
+.fp_box .price_jour dt p em{font-size:24px;}
+.fp_box .price_jour dd{padding-left:30px;}
+.fp_box .price_jour dd b{margin-right:15px;font-size:14px;}
+.fp_box .if_hint{margin-top:28px;}
+.fp_box .pay_list h3{line-height:40px;margin-top:10px;font-size:14px;font-weight:bold;color:#f60;}
+.fp_box .pay_list li{float:left;width:200px;height:90px;padding-right:15px;cursor:pointer;}
+.fp_box .pay_list li input{float:left;margin:30px 20px 0 0;}
+.fp_box .pay_list li span{float:left;display:block;width:166px;height:71px;background:url(../images/Iflight/flight.png) no-repeat;}
+.fp_box .pay_list li span.bill{background-position:0px -269px;}
+.fp_box .pay_list li span.alipay{background-position:-166px -269px;}
+.fp_box .pay_list li span.yeepay{background-position:0px -340px;}
+.fp_box .pay_list li span.tenpay{background-position:-166px -340px;}
+.fp_box .succeed{width:430px;height:180px;padding:15px 0;margin:0 auto;}
+.fp_box .succeed *{float:left;}
+.fp_box .succeed .succ_icon{width:45px;height:180px;}
+.fp_box .succeed .succ_icon span{display:block;width:45px;height:35px;background:url(../images/Iflight/flight.png) no-repeat -250px -120px;}
+.fp_box .succeed h3{width:385px;line-height:50px;font-size:14px;font-weight:bold;color:#000;border-bottom:1px solid #e3e3e3;}
+.fp_box .succeed p{width:325px;height:48px;line-height:24px;padding:10px 60px 10px 0;}
+.fp_box .succeed a{display:inline-block;width:148px;height:39px;line-height:39px;margin-top:5px;font-size:18px;font-weight:bold;text-align:center;color:#fff;border:none;background:url(../images/Iflight/flight.png) no-repeat 0 -230px;}

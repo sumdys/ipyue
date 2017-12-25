@@ -1,0 +1,78 @@
+
+<script language="JavaScript">
+<!--
+function checkName(){
+	ThinkAjax.send('__URL__/checkAccount/','ajax=1&account='+$F('account'));
+}
+//-->
+</script>
+
+<div class="pageContent">
+	<form method="post" action="__URL__/add/navTabId/__MODULE__-index"  enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+                	<input type="hidden" name="cid" value="{$info['cid']}" />    
+            <div class="unit">
+				<label>广告名称：</label>
+				<input type="text"  size="60" name="title" id="title">
+			</div>
+            <div class="unit">
+                <label>广告发布状态：</label>
+                <input type="radio" name="status" value="0" <if condition="$info.status eq 0"> checked="checked"</if>/> 广告审核状态 &nbsp; 
+                <input type="radio" name="status" value="1" <if condition="$info.status eq 1"> checked="checked"</if>/> 广告已发布状态
+            </div>
+             <div class="unit">
+				<label>广告图片：</label>
+				<input type="file" size="60"  name="img"  id="img">
+	       </div>
+                <div class="unit">
+				<label>图片地址：</label>
+				<input type="text" size="60"  name="img"  id="img">
+	        </div>         
+                <div class="unit">
+				<label>宽度：</label>
+				<input type="text" size="30"  name="width"  id="width">
+	       </div>
+                <div class="unit">
+				<label>高度：</label>
+				<input type="text" size="30"  name="height"  id="height">
+	       </div>         
+              
+          <div class="unit">
+                <label>广告分类：</label>
+                <select name="info[cid]">
+                    <volist name="list" id="vo" offset="0">       
+                       <option value="{$vo.cid}">{$vo.fullname}</option>                      
+                    </volist>
+                </select>
+            </div>
+          <div class="unit">
+                <label>是否获取来源网址：</label>
+                <input type="radio" name="is_url" value="1" <if condition="$info.is_url eq 1"> checked="checked"</if>/> 是 &nbsp; 
+                <input type="radio" name="is_url" value="0" <if condition="$info.is_url eq 0"> checked="checked"</if>/> 否
+            </div>             
+           <div class="unit">
+				<label>广告链接：</label>
+				<input type="text" size="60" name="link"  id="link">
+	    </div>
+            <div class="unit">
+                <label width="100">发布时间：</label>
+                <input type="text"  class="input"  name="time" value="{:date('Y-m-d H:i:s',time())}"/>
+            </div>
+             
+            <div class="unit">
+                <label>广告备注：</label>
+                <textarea class="alt" cols="100" rows="3" name="content" alt="填写广告备注" ></textarea>
+                <span class="info"></span>
+            </div>            
+		</div>		
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	</div>
+
+
+
