@@ -36,8 +36,8 @@ $config=array(
     'DB_TYPE'			=>	'mysql',
     'DB_HOST'			=>	'127.0.0.1',
     'DB_NAME'			=>	'ipyue',
-    'DB_USER'			=>	'ipyue',
-    'DB_PWD'			=>	'xy@q1w2e3',
+    'DB_USER'			=>	'root',
+    'DB_PWD'			=>	'',
     'DB_PORT'			=>	'3306',
     'DB_PREFIX'			=>	'asf_',
 
