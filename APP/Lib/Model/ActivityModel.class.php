@@ -68,8 +68,8 @@ class ActivityModel extends RelationModel {
      * @author hesheng
      * 2017.12.27
      */
-    public function getInfo(){
-        $where['freetour_id']=$_GET['id'];
+    public function getInfo($freetour_id){
+        $where['freetour_id']=$freetour_id;
         $where['end_time']=array('gt',time());
         $where['type']=1;
         $field='id,start_time,end_time,type,sell_price';

@@ -100,7 +100,7 @@ class FreetourAction extends CommonAction{
                 $this->error($rs['info']);
             }
         } else {
-            $info = D('Activity')->getInfo();
+            $info = D('Activity')->getInfo($freetour_id);
 //            var_dump($info);exit;
             $this->assign('freetour_id',$freetour_id);
             $this->info=$info;

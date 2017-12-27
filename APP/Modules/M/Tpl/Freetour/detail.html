@@ -30,6 +30,8 @@
 		  .f-btn-more{
 			  height: auto;
 		  }
+		  .timespan{float: right;color: red;font-size: 18px;}
+		  .timespan_h4{width:100%;display:block;color: red;padding-bottom: 15px;font-size: 18px;}
 	  </style>
 </head>
 
@@ -73,13 +75,22 @@
 		</div>
 	</div>
 	<div class="m-project-box">
-		<div class="m-project-money ng-binding">
-			¥&nbsp;{$info.price}
-            <span>
+		<if condition="$info.end_time neq ''">
+			<div class="timespan_h4">
+				<span>¥&nbsp;{$info.price}</span><br/>
+				<s style="font-size: 12px;">¥&nbsp;{$info.old_price}</s>
+				<p style="float: right;margin-top: -15px;" class="countDown"></p>
+
+			</div>
+		<else/>
+			<div class="m-project-money ng-binding">
+				¥&nbsp;{$info.price}
+				<span>
                 起
             </span>
-		</div>
-		<h4 class="f-font-15">
+			</div>
+		</if>
+		<h4 class="f-font-15" style="display: block;width: 100%;">
 			<b class="ng-binding">{$info.title}</b>
 		</h4>
 		<!--  <p class="s-gray f-font-13">
@@ -399,6 +410,8 @@
 			})();
 		</script>
 <script>
+	var end_time = "{$info.end_time}";
+	countdown(end_time);
 // var _hmt = _hmt || [];
  (function() {
 //     var hm = document.createElement("script");
@@ -424,5 +437,27 @@
 	function order(){
 		window.location.href="{:U('/orders/create_order')}/id/{$info.id}";
 	}
+
+	//倒计时
+	function countdown(starttime){
+        var starttime = new Date(starttime);
+        setInterval(function () {
+            var nowtime = new Date();
+            var html_text='';
+            var time = starttime - nowtime;
+            var day = parseInt(time / 1000 / 60 / 60 / 24);
+            var hour = parseInt(time / 1000 / 60 / 60 % 24);
+            if(day>0){
+                html_text+=day+'天'+hour+'小时';
+            }else{
+                html_text+=hour+'小时';
+			}
+            var minute = parseInt(time / 1000 / 60 % 60);
+            var seconds = parseInt(time / 1000 % 60);
+
+            $('.countDown').html('<span style="display: inline;height: 27px;line-height: 27px;">距结束：</span><span class="timespan">'+html_text + minute + "分钟" + seconds + "秒"+'</span>');
+        }, 1000);
+	}
+
  </script>
 </body></html>
