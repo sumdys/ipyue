@@ -1,0 +1,56 @@
+﻿<style type="text/css">
+    .border_div{border:1px solid #999; font-size:12px; margin-right:10px;}
+    .border_div span{font-weight:bold; clear:both;}
+    .border_bottom{border-bottom:1px solid #CCC; padding-top:3px; padding-bottom:3px;padding-left:20px;}
+    .border_div input{ border:1px solid #999; color:#666;margin-top:2px; margin-left:5px; margin-right:5px;float:none;}
+    .in{width:100px; margin:0 auto; padding:0px;}
+    .tag{margin-right: 10px;margin-bottom: 10px;}
+</style>
+
+<div class="page">
+	<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="__URL__/activity/navTabId/__MODULE__-index" class="pageForm required-validate" onsubmit="return  validateCallback(this,dialogAjaxDone)" novalidate="novalidate">
+        <input type="hidden" name="info[freetour_id]" id="freetour_id" value="{$freetour_id}">
+
+        <div class="pageFormContent" layoutH="58">
+            <!--<div class="unit">-->
+				<!--<label>标题：</label>-->
+				<!--<input type="text" class="required" size="60" name="info[title]" id="title" value="{$info.title}">-->
+			<!--</div>-->
+            <div class="unit">
+            <label>活动价格：</label>
+            <input type="text" class="required" name="info[sell_price]" id="sell_price" value="{$info.sell_price}">
+            </div>
+            <div class="unit">
+                <label width="100">活动类型：</label>
+                <select name="info[type]">
+                    <option value="1">限量抢购</option>
+                </select>
+            </div>
+            <div class="unit">
+                <label width="100">开始时间：</label>
+                <input type="text"  class="input date textInput valid" dateFmt="yyyy-MM-dd HH:mm:ss"  name="info[start_time]" value="{$info.start_time|default=date('Y-m-d H:i:s',time())}"/>
+            </div>
+            <div class="unit">
+                <label width="100">结束时间：</label>
+                <input type="text"  class="input date textInput valid" dateFmt="yyyy-MM-dd HH:mm:ss"  name="info[end_time]" value="{$info.end_time|default=date('Y-m-d H:i:s',strtotime('7 day'))}"/>
+            </div>
+
+
+		</div>		
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	</div>
+</div>
+<script>
+    $(function(){
+
+    })
+
+</script>
+

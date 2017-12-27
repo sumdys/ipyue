@@ -20,13 +20,13 @@
 					<li>
 						<span>出发城市：</span>
 						<volist name="city_list" id="vo">
-							<a <if condition="$vo.name eq $_GET['from']"> class="curr" </if> href="{:U('/freetour/query')}?from={$vo.name}">{$vo.name}</a>
+							<a <if condition="$vo.name eq $_GET['from']"> class="curr" id="curr" </if> href="{:U('/freetour/query')}?from={$vo.name}">{$vo.name}</a>
 						</volist>
 						<div class="more" data-more="1">更多<i class="triangle-down"></i></div>
 					</li>
 					<li class="more_city" style="display: none;">
 						<volist name="city_list_more" id="vo">
-							<a <if condition="$vo.name eq $_GET['from']"> class="curr" </if> href="{:U('/freetour/query')}?from={$vo.name}">{$vo.name}</a>
+							<a <if condition="$vo.name eq $_GET['from']"> class="curr" </if> href="{:U('/freetour/query')}?from={$vo.name}&type=2">{$vo.name}</a>
 						</volist>
 					</li>
 					<li>
@@ -162,6 +162,6 @@
 				$(this).attr('data-more',1);
 				$('.more_city').hide();
 			}
-		})
+		});
 	})
 </script>

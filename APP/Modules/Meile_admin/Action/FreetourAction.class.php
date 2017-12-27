@@ -36,9 +36,9 @@ class FreetourAction extends CommonAction{
         if($list){
             $CityModel = D("City");
             foreach($list as $key=>$val){
-                isset($list[$key]['published']) && $list[$key]['published']=date("Y-m-d H:i:s",$val['published']);
-                isset($list[$key]['images']) && $list[$key]['images']  = json_decode($val['images'],true);
-                isset($list[$key]['package']) && $list[$key]['package'] = explode(',',$val['package']);
+//                isset($list[$key]['published']) && $list[$key]['published']=date("Y-m-d H:i:s",$val['published']);
+//                isset($list[$key]['images']) && $list[$key]['images']  = json_decode($val['images'],true);
+//                isset($list[$key]['package']) && $list[$key]['package'] = explode(',',$val['package']);
                 isset($list[$key]['dcity']) &&  ($list[$key]['dcity_name'] = $val['dcity']?$CityModel->getCityName($val['dcity']):'');
                 isset($list[$key]['acity']) &&   ($list[$key]['acity_name'] = $val['acity']?$CityModel->getCityName($val['acity']):'');
             }
@@ -86,6 +86,28 @@ class FreetourAction extends CommonAction{
        $_POST['published']=strtotime($_POST['published']);
     }
 
-	
+
+    /*
+     * 限购
+     */
+    function activity(){
+        $freetour_id = I('get.id');
+        if (IS_POST) {
+            $rs=D("Activity")->addNews();
+            if($rs['status']==1){
+                $this->success($rs['info']);
+            }else{
+                $this->error($rs['info']);
+            }
+        } else {
+            $info = D('Activity')->getInfo();
+//            var_dump($info);exit;
+            $this->assign('freetour_id',$freetour_id);
+            $this->info=$info;
+            $this->display();
+        }
+    }
+
+
 
 }?>

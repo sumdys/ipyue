@@ -692,6 +692,14 @@ function cookie($name, $value='', $option=null) {
     }
 }
 
+///*
+// * 获取用户Id
+// */
+//function getUid(){
+//    return session("uid")?session("uid"):false;
+//}
+
+
 /**
  * 加载动态扩展文件
  * @return void
