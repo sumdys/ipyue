@@ -17,6 +17,7 @@
 	<style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
 	<link rel="stylesheet" href="__PUBLIC__/css/mui.min.css">
 	<link rel="stylesheet" href="__PUBLIC__/mobile/detail/app.css" type="text/css">
+	<link rel="stylesheet" href="__PUBLIC__/mobile/css/blueimp-gallery.css" type="text/css">
 
 	<script src="__PUBLIC__/mobile/js/jquery-1.9.1.min.js" async=""></script>
 	<!--<script src="__PUBLIC__/mobile/detail/goods-detail-ctrl.js" async=""></script>-->
@@ -32,6 +33,7 @@
 		  }
 		  .timespan{float: right;color: red;font-size: 18px;}
 		  .timespan_h4{width:100%;display:block;color: red;padding-bottom: 15px;font-size: 18px;}
+		  .slide-content{height: 100%;top: 10px;}
 	  </style>
 </head>
 
@@ -48,30 +50,37 @@
 	<!-- <div lun-bo nameprop="data.slides" arrow="true" num='true' class="f-fullwidth"></div> -->
 	<!-- 轮播图 -->
 	<div id="slideBox" class="m-slideBox">
-		<div class="hd">
-            <span class="prev m-slide-left">
-                <img src="__PUBLIC__/mobile/detail/arrow-left-big.png" ng-hide="pageIndex == 1" class="ng-hide" height="82" width="33">
-            </span>
-            <span class="next m-slide-right">
-                <img src="__PUBLIC__/mobile/detail/arrow-right-big.png" ng-hide="pageIndex == data.slides.length"  height="82" width="33">
-            </span>
-		</div>
-		<div ng-show="data.slides.length == 1" class="ng-hide">
-			<img src="__PUBLIC__/uploads{$info['images'][0]}" width="100%">
-			<a class="m-touch-num" href=""> 1/1</a>
-		</div>
+		<!--<div class="hd">-->
+            <!--<span class="prev m-slide-left">-->
+                <!--<img src="__PUBLIC__/mobile/detail/arrow-left-big.png" ng-hide="pageIndex == 1" class="ng-hide" height="82" width="33">-->
+            <!--</span>-->
+            <!--<span class="next m-slide-right">-->
+                <!--<img src="__PUBLIC__/mobile/detail/arrow-right-big.png" ng-hide="pageIndex == data.slides.length"  height="82" width="33">-->
+            <!--</span>-->
+		<!--</div>-->
+		<!--<div ng-show="data.slides.length == 1" class="ng-hide">-->
+			<!--<img src="__PUBLIC__/uploads{$info['images'][0]}" width="100%">-->
+			<!--<a class="m-touch-num" href=""> 1/1</a>-->
+		<!--</div>-->
 		<div class="bd" ng-hide="data.slides.length == 1">
 			<div class="tempWrap" style="overflow:hidden; position:relative;">
-				<ul style="width: 9720px; position: relative; overflow: hidden; padding: 0px; margin: 0px; transition-duration: 200ms; transform: translateX(-540px);">
+				<div id="blueimp-image-carousel" class="blueimp-gallery blueimp-gallery-carousel">
+					<div class="slides"></div>
+					<h3 class="title"></h3>
+					<!--<a class="prev">‹</a>-->
+					<!--<a class="next">›</a>-->
+					<!--<a class="play-pause"></a>-->
+				</div>
+				<!--<ul style="width: 9720px; position: relative; overflow: hidden; padding: 0px; margin: 0px; transition-duration: 200ms; transform: translateX(-540px);">-->
 				<!-- ngRepeat: item in data.slides -->
-					<volist name="info.images" id="vo">
-				<li ng-repeat="item in data.slides" on-finish-render-filters="" class="ng-scope" style="display: table-cell; vertical-align: top; width: 540px;">
-					<a class="pic"><img src="__PUBLIC__/uploads/{$vo}" width="100%"></a>
-				</li>
-					</volist>
-				</ul>
+					<!--<volist name="info.images" id="vo">-->
+					<!--<li ng-repeat="item in data.slides" on-finish-render-filters="" class="ng-scope" style="display: table-cell; vertical-align: top; width: 540px;">-->
+						<!--<a class="pic"><img src="__PUBLIC__/uploads/{$vo}" width="100%"></a>-->
+					<!--</li>-->
+					<!--</volist>-->
+				<!--</ul>-->
 			</div>
-			<a class="m-touch-num ng-binding" href=""> 1/<php>echo count($info['images']);</php></a>
+			<!--<a class="m-touch-num ng-binding" href=""> 1/{$info['count_photo']}</php></a>-->
 		</div>
 	</div>
 	<div class="m-project-box">
@@ -337,6 +346,9 @@
 		<!--通用分享-->
 		<!--新版分享特效-->
 		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script src="__PUBLIC__/mobile/js/blueimp-helper.js"></script>
+		<script src="__PUBLIC__/mobile/js/blueimp-gallery.js"></script>
+		<script src="js/blueimp-gallery-fullscreen.js"></script>
 		<script>
 
 			var title="{$info.title}";
@@ -411,7 +423,9 @@
 		</script>
 <script>
 	var end_time = "{$info.end_time}";
+    var images = {$info.images};
 	countdown(end_time);
+    gralle_photo(images);
 // var _hmt = _hmt || [];
  (function() {
 //     var hm = document.createElement("script");
@@ -440,7 +454,9 @@
 
 	//倒计时
 	function countdown(starttime){
-        var starttime = new Date(starttime);
+        var starttime = starttime.replace(/\-/g, "/");
+        starttime = new Date(starttime);
+
         setInterval(function () {
             var nowtime = new Date();
             var html_text='';
@@ -459,5 +475,33 @@
         }, 1000);
 	}
 
+
+	//相册
+	function gralle_photo(images){
+        var carouselLinks = [];
+        var linksContainer = $('#links');
+        var baseUrl = '__PUBLIC__/uploads';
+        // Add the demo images as links with thumbnails to the page:
+        $.each(images, function (index, photo) {
+            console.log(photo);
+            $('<a/>')
+                .append($('<img>').prop('src', baseUrl+photo))
+                .prop('href', photo)
+                .prop('title', '1111')
+                .attr('data-gallery', '')
+                .appendTo(linksContainer);
+            carouselLinks.push({
+                href: baseUrl+photo,
+                title: '222'
+            });
+        });
+
+        // Initialize the Gallery as image carousel:
+        blueimp.Gallery(carouselLinks, {
+            container: '#blueimp-image-carousel',
+            carousel: true
+        })
+	}
  </script>
-</body></html>
+</body>
+</html>

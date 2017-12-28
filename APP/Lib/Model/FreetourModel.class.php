@@ -30,10 +30,10 @@ class FreetourModel extends RelationModel {
         if($list){
         	$CityModel = D('City');
             foreach($list as $key=>$val){
-//                isset($list[$key]['published']) && $list[$key]['published']=date("Y-m-d H:i:s",$val['published']);
-//                isset($list[$key]['images']) && $list[$key]['images']  = json_decode($val['images'],true);
-                
-//                isset($list[$key]['package']) && $list[$key]['package'] = explode(',',$val['package']);
+                isset($list[$key]['published']) && $list[$key]['published']=date("Y-m-d H:i:s",$val['published']);
+                isset($list[$key]['images']) && $list[$key]['images']  = json_decode($val['images'],true);
+//
+                isset($list[$key]['package']) && $list[$key]['package'] = explode(',',$val['package']);
                 isset($list[$key]['dcity']) &&  ($list[$key]['dcity_name'] = $val['dcity']?$CityModel->getCityName($val['dcity']):'');
                 isset($list[$key]['acity']) &&   ($list[$key]['acity_name'] = $val['acity']?$CityModel->getCityName($val['acity']):'');
             }
@@ -144,6 +144,8 @@ class FreetourModel extends RelationModel {
             $info['package'] = explode(',',$info['package']);
             $info['end_time']=$activityInfo['end_time']?$activityInfo['end_time']:'';
             $activityInfo?$info['price']=sprintf('%0.2f',$activityInfo['sell_price']):$info['price'];
+            $info['count_photo']=count($info['images']);
+            $info['images']=json_encode($info['images']);
         }
 
         return $info;
