@@ -73,10 +73,12 @@
 				<input name="pay_price" checked class="pay_price_type" value="1" type="radio" id="allPrice">
 				<label>全额：<span style="color: red;">{$info.price}</span></label>
 			</div>
+			<if condition="$info.end_time eq ''">
 			<div class="mui-input-row mui-radio">
 				<input name="pay_price" type="radio" class="pay_price_type" value="2" id="pay_price" onclick="showCount(this);">
 				<label>预定金：<span style="color: red;" id="pay_price_text"></span></label>
 			</div>
+			</if>
 			<p class="ads_ortt3 fonts85 ads"><!--<span class="aaaa"><b style="color: red;">*</b>出发日期：</span>--></p>
 
 			<!-- <div class="ads-line"></div> -->
