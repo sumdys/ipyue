@@ -145,7 +145,7 @@ class FreetourModel extends RelationModel {
             $info['end_time']=$activityInfo['end_time']?$activityInfo['end_time']:'';
             $activityInfo?$info['price']=sprintf('%0.2f',$activityInfo['sell_price']):$info['price'];
             $info['count_photo']=count($info['images']);
-            $info['images']=json_encode($info['images']);
+            $info['imagesAds']=json_encode($info['images']);
         }
 
         return $info;
