@@ -2,6 +2,7 @@
 // 首页控制器
 class FreetourAction extends IniAction {
     public function index(){
+
         $this->title="品悦定制旅游_定制旅游";
         $this->keywords="品悦旅行，定制旅行，定制旅游，旅行定制，旅行定制师，海外旅行，旅游路书，旅行";
         $this->description="品悦定制旅行最专业的海外旅行定制专家。我们拥有优秀的旅行定制师团队，凭借多年深度旅行和海外旅居经历，为想要出国旅行的朋友提供咨询服务。专业的推荐、精彩的设计、严谨的安排、24小时电话和网络协助，一切都只为，让你的旅行有温度。";
@@ -14,8 +15,8 @@ class FreetourAction extends IniAction {
         $where =  array(
             'old_price'=>array('gt',0)
         );
-        $data['tj_line'] = $model->lists($where,'*','',8);
-
+        $data['tj_line'] = $model->lists($where,'*','',9);
+//var_dump($data);
         //短线游
         $data['short_line'] = $model->lists(array('line_type'=>1),'*','',3);
 
@@ -26,9 +27,9 @@ class FreetourAction extends IniAction {
         //客栈
         $data['kezhan_line'] = $model->lists(array('line_type'=>4),'*','',3);
         //国内航线
-        $data['guonei_line'] = $model->lists(array('line_type'=>5),'*','',4);
+        $data['guonei_line'] = $model->lists(array('line_type'=>5),'*','',6);
         //国际航线
-        $data['guoji_line'] = $model->lists(array('line_type'=>6),'*','',4);
+        $data['guoji_line'] = $model->lists(array('line_type'=>6),'*','',6);
         //独家资源
         $data['dujia_line'] = $model->lists(array('line_type'=>7),'*','',4);
         //跟团游
@@ -55,9 +56,9 @@ class FreetourAction extends IniAction {
 
 
         //国内航线
-        $data['guonei_line'] = $model->lists(array('line_type'=>5),'*','',16);
+        $data['guonei_line'] = $model->lists(array('line_type'=>5),'*','',15);
         //国际航线
-        $data['guoji_line'] = $model->lists(array('line_type'=>6),'*','',16);
+        $data['guoji_line'] = $model->lists(array('line_type'=>6),'*','',15);
 
         $this->assign('list', $data);
         $this->display();
@@ -79,10 +80,10 @@ class FreetourAction extends IniAction {
         $data['tj_line'] = $model->lists($where,'*','',8);
 
         //短线游
-        $data['short_line'] = $model->lists(array('line_type'=>1),'*','',16);
+        $data['short_line'] = $model->lists(array('line_type'=>1),'*','',15);
 
         //长线游
-        $data['long_line'] = $model->lists(array('line_type'=>2),'*','',16);
+        $data['long_line'] = $model->lists(array('line_type'=>2),'*','',15);
 
         $this->assign('list', $data);
         $this->display();
@@ -98,9 +99,9 @@ class FreetourAction extends IniAction {
         $model = D("Freetour");
 
         //酒店
-        $data['hotle_line'] = $model->lists(array('line_type'=>3),'*','',32);
+        $data['hotle_line'] = $model->lists(array('line_type'=>3),'*','',30);
         //客栈
-        $data['kezhan_line'] = $model->lists(array('line_type'=>4),'*','',16);
+        $data['kezhan_line'] = $model->lists(array('line_type'=>4),'*','',15);
 
 
         $this->assign('list', $data);

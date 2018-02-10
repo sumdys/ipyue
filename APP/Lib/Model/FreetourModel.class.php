@@ -32,10 +32,12 @@ class FreetourModel extends RelationModel {
             foreach($list as $key=>$val){
                 isset($list[$key]['published']) && $list[$key]['published']=date("Y-m-d H:i:s",$val['published']);
                 isset($list[$key]['images']) && $list[$key]['images']  = json_decode($val['images'],true);
-//
+                $list[$key]['tags']  = array_slice(array_filter(array_unique(json_decode($val['tags'],true))),0,3);
                 isset($list[$key]['package']) && $list[$key]['package'] = explode(',',$val['package']);
                 isset($list[$key]['dcity']) &&  ($list[$key]['dcity_name'] = $val['dcity']?$CityModel->getCityName($val['dcity']):'');
                 isset($list[$key]['acity']) &&   ($list[$key]['acity_name'] = $val['acity']?$CityModel->getCityName($val['acity']):'');
+                $list[$key]['price'] = (int)$val['price'];
+                $list[$key]['old_price'] = (int)$val['old_price'];
             }
         }
 //          var_dump($list);

@@ -1,4 +1,7 @@
-﻿<include file="Public:header" />
+﻿<include file="Public:header" xmlns="http://www.w3.org/1999/html"/>
+<style>
+
+</style>
 <script type="text/javascript" src="__PUBLIC__/js/hotcitypop/popcitylist.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/chaxun.js"></script>
 <div class="w1200">
@@ -25,8 +28,16 @@
                         <a href="{:U('freetour/detail')}/id/{$vo.id}"><img src="__PUBLIC__/uploads{$vo[images][0]}" alt="">  </a>
 						<div class="ft-tj-d">
 							<a href="{:U('freetour/detail')}/id/{$vo.id}">{$vo.title}</a>
-							<span class="ft-tj-pri"><B>现价:{$vo.price}</B></span><span class="ft-tj-m-pri">市场价:{$vo.old_price}</span>
+							<volist name="vo.tags" id="v">
+								<span class="room_intro_blue <if condition='$key eq 0'> display_border_left</if>">{$v}</span>
+							</volist>
+
 						</div>
+						<b class="moy-b">
+							<p><font>￥</font>{$vo.price}
+								<span class="f16" style="line-height:45px;text-decoration: line-through;color:#ccc"><font>￥</font>{$vo.old_price} </span>
+							</p>
+						</b>
 					</li>
                     </volist>
 				</ul>
@@ -42,8 +53,15 @@
                         <a href="{:U('freetour/detail')}/id/{$vo.id}"><img src="__PUBLIC__/uploads{$vo[images][0]}" alt="">  </a>
 						<div class="ft-tj-d">
 							<a href="{:U('freetour/detail')}/id/{$vo.id}">{$vo.title}</a>
-							<span class="ft-tj-pri">现价：AUD {$vo.price}</span><span class="ft-tj-m-pri">原价：AUD {$vo.old_price}</span>
+							<volist name="vo.tags" id="v">
+								<span class="room_intro_blue <if condition='$key eq 0'> display_border_left</if>">{$v}</span>
+							</volist>
 						</div>
+						<b class="moy-b">
+							<p><font>￥</font>{$vo.price}
+								<span class="f16" style="line-height:45px;text-decoration: line-through;color:#ccc"><font>￥</font>{$vo.old_price} </span>
+							</p>
+						</b>
 					</li>
                     </volist>
 				</ul>
@@ -59,8 +77,15 @@
                         <a href="{:U('freetour/detail')}/id/{$vo.id}"><img src="__PUBLIC__/uploads{$vo[images][0]}" alt="">  </a>
 						<div class="ft-tj-d">
 							<a href="{:U('freetour/detail')}/id/{$vo.id}">{$vo.title}</a>
-							<span class="ft-tj-pri">现价：AUD {$vo.price}</span><span class="ft-tj-m-pri">原价：AUD {$vo.old_price}</span>
+							<volist name="vo.tags" id="v">
+								<span class="room_intro_blue <if condition='$key eq 0'> display_border_left</if>">{$v}</span>
+							</volist>
 						</div>
+						<b class="moy-b">
+							<p><font>￥</font>{$vo.price}
+								<span class="f16" style="line-height:45px;text-decoration: line-through;color:#ccc"><font>￥</font>{$vo.old_price} </span>
+							</p>
+						</b>
 					</li>
                     </volist>
 				</ul>
