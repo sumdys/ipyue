@@ -76,8 +76,8 @@
             </div>
             <div class="unit">
                 <label width="100">排序：</label>
-                <select name="sort">
-                    <option value="30">选择排序</option>
+                <select name="info[sorts]">
+                    <option value="99">选择排序</option>
                     <?php if(is_array($sorts)): $i = 0; $__LIST__ = $sorts;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo); ?>"><?php echo ($vo); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
 
                 </select>

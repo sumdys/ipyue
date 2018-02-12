@@ -70,7 +70,9 @@
                     <td><?php echo ($vo['sorts']); ?></td>
                     <td><?php echo ($vo['update_uid']); ?></td>
                     <td><?php echo (getstatus($vo['status'])); ?></td>
+
                     <td>
+                        <a href="__URL__/activity/id/<?php echo ($vo['id']); ?>" target="dialog" rel="activity" width="330" height="200">限购</a>
                         <a href="__URL__/edit/id/<?php echo ($vo['id']); ?>" target="dialog" rel="edit" width="890" height="550">编辑</a>
                         <a href="__URL__/delete/id/<?php echo ($vo['id']); ?>/navTabId/__MODULE__-index" target="navTabTodo" title="你确定要删除吗？">删除</a></td>
                 </tr><?php endforeach; endif; else: echo "" ;endif; ?>

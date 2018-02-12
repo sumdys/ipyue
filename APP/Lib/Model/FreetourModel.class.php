@@ -32,8 +32,8 @@ class FreetourModel extends RelationModel {
             foreach($list as $key=>$val){
                 isset($list[$key]['published']) && $list[$key]['published']=date("Y-m-d H:i:s",$val['published']);
                 isset($list[$key]['images']) && $list[$key]['images']  = json_decode($val['images'],true);
-                
-                isset($list[$key]['package']) && $list[$key]['package'] = explode(',',$val['package']);                
+//
+                isset($list[$key]['package']) && $list[$key]['package'] = explode(',',$val['package']);
                 isset($list[$key]['dcity']) &&  ($list[$key]['dcity_name'] = $val['dcity']?$CityModel->getCityName($val['dcity']):'');
                 isset($list[$key]['acity']) &&   ($list[$key]['acity_name'] = $val['acity']?$CityModel->getCityName($val['acity']):'');
             }
@@ -131,16 +131,23 @@ class FreetourModel extends RelationModel {
     }
 
     function info(){
-        $CityModel = D("City");
-        $info=$this->find(I('id'));
+        $info=$this->field('*')->find(I('id'));
         if($info){
+            $CityModel = D("City");
+            $ActivityModel = D('Activity');
+            $activityInfo = $ActivityModel->getInfo(I('id'));
             $info['dcity_name'] = $info['dcity']?$CityModel->getCityName($info['dcity']):'';
             $info['acity_name'] = $info['acity']?$CityModel->getCityName($info['acity']):'';
             $info['published']=date("Y-m-d H:i:s",$info['published']);
             $info['images']  = array_filter(array_unique(json_decode($info['images'],true)));
             $info['tags']  = array_filter(array_unique(json_decode($info['tags'],true)));
             $info['package'] = explode(',',$info['package']);
+            $info['end_time']=$activityInfo['end_time']?$activityInfo['end_time']:'';
+            $activityInfo?$info['price']=sprintf('%0.2f',$activityInfo['sell_price']):$info['price'];
+            $info['count_photo']=count($info['images']);
+            $info['imagesAds']=json_encode($info['images']);
         }
+
         return $info;
     }
 

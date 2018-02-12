@@ -82,6 +82,30 @@ class FreetourAction extends CommonAction{
     }
 
 
+    /*
+     * 限时抢购
+     * @author hesheng
+     * 2017.12.26
+     */
+    public function activity(){
+        if (IS_POST) {
+
+            $rs=D("Activity")->addNews();
+            if($rs['status']==1){
+                $this->success($rs['info']);
+            }else{
+                $this->error($rs['info']);
+            }
+        } else {
+            $freetour_id = I('get.id');
+            $sorts = range(1,20);
+            $this->assign('sorts',$sorts);
+            $this->assign('freetour_id',$freetour_id);
+            $this->display();
+        }
+    }
+
+
     function _before_update(){
        $_POST['published']=strtotime($_POST['published']);
     }

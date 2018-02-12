@@ -17,6 +17,7 @@
 	<style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
 	<link rel="stylesheet" href="__PUBLIC__/css/mui.min.css">
 	<link rel="stylesheet" href="__PUBLIC__/mobile/detail/app.css" type="text/css">
+	<link rel="stylesheet" href="__PUBLIC__/mobile/css/blueimp-gallery.css" type="text/css">
 
 	<script src="__PUBLIC__/mobile/js/jquery-1.9.1.min.js" async=""></script>
 	<!--<script src="__PUBLIC__/mobile/detail/goods-detail-ctrl.js" async=""></script>-->
@@ -30,6 +31,9 @@
 		  .f-btn-more{
 			  height: auto;
 		  }
+		  .timespan{float: right;color: red;font-size: 18px;}
+		  .timespan_h4{width:100%;display:block;color: red;padding-bottom: 15px;font-size: 18px;}
+		  .slide-content{height: 100%;top: 10px;}
 	  </style>
 </head>
 
@@ -46,40 +50,56 @@
 	<!-- <div lun-bo nameprop="data.slides" arrow="true" num='true' class="f-fullwidth"></div> -->
 	<!-- 轮播图 -->
 	<div id="slideBox" class="m-slideBox">
-		<div class="hd">
-            <span class="prev m-slide-left">
-                <img src="__PUBLIC__/mobile/detail/arrow-left-big.png" ng-hide="pageIndex == 1" class="ng-hide" height="82" width="33">
-            </span>
-            <span class="next m-slide-right">
-                <img src="__PUBLIC__/mobile/detail/arrow-right-big.png" ng-hide="pageIndex == data.slides.length"  height="82" width="33">
-            </span>
-		</div>
-		<div ng-show="data.slides.length == 1" class="ng-hide">
-			<img src="__PUBLIC__/uploads{$info['images'][0]}" width="100%">
-			<a class="m-touch-num" href=""> 1/1</a>
-		</div>
+		<!--<div class="hd">-->
+            <!--<span class="prev m-slide-left">-->
+                <!--<img src="__PUBLIC__/mobile/detail/arrow-left-big.png" ng-hide="pageIndex == 1" class="ng-hide" height="82" width="33">-->
+            <!--</span>-->
+            <!--<span class="next m-slide-right">-->
+                <!--<img src="__PUBLIC__/mobile/detail/arrow-right-big.png" ng-hide="pageIndex == data.slides.length"  height="82" width="33">-->
+            <!--</span>-->
+		<!--</div>-->
+		<!--<div ng-show="data.slides.length == 1" class="ng-hide">-->
+			<!--<img src="__PUBLIC__/uploads{$info['images'][0]}" width="100%">-->
+			<!--<a class="m-touch-num" href=""> 1/1</a>-->
+		<!--</div>-->
 		<div class="bd" ng-hide="data.slides.length == 1">
 			<div class="tempWrap" style="overflow:hidden; position:relative;">
-				<ul style="width: 9720px; position: relative; overflow: hidden; padding: 0px; margin: 0px; transition-duration: 200ms; transform: translateX(-540px);">
+				<div id="blueimp-image-carousel" class="blueimp-gallery blueimp-gallery-carousel">
+					<div class="slides"></div>
+					<h3 class="title"></h3>
+					<!--<a class="prev">‹</a>-->
+					<!--<a class="next">›</a>-->
+					<!--<a class="play-pause"></a>-->
+				</div>
+				<!--<ul style="width: 9720px; position: relative; overflow: hidden; padding: 0px; margin: 0px; transition-duration: 200ms; transform: translateX(-540px);">-->
 				<!-- ngRepeat: item in data.slides -->
-					<volist name="info.images" id="vo">
-				<li ng-repeat="item in data.slides" on-finish-render-filters="" class="ng-scope" style="display: table-cell; vertical-align: top; width: 540px;">
-					<a class="pic"><img src="__PUBLIC__/uploads/{$vo}" width="100%"></a>
-				</li>
-					</volist>
-				</ul>
+					<!--<volist name="info.images" id="vo">-->
+					<!--<li ng-repeat="item in data.slides" on-finish-render-filters="" class="ng-scope" style="display: table-cell; vertical-align: top; width: 540px;">-->
+						<!--<a class="pic"><img src="__PUBLIC__/uploads/{$vo}" width="100%"></a>-->
+					<!--</li>-->
+					<!--</volist>-->
+				<!--</ul>-->
 			</div>
-			<a class="m-touch-num ng-binding" href=""> 1/<php>echo count($info['images']);</php></a>
+			<!--<a class="m-touch-num ng-binding" href=""> 1/{$info['count_photo']}</php></a>-->
 		</div>
 	</div>
 	<div class="m-project-box">
-		<div class="m-project-money ng-binding">
-			¥&nbsp;{$info.price}
-            <span>
+		<if condition="$info.end_time neq ''">
+			<div class="timespan_h4">
+				<span>¥&nbsp;{$info.price}</span><br/>
+				<s style="font-size: 12px;">¥&nbsp;{$info.old_price}</s>
+				<p style="float: right;margin-top: -15px;" class="countDown"></p>
+
+			</div>
+		<else/>
+			<div class="m-project-money ng-binding">
+				¥&nbsp;{$info.price}
+				<span>
                 起
             </span>
-		</div>
-		<h4 class="f-font-15">
+			</div>
+		</if>
+		<h4 class="f-font-15" style="display: block;width: 100%;">
 			<b class="ng-binding">{$info.title}</b>
 		</h4>
 		<!--  <p class="s-gray f-font-13">
@@ -189,6 +209,29 @@
 				</div>
 			</div>
 		</div>
+		<!-- 周边交通 -->
+		<div class="m-pdetail-item f-fullwidth f-mt5">
+			<div class="f-table f-fullwidth">
+				<div class="f-table-cell">
+					<hr>&nbsp;
+				</div>
+				<div class="f-table-cell m-title">
+					周边交通
+				</div>
+				<div class="f-table-cell">
+					<hr>&nbsp;
+				</div>
+			</div>
+			<div class="f-mt5 m-facilities-img-box">
+				<div ng-bind-html="data.goods.g_description | to_trusted" ng-class="{'m-tip-box': moreTip}" class="ng-binding m-tip-box xuzhi" style="height: 150px;">{$info.cost_info}</div>
+				<div class="f-text-center">
+					<button class="f-btn-more f-mt20 ng-binding" onclick="getMoreTip()">
+						更多
+					</button>
+				</div>
+			</div>
+		</div>
+
 		<!-- 配套设施 -->
 		<div class="m-pdetail-item f-fullwidth f-mt5">
 			<div class="f-table f-fullwidth">
@@ -196,68 +239,23 @@
 					<hr>&nbsp;
 				</div>
 				<div class="f-table-cell m-title">
-					配套设施
+					产品配套
 				</div>
 				<div class="f-table-cell">
 					<hr>&nbsp;
 				</div>
 			</div>
 			<div class="f-mt5 m-facilities-img-box">
-				<!-- ngRepeat: set in data.goods.g_sets | limitTo:10 --><div class="m-facilities-img ng-scope" ng-repeat="set in data.goods.g_sets | limitTo:10" ng-show="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_2.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets | limitTo:10 --><div class="m-facilities-img ng-scope" ng-repeat="set in data.goods.g_sets | limitTo:10" ng-show="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_3.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets | limitTo:10 --><div class="m-facilities-img ng-scope" ng-repeat="set in data.goods.g_sets | limitTo:10" ng-show="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_4.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets | limitTo:10 --><div class="m-facilities-img ng-scope" ng-repeat="set in data.goods.g_sets | limitTo:10" ng-show="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_5.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets | limitTo:10 --><div class="m-facilities-img ng-scope" ng-repeat="set in data.goods.g_sets | limitTo:10" ng-show="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_6.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets | limitTo:10 --><div class="m-facilities-img ng-scope" ng-repeat="set in data.goods.g_sets | limitTo:10" ng-show="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_7.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets | limitTo:10 --><div class="m-facilities-img ng-scope" ng-repeat="set in data.goods.g_sets | limitTo:10" ng-show="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_8.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets | limitTo:10 --><div class="m-facilities-img ng-scope" ng-repeat="set in data.goods.g_sets | limitTo:10" ng-show="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_9.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets | limitTo:10 --><div class="m-facilities-img ng-scope" ng-repeat="set in data.goods.g_sets | limitTo:10" ng-show="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_10.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets | limitTo:10 --><div class="m-facilities-img ng-scope" ng-repeat="set in data.goods.g_sets | limitTo:10" ng-show="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_11.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets | limitTo:10 -->
-				<!-- ngRepeat: set in data.goods.g_sets --><div class="m-facilities-img ng-scope ng-hide" ng-repeat="set in data.goods.g_sets" ng-hide="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_2.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets --><div class="m-facilities-img ng-scope ng-hide" ng-repeat="set in data.goods.g_sets" ng-hide="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_3.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets --><div class="m-facilities-img ng-scope ng-hide" ng-repeat="set in data.goods.g_sets" ng-hide="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_4.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets --><div class="m-facilities-img ng-scope ng-hide" ng-repeat="set in data.goods.g_sets" ng-hide="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_5.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets --><div class="m-facilities-img ng-scope ng-hide" ng-repeat="set in data.goods.g_sets" ng-hide="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_6.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets --><div class="m-facilities-img ng-scope ng-hide" ng-repeat="set in data.goods.g_sets" ng-hide="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_7.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets --><div class="m-facilities-img ng-scope ng-hide" ng-repeat="set in data.goods.g_sets" ng-hide="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_8.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets --><div class="m-facilities-img ng-scope ng-hide" ng-repeat="set in data.goods.g_sets" ng-hide="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_9.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets --><div class="m-facilities-img ng-scope ng-hide" ng-repeat="set in data.goods.g_sets" ng-hide="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_10.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets --><div class="m-facilities-img ng-scope ng-hide" ng-repeat="set in data.goods.g_sets" ng-hide="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_11.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets --><div class="m-facilities-img ng-scope ng-hide" ng-repeat="set in data.goods.g_sets" ng-hide="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_12.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets --><div class="m-facilities-img ng-scope ng-hide" ng-repeat="set in data.goods.g_sets" ng-hide="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_15.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets --><div class="m-facilities-img ng-scope ng-hide" ng-repeat="set in data.goods.g_sets" ng-hide="moreFacilities">
-				<img src="__PUBLIC__/mobile/detail/sets_16.png">
-			</div><!-- end ngRepeat: set in data.goods.g_sets -->
-				<!--<div class="f-text-center" ng-hide="data.goods.g_sets.length &lt;= 10">-->
-					<!--<button class="f-btn-more f-mt20 ng-binding" ng-click="getMoreFacilities()">-->
-						<!--更多-->
-					<!--</button>-->
-				<!--</div>-->
+				<div ng-bind-html="data.goods.g_description | to_trusted" ng-class="{'m-tip-box': moreTip}" class="ng-binding m-tip-box xuzhi" style="height: 150px;">{$info.reference_route}</div>
+				<div class="f-text-center">
+					<button class="f-btn-more f-mt20 ng-binding" onclick="getMoreTip()">
+						更多
+					</button>
+				</div>
 			</div>
 		</div>
+
+
 		<!-- 参考行程 -->
 		<!--<div class="m-pdetail-item f-fullwidth">-->
 			<!--<div class="f-table f-fullwidth">-->
@@ -348,6 +346,9 @@
 		<!--通用分享-->
 		<!--新版分享特效-->
 		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<script src="__PUBLIC__/mobile/js/blueimp-helper.js"></script>
+		<script src="__PUBLIC__/mobile/js/blueimp-gallery.js"></script>
+		<script src="js/blueimp-gallery-fullscreen.js"></script>
 		<script>
 
 			var title="{$info.title}";
@@ -421,6 +422,10 @@
 			})();
 		</script>
 <script>
+	var end_time = "{$info.end_time}";
+    var images = {$info.imagesAds};
+	countdown(end_time);
+    gralle_photo(images);
 // var _hmt = _hmt || [];
  (function() {
 //     var hm = document.createElement("script");
@@ -446,5 +451,57 @@
 	function order(){
 		window.location.href="{:U('/orders/create_order')}/id/{$info.id}";
 	}
+
+	//倒计时
+	function countdown(starttime){
+        var starttime = starttime.replace(/\-/g, "/");
+        starttime = new Date(starttime);
+
+        setInterval(function () {
+            var nowtime = new Date();
+            var html_text='';
+            var time = starttime - nowtime;
+            var day = parseInt(time / 1000 / 60 / 60 / 24);
+            var hour = parseInt(time / 1000 / 60 / 60 % 24);
+            if(day>0){
+                html_text+=day+'天'+hour+'小时';
+            }else{
+                html_text+=hour+'小时';
+			}
+            var minute = parseInt(time / 1000 / 60 % 60);
+            var seconds = parseInt(time / 1000 % 60);
+
+            $('.countDown').html('<span style="display: inline;height: 27px;line-height: 27px;">距结束：</span><span class="timespan">'+html_text + minute + "分钟" + seconds + "秒"+'</span>');
+        }, 1000);
+	}
+
+
+	//相册
+	function gralle_photo(images){
+        var carouselLinks = [];
+        var linksContainer = $('#links');
+        var baseUrl = '__PUBLIC__/uploads';
+        // Add the demo images as links with thumbnails to the page:
+        $.each(images, function (index, photo) {
+            console.log(photo);
+            $('<a/>')
+                .append($('<img>').prop('src', baseUrl+photo))
+                .prop('href', photo)
+                .prop('title', '1111')
+                .attr('data-gallery', '')
+                .appendTo(linksContainer);
+            carouselLinks.push({
+                href: baseUrl+photo,
+                title: '222'
+            });
+        });
+
+        // Initialize the Gallery as image carousel:
+        blueimp.Gallery(carouselLinks, {
+            container: '#blueimp-image-carousel',
+            carousel: true
+        })
+	}
  </script>
-</body></html>
+</body>
+</html>
