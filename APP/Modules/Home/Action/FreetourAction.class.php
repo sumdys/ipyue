@@ -121,12 +121,16 @@ class FreetourAction extends IniAction {
         $where = array();
         $from = I('get.from');
         $days = I('get.days');
-        if($from){
-            $where_city['name']=$from;
-            $where['dcity']=M('City')->where($where_city)->getField('iata');
-        }
+        $keyword = I('get.to');
+//        if($from){
+//            $where_city['name']=$from;
+//            $where['dcity']=M('City')->where($where_city)->getField('iata');
+//        }
         if($days){
             $where['days']=$days;
+        }
+        if($keyword){
+            $where['title']=array('like',"%{$keyword}%");
         }
         //获取城市列表
         $where_city=array();
@@ -152,10 +156,25 @@ class FreetourAction extends IniAction {
         if(!isset($_REQUEST['id'])){
             $this->error("页面不存在");
         }
-        $this->info = D("Freetour")->info();
+        $model=D("Freetour");
+        $this->info = $model->info();
         if(!$this->info){
             $this->error("页面不存在");
         }
+        //特价
+        $ids = D('Activity')->getActivityList();
+        $speciaPrice = array();
+        if($ids){
+            $where['id']=array('in',$ids);
+            $fields='id,title,price';
+            $order = 'sorts ASC,create_time DESC';
+            $speciaPrice = $model->lists($where,$fields,$order,10);
+        }
+        $where_1['id']=array('gt',0);
+        $hotFreetour = $model->lists($where_1,$fields,$order,10);
+//        var_dump($speciaPrice);exit;
+        $this->assign('speciaPrice',$speciaPrice);
+        $this->assign('hotFreetour',$hotFreetour);
 		$this->assign('id',$_REQUEST['id']);
         $this->display();
     }

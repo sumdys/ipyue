@@ -30,10 +30,19 @@
 <div id="hd_top">
         <div class="wd980"><script type="text/javascript"  src="<?php echo U('/Public/topMenu');?>"></script></div>
     </div>
+
         <div id="hd_logo">
         <div class="wd960">
             <a href="<?php echo U('/') ?>" class="left"><img src="__PUBLIC__/images/logo.gif" alt="logo" class="logo" /></a>
-             <div class="right"><a href="<?php echo U('/activity/share');?>" target="_blank"><img src="__PUBLIC__/images/activity/share_home_top.jpg" alt="中国国际航空" /></a></div>
+            <form id="sL" action="<?php echo U('/freetour/query');?>" method="get">
+	<!--<input id="sLf" type="text" name="from" value="广州">-->
+	<input id="sLt" type="text" placeholder="您的目的地" name="to">
+	<input id="sLs" type="submit" value="搜索">
+	<!--<span id="sLc">出发</span>-->
+</form>
+                <!--<div class="right"><a href="<?php echo U('/activity/share');?>" target="_blank"><img src="__PUBLIC__/images/activity/share_home_top.jpg" alt="中国国际航空" /></a></div>-->
+
+
         </div>
     </div>
     <div id="hd_nav">

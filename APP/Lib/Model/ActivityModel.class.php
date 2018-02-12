@@ -80,4 +80,16 @@ class ActivityModel extends RelationModel {
         }
         return $res;
     }
+
+    /*
+     * 获取有限限购
+     *
+     */
+    public function getActivityList(){
+        $where['end_time']=array('gt',date('Y-m-d H:i:s'));
+        $where['type']=1;
+        $where['status']=1;
+        $res = $this->where($where)->getField('freetour_id',true);
+        return $res;
+    }
 }

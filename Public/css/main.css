@@ -1054,11 +1054,11 @@ label.kfpj a.a0{background-position:0 -200px}
 .w1200{width: 1200px;margin: 0 auto;}
 .ft-b{margin: 3px 0 20px; position: relative;}
 .ft-s{position: absolute; left: 70px; top: 45px}
-#sL{position: relative;}
-#sL input{line-height: 30px; height: 30px; float: left; border: 1px solid #E6E6E6; color: #5F5F5F}
-#sLf{padding: 0 40px 0 30px; background: #FFF url(../images/ico-2.png) 5px center no-repeat; width: 6em; margin-right: 8px;}
-#sL #sLs{padding: 0 20px; height: 32px; color: #fff!important; border-color: #FF9933!important; background-color: #FF9933;}
-#sLt{width: 200px; padding: 0 5px;}
+#sL{position: relative;padding-left: 30px;padding-top: 20px;}
+#sL input{line-height: 40px; height: 40px; float: left; border: 1px solid #E6E6E6; color: #5F5F5F;border-radius: 5px;}
+#sLf{padding: 0 40px 0 30px; background: #FFF url(../images/ico-2.png) 5px center no-repeat; width: 7.6em; margin-right: 8px;}
+#sL #sLs{padding: 0 20px; height: 40px; color: #fff!important; border-color: #FF9933!important; background-color: #FF9933;}
+#sLt{width: 50%; padding: 0 5px;}
 #sLc{ position: absolute; left: 110px; cursor: pointer; top: 7px; padding-right: 10px; background: #fff url(../images/ico-3.png) right center no-repeat;}
 #sD{padding: 15px 10px; background-color: #fff;}
 #sD input{line-height: 35px; height: 35px; padding: 0 5px; border: 1px solid #E6E6E6; float: left;}
