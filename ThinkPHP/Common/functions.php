@@ -692,14 +692,6 @@ function cookie($name, $value='', $option=null) {
     }
 }
 
-///*
-// * 获取用户Id
-// */
-//function getUid(){
-//    return session("uid")?session("uid"):false;
-//}
-
-
 /**
  * 加载动态扩展文件
  * @return void
@@ -818,28 +810,5 @@ function filter_exp(&$value){
     if (in_array(strtolower($value),array('exp','or'))){
         $value .= ' ';
     }
-}
-
-function array_json($arr){
-    header('Content-type: application/json;charset=utf-8');
-    echo utf8_json_encode($arr);
-    exit();
-}
-
-
-function APIHttpRequestCURL($api, $post_data) {
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $api);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, FALSE);
-    if (!empty($post_data)) {
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
-    }
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    $output = curl_exec($curl);
-    curl_close($curl);
-    $output = trim($output, "\xEF\xBB\xBF");
-    return json_decode($output, true);
 }
 ?>

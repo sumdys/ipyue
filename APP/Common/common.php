@@ -1000,4 +1000,38 @@ function getLineType($type){
     }
     return $str;
 }
+
+function array_json($arr){
+    header('Content-type: application/json;charset=utf-8');
+    echo utf8_json_encode($arr);
+    exit();
+}
+
+
+/**
+ * 将数组转换成json,不对中文进行unicode编码
+ * @author liaozhiwei
+ * @date   2015-03-25T13:16:19+0800
+ * @return string                   返回json字符串
+ */
+function utf8_json_encode($data) {
+    if (version_compare(PHP_VERSION, '5.4') >= 0) {
+        return json_encode($data, JSON_UNESCAPED_UNICODE);
+    } else {
+        $data = preg_replace("#\\\u([0-9a-f]{4})#ie", "iconv('UCS-2', 'UTF-8', pack('H4', '\\1'))", json_encode($data));
+        $data = stripslashes($data);
+        return $data;
+    }
+}
+
+/*
+ * 接口返回
+ * @param array $data 返回参数
+ * @author hesheng
+ */
+function returnJson($data){
+    $res=$data;
+    return array_json($res);
+}
+
 ?>

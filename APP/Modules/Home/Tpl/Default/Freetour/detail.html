@@ -174,7 +174,7 @@
 					<volist name="hotFreetour" id="vo">
 						<li><i>{$key+1}</i>
 							<img src="__PUBLIC__/images/fb-5.jpg" alt="#">
-							<a href="#">{$vo.title}</a>
+							<a href="{:U('freetour/detail',array('id'=>$vo['id']))}">{$vo.title}</a>
 							<span class="pri">￥<b>{$vo.price}</b>元</span>
 						</li>
 					</volist>
