@@ -515,7 +515,7 @@ label.kfpj a.a0{background-position:0 -200px}
 #memService span a.button{background:url(../images/membser_07.gif) no-repeat 0 0;height:19px;width:82px;line-height:19px;font-size:12px;font-weight:normal;margin-left:730px;}
 
 /*隐私声明*/
-#privacy{color:color:#666666;line-height:22px;line-height:23px;}
+#privacy{color:#666666;line-height:22px;line-height:23px;}
 #privacy p{text-indent:2em;font-size:14px; color:#666;padding:0px;margin:5px 0;}
 #privacy li{border-bottom:1px dashed #cae8f9;color:#333;padding:10px 0;}
 #privacy li span{display:block;}
