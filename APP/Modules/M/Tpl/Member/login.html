@@ -2,15 +2,22 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,height=device-width, initial-scale=1,maximum-scale=1,user-scalable=no;">
+  <meta name="apple-mobile-web-app-capable" content="yes">
 <title>会员登录-品悦手机网</title>
-<link href="__PUBLIC__/mobile/css/global.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="__PUBLIC__/css/bootstrap.min.css" />
+
+  <link href="__PUBLIC__/mobile/css/global.css" rel="stylesheet" type="text/css">
 <style type="text/css">
-#topnav{padding-right:42px;}
-#import{padding:10px 10px 0 10px;margin-bottom:10px;height:80px;}
-#import span{margin-bottom:10px;display:block;}
+  #page{height: 100%;}
+  #content{position: relative;}
+.box{position:absolute;top:100px;margin:10px;border-radius: 5px;background: white;padding: 20px;}
 .box p{padding:10px;clear: both;}
 .box p span a{color:#3598db;font-weight:bold;}
+input[type="submit"]{width: 100%;}
+input{border: 1px #ccd1d9 solid !important;text-indent:0px !important;width: 96%;height: 30px;font-size: 16px !important;box-shadow:none !important;}
+#password{margin: 10px 0px;}
+  .btn-primary{background: #3598db;height: 35px;margin-top: 10px;}
 </style>
 </head>
 
@@ -19,14 +26,14 @@
   <div id="content">
     <h1 id="topnav"><span class="left icon"><a href="{:U('/')}" class="icon-home">首页</a></span>我的帐号</h1>
     <div class="box">
-      <form action="" method="post">
-        <h2>会员登录</h2>
-        <div id="import">
-          <span><input name="name" type="text" id="name" class="txt" maxlength="20" required value placeholder="用户名"></span>
-          <span><input name="password" type="password" id="password" class="txt" maxlength="18" required placeholder="密码(6-18位字符)"></span>
-        </div>
+      <form class="form-group" action="" method="post">
+        <!--<h2>会员登录</h2>-->
+        <!--<div id="import">-->
+          <input name="name" type="text" id="name" class="form-control" maxlength="20" required value placeholder="用户名">
+          <input name="password" type="password" id="password" class="form-control" maxlength="18" required placeholder="密码(6-18位字符)">
+        <!--</div>-->
           <input type="hidden" name="act" value="login">
-        <input type="submit" value="立即登录" class="sub">
+        <input type="submit" value="立即登录" class="btn btn-primary">
       </form>
       <p><span class="left"><a href="{:U('/Member/register')}">免费注册</a></span><span class="right"><a href="{:U('/Member/getPassword')}">忘记密码</a></span></p>
       <!--<p>注册即送50元现金券(预订机票时使用)及1000积fun</p>-->

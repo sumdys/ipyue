@@ -71,14 +71,15 @@
 					<!--<a class="next">›</a>-->
 					<!--<a class="play-pause"></a>-->
 				</div>
-				<!--<ul style="width: 9720px; position: relative; overflow: hidden; padding: 0px; margin: 0px; transition-duration: 200ms; transform: translateX(-540px);">-->
-				<!-- ngRepeat: item in data.slides -->
-					<!--<volist name="info.images" id="vo">-->
-					<!--<li ng-repeat="item in data.slides" on-finish-render-filters="" class="ng-scope" style="display: table-cell; vertical-align: top; width: 540px;">-->
-						<!--<a class="pic"><img src="__PUBLIC__/uploads/{$vo}" width="100%"></a>-->
-					<!--</li>-->
-					<!--</volist>-->
-				<!--</ul>-->
+				<div class="show_image">
+					<ul style="width: 9720px; position: relative; overflow: hidden; padding: auto; margin: auto; transition-duration: 200ms; transform: translateX(-540px);height: 280px;">
+						<volist name="info.images" id="vo">
+							<li ng-repeat="item in data.slides" style="display: table-cell; width: 540px;">
+								<a class="pic"><img style="margin: auto;width: auto;height: auto;max-width:100%;" src="__PUBLIC__/uploads/{$vo}"></a>
+							</li>
+						</volist>
+					</ul>
+				</div>
 			</div>
 			<!--<a class="m-touch-num ng-binding" href=""> 1/{$info['count_photo']}</php></a>-->
 		</div>
@@ -483,7 +484,7 @@
         var baseUrl = '__PUBLIC__/uploads';
         // Add the demo images as links with thumbnails to the page:
         $.each(images, function (index, photo) {
-            console.log(photo);
+            // console.log(photo);
             $('<a/>')
                 .append($('<img>').prop('src', baseUrl+photo))
                 .prop('href', photo)
@@ -500,7 +501,8 @@
         blueimp.Gallery(carouselLinks, {
             container: '#blueimp-image-carousel',
             carousel: true
-        })
+        });
+        $('.show_image').hide();
 	}
  </script>
 </body>
