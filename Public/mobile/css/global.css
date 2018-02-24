@@ -110,3 +110,6 @@ h5 .icon-down,h6 .icon-down{background-position:0px -422px;}
 #msg #cancel a,#msg #call-back a,#msg #confirm a{width:92px;height:30px;line-height:30px;color:#FFF;display:block;}
 #msg #cancel a{background-color:#b0b0b0;}
 #msg #call-back a,#msg #confirm a,#logout span#cancel a:hover{background-color:#67b1e4;}
+input{box-shadow:none !important;-webkit-appearance: none !important;appearance: none !important;}
+.btn-primary{background: #3598db;}
+.btn-primary:hover,.btn-primary:active,.btn-primary.focus,.btn-primary.active.focus,.btn-primary.active:focus,.btn-primary.active:hover,.btn-primary:active.focus,.btn-primary:active:focus,.btn-primary:active:hover,.open>.dropdown-toggle.btn-primary.focus,.open>.dropdown-toggle.btn-primary:focus,.open>.dropdown-toggle.btn-primary:hover{color:#fff;background-color:#3598db;border-color:#122b40}
