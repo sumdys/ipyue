@@ -1,12 +1,42 @@
 ﻿<include file="Public:header" xmlns="http://www.w3.org/1999/html"/>
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
 <style>
 	body{margin-top: -18px;}
+	/*.ft-b{height: 20%;}*/
+	.item{width: 100%;}
 </style>
 <script type="text/javascript" src="__PUBLIC__/js/hotcitypop/popcitylist.js"></script>
-<script type="text/javascript" src="__PUBLIC__/js/chaxun.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-2.0.3.min.js"></script>
+<script src="__PUBLIC__/js/jquery-2.0.3.min.js"></script>
+<script src="__PUBLIC__/js/bootstrap.min.js"></script>
 <div class="w1200">
 	<div class="ft-b">
-		<img src="__PUBLIC__/images/ft-banner.jpg" alt="境外自由行">
+		<!--<img src="__PUBLIC__/images/ft-banner.jpg" alt="境外自由行">-->
+		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+			<!-- 轮播（Carousel）指标 -->
+			<ol class="carousel-indicators">
+				<volist name="ad_list" id="vo">
+				<li data-target="#myCarousel" data-slide-to="0" <if condition="$key eq '0'">class="active"</if>></li>
+				</volist>
+				<!--<li data-target="#myCarousel" data-slide-to="1"></li>-->
+				<!--<li data-target="#myCarousel" data-slide-to="2"></li>-->
+			</ol>
+			<!-- 轮播（Carousel）项目 -->
+			<div class="carousel-inner">
+				<volist name="ad_list" id="vo">
+				<div class="item <if condition="$key eq '0'">active</if>">
+					<a href="{$vo.src}">
+					<img src="__PUBLIC__/uploads/ad/{$vo.img}" width="100%">
+					</a>
+				</div>
+				</volist>
+			</div>
+			<!-- 轮播（Carousel）导航 -->
+			<!--<a class="carousel-control left" href="#myCarousel"-->
+			   <!--data-slide="prev">&lsaquo;</a>-->
+			<!--<a class="carousel-control right" href="#myCarousel"-->
+			   <!--data-slide="next">&rsaquo;</a>-->
+		</div>
 		<div class="ft-s">
 			<!--<div class="ft-diy">-->
 				<!--<div class="ft-d-t">对这些线路不满意？仅需一分钟定制您的私人旅行方案</div>-->

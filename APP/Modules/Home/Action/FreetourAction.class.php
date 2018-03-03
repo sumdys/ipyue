@@ -40,8 +40,9 @@ class FreetourAction extends IniAction {
         $data['gaoduan_line'] = $model->lists(array('line_type'=>10),'*','',4);
         //景点门票
         $data['gaoduan_line'] = $model->lists(array('line_type'=>11),'*','',4);
-
+        $ad = M('news_img')->where('type=1')->field('id,img,src')->order('rand DESC')->limit(3)->select();
         $this->assign('list', $data);
+        $this->assign('ad_list',$ad);
         $this->display();
     }
 

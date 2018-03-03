@@ -1291,7 +1291,7 @@ label.kfpj a.a0{background-position:0 -200px}
 	color: #fff;
 	background: rgba(0,0,0,0.5);
 	padding: 0px 10px;
-	filter:alpha(Opacity=80);-moz-opacity:0.8;opacity: 0.8;
 }
 .moy-b font{font-size: 16px;}
 .moy-b .f16{font-size: 20px;margin-left: 5px;}
+p{margin: 0px !important;}
