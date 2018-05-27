@@ -31,15 +31,15 @@ class FreetourAction extends IniAction {
         //国际航线
         $data['guoji_line'] = $model->lists(array('line_type'=>6),'*','',6);
         //独家资源
-        $data['dujia_line'] = $model->lists(array('line_type'=>7),'*','',4);
+//        $data['dujia_line'] = $model->lists(array('line_type'=>7),'*','',4);
         //跟团游
-        $data['gentuan_line'] = $model->lists(array('line_type'=>8),'*','',4);
+//        $data['gentuan_line'] = $model->lists(array('line_type'=>8),'*','',4);
         //高端游
-        $data['gaoduan_line'] = $model->lists(array('line_type'=>9),'*','',4);
+//        $data['gaoduan_line'] = $model->lists(array('line_type'=>9),'*','',4);
         //亲子游学
-        $data['gaoduan_line'] = $model->lists(array('line_type'=>10),'*','',4);
+//        $data['gaoduan_line'] = $model->lists(array('line_type'=>10),'*','',4);
         //景点门票
-        $data['gaoduan_line'] = $model->lists(array('line_type'=>11),'*','',4);
+//        $data['gaoduan_line'] = $model->lists(array('line_type'=>11),'*','',4);
 
         $this->assign('list', $data);
         $this->display();

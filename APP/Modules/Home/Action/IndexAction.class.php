@@ -60,11 +60,23 @@ class IndexAction extends IniAction {
             }
             $nothing[$kel]['from_now']=$res;
         }
-        $this->nothing=$nothing;
+        $model = D('Freetour');
+        $field = 'id,title,images,price,dcity';
+        //客栈
+        $data['kezhan_line'] = $model->lists(array('line_type'=>array('in',array(3,4))),$field,'',6);
+        //亲子游学
+        $data['qinzi_line'] = $model->lists(array('line_type'=>10),$field,'',4);
+        //国际航线
+        $data['guoji_line'] = $model->lists(array('line_type'=>6),$field,'',6);
+        //独家资源
+        $data['dujia_line'] = $model->lists(array('line_type'=>array('in',array(7,9))),$field,'',4);
+//var_dump($data);
+//        $this->nothing=$nothing;
 
         //    rand(15,30);
         //   print_r($nothing);
         //    exit;
+        $this->assign('list', $data);
         $this->display();
     }
 
